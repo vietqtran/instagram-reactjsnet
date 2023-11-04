@@ -7,6 +7,7 @@ using vietqtran.Models.User;
 using vietqtran.Models.ViewModels;
 using vietqtran.Models.DTO;
 using vietqtran.Services.IRepositories;
+using AutoMapper;
 
 namespace vietqtran.Services.Services
 {
@@ -19,10 +20,13 @@ namespace vietqtran.Services.Services
             _appUserRepository = appUserRepository;
         }
 
-        Task<IEnumerable<AppUserVM>> IAppUserService.GetAll ( )
+
+        public ICollection<AppUser> GetAllUsersService ( )
         {
-            throw new NotImplementedException();
+            var users = _appUserRepository.GetAllUsers();
+            return users;
         }
+
 
         Task<AppUserVM> IAppUserService.GetById (Guid id)
         {

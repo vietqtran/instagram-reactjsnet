@@ -10,16 +10,16 @@ namespace vietqtran.Services.IRepositories
 {
     public interface IAppUserRepository
     {
-        Task<IEnumerable<AppUser>> GetAll ( );
+        public ICollection<AppUser> GetAllUsers ( );
 
-        Task<AppUser?> GetByIdAsync (string id);
+        public AppUser? GetById (string id);
 
-        Task<AppUser> CreateAsync (AppUserDTO userDto);
+        public AppUser Create (AppUserDTO userDto);
 
-        Task<AppUser> UpdateAsync (AppUserDTO userDto);
+        public AppUser Update (AppUserDTO userDto);
 
-        Task<bool> DeleteAsync (string id);
+        public bool Delete (string id);
 
-        IEnumerable<AppUser> Search (string searchTerm);
+        public AppUser Search (string searchTerm);
     }
 }
