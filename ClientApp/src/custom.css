@@ -1,0 +1,33 @@
+/* Provide sufficient contrast against white background */
+
+* {
+   user-select: none;
+   font-family: BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
+      sans-seri;
+}
+
+a {
+   color: #0366d6;
+}
+
+button {
+   cursor: default;
+}
+
+code {
+   color: #e01a76;
+}
+
+.btn-primary {
+   color: #fff;
+   background-color: #1b6ec2;
+   border-color: #1861ac;
+}
+
+.border-form-login.dark {
+   border: 1px solid rgb(54, 54, 54);
+}
+
+.border-form-login.light {
+   border: 1px solid rgb(219, 219, 219);
+}

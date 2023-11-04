@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34221.43
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "vietqtran.Api", "vietqtran.Api\vietqtran.Api.csproj", "{EE87A7E9-DA41-447B-A679-951AE85382BE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "vietqtran.Services", "vietqtran.Services\vietqtran.Services.csproj", "{B9210D8D-A557-4B2E-935F-CB6ED608C292}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "vietqtran.Core", "vietqtran.Core\vietqtran.Core.csproj", "{6B942199-04A9-4DC5-924A-242D96F5AF2F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "vietqtran.Models", "vietqtran.Models\vietqtran.Models.csproj", "{C2AB3E4E-DB69-4016-9545-7A46E2DFA7AB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "vietqtran.DataLayer", "vietqtran.DataLayer\vietqtran.DataLayer.csproj", "{C352D710-310F-4099-B25D-E661FB6060E4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vietqtran.Application", "vietqtran.Application\vietqtran.Application.csproj", "{8302E213-D917-422A-B86B-751C3BBAACBA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EE87A7E9-DA41-447B-A679-951AE85382BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE87A7E9-DA41-447B-A679-951AE85382BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE87A7E9-DA41-447B-A679-951AE85382BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE87A7E9-DA41-447B-A679-951AE85382BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9210D8D-A557-4B2E-935F-CB6ED608C292}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9210D8D-A557-4B2E-935F-CB6ED608C292}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9210D8D-A557-4B2E-935F-CB6ED608C292}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9210D8D-A557-4B2E-935F-CB6ED608C292}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B942199-04A9-4DC5-924A-242D96F5AF2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B942199-04A9-4DC5-924A-242D96F5AF2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B942199-04A9-4DC5-924A-242D96F5AF2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B942199-04A9-4DC5-924A-242D96F5AF2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2AB3E4E-DB69-4016-9545-7A46E2DFA7AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2AB3E4E-DB69-4016-9545-7A46E2DFA7AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2AB3E4E-DB69-4016-9545-7A46E2DFA7AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2AB3E4E-DB69-4016-9545-7A46E2DFA7AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C352D710-310F-4099-B25D-E661FB6060E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C352D710-310F-4099-B25D-E661FB6060E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C352D710-310F-4099-B25D-E661FB6060E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C352D710-310F-4099-B25D-E661FB6060E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8302E213-D917-422A-B86B-751C3BBAACBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8302E213-D917-422A-B86B-751C3BBAACBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8302E213-D917-422A-B86B-751C3BBAACBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8302E213-D917-422A-B86B-751C3BBAACBA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E485BE89-8C9A-45A6-BA91-D6E0241324D0}
+	EndGlobalSection
+EndGlobal
