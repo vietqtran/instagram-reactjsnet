@@ -7,15 +7,16 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-	  <NoWarn>1701;1702;0168;CS0168</NoWarn>
+		<NoWarn>1701;1702;0168;CS0168</NoWarn>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-	  <NoWarn>1701;1702;0168;CS0168</NoWarn>
+		<NoWarn>1701;1702;0168;CS0168</NoWarn>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.32" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.1.39" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.0" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.13" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.13">
 			<PrivateAssets>all</PrivateAssets>
@@ -30,6 +31,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\vietqtran.Core\vietqtran.Core.csproj" />
 		<ProjectReference Include="..\vietqtran.Models\vietqtran.Models.csproj" />
 		<ProjectReference Include="..\vietqtran.Services\vietqtran.Services.csproj" />
 	</ItemGroup>

@@ -7,11 +7,11 @@ using vietqtran.Models.User;
 using vietqtran.Models.ViewModels;
 using vietqtran.Models.DTO;
 
-namespace vietqtran.Services.Services
+namespace vietqtran.Core.Interfaces.IService
 {
     public interface IAppUserService
     {
-        public ICollection<AppUser> GetAllUsersService ( );
+        public Task<ICollection<AppUser>> GetAllUsersServiceAsync ( );
 
         public Task<AppUserVM> GetById (Guid id);
 

@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 using vietqtran.Models.User;
 using vietqtran.Models.ViewModels;
 using vietqtran.Models.DTO;
-using vietqtran.Services.IRepositories;
+using vietqtran.Core.Interfaces.IService;
 using AutoMapper;
+using vietqtran.Core.Interfaces.IRepository;
 
 namespace vietqtran.Services.Services
 {
@@ -21,9 +22,9 @@ namespace vietqtran.Services.Services
         }
 
 
-        public ICollection<AppUser> GetAllUsersService ( )
+        public async Task<ICollection<AppUser>> GetAllUsersServiceAsync ( )
         {
-            var users = _appUserRepository.GetAllUsers();
+            var users = await _appUserRepository.GetAllUsersAsync();
             return users;
         }
 

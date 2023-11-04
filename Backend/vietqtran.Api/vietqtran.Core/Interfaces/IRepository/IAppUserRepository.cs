@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 using vietqtran.Models.User;
 using vietqtran.Models.DTO;
 
-namespace vietqtran.Services.IRepositories
+namespace vietqtran.Core.Interfaces.IRepository
 {
     public interface IAppUserRepository
     {
-        public ICollection<AppUser> GetAllUsers ( );
+        public Task<ICollection<AppUser>> GetAllUsersAsync ( );
 
         public AppUser? GetById (string id);
 
