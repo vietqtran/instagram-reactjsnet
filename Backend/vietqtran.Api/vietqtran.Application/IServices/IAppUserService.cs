@@ -11,7 +11,7 @@ namespace vietqtran.Services.Services
 {
     public interface IAppUserService
     {
-        public ICollection<AppUser> GetAllUsersService ( );
+        public Task<ICollection<AppUser>> GetAllUsersServiceAsync ( );
 
         public Task<AppUserVM> GetById (Guid id);
 

@@ -7,7 +7,7 @@ using vietqtran.DataAccess.Data;
 using vietqtran.Models.DTO;
 using vietqtran.Services.IRepositories;
 using vietqtran.Models.User;
-using System.Data.Entity;
+using Microsoft.EntityFrameworkCore;
 
 namespace vietqtran.DataLayer.Repositories
 {
@@ -54,11 +54,9 @@ namespace vietqtran.DataLayer.Repositories
             }
         }
 
-        public ICollection<AppUser> GetAllUsers ( )
+        public async Task<ICollection<AppUser>> GetAllUsersAsync ( )
         {
-            var users = _context.AppUsers.ToList();
-
-            return users;
+            return await _context.AppUsers.ToListAsync();
         }
 
 

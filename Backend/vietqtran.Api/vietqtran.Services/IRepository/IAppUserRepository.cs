@@ -10,7 +10,7 @@ namespace vietqtran.Services.IRepositories
 {
     public interface IAppUserRepository
     {
-        public ICollection<AppUser> GetAllUsers ( );
+        public Task<ICollection<AppUser>> GetAllUsersAsync ( );
 
         public AppUser? GetById (string id);
 

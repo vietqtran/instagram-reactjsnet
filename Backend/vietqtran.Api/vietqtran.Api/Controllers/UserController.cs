@@ -23,9 +23,10 @@ namespace vietqtran.Api.Controllers
         // GET: api/<UserController>
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(ICollection<AppUserVM>))]
-        public IActionResult Get ( )
+        public async Task<IActionResult> GetAsync ( )
         {
-            return Ok(_mapper.Map<ICollection<AppUserVM>>(_appUserService.GetAllUsersService()));
+            var users = await _appUserService.GetAllUsersServiceAsync();
+            return Ok(_mapper.Map<ICollection<AppUserVM>>(users));
         }
 
         // GET api/<UserController>/5

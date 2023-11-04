@@ -21,9 +21,9 @@ namespace vietqtran.Services.Services
         }
 
 
-        public ICollection<AppUser> GetAllUsersService ( )
+        public async Task<ICollection<AppUser>> GetAllUsersServiceAsync ( )
         {
-            var users = _appUserRepository.GetAllUsers();
+            var users = await _appUserRepository.GetAllUsersAsync();
             return users;
         }
 
