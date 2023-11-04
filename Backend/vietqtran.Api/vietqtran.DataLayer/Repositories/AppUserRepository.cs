@@ -20,7 +20,7 @@ namespace vietqtran.DataLayer.Repositories
             _context = context;
         }
 
-        public async Task<AppUser> CreateAsync (AppUserDTO userDto)
+        public AppUser Create (AppUserDTO userDto)
         {
             var user = new AppUser()
             {
@@ -30,23 +30,23 @@ namespace vietqtran.DataLayer.Repositories
                 Password = userDto.Password,
             };
 
-            await _context.AppUsers.AddAsync(user);
-            await _context.SaveChangesAsync();
+            _context.AppUsers.AddAsync(user);
+            _context.SaveChangesAsync();
 
             return user;
         }
 
-        public async Task<bool> DeleteAsync (string id)
+        public bool Delete (string id)
         {
             try {
-                var user = await _context.AppUsers.FindAsync(Guid.Parse(id));
+                var user = _context.AppUsers.Where(u => u.Id == Guid.Parse(id)).FirstOrDefault();
 
                 if (user == null) {
                     return false;
                 }
 
                 _context.AppUsers.Remove(user);
-                await _context.SaveChangesAsync();
+                _context.SaveChanges();
 
                 return true;
             } catch (Exception ex) {
@@ -54,18 +54,18 @@ namespace vietqtran.DataLayer.Repositories
             }
         }
 
-        public async Task<IEnumerable<AppUser>> GetAll ( )
+        public ICollection<AppUser> GetAllUsers ( )
         {
-            var users = await _context.AppUsers.ToListAsync();
+            var users = _context.AppUsers.ToList();
 
             return users;
         }
 
 
-        public async Task<AppUser?> GetByIdAsync (string id)
+        public AppUser? GetById (string id)
         {
             try {
-                var user = await _context.AppUsers.FindAsync(Guid.Parse(id));
+                var user = _context.AppUsers.Where(u => u.Id == Guid.Parse(id)).FirstOrDefault();
 
                 if (user == null) {
                     return null;
@@ -77,9 +77,9 @@ namespace vietqtran.DataLayer.Repositories
             }
         }
 
-        public async Task<AppUser> UpdateAsync (AppUserDTO userDto)
+        public AppUser Update (AppUserDTO userDto)
         {
-            var user = await _context.AppUsers.FindAsync(userDto.Id);
+            var user = _context.AppUsers.Where(u => u.Id == userDto.Id).FirstOrDefault();
 
             if (user == null) {
                 throw new KeyNotFoundException("User not found");
@@ -89,12 +89,12 @@ namespace vietqtran.DataLayer.Repositories
             user.Email = userDto.Email;
 
             _context.AppUsers.Update(user);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
 
             return user;
         }
 
-        public IEnumerable<AppUser> Search (string searchTerm)
+        public AppUser Search (string searchTerm)
         {
             throw new NotImplementedException();
         }

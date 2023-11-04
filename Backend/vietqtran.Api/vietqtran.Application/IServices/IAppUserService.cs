@@ -11,16 +11,16 @@ namespace vietqtran.Services.Services
 {
     public interface IAppUserService
     {
-        Task<IEnumerable<AppUserVM>> GetAll ( );
+        public ICollection<AppUser> GetAllUsersService ( );
 
-        Task<AppUserVM> GetById (Guid id);
+        public Task<AppUserVM> GetById (Guid id);
 
-        Task<AppUserVM> Create (AppUserDTO userDto);
+        public Task<AppUserVM> Create (AppUserDTO userDto);
 
-        Task<AppUserVM> Update (AppUserDTO userDto);
+        public Task<AppUserVM> Update (AppUserDTO userDto);
 
-        Task<bool> Delete (Guid id);
+        public Task<bool> Delete (Guid id);
 
-        Task<IEnumerable<AppUserVM>> GetWithPagination (string keyword, int page, int pageSize);
+        public Task<IEnumerable<AppUserVM>> GetWithPagination (string keyword, int page, int pageSize);
     }
 }
