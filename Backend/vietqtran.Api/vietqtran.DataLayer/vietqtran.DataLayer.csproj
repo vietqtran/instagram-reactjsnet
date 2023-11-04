@@ -7,11 +7,11 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-	  <NoWarn>1701;1702;0168;CS0168</NoWarn>
+		<NoWarn>1701;1702;0168;CS0168</NoWarn>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-	  <NoWarn>1701;1702;0168;CS0168</NoWarn>
+		<NoWarn>1701;1702;0168;CS0168</NoWarn>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -31,6 +31,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\vietqtran.Core\vietqtran.Core.csproj" />
 		<ProjectReference Include="..\vietqtran.Models\vietqtran.Models.csproj" />
 		<ProjectReference Include="..\vietqtran.Services\vietqtran.Services.csproj" />
 	</ItemGroup>

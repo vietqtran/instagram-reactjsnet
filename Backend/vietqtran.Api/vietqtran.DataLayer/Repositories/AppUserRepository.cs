@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using vietqtran.DataAccess.Data;
 using vietqtran.Models.DTO;
-using vietqtran.Services.IRepositories;
 using vietqtran.Models.User;
 using Microsoft.EntityFrameworkCore;
+using vietqtran.Core.Interfaces.IRepository;
 
 namespace vietqtran.DataLayer.Repositories
 {

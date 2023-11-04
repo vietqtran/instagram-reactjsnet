@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 using vietqtran.Models.User;
 using vietqtran.Models.ViewModels;
 using vietqtran.Models.DTO;
-using vietqtran.Services.IRepositories;
+using vietqtran.Core.Interfaces.IService;
 using AutoMapper;
+using vietqtran.Core.Interfaces.IRepository;
 
 namespace vietqtran.Services.Services
 {

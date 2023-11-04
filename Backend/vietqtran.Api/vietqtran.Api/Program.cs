@@ -1,9 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.SqlServer.Server;
 using System.Text.Json.Serialization;
+using vietqtran.Core.Interfaces.IRepository;
+using vietqtran.Core.Interfaces.IService;
 using vietqtran.DataAccess.Data;
 using vietqtran.DataLayer.Repositories;
-using vietqtran.Services.IRepositories;
 using vietqtran.Services.Services;
 
 var builder = WebApplication.CreateBuilder(args);

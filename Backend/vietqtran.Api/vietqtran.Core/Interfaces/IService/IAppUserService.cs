@@ -7,7 +7,7 @@ using vietqtran.Models.User;
 using vietqtran.Models.ViewModels;
 using vietqtran.Models.DTO;
 
-namespace vietqtran.Services.Services
+namespace vietqtran.Core.Interfaces.IService
 {
     public interface IAppUserService
     {
