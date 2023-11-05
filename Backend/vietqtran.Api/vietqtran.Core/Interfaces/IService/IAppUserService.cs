@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using vietqtran.Models.User;
 using vietqtran.Models.ViewModels;
 using vietqtran.Models.DTO;
+using vietqtran.Models.RequestModels.User;
+using Microsoft.AspNetCore.Identity;
 
 namespace vietqtran.Core.Interfaces.IService
 {
@@ -13,14 +15,8 @@ namespace vietqtran.Core.Interfaces.IService
     {
         public Task<ICollection<AppUser>> GetAllUsersServiceAsync ( );
 
-        public Task<AppUserVM> GetById (Guid id);
+        public Task<string> GetLoginToken (LoginCredentials loginCredentials);
 
-        public Task<AppUserVM> Create (AppUserDTO userDto);
-
-        public Task<AppUserVM> Update (AppUserDTO userDto);
-
-        public Task<bool> Delete (Guid id);
-
-        public Task<IEnumerable<AppUserVM>> GetWithPagination (string keyword, int page, int pageSize);
+        public Task<AppUserVM> SignUp (SignUpCredentials signUpCredentials);
     }
 }

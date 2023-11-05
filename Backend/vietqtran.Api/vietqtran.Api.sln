@@ -13,7 +13,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "vietqtran.Models", "vietqtr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "vietqtran.DataLayer", "vietqtran.DataLayer\vietqtran.DataLayer.csproj", "{C352D710-310F-4099-B25D-E661FB6060E4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vietqtran.Application", "vietqtran.Application\vietqtran.Application.csproj", "{8302E213-D917-422A-B86B-751C3BBAACBA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "vietqtran.Application", "vietqtran.Application\vietqtran.Application.csproj", "{8302E213-D917-422A-B86B-751C3BBAACBA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{641B76C2-C1B0-4AB8-8CC5-FA28B3BEF623}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

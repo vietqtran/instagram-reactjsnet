@@ -40,6 +40,7 @@ namespace vietqtran.DataLayer.Extensions
                     Name = "Ngô Thị Linh Chi",
                     Password = "linhchi",
                     Id = Guid.NewGuid(),
+                    NormalizedEmail = "ngothilinhchi@gmail.com"
                 },
                 new AppUser
                 {
@@ -47,7 +48,8 @@ namespace vietqtran.DataLayer.Extensions
                     EmailConfirmed = true,
                     Name = "Trần Quốc Việt",
                     Password = "admin",
-                    Id = Guid.NewGuid()
+                    Id = Guid.NewGuid(),
+                    NormalizedEmail = "tranquocviet1303@gmail.com"
                 },
                 new AppUser
                 {
@@ -55,9 +57,10 @@ namespace vietqtran.DataLayer.Extensions
                     EmailConfirmed = true,
                     Name = "Trần Thùy Linh",
                     Password = "thuylinh",
-                    Id = Guid.NewGuid()
+                    Id = Guid.NewGuid(),
+                    NormalizedEmail = "tranthuylinh@gmail.com"
                 }
-            );
+            ); ;
         }
     }
 }

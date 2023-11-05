@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using vietqtran.Core.Interfaces.IService;
+using vietqtran.Models.RequestModels.User;
 using vietqtran.Models.ViewModels;
 using vietqtran.Services.Services;
 
@@ -14,14 +15,18 @@ namespace vietqtran.Api.Controllers
     {
         private readonly IAppUserService _appUserService;
         private readonly IMapper _mapper;
+        private readonly ILogger<UserController> _logger;
 
-        public UserController (IAppUserService appUserService, IMapper mapper)
+        public UserController (IAppUserService appUserService, IMapper mapper, ILogger<UserController> logger)
         {
             _appUserService = appUserService;
             _mapper = mapper;
+            _logger = logger;
         }
 
-        // GET: api/<UserController>
+
+
+
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(ICollection<AppUserVM>))]
         public async Task<IActionResult> GetAsync ( )
@@ -30,29 +35,25 @@ namespace vietqtran.Api.Controllers
             return Ok(_mapper.Map<ICollection<AppUserVM>>(users));
         }
 
-        // GET api/<UserController>/5
-        [HttpGet("{id}")]
-        public string Get (int id)
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login ([FromBody] LoginCredentials loginCredentials)
         {
-            return "value";
+            _logger.LogInformation("Attempting to login for user: {userEmail}", loginCredentials.Email);
+            var token = await _appUserService.GetLoginToken(loginCredentials);
+
+            if (string.IsNullOrEmpty(token)) {
+                _logger.LogError("An error occurred while trying to login for user: {userEmail}", loginCredentials.Email);
+                return BadRequest("Can't Login!");
+            }
+            _logger.LogInformation("Login successful for user: {userEmail}", loginCredentials.Email);
+            return Ok(token);
         }
 
-        // POST api/<UserController>
-        [HttpPost]
-        public void Post ([FromBody] string value)
+        [HttpPost("signup")]
+        public async Task<IActionResult> SignUp ([FromBody] SignUpCredentials signUpCredentials)
         {
-        }
-
-        // PUT api/<UserController>/5
-        [HttpPut("{id}")]
-        public void Put (int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<UserController>/5
-        [HttpDelete("{id}")]
-        public void Delete (int id)
-        {
+            return Ok(await _appUserService.SignUp(signUpCredentials));
         }
     }
 }

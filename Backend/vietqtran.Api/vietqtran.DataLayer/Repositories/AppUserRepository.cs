@@ -8,50 +8,37 @@ using vietqtran.Models.DTO;
 using vietqtran.Models.User;
 using Microsoft.EntityFrameworkCore;
 using vietqtran.Core.Interfaces.IRepository;
+using vietqtran.Models.RequestModels.User;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
+using AutoMapper;
+using System.Security.Claims;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.IdentityModel.Tokens;
+using vietqtran.Core.Utilities;
+using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Logging;
+using vietqtran.Models.ViewModels;
 
 namespace vietqtran.DataLayer.Repositories
 {
     public class AppUserRepository : IAppUserRepository
     {
-        DataContext _context;
+        private readonly DataContext _context;
+        private readonly UserManager<AppUser> _userManager;
+        private readonly SignInManager<AppUser> _signInManager;
+        private readonly IOptions<JwtConfig> _jwtConfig;
+        private readonly IMapper _mapper;
+        private readonly ILogger<AppUserRepository> _logger;
 
-        public AppUserRepository (DataContext context)
+        public AppUserRepository (DataContext context, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IOptions<JwtConfig> jwtConfig, IMapper mapper, ILogger<AppUserRepository> logger)
         {
+            _mapper = mapper;
             _context = context;
-        }
-
-        public AppUser Create (AppUserDTO userDto)
-        {
-            var user = new AppUser()
-            {
-                Id = userDto.Id,
-                UserName = userDto.UserName,
-                Email = userDto.Email,
-                Password = userDto.Password,
-            };
-
-            _context.AppUsers.AddAsync(user);
-            _context.SaveChangesAsync();
-
-            return user;
-        }
-
-        public bool Delete (string id)
-        {
-            try {
-                var user = _context.AppUsers.Where(u => u.Id == Guid.Parse(id)).FirstOrDefault();
-
-                if (user == null) {
-                    return false;
-                }
-
-                _context.AppUsers.Remove(user);
-                _context.SaveChanges();
-
-                return true;
-            } catch (Exception ex) {
-                return false;
-            }
+            _userManager = userManager;
+            _signInManager = signInManager;
+            _jwtConfig = jwtConfig;
+            _logger = logger;
         }
 
         public async Task<ICollection<AppUser>> GetAllUsersAsync ( )
@@ -59,43 +46,54 @@ namespace vietqtran.DataLayer.Repositories
             return await _context.AppUsers.ToListAsync();
         }
 
-
-        public AppUser? GetById (string id)
+        public async Task<string> Login (LoginCredentials loginCredentials)
         {
-            try {
-                var user = _context.AppUsers.Where(u => u.Id == Guid.Parse(id)).FirstOrDefault();
-
-                if (user == null) {
-                    return null;
-                }
-
-                return user;
-            } catch (Exception ex) {
+            _logger.LogInformation("Repository: Login for user: {userEmail}", loginCredentials.Email);
+            var user = await _userManager.FindByEmailAsync(loginCredentials.Email.ToLowerInvariant());
+            if (user == null) {
+                _logger.LogError("Repository: User null");
                 return null;
             }
-        }
 
-        public AppUser Update (AppUserDTO userDto)
-        {
-            var user = _context.AppUsers.Where(u => u.Id == userDto.Id).FirstOrDefault();
+            var result = await _signInManager.PasswordSignInAsync(user, loginCredentials.Password, false, false);
 
-            if (user == null) {
-                throw new KeyNotFoundException("User not found");
+            if (!result.Succeeded) {
+                _logger.LogError("Repository: User null");
+                return null;
             }
 
-            user.UserName = userDto.UserName;
-            user.Email = userDto.Email;
+            var authClaims = new List<Claim> {
+                new Claim(ClaimTypes.Email, loginCredentials.Email),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+            };
 
-            _context.AppUsers.Update(user);
-            _context.SaveChanges();
+            _logger.LogInformation(_jwtConfig.Value.SecretKey + " - " + _jwtConfig.Value.Issuer + " - " + _jwtConfig.Value.Audience);
 
-            return user;
+            var authKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtConfig.Value.SecretKey));
+
+            var token = new JwtSecurityToken(
+                    issuer: _jwtConfig.Value.Issuer,
+                    audience: _jwtConfig.Value.Audience,
+                    expires: DateTime.Now.AddMonths(1),
+                    claims: authClaims,
+                    signingCredentials: new SigningCredentials(authKey, SecurityAlgorithms.HmacSha256)
+                );
+
+            _logger.LogInformation("Repository: Token: " + token);
+            return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-        public AppUser Search (string searchTerm)
+
+        public async Task<AppUserVM> SignUpAsync (SignUpCredentials signUpCredentials)
         {
-            throw new NotImplementedException();
-        }
+            var user = _mapper.Map<AppUser>(signUpCredentials);
+            var result = await _userManager.CreateAsync(user, signUpCredentials.Password);
 
+            if (result.Succeeded) {
+                await _userManager.UpdateAsync(user);
+                return _mapper.Map<AppUserVM>(signUpCredentials);
+            }
+            return null;
+        }
     }
 }
