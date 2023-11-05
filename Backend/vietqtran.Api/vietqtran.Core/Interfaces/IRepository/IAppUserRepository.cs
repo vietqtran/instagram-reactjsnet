@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using vietqtran.Models.User;
 using vietqtran.Models.DTO;
+using vietqtran.Models.RequestModels.User;
+using Microsoft.AspNetCore.Identity;
+using vietqtran.Models.ViewModels;
 
 namespace vietqtran.Core.Interfaces.IRepository
 {
@@ -12,14 +15,8 @@ namespace vietqtran.Core.Interfaces.IRepository
     {
         public Task<ICollection<AppUser>> GetAllUsersAsync ( );
 
-        public AppUser? GetById (string id);
+        public Task<AppUserVM> SignUpAsync (SignUpCredentials signUpCredentials);
 
-        public AppUser Create (AppUserDTO userDto);
-
-        public AppUser Update (AppUserDTO userDto);
-
-        public bool Delete (string id);
-
-        public AppUser Search (string searchTerm);
+        public Task<string> Login (LoginCredentials loginCredentials);
     }
 }
