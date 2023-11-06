@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using NuGet.Common;
 using vietqtran.Core.Interfaces.IService;
 using vietqtran.Models.RequestModels.User;
 using vietqtran.Models.ViewModels;
@@ -24,11 +25,6 @@ namespace vietqtran.Api.Controllers
 			_logger = logger;
 		}
 
-
-
-
-
-
 		[HttpGet]
 		[ProducesResponseType(200, Type = typeof(ICollection<AppUserVM>))]
 		public async Task<IActionResult> GetAsync ( )
@@ -37,33 +33,20 @@ namespace vietqtran.Api.Controllers
 			return Ok(_mapper.Map<ICollection<AppUserVM>>(users));
 		}
 
-
-
-
-
-
-		[HttpPost("login")]
-		public async Task<IActionResult> Login ([FromBody] LoginCredentials loginCredentials)
+		[HttpPost("register")]
+		public async Task<IActionResult> Register (SignUpCredentials signUpCredentials)
 		{
-			_logger.LogInformation("Attempting to login for user: {userEmail}", loginCredentials.Email);
-			var tokenResult = await _appUserService.GetLoginToken(loginCredentials);
+			var result = await _appUserService.Register(signUpCredentials);
 
-			if (string.IsNullOrEmpty(tokenResult)) {
-				_logger.LogError("An error occurred while trying to login for user: {userEmail}", loginCredentials.Email);
-				return BadRequest("Can't Login!");
-			}
-			_logger.LogInformation("Login successful for user: {userEmail}", loginCredentials.Email);
-			return Ok(new { token = tokenResult });
+			return Ok(result);
 		}
 
-
-
-
-
-		[HttpPost("signup")]
-		public async Task<IActionResult> SignUp ([FromBody] SignUpCredentials signUpCredentials)
+		[HttpPost("login")]
+		public async Task<IActionResult> Login (LoginCredentials loginCredentials)
 		{
-			return Ok(await _appUserService.SignUp(signUpCredentials));
+			var result = await _appUserService.Login(loginCredentials);
+
+			return Ok(result);
 		}
 	}
 }

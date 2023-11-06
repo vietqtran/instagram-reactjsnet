@@ -74,6 +74,7 @@ builder.Services.AddAuthentication(options => {
 		ValidateIssuerSigningKey = true,
 		ValidAudience = builder.Configuration["JWT:Audience"],
 		ValidIssuer = builder.Configuration["JWT:Issuer"],
+		RequireExpirationTime = true,
 		IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:SecretKey"])),
 	};
 });
@@ -89,10 +90,14 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 //! Add Repositories Injection
 builder.Services.AddTransient<AppUserRepository>();
 builder.Services.AddScoped<IAppUserRepository, AppUserRepository>();
+builder.Services.AddTransient<TokenRepository>();
+builder.Services.AddScoped<ITokenRepository, TokenRepository>();
 
 //! Add Services Injection
 builder.Services.AddTransient<AppUserService>();
 builder.Services.AddScoped<IAppUserService, AppUserService>();
+builder.Services.AddTransient<TokenService>();
+builder.Services.AddScoped<ITokenService, TokenService>();
 
 //! Cors setup
 builder.Services.AddCors(options => {

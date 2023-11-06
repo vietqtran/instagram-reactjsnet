@@ -8,15 +8,18 @@ using vietqtran.Models.DTO;
 using vietqtran.Models.RequestModels.User;
 using Microsoft.AspNetCore.Identity;
 using vietqtran.Models.ViewModels;
+using vietqtran.Models.Models;
+using vietqtran.Models.ResponseModels;
 
 namespace vietqtran.Core.Interfaces.IRepository
 {
-    public interface IAppUserRepository
-    {
-        public Task<ICollection<AppUser>> GetAllUsersAsync ( );
+	public interface IAppUserRepository
+	{
+		public Task<ICollection<AppUser>> GetAllUsersAsync ( );
 
-        public Task<AppUserVM> SignUpAsync (SignUpCredentials signUpCredentials);
+		Task<AuthResponse> Register (SignUpCredentials signUpCredentials);
 
-        public Task<string> Login (LoginCredentials loginCredentials);
-    }
+		Task<AuthResponse> Login (LoginCredentials loginCredentials);
+
+	}
 }
