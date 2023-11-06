@@ -126,14 +126,53 @@ namespace vietqtran.DataLayer.Migrations
                     table.PrimaryKey("PK_UserTokens", x => x.UserId);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "AccessTokens",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Token = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ExpiryDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AccessTokens", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AccessTokens_AppUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AppUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RefreshTokens",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Token = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RefreshTokens", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_RefreshTokens_AppUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AppUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "AppUserRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Description", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { new Guid("4010f305-4f39-4583-a426-311840e61360"), "683195f5-207d-4195-9a29-0e884d7152ab", null, "Admin", null },
-                    { new Guid("ae75983c-5fcb-463a-8752-d305c8bbe34c"), "c992407c-c3e3-4d81-8647-976711664b43", null, "Manager", null },
-                    { new Guid("cc878c16-f791-4024-9177-b3e87b1cf536"), "4d59885b-505c-4f9a-8a34-518c0d12bb60", null, "User", null }
+                    { new Guid("6b5f1083-24f1-4887-abb7-ede43054b68e"), "2da3fd54-d1fa-48d0-b7b3-bf7d09bb21b4", null, "Admin", null },
+                    { new Guid("83867a81-8f4e-4a39-a225-d4fcadb07e59"), "f6c6c1d5-4676-4565-b31e-b6b476ef898d", null, "User", null },
+                    { new Guid("ef26d1f6-60cb-4036-b37a-58aae52773bc"), "bbe4530c-d04c-4abb-b0ce-2e4bca46cdf8", null, "Manager", null }
                 });
 
             migrationBuilder.InsertData(
@@ -141,20 +180,35 @@ namespace vietqtran.DataLayer.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Dob", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "Password", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { new Guid("0cba8d06-6bc4-41d3-8edd-b93cd69dc8ef"), 0, "71e78f96-1977-4fcc-bd3b-e1171fab46a0", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "ngothilinhchi@gmail.com", true, false, null, "Ngô Thị Linh Chi", "ngothilinhchi@gmail.com", null, "linhchi", null, null, false, null, false, null },
-                    { new Guid("36aa6bdc-c0ec-4e6a-b1af-59df7df4797b"), 0, "a8b42efe-4110-4cad-ac34-05c59a8a580d", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "tranthuylinh@gmail.com", true, false, null, "Trần Thùy Linh", "tranthuylinh@gmail.com", null, "thuylinh", null, null, false, null, false, null },
-                    { new Guid("5a9c9685-4f0e-488a-9aae-71ad4d520090"), 0, "f403d1b8-5ba5-4261-b073-1a2788b29a2c", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "tranquocviet1303@gmail.com", true, false, null, "Trần Quốc Việt", "tranquocviet1303@gmail.com", null, "admin", null, null, false, null, false, null }
+                    { new Guid("2594da8a-e88f-4915-a901-9ce940e8c1ce"), 0, "4ba3978b-4269-4250-a092-5988fbf28a82", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "ngothilinhchi@gmail.com", true, false, null, "Ngô Thị Linh Chi", "ngothilinhchi@gmail.com", null, "linhchi", null, null, false, null, false, null },
+                    { new Guid("914c9fc5-f5a1-477c-beb7-a3da67056ae8"), 0, "c45b0c1b-a227-45e0-9164-9956062bf32e", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "tranquocviet1303@gmail.com", true, false, null, "Trần Quốc Việt", "tranquocviet1303@gmail.com", null, "admin", null, null, false, null, false, null },
+                    { new Guid("b7144f23-fa5e-4e82-99c4-6562626bac2c"), 0, "b49ef1fc-57db-40cc-aa2e-f1575710e2f9", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "tranthuylinh@gmail.com", true, false, null, "Trần Thùy Linh", "tranthuylinh@gmail.com", null, "thuylinh", null, null, false, null, false, null }
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AccessTokens_UserId",
+                table: "AccessTokens",
+                column: "UserId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RefreshTokens_UserId",
+                table: "RefreshTokens",
+                column: "UserId",
+                unique: true);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "AccessTokens");
+
+            migrationBuilder.DropTable(
                 name: "AppUserRoles");
 
             migrationBuilder.DropTable(
-                name: "AppUsers");
+                name: "RefreshTokens");
 
             migrationBuilder.DropTable(
                 name: "RoleClaims");
@@ -170,6 +224,9 @@ namespace vietqtran.DataLayer.Migrations
 
             migrationBuilder.DropTable(
                 name: "UserTokens");
+
+            migrationBuilder.DropTable(
+                name: "AppUsers");
         }
     }
 }
