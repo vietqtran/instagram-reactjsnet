@@ -8,25 +8,24 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using vietqtran.Models.Models;
-using vietqtran.Models.User;
+using vietqtran.Models.Entities;
 
 namespace vietqtran.Core.Utilities
 {
 	public static class TokenGenerator
 	{
-		public static AccessToken GenerateAccessToken (AppUser user, IOptions<JwtConfig> _jwtConfig)
+		public static AccessToken GenerateAccessToken (User user, IOptions<JwtConfig> _jwtConfig)
 		{
 			if (user == null) {
-				throw new ArgumentNullException("user", "User cannot be null");
+				throw new ArgumentNullException("User", "User cannot be null");
 			}
 
 			var claims = new List<Claim>
-			{
-				new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
-				new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-				new Claim(ClaimTypes.Role, user.AppUserRole.Name),
-			};
+		  {
+			 new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
+			 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+			 new Claim(ClaimTypes.Role, user.UserRole.Name),
+		  };
 
 			var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtConfig.Value.SecretKey));
 
@@ -56,7 +55,7 @@ namespace vietqtran.Core.Utilities
 			};
 		}
 
-		public static RefreshToken GenerateRefreshToken (AppUser user)
+		public static RefreshToken GenerateRefreshToken (User user)
 		{
 			var randomNumber = new byte[32];
 			using var rng = RandomNumberGenerator.Create();

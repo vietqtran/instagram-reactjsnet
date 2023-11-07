@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace vietqtran.Models.Models.Message
+namespace vietqtran.Models.RequestModels
 {
-	public class Message
+	public class SendMessageRequest
 	{
 	}
 }

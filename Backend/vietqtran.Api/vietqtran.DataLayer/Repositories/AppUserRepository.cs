@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using vietqtran.DataAccess.Data;
 using vietqtran.Models.DTO;
-using vietqtran.Models.User;
 using Microsoft.EntityFrameworkCore;
 using vietqtran.Core.Interfaces.IRepository;
 using vietqtran.Models.RequestModels.User;
@@ -19,7 +18,7 @@ using vietqtran.Core.Utilities;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Logging;
 using vietqtran.Models.ViewModels;
-using vietqtran.Models.Models;
+using vietqtran.Models.Entities;
 using System.Security.Cryptography;
 using vietqtran.Core.Interfaces.IService;
 using vietqtran.Models.ResponseModels;
@@ -29,18 +28,18 @@ namespace vietqtran.DataLayer.Repositories
 	public class AppUserRepository : IAppUserRepository
 	{
 		private readonly DataContext _context;
-		private readonly UserManager<AppUser> _userManager;
-		private readonly SignInManager<AppUser> _signInManager;
+		private readonly UserManager<User> _userManager;
+		private readonly SignInManager<User> _signInManager;
 		private readonly IOptions<JwtConfig> _jwtConfig;
 		private readonly IMapper _mapper;
 		private readonly ILogger<AppUserRepository> _logger;
 
 		public AppUserRepository (DataContext context,
-			UserManager<AppUser> userManager,
-			SignInManager<AppUser> signInManager,
-			IOptions<JwtConfig> jwtConfig,
-			IMapper mapper,
-			ILogger<AppUserRepository> logger)
+		    UserManager<User> userManager,
+		    SignInManager<User> signInManager,
+		    IOptions<JwtConfig> jwtConfig,
+		    IMapper mapper,
+		    ILogger<AppUserRepository> logger)
 		{
 			_mapper = mapper;
 			_context = context;
@@ -50,7 +49,7 @@ namespace vietqtran.DataLayer.Repositories
 			_logger = logger;
 		}
 
-		public async Task<ICollection<AppUser>> GetAllUsersAsync ( )
+		public async Task<ICollection<User>> GetAllUsersAsync ( )
 		{
 			return await _context.Users.ToListAsync();
 		}
@@ -84,14 +83,14 @@ namespace vietqtran.DataLayer.Repositories
 				AccessToken = token.Token,
 				RefreshToken = refreshToken.Token,
 				ExpireDate = token.ExpiryDate,
-				Role = user.AppUserRole.Name
+				Role = user.UserRole.Name
 			};
 		}
 
 
 		public async Task<bool> Register (SignUpCredentials credentials)
 		{
-			var user = _mapper.Map<AppUser>(credentials);
+			var user = _mapper.Map<User>(credentials);
 
 			//! Set Role for user
 			user.Id = Guid.NewGuid();
@@ -103,7 +102,7 @@ namespace vietqtran.DataLayer.Repositories
 				return false;
 			}
 
-			user.AppUserRole = role;
+			user.UserRole = role;
 			user.RoleId = role.Id;
 
 			var result = await _userManager.CreateAsync(user, credentials.Password);

@@ -9,15 +9,15 @@ using vietqtran.Models.Entities;
 
 namespace vietqtran.DataLayer.Configurations
 {
-	public class UserRoleConfiguration : IEntityTypeConfiguration<Role>
+	public class AccessTokenConfiguration : IEntityTypeConfiguration<AccessToken>
 	{
-		public void Configure (EntityTypeBuilder<Role> builder)
+		public void Configure (EntityTypeBuilder<AccessToken> builder)
 		{
-			builder.ToTable("Roles");
+			builder.ToTable("Access_Tokens");
 
-			builder.HasKey(x => x.Id);
+			builder.HasKey(at => at.Id);
 
-			builder.HasIndex(r => r.Name).HasDatabaseName("Index_Role_Name").IsUnique();
+			builder.HasIndex(at => at.Token).HasDatabaseName("Index_AccessToken_Token");
 		}
 	}
 }

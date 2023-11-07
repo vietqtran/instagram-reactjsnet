@@ -11,9 +11,8 @@ using System.Threading.Tasks;
 using vietqtran.Core.Interfaces.IRepository;
 using vietqtran.Core.Utilities;
 using vietqtran.DataAccess.Data;
-using vietqtran.Models.Models;
 using vietqtran.Models.ResponseModels;
-using vietqtran.Models.User;
+using vietqtran.Models.Entities;
 
 namespace vietqtran.DataLayer.Repositories
 {
