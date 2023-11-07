@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using vietqtran.Models.User;
+using vietqtran.Models.Entities;
 using vietqtran.Models.ViewModels;
 using vietqtran.Models.DTO;
 using vietqtran.Core.Interfaces.IService;
@@ -12,7 +12,6 @@ using vietqtran.Core.Interfaces.IRepository;
 using vietqtran.Models.RequestModels.User;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Identity;
-using vietqtran.Models.Models;
 using vietqtran.Models.ResponseModels;
 using Microsoft.EntityFrameworkCore;
 using System.Net;
@@ -31,7 +30,7 @@ namespace vietqtran.Services.Services
 		}
 
 
-		public async Task<ICollection<AppUser>> GetAllUsersServiceAsync ( )
+		public async Task<ICollection<User>> GetAllUsersServiceAsync ( )
 		{
 			var users = await _appUserRepository.GetAllUsersAsync();
 			return users;

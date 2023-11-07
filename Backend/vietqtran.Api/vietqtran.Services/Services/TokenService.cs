@@ -11,10 +11,9 @@ using System.Threading.Tasks;
 using vietqtran.Core.Interfaces.IRepository;
 using vietqtran.Core.Interfaces.IService;
 using vietqtran.Core.Utilities;
-using vietqtran.Models.Models;
 using vietqtran.Models.RequestModels.User;
 using vietqtran.Models.ResponseModels;
-using vietqtran.Models.User;
+using vietqtran.Models.Entities;
 
 namespace vietqtran.Services.Services
 {

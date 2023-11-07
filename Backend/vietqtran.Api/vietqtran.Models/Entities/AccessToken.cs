@@ -5,20 +5,20 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using vietqtran.Models.User;
+using vietqtran.Models.Entities;
 
-namespace vietqtran.Models.Models
+namespace vietqtran.Models.Entities
 {
-	[Table("Refresh_Tokens")]
-	public class RefreshToken
+	public class AccessToken
 	{
-		[Key]
 		public Guid Id { get; set; }
 		public string Token { get; set; }
 		public DateTime ExpiryDate { get; set; }
 
-		[ForeignKey("UserId")]
+
+		//! Reference
+
 		public Guid UserId { get; set; }
-		public AppUser User { get; set; }
+		public User User { get; set; }
 	}
 }

@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using vietqtran.Models.Models;
-using vietqtran.Models.User;
+using vietqtran.Models.Entities;
 
 namespace vietqtran.Models.ResponseModels
 {

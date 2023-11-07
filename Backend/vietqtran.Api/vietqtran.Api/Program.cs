@@ -13,7 +13,7 @@ using vietqtran.Core.Interfaces.IService;
 using vietqtran.Core.Utilities;
 using vietqtran.DataAccess.Data;
 using vietqtran.DataLayer.Repositories;
-using vietqtran.Models.User;
+using vietqtran.Models.Entities;
 using vietqtran.Services.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -37,26 +37,26 @@ builder.Services.AddSwaggerGen(options => {
 	});
 	options.AddSecurityRequirement(new OpenApiSecurityRequirement()
     {
-	   {
-		  new OpenApiSecurityScheme
-		  {
-			 Reference = new OpenApiReference
-			 {
-				Type = ReferenceType.SecurityScheme,
-				Id = "Bearer"
-			 },
-			 Scheme = "oauth2",
-			 Name = "Bearer",
-			 In = ParameterLocation.Header,
-		  },
-		  new List<string>()
-	   }
+	  {
+		new OpenApiSecurityScheme
+		{
+		   Reference = new OpenApiReference
+		   {
+			 Type = ReferenceType.SecurityScheme,
+			 Id = "Bearer"
+		   },
+		   Scheme = "oauth2",
+		   Name = "Bearer",
+		   In = ParameterLocation.Header,
+		},
+		new List<string>()
+	  }
     });
 });
 
 //! JWT Authentication
 builder.Services.Configure<JwtConfig>(builder.Configuration.GetSection("JWT"));
-builder.Services.AddIdentity<AppUser, AppUserRole>()
+builder.Services.AddIdentity<User, Role>()
     .AddEntityFrameworkStores<DataContext>()
     .AddDefaultTokenProviders();
 builder.Services.AddAuthentication(options => {

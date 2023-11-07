@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace vietqtran.Models.Models.Message
+namespace vietqtran.Models.Enums
 {
-	public class IconMessage
+	public enum MessageReact
 	{
+		Like, Love, Haha, Sad, Wow, Angry
 	}
 }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using vietqtran.Models.User;
+using vietqtran.Models.Entities;
 
 namespace vietqtran.DataLayer.Extensions
 {
@@ -13,15 +13,15 @@ namespace vietqtran.DataLayer.Extensions
 		public static void SeedData (this ModelBuilder modelBuilder)
 		{
 			//! Seeding Data
-			modelBuilder.Entity<AppUserRole>().HasData(
-			    new AppUserRole
+			modelBuilder.Entity<Role>().HasData(
+			    new Role
 			    {
 				    Id = Guid.NewGuid(),
 				    Name = "Admin",
 				    Description = "Role for ADMIN",
 				    NormalizedName = "ADMIN"
 			    },
-			    new AppUserRole
+			    new Role
 			    {
 				    Id = Guid.NewGuid(),
 				    Name = "User",
