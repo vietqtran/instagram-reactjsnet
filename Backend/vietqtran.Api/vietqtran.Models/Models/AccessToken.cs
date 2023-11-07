@@ -9,6 +9,7 @@ using vietqtran.Models.User;
 
 namespace vietqtran.Models.Models
 {
+	[Table("Access_Tokens")]
 	public class AccessToken
 	{
 		[Key]

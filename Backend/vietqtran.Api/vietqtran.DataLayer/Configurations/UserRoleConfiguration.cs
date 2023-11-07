@@ -9,11 +9,11 @@ using vietqtran.Models.User;
 
 namespace vietqtran.DataLayer.Configurations
 {
-    public class UserRoleConfiguration : IEntityTypeConfiguration<AppUserRole>
-    {
-        public void Configure (EntityTypeBuilder<AppUserRole> builder)
-        {
-            builder.ToTable("AppUserRoles");
-        }
-    }
+	public class UserRoleConfiguration : IEntityTypeConfiguration<AppUserRole>
+	{
+		public void Configure (EntityTypeBuilder<AppUserRole> builder)
+		{
+
+		}
+	}
 }
