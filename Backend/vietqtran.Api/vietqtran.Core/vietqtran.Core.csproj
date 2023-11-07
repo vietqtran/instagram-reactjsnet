@@ -7,23 +7,19 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-	  <NoWarn>1701;1702;8618</NoWarn>
+		<NoWarn>1701;1702;8618</NoWarn>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-	  <NoWarn>1701;1702;8618</NoWarn>
+		<NoWarn>1701;1702;8618</NoWarn>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Folder Include="Exceptions\" />
+		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.24.0" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.24.0" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <ProjectReference Include="..\vietqtran.Models\vietqtran.Models.csproj" />
+		<ProjectReference Include="..\vietqtran.Models\vietqtran.Models.csproj" />
 	</ItemGroup>
 
 </Project>

@@ -48,11 +48,9 @@ namespace vietqtran.Services.Services
 			return response;
 		}
 
-		public Task<AuthResponse> Register (SignUpCredentials signUpCredentials)
+		public async Task<bool> Register (SignUpCredentials signUpCredentials)
 		{
-			var tokens = _appUserRepository.Register(signUpCredentials);
-
-			return tokens;
+			return await _appUserRepository.Register(signUpCredentials);
 		}
 	}
 }

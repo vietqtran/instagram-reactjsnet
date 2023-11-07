@@ -26,10 +26,10 @@ namespace vietqtran.DataAccess.Data
 			modelBuilder.ApplyConfiguration(new UserConfiguration());
 			modelBuilder.ApplyConfiguration(new UserRoleConfiguration());
 
-			modelBuilder.Entity<IdentityUserClaim<Guid>>().ToTable("UserClaims");
-			modelBuilder.Entity<IdentityUserRole<Guid>>().ToTable("UserRoles").HasKey(ur => new { ur.UserId, ur.RoleId });
-			modelBuilder.Entity<IdentityUserLogin<Guid>>().ToTable("UserLogins").HasKey(ul => ul.UserId);
-			modelBuilder.Entity<IdentityUserToken<Guid>>().ToTable("UserTokens").HasKey(ut => ut.UserId);
+			modelBuilder.Entity<IdentityUserClaim<Guid>>().ToTable("User_Claims");
+			modelBuilder.Entity<IdentityUserRole<Guid>>().ToTable("User_Roles").HasKey(ur => new { ur.UserId, ur.RoleId });
+			modelBuilder.Entity<IdentityUserLogin<Guid>>().ToTable("User_Logins").HasKey(ul => ul.UserId);
+			modelBuilder.Entity<IdentityUserToken<Guid>>().ToTable("User_Tokens").HasKey(ut => ut.UserId);
 
 			//! Call Seeder
 			modelBuilder.SeedData();

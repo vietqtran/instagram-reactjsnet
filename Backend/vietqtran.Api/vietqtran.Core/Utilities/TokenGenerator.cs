@@ -24,7 +24,8 @@ namespace vietqtran.Core.Utilities
 			var claims = new List<Claim>
 			{
 				new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
-				new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+				new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+				new Claim(ClaimTypes.Role, user.AppUserRole.Name),
 			};
 
 			var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtConfig.Value.SecretKey));
@@ -65,7 +66,8 @@ namespace vietqtran.Core.Utilities
 				Id = Guid.NewGuid(),
 				Token = Convert.ToBase64String(randomNumber),
 				User = user,
-				UserId = user.Id
+				UserId = user.Id,
+				ExpiryDate = DateTime.UtcNow.AddMonths(1)
 			};
 		}
 	}

@@ -12,7 +12,7 @@ using vietqtran.DataAccess.Data;
 namespace vietqtran.DataLayer.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20231106054924_init")]
+    [Migration("20231107092423_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -66,7 +66,7 @@ namespace vietqtran.DataLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("UserClaims", (string)null);
+                    b.ToTable("User_Claims", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
@@ -86,7 +86,7 @@ namespace vietqtran.DataLayer.Migrations
 
                     b.HasKey("UserId");
 
-                    b.ToTable("UserLogins", (string)null);
+                    b.ToTable("User_Logins", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
@@ -99,7 +99,7 @@ namespace vietqtran.DataLayer.Migrations
 
                     b.HasKey("UserId", "RoleId");
 
-                    b.ToTable("UserRoles", (string)null);
+                    b.ToTable("User_Roles", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
@@ -119,7 +119,7 @@ namespace vietqtran.DataLayer.Migrations
 
                     b.HasKey("UserId");
 
-                    b.ToTable("UserTokens", (string)null);
+                    b.ToTable("User_Tokens", (string)null);
                 });
 
             modelBuilder.Entity("vietqtran.Models.Models.AccessToken", b =>
@@ -143,7 +143,7 @@ namespace vietqtran.DataLayer.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("AccessTokens");
+                    b.ToTable("Access_Tokens");
                 });
 
             modelBuilder.Entity("vietqtran.Models.Models.RefreshToken", b =>
@@ -151,6 +151,9 @@ namespace vietqtran.DataLayer.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("ExpiryDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Token")
                         .IsRequired()
@@ -164,30 +167,54 @@ namespace vietqtran.DataLayer.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("RefreshTokens");
+                    b.ToTable("Refresh_Tokens");
                 });
 
             modelBuilder.Entity("vietqtran.Models.User.AppUser", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
+                    b.Property<string>("Avatar")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Bio")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("BirthDay")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("ConcurrencyStamp")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("Dob")
-                        .HasColumnType("datetime2");
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(2023, 11, 7, 9, 24, 23, 274, DateTimeKind.Utc).AddTicks(1513));
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<bool>("Gender")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsPrivateAccount")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("LastOfflineTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("LastOnlineTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -196,7 +223,9 @@ namespace vietqtran.DataLayer.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("NormalizedEmail")
                         .HasColumnType("nvarchar(max)");
@@ -205,7 +234,9 @@ namespace vietqtran.DataLayer.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Password")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
@@ -216,6 +247,9 @@ namespace vietqtran.DataLayer.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -223,58 +257,13 @@ namespace vietqtran.DataLayer.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("AppUsers", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("2594da8a-e88f-4915-a901-9ce940e8c1ce"),
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "4ba3978b-4269-4250-a092-5988fbf28a82",
-                            Dob = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "ngothilinhchi@gmail.com",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            Name = "Ngô Thị Linh Chi",
-                            NormalizedEmail = "ngothilinhchi@gmail.com",
-                            Password = "linhchi",
-                            PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false
-                        },
-                        new
-                        {
-                            Id = new Guid("914c9fc5-f5a1-477c-beb7-a3da67056ae8"),
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "c45b0c1b-a227-45e0-9164-9956062bf32e",
-                            Dob = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "tranquocviet1303@gmail.com",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            Name = "Trần Quốc Việt",
-                            NormalizedEmail = "tranquocviet1303@gmail.com",
-                            Password = "admin",
-                            PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false
-                        },
-                        new
-                        {
-                            Id = new Guid("b7144f23-fa5e-4e82-99c4-6562626bac2c"),
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "b49ef1fc-57db-40cc-aa2e-f1575710e2f9",
-                            Dob = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "tranthuylinh@gmail.com",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            Name = "Trần Thùy Linh",
-                            NormalizedEmail = "tranthuylinh@gmail.com",
-                            Password = "thuylinh",
-                            PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false
-                        });
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("vietqtran.Models.User.AppUserRole", b =>
@@ -297,26 +286,24 @@ namespace vietqtran.DataLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AppUserRoles", (string)null);
+                    b.ToTable("Roles");
 
                     b.HasData(
                         new
                         {
-                            Id = new Guid("6b5f1083-24f1-4887-abb7-ede43054b68e"),
-                            ConcurrencyStamp = "2da3fd54-d1fa-48d0-b7b3-bf7d09bb21b4",
-                            Name = "Admin"
+                            Id = new Guid("af67e5e1-49ce-4b97-a09d-eb9c948da214"),
+                            ConcurrencyStamp = "dca1e707-d5ca-4b5c-ab65-6526cee4eab9",
+                            Description = "Role for ADMIN",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = new Guid("83867a81-8f4e-4a39-a225-d4fcadb07e59"),
-                            ConcurrencyStamp = "f6c6c1d5-4676-4565-b31e-b6b476ef898d",
-                            Name = "User"
-                        },
-                        new
-                        {
-                            Id = new Guid("ef26d1f6-60cb-4036-b37a-58aae52773bc"),
-                            ConcurrencyStamp = "bbe4530c-d04c-4abb-b0ce-2e4bca46cdf8",
-                            Name = "Manager"
+                            Id = new Guid("60fab020-4e16-4e1c-84d7-f6344451bc57"),
+                            ConcurrencyStamp = "6dbadddd-6773-4403-bb6c-183d8dfa1570",
+                            Description = "Role for USER",
+                            Name = "User",
+                            NormalizedName = "USER"
                         });
                 });
 
@@ -344,11 +331,27 @@ namespace vietqtran.DataLayer.Migrations
 
             modelBuilder.Entity("vietqtran.Models.User.AppUser", b =>
                 {
+                    b.HasOne("vietqtran.Models.User.AppUserRole", "AppUserRole")
+                        .WithMany("AppUsers")
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUserRole");
+                });
+
+            modelBuilder.Entity("vietqtran.Models.User.AppUser", b =>
+                {
                     b.Navigation("AccessTokens")
                         .IsRequired();
 
                     b.Navigation("RefreshTokens")
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("vietqtran.Models.User.AppUserRole", b =>
+                {
+                    b.Navigation("AppUsers");
                 });
 #pragma warning restore 612, 618
         }

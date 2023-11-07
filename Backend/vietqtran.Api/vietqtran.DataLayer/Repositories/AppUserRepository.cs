@@ -84,33 +84,51 @@ namespace vietqtran.DataLayer.Repositories
 				AccessToken = token.Token,
 				RefreshToken = refreshToken.Token,
 				ExpireDate = token.ExpiryDate,
+				Role = user.AppUserRole.Name
 			};
 		}
 
 
-		public async Task<AuthResponse> Register (SignUpCredentials credentials)
+		public async Task<bool> Register (SignUpCredentials credentials)
 		{
 			var user = _mapper.Map<AppUser>(credentials);
+
+			//! Set Role for user
+			user.Id = Guid.NewGuid();
+
+			//! Create User
+			var role = _context.Roles.Where(r => r.Name == "User").FirstOrDefault();
+
+			if (role == null) {
+				return false;
+			}
+
+			user.AppUserRole = role;
+			user.RoleId = role.Id;
 
 			var result = await _userManager.CreateAsync(user, credentials.Password);
 
 			if (!result.Succeeded) {
-				return null;
+				return false;
 			}
 
 			var accessToken = TokenGenerator.GenerateAccessToken(user, _jwtConfig);
 			var refreshToken = TokenGenerator.GenerateRefreshToken(user);
 
+			if (accessToken == null || refreshToken == null) {
+				return false;
+			}
+
 			await _context.AccessTokens.AddAsync(accessToken);
 			await _context.RefreshTokens.AddAsync(refreshToken);
-			await _context.SaveChangesAsync();
 
-			return new AuthResponse
-			{
-				AccessToken = accessToken.Token,
-				RefreshToken = refreshToken.Token,
-				ExpireDate = accessToken.ExpiryDate,
-			};
+			try {
+				await _context.SaveChangesAsync();
+			} catch (Exception ex) {
+				return false;
+			}
+
+			return true;
 		}
 
 	}

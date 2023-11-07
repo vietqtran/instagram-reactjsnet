@@ -9,11 +9,13 @@ using vietqtran.Models.User;
 
 namespace vietqtran.Models.Models
 {
+	[Table("Refresh_Tokens")]
 	public class RefreshToken
 	{
 		[Key]
 		public Guid Id { get; set; }
 		public string Token { get; set; }
+		public DateTime ExpiryDate { get; set; }
 
 		[ForeignKey("UserId")]
 		public Guid UserId { get; set; }

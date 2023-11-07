@@ -38,7 +38,11 @@ namespace vietqtran.Api.Controllers
 		{
 			var result = await _appUserService.Register(signUpCredentials);
 
-			return Ok(result);
+			if (result == true) {
+				return Ok("Signup successfull!");
+			}
+
+			return BadRequest("Signup failed!");
 		}
 
 		[HttpPost("login")]
