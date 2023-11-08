@@ -109,7 +109,7 @@ namespace vietqtran.DataLayer.Migrations
                     BirthDay = table.Column<DateTime>(type: "datetime2", nullable: false),
                     RoleId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     IsPrivateAccount = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 11, 8, 4, 55, 43, 272, DateTimeKind.Utc).AddTicks(7127)),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 11, 8, 6, 4, 35, 984, DateTimeKind.Utc).AddTicks(6756)),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
                     LastOnlineTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastOfflineTime = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -253,6 +253,30 @@ namespace vietqtran.DataLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "User_Follows",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    FollowedId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    FollowerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_User_Follows", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_User_Follows_Users_FollowedId",
+                        column: x => x.FollowedId,
+                        principalTable: "Users",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_User_Follows_Users_FollowerId",
+                        column: x => x.FollowerId,
+                        principalTable: "Users",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Stories",
                 columns: table => new
                 {
@@ -310,8 +334,8 @@ namespace vietqtran.DataLayer.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Description", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { new Guid("9d916b2c-5966-4dde-98f9-7c0426a7fb22"), "bbbc0955-16be-491d-b49c-303aba55b746", "Role for USER", "User", "USER" },
-                    { new Guid("a2241981-061c-476b-acc9-43857bb58325"), "01da0e68-3998-4120-af59-e8b22deb7ddf", "Role for ADMIN", "Admin", "ADMIN" }
+                    { new Guid("0c43e18c-135b-4c96-ab6d-297c8cea3727"), "3b6adcc5-47e3-4f02-88d6-23310ce9cadd", "Role for ADMIN", "Admin", "ADMIN" },
+                    { new Guid("dd015c28-b813-4785-8212-41e959889b19"), "e7656773-0c6e-4739-86ba-29cb2eed76ab", "Role for USER", "User", "USER" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -425,6 +449,16 @@ namespace vietqtran.DataLayer.Migrations
                 column: "HighLightId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_User_Follows_FollowedId",
+                table: "User_Follows",
+                column: "FollowedId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_User_Follows_FollowerId",
+                table: "User_Follows",
+                column: "FollowerId");
+
+            migrationBuilder.CreateIndex(
                 name: "Index_User_CreatedAt",
                 table: "Users",
                 column: "CreatedAt");
@@ -483,6 +517,9 @@ namespace vietqtran.DataLayer.Migrations
 
             migrationBuilder.DropTable(
                 name: "User_Claims");
+
+            migrationBuilder.DropTable(
+                name: "User_Follows");
 
             migrationBuilder.DropTable(
                 name: "User_Logins");

@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using vietqtran.Models.Entities;
@@ -50,6 +51,14 @@ namespace vietqtran.DataLayer.Configurations
 				.OnDelete(DeleteBehavior.NoAction);
 			builder.HasMany(u => u.HighLights)
 				.WithOne(hl => hl.User)
+				.OnDelete(DeleteBehavior.NoAction);
+			builder.HasMany(u => u.Followers)
+				.WithOne(f => f.Follower)
+				.HasForeignKey(f => f.FollowerId)
+				.OnDelete(DeleteBehavior.NoAction);
+			builder.HasMany(u => u.Followeds)
+				.WithOne(f => f.Followed)
+				.HasForeignKey(f => f.FollowedId)
 				.OnDelete(DeleteBehavior.NoAction);
 
 

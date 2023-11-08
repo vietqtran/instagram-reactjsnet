@@ -44,5 +44,7 @@ namespace vietqtran.Models.Entities
 		public ICollection<PersonalLink> PersonalLinks { get; set; }
 		public ICollection<Story> Stories { get; set; }
 		public ICollection<HighLight> HighLights { get; set; }
+		public ICollection<Follow> Followers { get; set; }
+		public ICollection<Follow> Followeds { get; set; }
 	}
 }

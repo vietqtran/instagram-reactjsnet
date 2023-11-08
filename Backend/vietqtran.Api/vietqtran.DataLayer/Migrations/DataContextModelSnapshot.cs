@@ -301,6 +301,30 @@ namespace vietqtran.DataLayer.Migrations
                     b.ToTable("Refresh_Tokens", (string)null);
                 });
 
+            modelBuilder.Entity("vietqtran.Models.Entities.Relations.Follow", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("FollowedId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("FollowerId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FollowedId");
+
+                    b.HasIndex("FollowerId");
+
+                    b.ToTable("User_Follows", (string)null);
+                });
+
             modelBuilder.Entity("vietqtran.Models.Entities.Relations.ReactMessage", b =>
                 {
                     b.Property<Guid>("UserId")
@@ -357,16 +381,16 @@ namespace vietqtran.DataLayer.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("a2241981-061c-476b-acc9-43857bb58325"),
-                            ConcurrencyStamp = "01da0e68-3998-4120-af59-e8b22deb7ddf",
+                            Id = new Guid("0c43e18c-135b-4c96-ab6d-297c8cea3727"),
+                            ConcurrencyStamp = "3b6adcc5-47e3-4f02-88d6-23310ce9cadd",
                             Description = "Role for ADMIN",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = new Guid("9d916b2c-5966-4dde-98f9-7c0426a7fb22"),
-                            ConcurrencyStamp = "bbbc0955-16be-491d-b49c-303aba55b746",
+                            Id = new Guid("dd015c28-b813-4785-8212-41e959889b19"),
+                            ConcurrencyStamp = "e7656773-0c6e-4739-86ba-29cb2eed76ab",
                             Description = "Role for USER",
                             Name = "User",
                             NormalizedName = "USER"
@@ -440,7 +464,7 @@ namespace vietqtran.DataLayer.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 11, 8, 4, 55, 43, 272, DateTimeKind.Utc).AddTicks(7127));
+                        .HasDefaultValue(new DateTime(2023, 11, 8, 6, 4, 35, 984, DateTimeKind.Utc).AddTicks(6756));
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(450)");
@@ -594,6 +618,25 @@ namespace vietqtran.DataLayer.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("vietqtran.Models.Entities.Relations.Follow", b =>
+                {
+                    b.HasOne("vietqtran.Models.Entities.User", "Followed")
+                        .WithMany("Followeds")
+                        .HasForeignKey("FollowedId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("vietqtran.Models.Entities.User", "Follower")
+                        .WithMany("Followers")
+                        .HasForeignKey("FollowerId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Followed");
+
+                    b.Navigation("Follower");
+                });
+
             modelBuilder.Entity("vietqtran.Models.Entities.Relations.ReactMessage", b =>
                 {
                     b.HasOne("vietqtran.Models.Entities.MessageModels.Message", "Message")
@@ -662,6 +705,10 @@ namespace vietqtran.DataLayer.Migrations
                 {
                     b.Navigation("AccessToken")
                         .IsRequired();
+
+                    b.Navigation("Followeds");
+
+                    b.Navigation("Followers");
 
                     b.Navigation("HighLights");
 
