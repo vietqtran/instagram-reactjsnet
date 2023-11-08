@@ -225,6 +225,28 @@ namespace vietqtran.DataLayer.Migrations
                     b.ToTable("Messages", (string)null);
                 });
 
+            modelBuilder.Entity("vietqtran.Models.Entities.PersonalLink", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Link")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id", "UserId", "Link");
+
+                    b.HasIndex("Id")
+                        .HasDatabaseName("Index_PersonalLink_Id");
+
+                    b.HasIndex("UserId")
+                        .HasDatabaseName("Index_PersonalLink_UserId");
+
+                    b.ToTable("Personal_Links", (string)null);
+                });
+
             modelBuilder.Entity("vietqtran.Models.Entities.RefreshToken", b =>
                 {
                     b.Property<Guid>("Id")
@@ -308,16 +330,16 @@ namespace vietqtran.DataLayer.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("e4109737-75dc-4792-b2ce-0f144d3848f4"),
-                            ConcurrencyStamp = "c55cb547-3fa5-4cd5-ad84-ffc78336bf4f",
+                            Id = new Guid("bd810d0f-7a36-463c-b2da-e81d8e8d19c0"),
+                            ConcurrencyStamp = "7556f4fc-63cb-416a-9703-4113989b0b65",
                             Description = "Role for ADMIN",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = new Guid("27c4b751-267d-4de1-bff9-f19f47ce1e94"),
-                            ConcurrencyStamp = "11191948-d420-43a3-8b27-305cb8d15cd1",
+                            Id = new Guid("cdb08037-8686-4802-929f-8a05e7f12219"),
+                            ConcurrencyStamp = "8a16a873-37da-423f-bf18-43e9a7414e0a",
                             Description = "Role for USER",
                             Name = "User",
                             NormalizedName = "USER"
@@ -349,7 +371,7 @@ namespace vietqtran.DataLayer.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 11, 7, 16, 47, 20, 432, DateTimeKind.Utc).AddTicks(3342));
+                        .HasDefaultValue(new DateTime(2023, 11, 8, 4, 23, 58, 744, DateTimeKind.Utc).AddTicks(8522));
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(450)");
@@ -470,6 +492,17 @@ namespace vietqtran.DataLayer.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("vietqtran.Models.Entities.PersonalLink", b =>
+                {
+                    b.HasOne("vietqtran.Models.Entities.User", "User")
+                        .WithMany("PersonalLinks")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("vietqtran.Models.Entities.RefreshToken", b =>
                 {
                     b.HasOne("vietqtran.Models.Entities.User", "User")
@@ -529,6 +562,8 @@ namespace vietqtran.DataLayer.Migrations
                     b.Navigation("MessageReacts");
 
                     b.Navigation("Messages");
+
+                    b.Navigation("PersonalLinks");
 
                     b.Navigation("RefreshToken")
                         .IsRequired();

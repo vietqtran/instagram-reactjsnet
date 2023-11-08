@@ -109,7 +109,7 @@ namespace vietqtran.DataLayer.Migrations
                     BirthDay = table.Column<DateTime>(type: "datetime2", nullable: false),
                     RoleId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     IsPrivateAccount = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 11, 7, 16, 47, 20, 432, DateTimeKind.Utc).AddTicks(3342)),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 11, 8, 4, 23, 58, 744, DateTimeKind.Utc).AddTicks(8522)),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
                     LastOnlineTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastOfflineTime = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -195,6 +195,25 @@ namespace vietqtran.DataLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Personal_Links",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Link = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Personal_Links", x => new { x.Id, x.UserId, x.Link });
+                    table.ForeignKey(
+                        name: "FK_Personal_Links_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Refresh_Tokens",
                 columns: table => new
                 {
@@ -243,8 +262,8 @@ namespace vietqtran.DataLayer.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Description", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { new Guid("27c4b751-267d-4de1-bff9-f19f47ce1e94"), "11191948-d420-43a3-8b27-305cb8d15cd1", "Role for USER", "User", "USER" },
-                    { new Guid("e4109737-75dc-4792-b2ce-0f144d3848f4"), "c55cb547-3fa5-4cd5-ad84-ffc78336bf4f", "Role for ADMIN", "Admin", "ADMIN" }
+                    { new Guid("bd810d0f-7a36-463c-b2da-e81d8e8d19c0"), "7556f4fc-63cb-416a-9703-4113989b0b65", "Role for ADMIN", "Admin", "ADMIN" },
+                    { new Guid("cdb08037-8686-4802-929f-8a05e7f12219"), "8a16a873-37da-423f-bf18-43e9a7414e0a", "Role for USER", "User", "USER" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -297,6 +316,16 @@ namespace vietqtran.DataLayer.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Messages_UserId",
                 table: "Messages",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "Index_PersonalLink_Id",
+                table: "Personal_Links",
+                column: "Id");
+
+            migrationBuilder.CreateIndex(
+                name: "Index_PersonalLink_UserId",
+                table: "Personal_Links",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
@@ -363,6 +392,9 @@ namespace vietqtran.DataLayer.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Access_Tokens");
+
+            migrationBuilder.DropTable(
+                name: "Personal_Links");
 
             migrationBuilder.DropTable(
                 name: "Reacts_Message");

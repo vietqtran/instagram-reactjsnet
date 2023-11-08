@@ -21,11 +21,11 @@ namespace vietqtran.Core.Utilities
 			}
 
 			var claims = new List<Claim>
-		  {
-			 new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
-			 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-			 new Claim(ClaimTypes.Role, user.UserRole.Name),
-		  };
+			{
+				new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
+				new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+				new Claim(ClaimTypes.Role, user.UserRole.Name),
+			};
 
 			var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtConfig.Value.SecretKey));
 

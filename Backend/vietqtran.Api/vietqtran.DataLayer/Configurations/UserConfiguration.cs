@@ -42,6 +42,9 @@ namespace vietqtran.DataLayer.Configurations
 				.WithOne(at => at.User)
 				.HasForeignKey<RefreshToken>(at => at.UserId)
 				.OnDelete(DeleteBehavior.NoAction);
+			builder.HasMany(u => u.PersonalLinks)
+				.WithOne(pl => pl.User)
+				.OnDelete(DeleteBehavior.Cascade);
 
 
 			builder.Property(u => u.Avatar).IsRequired(false);
