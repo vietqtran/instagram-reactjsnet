@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using vietqtran.Models.Entities.MessageModels;
 using vietqtran.Models.Entities;
 using vietqtran.Models.ViewModels;
 

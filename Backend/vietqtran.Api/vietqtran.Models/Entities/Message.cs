@@ -9,9 +9,9 @@ using vietqtran.Core.Enums;
 using vietqtran.Models.Enums;
 using vietqtran.Models.Entities.Relations;
 
-namespace vietqtran.Models.Entities.MessageModels
+namespace vietqtran.Models.Entities
 {
-	public class Message : IMessage
+	public class Message
 	{
 		//! Common
 		public Guid Id { get; set; }
@@ -29,6 +29,7 @@ namespace vietqtran.Models.Entities.MessageModels
 		public Guid PostId { get; set; }
 		public Guid StoryId { get; set; }
 		public string Emoji { get; set; }
+		[Url]
 		public string FileUrl { get; set; }
 
 

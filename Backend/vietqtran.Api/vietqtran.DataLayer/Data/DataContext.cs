@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 using vietqtran.DataLayer.Configurations;
 using vietqtran.DataLayer.Extensions;
 using vietqtran.Models.Entities;
-using vietqtran.Models.Entities.MessageModels;
 using vietqtran.Models.Entities.Relations;
 using vietqtran.Models.Enums;
 

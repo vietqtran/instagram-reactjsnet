@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using vietqtran.Models.Entities.MessageModels;
+using vietqtran.Models.Entities;
 using vietqtran.Models.Entities.Relations;
 using System.Reflection.Emit;
 
