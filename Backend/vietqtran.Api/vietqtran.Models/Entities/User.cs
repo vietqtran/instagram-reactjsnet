@@ -47,7 +47,10 @@ namespace vietqtran.Models.Entities
 		public ICollection<Follow> Followeds { get; set; }
 		public ICollection<Block> Blockers { get; set; }
 		public ICollection<Block> Blockeds { get; set; }
+		public ICollection<BestFriend> RequestUsers { get; set; }
+		public ICollection<BestFriend> ResponseUsers { get; set; }
 		public ICollection<Post> Posts { get; set; }
 		public ICollection<ViewStory> ViewsStory { get; set; }
+		public ICollection<LikePost> LikePosts { get; set; }
 	}
 }

@@ -20,6 +20,5 @@ namespace vietqtran.Models.Entities
 
 		//! Reference
 		public User User { get; set; }
-		public ICollection<Story> Stories { get; set; }
 	}
 }

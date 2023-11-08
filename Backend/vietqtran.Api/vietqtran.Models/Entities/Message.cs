@@ -26,8 +26,8 @@ namespace vietqtran.Models.Entities
 		//! Particilar
 
 		public string Content { get; set; }
-		public Guid PostId { get; set; }
-		public Guid StoryId { get; set; }
+		public Guid? PostId { get; set; }
+		public Guid? StoryId { get; set; }
 		public string Emoji { get; set; }
 		[Url]
 		public string FileUrl { get; set; }
@@ -36,7 +36,5 @@ namespace vietqtran.Models.Entities
 		//! Refrence
 		public User User { get; set; }
 		public ICollection<ReactMessage> MessageReacts { get; set; }
-		public Post Post { get; set; }
-		public Story Story { get; set; }
 	}
 }

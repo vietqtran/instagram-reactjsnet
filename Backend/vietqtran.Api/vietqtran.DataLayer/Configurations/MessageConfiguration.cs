@@ -24,18 +24,12 @@ namespace vietqtran.DataLayer.Configurations
 			builder.HasIndex(m => m.StoryId);
 			builder.HasIndex(m => m.UserId);
 
+			builder.Property(m => m.PostId).IsRequired(false);
+			builder.Property(m => m.StoryId).IsRequired(false);
 
 			builder.HasOne(m => m.User)
 				.WithMany(u => u.Messages)
 				.HasForeignKey(m => m.UserId);
-			builder.HasOne(m => m.Post)
-				.WithMany(p => p.Messages)
-				.HasForeignKey(m => m.PostId)
-				.OnDelete(DeleteBehavior.NoAction);
-			builder.HasOne(m => m.Story)
-				.WithMany(s => s.Messages)
-				.HasForeignKey(m => m.StoryId)
-				.OnDelete(DeleteBehavior.NoAction);
 		}
 	}
 }

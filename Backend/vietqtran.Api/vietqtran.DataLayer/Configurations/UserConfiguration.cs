@@ -67,6 +67,14 @@ namespace vietqtran.DataLayer.Configurations
 				.WithOne(f => f.Followed)
 				.HasForeignKey(f => f.FollowedId)
 				.OnDelete(DeleteBehavior.NoAction);
+			builder.HasMany(u => u.RequestUsers)
+				.WithOne(bf => bf.RequestUser)
+				.HasForeignKey(bf => bf.RequestUserId)
+				.OnDelete(DeleteBehavior.NoAction);
+			builder.HasMany(u => u.ResponseUsers)
+				.WithOne(bf => bf.ResponseUser)
+				.HasForeignKey(bf => bf.ResponseUserId)
+				.OnDelete(DeleteBehavior.NoAction);
 			builder.HasMany(u => u.Blockers)
 				.WithOne(b => b.Blocker)
 				.HasForeignKey(b => b.BlockerId)
@@ -83,6 +91,9 @@ namespace vietqtran.DataLayer.Configurations
 				.WithOne(vs => vs.User)
 				.HasForeignKey(vs => vs.ViewerId)
 				.OnDelete(DeleteBehavior.NoAction);
+			builder.HasMany(u => u.LikePosts)
+				.WithOne(lp => lp.User)
+				.HasForeignKey(lp => lp.UserId);
 
 			builder.Property(u => u.Avatar).IsRequired(false);
 			builder.Property(u => u.CreatedAt).HasDefaultValue(DateTime.UtcNow);

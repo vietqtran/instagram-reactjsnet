@@ -23,9 +23,9 @@ namespace vietqtran.DataLayer.Configurations
 			builder.HasOne(p => p.User)
 				.WithMany(u => u.Posts)
 				.HasForeignKey(p => p.UserId);
-			builder.HasMany(p => p.Messages)
-				.WithOne(m => m.Post)
-				.HasForeignKey(m => m.PostId);
+			builder.HasMany(p => p.LikePosts)
+				.WithOne(lp => lp.Post)
+				.HasForeignKey(lp => lp.PostId);
 		}
 	}
 }

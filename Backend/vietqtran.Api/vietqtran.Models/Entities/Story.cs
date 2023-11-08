@@ -20,8 +20,6 @@ namespace vietqtran.Models.Entities
 
 		//! Reference
 		public User User { get; set; }
-		public HighLight HighLight { get; set; }
-		public ICollection<Message> Messages { get; set; }
 		public ICollection<ViewStory> ViewsStory { get; set; }
 	}
 }

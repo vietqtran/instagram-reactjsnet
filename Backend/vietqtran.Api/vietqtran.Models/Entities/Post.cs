@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using vietqtran.Models.Entities.Relations;
 using vietqtran.Models.Enums;
 
 namespace vietqtran.Models.Entities
@@ -19,6 +21,6 @@ namespace vietqtran.Models.Entities
 
 		//! Reference
 		public User User { get; set; }
-		public ICollection<Message> Messages { get; set; }
+		public Collection<LikePost> LikePosts { get; set; }
 	}
 }
