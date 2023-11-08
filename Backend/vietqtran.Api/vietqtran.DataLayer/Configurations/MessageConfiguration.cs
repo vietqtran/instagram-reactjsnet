@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using vietqtran.Models.Entities.MessageModels;
+using vietqtran.Models.Entities;
 
 namespace vietqtran.DataLayer.Configurations
 {
@@ -17,17 +17,25 @@ namespace vietqtran.DataLayer.Configurations
 
 			builder.HasKey(x => x.Id);
 
-			builder.HasIndex(m => m.Id).IsUnique().HasDatabaseName("Index_Message_Id");
-			builder.HasIndex(m => m.Content).IsUnique().HasDatabaseName("Index_Message_Content");
-			builder.HasIndex(m => m.CreatedAt).IsUnique().HasDatabaseName("Index_Message_CreatedAt");
-			builder.HasIndex(m => m.ReplyId).IsUnique().HasDatabaseName("Index_Message_ReplyId");
-			builder.HasIndex(m => m.StoryId).IsUnique().HasDatabaseName("Index_Message_StoryId");
-			builder.HasIndex(m => m.Sender).IsUnique().HasDatabaseName("Index_Message_Sender");
+			builder.HasIndex(m => m.Id);
+			builder.HasIndex(m => m.Content);
+			builder.HasIndex(m => m.CreatedAt);
+			builder.HasIndex(m => m.ReplyId);
+			builder.HasIndex(m => m.StoryId);
+			builder.HasIndex(m => m.UserId);
 
 
 			builder.HasOne(m => m.User)
-				.WithMany()
-				.HasForeignKey(m => m.Sender);
+				.WithMany(u => u.Messages)
+				.HasForeignKey(m => m.UserId);
+			builder.HasOne(m => m.Post)
+				.WithMany(p => p.Messages)
+				.HasForeignKey(m => m.PostId)
+				.OnDelete(DeleteBehavior.NoAction);
+			builder.HasOne(m => m.Story)
+				.WithMany(s => s.Messages)
+				.HasForeignKey(m => m.StoryId)
+				.OnDelete(DeleteBehavior.NoAction);
 		}
 	}
 }

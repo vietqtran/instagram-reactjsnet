@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using vietqtran.Models.Entities.MessageModels;
+using vietqtran.Models.Entities;
 using vietqtran.Models.Entities.Relations;
 using System.Reflection.Emit;
 
@@ -16,9 +16,9 @@ namespace vietqtran.DataLayer.Configurations
 		public void Configure (EntityTypeBuilder<ReactMessage> builder)
 		{
 			builder.ToTable("Reacts_Message");
-			builder.HasKey(x => new { x.UserId, x.MessageId, x.Id });
+			builder.HasKey(x => new { x.UserId, x.MessageId });
 
-			builder.HasIndex(x => new { x.MessageId, x.UserId }).HasDatabaseName("Index_ReactMessage_MessageId_UserId");
+			builder.HasIndex(x => new { x.MessageId, x.UserId });
 
 			builder.HasOne(rm => rm.Message)
 				.WithMany(m => m.MessageReacts)

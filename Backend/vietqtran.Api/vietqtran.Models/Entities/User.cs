@@ -8,7 +8,6 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
-using vietqtran.Models.Entities.MessageModels;
 using vietqtran.Models.Entities.Relations;
 using vietqtran.Models.Enums;
 
@@ -48,5 +47,7 @@ namespace vietqtran.Models.Entities
 		public ICollection<Follow> Followeds { get; set; }
 		public ICollection<Block> Blockers { get; set; }
 		public ICollection<Block> Blockeds { get; set; }
+		public ICollection<Post> Posts { get; set; }
+		public ICollection<ViewStory> ViewsStory { get; set; }
 	}
 }

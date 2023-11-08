@@ -17,8 +17,8 @@ namespace vietqtran.DataLayer.Configurations
 
 			builder.HasKey(b => b.Id);
 
-			builder.HasIndex(b => b.BlockerId).HasDatabaseName("Index_Follow_BlockerId");
-			builder.HasIndex(b => b.BlockedId).HasDatabaseName("Index_Follow_BlockedId");
+			builder.HasIndex(b => b.BlockedId);
+			builder.HasIndex(b => b.BlockerId);
 
 			builder.HasOne(b => b.Blocked)
 				.WithMany(u => u.Blockeds)

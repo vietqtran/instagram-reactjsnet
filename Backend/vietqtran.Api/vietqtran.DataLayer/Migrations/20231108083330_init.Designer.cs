@@ -12,7 +12,7 @@ using vietqtran.DataAccess.Data;
 namespace vietqtran.DataLayer.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20231108062834_init")]
+    [Migration("20231108083330_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -140,8 +140,7 @@ namespace vietqtran.DataLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Token")
-                        .HasDatabaseName("Index_AccessToken_Token");
+                    b.HasIndex("Token");
 
                     b.HasIndex("UserId")
                         .IsUnique();
@@ -176,7 +175,7 @@ namespace vietqtran.DataLayer.Migrations
                     b.ToTable("HighLights");
                 });
 
-            modelBuilder.Entity("vietqtran.Models.Entities.MessageModels.Message", b =>
+            modelBuilder.Entity("vietqtran.Models.Entities.Message", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -212,43 +211,28 @@ namespace vietqtran.DataLayer.Migrations
                     b.Property<Guid>("ReplyId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("Sender")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
                     b.Property<Guid>("StoryId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("UserId")
+                    b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Content")
-                        .IsUnique()
-                        .HasDatabaseName("Index_Message_Content");
+                    b.HasIndex("Content");
 
-                    b.HasIndex("CreatedAt")
-                        .IsUnique()
-                        .HasDatabaseName("Index_Message_CreatedAt");
+                    b.HasIndex("CreatedAt");
 
-                    b.HasIndex("Id")
-                        .IsUnique()
-                        .HasDatabaseName("Index_Message_Id");
+                    b.HasIndex("Id");
 
-                    b.HasIndex("ReplyId")
-                        .IsUnique()
-                        .HasDatabaseName("Index_Message_ReplyId");
+                    b.HasIndex("PostId");
 
-                    b.HasIndex("Sender")
-                        .IsUnique()
-                        .HasDatabaseName("Index_Message_Sender");
+                    b.HasIndex("ReplyId");
 
-                    b.HasIndex("StoryId")
-                        .IsUnique()
-                        .HasDatabaseName("Index_Message_StoryId");
+                    b.HasIndex("StoryId");
 
                     b.HasIndex("UserId");
 
@@ -268,13 +252,39 @@ namespace vietqtran.DataLayer.Migrations
 
                     b.HasKey("Id", "UserId", "Link");
 
-                    b.HasIndex("Id")
-                        .HasDatabaseName("Index_PersonalLink_Id");
+                    b.HasIndex("Id");
 
-                    b.HasIndex("UserId")
-                        .HasDatabaseName("Index_PersonalLink_UserId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Personal_Links", (string)null);
+                });
+
+            modelBuilder.Entity("vietqtran.Models.Entities.Post", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Visibility")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Posts", (string)null);
                 });
 
             modelBuilder.Entity("vietqtran.Models.Entities.RefreshToken", b =>
@@ -295,8 +305,7 @@ namespace vietqtran.DataLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Token")
-                        .HasDatabaseName("Index_RefreshToken_Token");
+                    b.HasIndex("Token");
 
                     b.HasIndex("UserId")
                         .IsUnique();
@@ -321,11 +330,9 @@ namespace vietqtran.DataLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BlockedId")
-                        .HasDatabaseName("Index_Follow_BlockedId");
+                    b.HasIndex("BlockedId");
 
-                    b.HasIndex("BlockerId")
-                        .HasDatabaseName("Index_Follow_BlockerId");
+                    b.HasIndex("BlockerId");
 
                     b.ToTable("User_Blocks", (string)null);
                 });
@@ -347,11 +354,9 @@ namespace vietqtran.DataLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FollowedId")
-                        .HasDatabaseName("Index_Follow_FollowedId");
+                    b.HasIndex("FollowedId");
 
-                    b.HasIndex("FollowerId")
-                        .HasDatabaseName("Index_Follow_FollowerId");
+                    b.HasIndex("FollowerId");
 
                     b.ToTable("User_Follows", (string)null);
                 });
@@ -364,9 +369,6 @@ namespace vietqtran.DataLayer.Migrations
                     b.Property<Guid>("MessageId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -374,12 +376,35 @@ namespace vietqtran.DataLayer.Migrations
                     b.Property<int>("React")
                         .HasColumnType("int");
 
-                    b.HasKey("UserId", "MessageId", "Id");
+                    b.HasKey("UserId", "MessageId");
 
-                    b.HasIndex("MessageId", "UserId")
-                        .HasDatabaseName("Index_ReactMessage_MessageId_UserId");
+                    b.HasIndex("MessageId", "UserId");
 
                     b.ToTable("Reacts_Message", (string)null);
+                });
+
+            modelBuilder.Entity("vietqtran.Models.Entities.Relations.ViewStory", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Liked")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("StotyId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ViewerId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StotyId");
+
+                    b.HasIndex("ViewerId");
+
+                    b.ToTable("ViewStory");
                 });
 
             modelBuilder.Entity("vietqtran.Models.Entities.Role", b =>
@@ -402,26 +427,23 @@ namespace vietqtran.DataLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Name")
-                        .IsUnique()
-                        .HasDatabaseName("Index_Role_Name")
-                        .HasFilter("[Name] IS NOT NULL");
+                    b.HasIndex("Name");
 
                     b.ToTable("Roles", (string)null);
 
                     b.HasData(
                         new
                         {
-                            Id = new Guid("dd55f1a6-57dd-4817-9d48-b150ccdb612c"),
-                            ConcurrencyStamp = "250b9839-0316-4878-b9bb-0604aeda8da2",
+                            Id = new Guid("8ed97161-ce04-413e-923a-331b4c4b813b"),
+                            ConcurrencyStamp = "fe6c0d6a-532f-4c1f-b76c-9d867f6eabaf",
                             Description = "Role for ADMIN",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = new Guid("d6b9ce69-2ee3-42a0-b103-cb85a4ccbcf3"),
-                            ConcurrencyStamp = "d915a6ff-b73d-4151-b8dc-e81920f215e1",
+                            Id = new Guid("d58dc9d2-5bdc-4e41-9423-ef9403454199"),
+                            ConcurrencyStamp = "2902b6a7-6a46-464f-87f0-5bf7ff0c5229",
                             Description = "Role for USER",
                             Name = "User",
                             NormalizedName = "USER"
@@ -451,21 +473,15 @@ namespace vietqtran.DataLayer.Migrations
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<long>("ViewQuantity")
-                        .HasColumnType("bigint");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("CreatedAt")
-                        .HasDatabaseName("Index_PersonalLink_CreatedAt");
+                    b.HasIndex("CreatedAt");
 
                     b.HasIndex("HighLightId");
 
-                    b.HasIndex("Id")
-                        .HasDatabaseName("Index_Story_Id");
+                    b.HasIndex("Id");
 
-                    b.HasIndex("UserId")
-                        .HasDatabaseName("Index_Story_UserId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Stories", (string)null);
                 });
@@ -495,7 +511,7 @@ namespace vietqtran.DataLayer.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 11, 8, 6, 28, 34, 174, DateTimeKind.Utc).AddTicks(866));
+                        .HasDefaultValue(new DateTime(2023, 11, 8, 8, 33, 30, 807, DateTimeKind.Utc).AddTicks(6810));
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(450)");
@@ -564,28 +580,17 @@ namespace vietqtran.DataLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CreatedAt")
-                        .HasDatabaseName("Index_User_CreatedAt");
+                    b.HasIndex("CreatedAt");
 
-                    b.HasIndex("Email")
-                        .IsUnique()
-                        .HasDatabaseName("Index_User_Email")
-                        .HasFilter("[Email] IS NOT NULL");
+                    b.HasIndex("Email");
 
-                    b.HasIndex("IsActive")
-                        .HasDatabaseName("Index_User_IsActive");
+                    b.HasIndex("IsActive");
 
-                    b.HasIndex("PhoneNumber")
-                        .IsUnique()
-                        .HasDatabaseName("Index_User_PhoneNumber")
-                        .HasFilter("[PhoneNumber] IS NOT NULL");
+                    b.HasIndex("PhoneNumber");
 
-                    b.HasIndex("RoleId")
-                        .HasDatabaseName("Index_User_RoleId");
+                    b.HasIndex("RoleId");
 
-                    b.HasIndex("UserName")
-                        .IsUnique()
-                        .HasDatabaseName("Index_User_UserName");
+                    b.HasIndex("UserName");
 
                     b.ToTable("Users", (string)null);
                 });
@@ -612,17 +617,29 @@ namespace vietqtran.DataLayer.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("vietqtran.Models.Entities.MessageModels.Message", b =>
+            modelBuilder.Entity("vietqtran.Models.Entities.Message", b =>
                 {
-                    b.HasOne("vietqtran.Models.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("Sender")
-                        .OnDelete(DeleteBehavior.Cascade)
+                    b.HasOne("vietqtran.Models.Entities.Post", "Post")
+                        .WithMany("Messages")
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("vietqtran.Models.Entities.User", null)
+                    b.HasOne("vietqtran.Models.Entities.Story", "Story")
                         .WithMany("Messages")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("StoryId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("vietqtran.Models.Entities.User", "User")
+                        .WithMany("Messages")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Post");
+
+                    b.Navigation("Story");
 
                     b.Navigation("User");
                 });
@@ -633,6 +650,17 @@ namespace vietqtran.DataLayer.Migrations
                         .WithMany("PersonalLinks")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("vietqtran.Models.Entities.Post", b =>
+                {
+                    b.HasOne("vietqtran.Models.Entities.User", "User")
+                        .WithMany("Posts")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("User");
@@ -689,7 +717,7 @@ namespace vietqtran.DataLayer.Migrations
 
             modelBuilder.Entity("vietqtran.Models.Entities.Relations.ReactMessage", b =>
                 {
-                    b.HasOne("vietqtran.Models.Entities.MessageModels.Message", "Message")
+                    b.HasOne("vietqtran.Models.Entities.Message", "Message")
                         .WithMany("MessageReacts")
                         .HasForeignKey("MessageId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -702,6 +730,25 @@ namespace vietqtran.DataLayer.Migrations
                         .IsRequired();
 
                     b.Navigation("Message");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("vietqtran.Models.Entities.Relations.ViewStory", b =>
+                {
+                    b.HasOne("vietqtran.Models.Entities.Story", "Story")
+                        .WithMany("ViewsStory")
+                        .HasForeignKey("StotyId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("vietqtran.Models.Entities.User", "User")
+                        .WithMany("ViewsStory")
+                        .HasForeignKey("ViewerId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Story");
 
                     b.Navigation("User");
                 });
@@ -741,14 +788,26 @@ namespace vietqtran.DataLayer.Migrations
                     b.Navigation("Stories");
                 });
 
-            modelBuilder.Entity("vietqtran.Models.Entities.MessageModels.Message", b =>
+            modelBuilder.Entity("vietqtran.Models.Entities.Message", b =>
                 {
                     b.Navigation("MessageReacts");
+                });
+
+            modelBuilder.Entity("vietqtran.Models.Entities.Post", b =>
+                {
+                    b.Navigation("Messages");
                 });
 
             modelBuilder.Entity("vietqtran.Models.Entities.Role", b =>
                 {
                     b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("vietqtran.Models.Entities.Story", b =>
+                {
+                    b.Navigation("Messages");
+
+                    b.Navigation("ViewsStory");
                 });
 
             modelBuilder.Entity("vietqtran.Models.Entities.User", b =>
@@ -772,10 +831,14 @@ namespace vietqtran.DataLayer.Migrations
 
                     b.Navigation("PersonalLinks");
 
+                    b.Navigation("Posts");
+
                     b.Navigation("RefreshToken")
                         .IsRequired();
 
                     b.Navigation("Stories");
+
+                    b.Navigation("ViewsStory");
                 });
 #pragma warning restore 612, 618
         }

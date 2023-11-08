@@ -9,14 +9,14 @@ using vietqtran.Core.Enums;
 using vietqtran.Models.Enums;
 using vietqtran.Models.Entities.Relations;
 
-namespace vietqtran.Models.Entities.MessageModels
+namespace vietqtran.Models.Entities
 {
-	public class Message : IMessage
+	public class Message
 	{
 		//! Common
 		public Guid Id { get; set; }
 		public MessageType MessageType { get; set; }
-		public Guid Sender { get; set; }
+		public Guid UserId { get; set; }
 		public DateTime CreatedAt { get; set; }
 		public bool IsDeleted { get; set; }
 		public MessageStatus Status { get; set; }
@@ -29,11 +29,14 @@ namespace vietqtran.Models.Entities.MessageModels
 		public Guid PostId { get; set; }
 		public Guid StoryId { get; set; }
 		public string Emoji { get; set; }
+		[Url]
 		public string FileUrl { get; set; }
 
 
 		//! Refrence
 		public User User { get; set; }
 		public ICollection<ReactMessage> MessageReacts { get; set; }
+		public Post Post { get; set; }
+		public Story Story { get; set; }
 	}
 }

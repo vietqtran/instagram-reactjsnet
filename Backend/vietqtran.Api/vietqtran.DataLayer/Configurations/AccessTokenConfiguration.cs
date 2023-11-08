@@ -17,7 +17,7 @@ namespace vietqtran.DataLayer.Configurations
 
 			builder.HasKey(at => at.Id);
 
-			builder.HasIndex(at => at.Token).HasDatabaseName("Index_AccessToken_Token");
+			builder.HasIndex(at => at.Token);
 		}
 	}
 }
