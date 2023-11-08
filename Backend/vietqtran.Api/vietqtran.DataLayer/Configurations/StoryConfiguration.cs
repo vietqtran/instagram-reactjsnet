@@ -31,6 +31,10 @@ namespace vietqtran.DataLayer.Configurations
 				.WithOne(m => m.Story)
 				.HasForeignKey(m => m.StoryId)
 				.OnDelete(DeleteBehavior.NoAction);
+			builder.HasMany(s => s.ViewsStory)
+				.WithOne(vs => vs.Story)
+				.HasForeignKey(vs => vs.StotyId)
+				.OnDelete(DeleteBehavior.NoAction);
 		}
 	}
 }

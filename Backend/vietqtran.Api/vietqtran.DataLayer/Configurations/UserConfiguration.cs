@@ -79,7 +79,10 @@ namespace vietqtran.DataLayer.Configurations
 				.WithOne(p => p.User)
 				.HasForeignKey(p => p.UserId)
 				.OnDelete(DeleteBehavior.NoAction);
-
+			builder.HasMany(u => u.ViewsStory)
+				.WithOne(vs => vs.User)
+				.HasForeignKey(vs => vs.ViewerId)
+				.OnDelete(DeleteBehavior.NoAction);
 
 			builder.Property(u => u.Avatar).IsRequired(false);
 			builder.Property(u => u.CreatedAt).HasDefaultValue(DateTime.UtcNow);

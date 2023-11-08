@@ -12,7 +12,7 @@ using vietqtran.DataAccess.Data;
 namespace vietqtran.DataLayer.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20231108071910_init")]
+    [Migration("20231108073522_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -391,9 +391,6 @@ namespace vietqtran.DataLayer.Migrations
                     b.Property<Guid>("MessageId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -401,12 +398,36 @@ namespace vietqtran.DataLayer.Migrations
                     b.Property<int>("React")
                         .HasColumnType("int");
 
-                    b.HasKey("UserId", "MessageId", "Id");
+                    b.HasKey("UserId", "MessageId");
 
                     b.HasIndex("MessageId", "UserId")
                         .HasDatabaseName("Index_ReactMessage_MessageId_UserId");
 
                     b.ToTable("Reacts_Message", (string)null);
+                });
+
+            modelBuilder.Entity("vietqtran.Models.Entities.Relations.ViewStory", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Liked")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("StotyId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ViewerId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StotyId");
+
+                    b.HasIndex("ViewerId");
+
+                    b.ToTable("ViewStory");
                 });
 
             modelBuilder.Entity("vietqtran.Models.Entities.Role", b =>
@@ -439,16 +460,16 @@ namespace vietqtran.DataLayer.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("eab2e07f-5973-44e0-835d-b40f4f72ecf3"),
-                            ConcurrencyStamp = "95973d66-ba40-4086-8924-38c6895a2bef",
+                            Id = new Guid("4b72fc57-37ba-498b-8057-ebcb498aa274"),
+                            ConcurrencyStamp = "809c7b8c-c1ce-4ead-b099-4c1917f67f17",
                             Description = "Role for ADMIN",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = new Guid("0edc50dc-163d-4a8a-8314-a8bc3ad92940"),
-                            ConcurrencyStamp = "dd334041-66d8-4dec-8a45-0e413ecc7947",
+                            Id = new Guid("b0d94b6c-ee25-4f00-a7f0-1cb73713162a"),
+                            ConcurrencyStamp = "ee34f6d9-4feb-469a-852a-4518114dead1",
                             Description = "Role for USER",
                             Name = "User",
                             NormalizedName = "USER"
@@ -477,9 +498,6 @@ namespace vietqtran.DataLayer.Migrations
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<long>("ViewQuantity")
-                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
@@ -522,7 +540,7 @@ namespace vietqtran.DataLayer.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 11, 8, 7, 19, 10, 494, DateTimeKind.Utc).AddTicks(7143));
+                        .HasDefaultValue(new DateTime(2023, 11, 8, 7, 35, 22, 84, DateTimeKind.Utc).AddTicks(9118));
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(450)");
@@ -756,6 +774,25 @@ namespace vietqtran.DataLayer.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("vietqtran.Models.Entities.Relations.ViewStory", b =>
+                {
+                    b.HasOne("vietqtran.Models.Entities.Story", "Story")
+                        .WithMany("ViewsStory")
+                        .HasForeignKey("StotyId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("vietqtran.Models.Entities.User", "User")
+                        .WithMany("ViewsStory")
+                        .HasForeignKey("ViewerId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Story");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("vietqtran.Models.Entities.Story", b =>
                 {
                     b.HasOne("vietqtran.Models.Entities.HighLight", "HighLight")
@@ -809,6 +846,8 @@ namespace vietqtran.DataLayer.Migrations
             modelBuilder.Entity("vietqtran.Models.Entities.Story", b =>
                 {
                     b.Navigation("Messages");
+
+                    b.Navigation("ViewsStory");
                 });
 
             modelBuilder.Entity("vietqtran.Models.Entities.User", b =>
@@ -838,6 +877,8 @@ namespace vietqtran.DataLayer.Migrations
                         .IsRequired();
 
                     b.Navigation("Stories");
+
+                    b.Navigation("ViewsStory");
                 });
 #pragma warning restore 612, 618
         }

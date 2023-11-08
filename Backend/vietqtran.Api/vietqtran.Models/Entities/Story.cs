@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using vietqtran.Models.Entities.Relations;
 
 namespace vietqtran.Models.Entities
 {
@@ -15,12 +16,12 @@ namespace vietqtran.Models.Entities
 		public string MediaLink { get; set; }
 		public string Type { get; set; }
 		public DateTime CreatedAt { get; set; }
-		public long ViewQuantity { get; set; }
 		public Guid HighLightId { get; set; }
 
 		//! Reference
 		public User User { get; set; }
 		public HighLight HighLight { get; set; }
 		public ICollection<Message> Messages { get; set; }
+		public ICollection<ViewStory> ViewsStory { get; set; }
 	}
 }

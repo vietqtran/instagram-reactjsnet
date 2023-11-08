@@ -16,7 +16,7 @@ namespace vietqtran.DataLayer.Configurations
 		public void Configure (EntityTypeBuilder<ReactMessage> builder)
 		{
 			builder.ToTable("Reacts_Message");
-			builder.HasKey(x => new { x.UserId, x.MessageId, x.Id });
+			builder.HasKey(x => new { x.UserId, x.MessageId });
 
 			builder.HasIndex(x => new { x.MessageId, x.UserId }).HasDatabaseName("Index_ReactMessage_MessageId_UserId");
 

@@ -48,5 +48,6 @@ namespace vietqtran.Models.Entities
 		public ICollection<Block> Blockers { get; set; }
 		public ICollection<Block> Blockeds { get; set; }
 		public ICollection<Post> Posts { get; set; }
+		public ICollection<ViewStory> ViewsStory { get; set; }
 	}
 }
