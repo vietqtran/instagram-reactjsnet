@@ -9,7 +9,7 @@ using vietqtran.Models.Entities.Relations;
 
 namespace vietqtran.DataLayer.Configurations
 {
-	public class LikePostConfiguration : IEntityTypeConfiguration<LikePost>
+	internal class LikePostConfiguration : IEntityTypeConfiguration<LikePost>
 	{
 		public void Configure (EntityTypeBuilder<LikePost> builder)
 		{

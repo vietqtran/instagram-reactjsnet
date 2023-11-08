@@ -9,7 +9,7 @@ using vietqtran.Models.Entities;
 
 namespace vietqtran.DataLayer.Configurations
 {
-	public class AccessTokenConfiguration : IEntityTypeConfiguration<AccessToken>
+	internal class AccessTokenConfiguration : IEntityTypeConfiguration<AccessToken>
 	{
 		public void Configure (EntityTypeBuilder<AccessToken> builder)
 		{

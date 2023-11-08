@@ -9,7 +9,7 @@ using vietqtran.Models.Entities.Relations;
 
 namespace vietqtran.DataLayer.Configurations
 {
-	public class BestFriendConfiguration : IEntityTypeConfiguration<BestFriend>
+	internal class BestFriendConfiguration : IEntityTypeConfiguration<BestFriend>
 	{
 		public void Configure (EntityTypeBuilder<BestFriend> builder)
 		{

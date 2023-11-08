@@ -9,7 +9,7 @@ using vietqtran.Models.Entities;
 
 namespace vietqtran.DataLayer.Configurations
 {
-	public class StoryConfiguration : IEntityTypeConfiguration<Story>
+	internal class StoryConfiguration : IEntityTypeConfiguration<Story>
 	{
 		public void Configure (EntityTypeBuilder<Story> builder)
 		{
@@ -18,8 +18,6 @@ namespace vietqtran.DataLayer.Configurations
 			builder.HasIndex(s => s.Id);
 			builder.HasIndex(s => s.UserId);
 			builder.HasIndex(s => s.CreatedAt);
-
-			builder.Property(s => s.HighLightId).IsRequired(false);
 
 			builder.HasOne(s => s.User)
 				.WithMany(u => u.Stories)

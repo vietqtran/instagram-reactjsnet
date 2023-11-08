@@ -9,7 +9,7 @@ using vietqtran.Models.Entities.Relations;
 
 namespace vietqtran.DataLayer.Configurations
 {
-	public class BlockConfiguration : IEntityTypeConfiguration<Block>
+	internal class BlockConfiguration : IEntityTypeConfiguration<Block>
 	{
 		public void Configure (EntityTypeBuilder<Block> builder)
 		{

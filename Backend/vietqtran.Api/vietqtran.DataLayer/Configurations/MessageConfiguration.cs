@@ -9,7 +9,7 @@ using vietqtran.Models.Entities;
 
 namespace vietqtran.DataLayer.Configurations
 {
-	public class MessageConfiguration : IEntityTypeConfiguration<Message>
+	internal class MessageConfiguration : IEntityTypeConfiguration<Message>
 	{
 		public void Configure (EntityTypeBuilder<Message> builder)
 		{
@@ -30,6 +30,9 @@ namespace vietqtran.DataLayer.Configurations
 			builder.HasOne(m => m.User)
 				.WithMany(u => u.Messages)
 				.HasForeignKey(m => m.UserId);
+			builder.HasOne(m => m.Conversation)
+				.WithMany(c => c.Messages)
+				.HasForeignKey(m => m.ConversationId);
 		}
 	}
 }

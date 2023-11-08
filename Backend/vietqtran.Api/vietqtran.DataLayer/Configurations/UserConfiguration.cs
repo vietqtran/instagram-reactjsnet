@@ -10,7 +10,7 @@ using vietqtran.Models.Entities;
 
 namespace vietqtran.DataLayer.Configurations
 {
-	public class UserConfiguration : IEntityTypeConfiguration<User>
+	internal class UserConfiguration : IEntityTypeConfiguration<User>
 	{
 		public void Configure (EntityTypeBuilder<User> builder)
 		{
@@ -42,6 +42,10 @@ namespace vietqtran.DataLayer.Configurations
 			builder.HasOne(u => u.RefreshToken)
 				.WithOne(at => at.User)
 				.HasForeignKey<RefreshToken>(at => at.UserId)
+				.OnDelete(DeleteBehavior.NoAction);
+			builder.HasOne(u => u.SearchHistory)
+				.WithOne(s => s.User)
+				.HasForeignKey<SearchHistory>(s => s.UserId)
 				.OnDelete(DeleteBehavior.NoAction);
 			builder.HasMany(u => u.Messages)
 				.WithOne(m => m.User)
@@ -94,6 +98,22 @@ namespace vietqtran.DataLayer.Configurations
 			builder.HasMany(u => u.LikePosts)
 				.WithOne(lp => lp.User)
 				.HasForeignKey(lp => lp.UserId);
+			builder.HasMany(u => u.Comments)
+				.WithOne(c => c.User)
+				.HasForeignKey(c => c.UserId)
+				.OnDelete(DeleteBehavior.Cascade);
+			builder.HasMany(u => u.SendNotifications)
+				.WithOne(n => n.Sender)
+				.HasForeignKey(n => n.SenderId)
+				.OnDelete(DeleteBehavior.NoAction);
+			builder.HasMany(u => u.ReceiveNotifications)
+				.WithOne(n => n.Receiver)
+				.HasForeignKey(n => n.UserId)
+				.OnDelete(DeleteBehavior.NoAction);
+			builder.HasMany(u => u.Saveds)
+				.WithOne(s => s.User)
+				.HasForeignKey(s => s.UserId)
+				.OnDelete(DeleteBehavior.NoAction);
 
 			builder.Property(u => u.Avatar).IsRequired(false);
 			builder.Property(u => u.CreatedAt).HasDefaultValue(DateTime.UtcNow);

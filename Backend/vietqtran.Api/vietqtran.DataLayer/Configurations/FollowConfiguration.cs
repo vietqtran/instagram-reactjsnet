@@ -9,7 +9,7 @@ using vietqtran.Models.Entities.Relations;
 
 namespace vietqtran.DataLayer.Configurations
 {
-	public class FollowConfiguration : IEntityTypeConfiguration<Follow>
+	internal class FollowConfiguration : IEntityTypeConfiguration<Follow>
 	{
 		public void Configure (EntityTypeBuilder<Follow> builder)
 		{

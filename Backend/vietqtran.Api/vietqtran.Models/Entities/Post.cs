@@ -20,7 +20,11 @@ namespace vietqtran.Models.Entities
 
 
 		//! Reference
+
 		public User User { get; set; }
-		public Collection<LikePost> LikePosts { get; set; }
+		public ICollection<LikePost> LikePosts { get; set; }
+		public ICollection<Comment> Comments { get; set; }
+		public ICollection<Saved> Saveds { get; set; }
+		public ICollection<PostHashTag> PostHashTags { get; set; }
 	}
 }

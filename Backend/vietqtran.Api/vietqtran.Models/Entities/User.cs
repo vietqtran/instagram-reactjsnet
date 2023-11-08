@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -27,10 +28,9 @@ namespace vietqtran.Models.Entities
 		public DateTime LastOfflineTime { get; set; }
 		public bool Gender { get; set; }
 		public string Bio { get; set; }
-
 		[Url]
 		public string Avatar { get; set; }
-
+		public bool IsLocked { get; set; } = false;
 
 
 		//! Reference 
@@ -52,5 +52,15 @@ namespace vietqtran.Models.Entities
 		public ICollection<Post> Posts { get; set; }
 		public ICollection<ViewStory> ViewsStory { get; set; }
 		public ICollection<LikePost> LikePosts { get; set; }
+		public ICollection<Comment> Comments { get; set; }
+		public ICollection<Notification> SendNotifications { get; set; }
+		public ICollection<Notification> ReceiveNotifications { get; set; }
+		public ICollection<Saved> Saveds { get; set; }
+		public ICollection<SavedGroup> SavedGroups { get; set; }
+		public ICollection<FollowHashTag> FollowHashTags { get; set; }
+		public SearchHistory SearchHistory { get; set; }
+		public ICollection<SearchHistory> SearchHistories { get; set; }
+		public ICollection<UserConversation> UserConversations { get; set; }
+
 	}
 }

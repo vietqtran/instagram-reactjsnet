@@ -9,7 +9,7 @@ using vietqtran.Models.Entities;
 
 namespace vietqtran.DataLayer.Configurations
 {
-	public class HighLightConfiguration : IEntityTypeConfiguration<HighLight>
+	internal class HighLightConfiguration : IEntityTypeConfiguration<HighLight>
 	{
 		public void Configure (EntityTypeBuilder<HighLight> builder)
 		{
