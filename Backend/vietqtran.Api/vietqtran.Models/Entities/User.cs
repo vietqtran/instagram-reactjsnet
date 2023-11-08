@@ -42,5 +42,6 @@ namespace vietqtran.Models.Entities
 		public ICollection<Message> Messages { get; set; }
 		public ICollection<ReactMessage> MessageReacts { get; set; }
 		public ICollection<PersonalLink> PersonalLinks { get; set; }
+		public ICollection<Story> Stories { get; set; }
 	}
 }

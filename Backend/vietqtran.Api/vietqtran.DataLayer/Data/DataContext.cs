@@ -37,6 +37,7 @@ namespace vietqtran.DataAccess.Data
 			modelBuilder.ApplyConfiguration(new RefreshTokenConfiguration());
 			modelBuilder.ApplyConfiguration(new AccessTokenConfiguration());
 			modelBuilder.ApplyConfiguration(new PersonalLinkConfiguration());
+			modelBuilder.ApplyConfiguration(new StoryConfiguration());
 
 
 			modelBuilder.Entity<IdentityUserClaim<Guid>>().ToTable("User_Claims");
@@ -53,6 +54,6 @@ namespace vietqtran.DataAccess.Data
 		public DbSet<Message> Messages { get; set; }
 		public DbSet<ReactMessage> ReactMessages { get; set; }
 		public DbSet<PersonalLink> PersonalLinks { get; set; }
-
+		public DbSet<Story> Stories { get; set; }
 	}
 }

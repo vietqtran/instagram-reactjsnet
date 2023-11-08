@@ -330,20 +330,57 @@ namespace vietqtran.DataLayer.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("bd810d0f-7a36-463c-b2da-e81d8e8d19c0"),
-                            ConcurrencyStamp = "7556f4fc-63cb-416a-9703-4113989b0b65",
+                            Id = new Guid("fb9ef4dc-f9e3-4013-ac33-78ab5c299ad2"),
+                            ConcurrencyStamp = "34a9c6f8-d9a9-4056-9aa2-d22576b50052",
                             Description = "Role for ADMIN",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = new Guid("cdb08037-8686-4802-929f-8a05e7f12219"),
-                            ConcurrencyStamp = "8a16a873-37da-423f-bf18-43e9a7414e0a",
+                            Id = new Guid("87a196d1-19d5-458c-a75f-1b2e7a01ffdd"),
+                            ConcurrencyStamp = "e5a1b214-8db5-4d1d-8c08-2b22af700341",
                             Description = "Role for USER",
                             Name = "User",
                             NormalizedName = "USER"
                         });
+                });
+
+            modelBuilder.Entity("vietqtran.Models.Entities.Story", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("MediaLink")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<long>("ViewQuantity")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatedAt")
+                        .HasDatabaseName("Index_PersonalLink_CreatedAt");
+
+                    b.HasIndex("Id")
+                        .HasDatabaseName("Index_Story_Id");
+
+                    b.HasIndex("UserId")
+                        .HasDatabaseName("Index_Story_UserId");
+
+                    b.ToTable("Stories", (string)null);
                 });
 
             modelBuilder.Entity("vietqtran.Models.Entities.User", b =>
@@ -371,7 +408,7 @@ namespace vietqtran.DataLayer.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 11, 8, 4, 23, 58, 744, DateTimeKind.Utc).AddTicks(8522));
+                        .HasDefaultValue(new DateTime(2023, 11, 8, 4, 37, 2, 99, DateTimeKind.Utc).AddTicks(6607));
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(450)");
@@ -533,6 +570,17 @@ namespace vietqtran.DataLayer.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("vietqtran.Models.Entities.Story", b =>
+                {
+                    b.HasOne("vietqtran.Models.Entities.User", "User")
+                        .WithMany("Stories")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("vietqtran.Models.Entities.User", b =>
                 {
                     b.HasOne("vietqtran.Models.Entities.Role", "UserRole")
@@ -567,6 +615,8 @@ namespace vietqtran.DataLayer.Migrations
 
                     b.Navigation("RefreshToken")
                         .IsRequired();
+
+                    b.Navigation("Stories");
                 });
 #pragma warning restore 612, 618
         }

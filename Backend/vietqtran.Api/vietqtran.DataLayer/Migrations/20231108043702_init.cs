@@ -109,7 +109,7 @@ namespace vietqtran.DataLayer.Migrations
                     BirthDay = table.Column<DateTime>(type: "datetime2", nullable: false),
                     RoleId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     IsPrivateAccount = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 11, 8, 4, 23, 58, 744, DateTimeKind.Utc).AddTicks(8522)),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 11, 8, 4, 37, 2, 99, DateTimeKind.Utc).AddTicks(6607)),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
                     LastOnlineTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastOfflineTime = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -233,6 +233,28 @@ namespace vietqtran.DataLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Stories",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    MediaLink = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ViewQuantity = table.Column<long>(type: "bigint", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Stories", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Stories_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Reacts_Message",
                 columns: table => new
                 {
@@ -262,8 +284,8 @@ namespace vietqtran.DataLayer.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Description", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { new Guid("bd810d0f-7a36-463c-b2da-e81d8e8d19c0"), "7556f4fc-63cb-416a-9703-4113989b0b65", "Role for ADMIN", "Admin", "ADMIN" },
-                    { new Guid("cdb08037-8686-4802-929f-8a05e7f12219"), "8a16a873-37da-423f-bf18-43e9a7414e0a", "Role for USER", "User", "USER" }
+                    { new Guid("87a196d1-19d5-458c-a75f-1b2e7a01ffdd"), "e5a1b214-8db5-4d1d-8c08-2b22af700341", "Role for USER", "User", "USER" },
+                    { new Guid("fb9ef4dc-f9e3-4013-ac33-78ab5c299ad2"), "34a9c6f8-d9a9-4056-9aa2-d22576b50052", "Role for ADMIN", "Admin", "ADMIN" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -352,6 +374,21 @@ namespace vietqtran.DataLayer.Migrations
                 filter: "[Name] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "Index_PersonalLink_CreatedAt",
+                table: "Stories",
+                column: "CreatedAt");
+
+            migrationBuilder.CreateIndex(
+                name: "Index_Story_Id",
+                table: "Stories",
+                column: "Id");
+
+            migrationBuilder.CreateIndex(
+                name: "Index_Story_UserId",
+                table: "Stories",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "Index_User_CreatedAt",
                 table: "Users",
                 column: "CreatedAt");
@@ -404,6 +441,9 @@ namespace vietqtran.DataLayer.Migrations
 
             migrationBuilder.DropTable(
                 name: "RoleClaims");
+
+            migrationBuilder.DropTable(
+                name: "Stories");
 
             migrationBuilder.DropTable(
                 name: "User_Claims");
