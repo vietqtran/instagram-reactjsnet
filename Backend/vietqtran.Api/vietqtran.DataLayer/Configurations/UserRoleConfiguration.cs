@@ -17,7 +17,7 @@ namespace vietqtran.DataLayer.Configurations
 
 			builder.HasKey(x => x.Id);
 
-			builder.HasIndex(r => r.Name).HasDatabaseName("Index_Role_Name").IsUnique();
+			builder.HasIndex(r => r.Name);
 		}
 	}
 }

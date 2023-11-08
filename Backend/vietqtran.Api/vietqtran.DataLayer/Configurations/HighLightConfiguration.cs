@@ -15,11 +15,11 @@ namespace vietqtran.DataLayer.Configurations
 		{
 			builder.ToTable("HighLights");
 
-			builder.HasIndex(hl => hl.Id).HasDatabaseName("Index_HighLight_Id");
+			builder.HasIndex(hl => hl.Id);
 
-			builder.HasIndex(hl => hl.UserId).HasDatabaseName("Index_HighLight_UserId");
+			builder.HasIndex(hl => hl.UserId);
 
-			builder.HasIndex(hl => hl.CreatedAt).HasDatabaseName("Index_HighLight_CreatedAt");
+			builder.HasIndex(hl => hl.CreatedAt);
 
 			builder.HasOne(hl => hl.User)
 				.WithMany(u => u.HighLights)

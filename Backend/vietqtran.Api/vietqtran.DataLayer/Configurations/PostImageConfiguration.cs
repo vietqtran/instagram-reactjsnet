@@ -5,21 +5,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using vietqtran.Models.Entities.Relations;
 using vietqtran.Models.Entities;
 
 namespace vietqtran.DataLayer.Configurations
 {
-	public class RefreshTokenConfiguration : IEntityTypeConfiguration<RefreshToken>
+	public class PostImageConfiguration : IEntityTypeConfiguration<PostImage>
 	{
-		public void Configure (EntityTypeBuilder<RefreshToken> builder)
+		public void Configure (EntityTypeBuilder<PostImage> builder)
 		{
-			builder.ToTable("Refresh_Tokens");
+			builder.ToTable("Post_Images");
 
-			builder.HasKey(rt => rt.Id);
+			builder.HasKey(pi => new { pi.Id, pi.PostId });
 
-			builder.HasIndex(rt => rt.Token);
-
+			builder.HasIndex(pi => new { pi.PostId, pi.Link });
 		}
 	}
 }

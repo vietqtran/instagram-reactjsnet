@@ -19,7 +19,7 @@ namespace vietqtran.DataLayer.Configurations
 			builder.HasKey(x => x.Id);
 			builder.HasKey(vs => new { vs.ViewerId, vs.StotyId });
 
-			builder.HasIndex(vs => new { vs.ViewerId, vs.StotyId }).HasDatabaseName("Index_ViewStory_Id");
+			builder.HasIndex(vs => new { vs.ViewerId, vs.StotyId });
 
 			builder.HasOne(vs => vs.User)
 				.WithMany(u => u.ViewsStory)

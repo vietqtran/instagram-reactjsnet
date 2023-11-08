@@ -16,12 +16,12 @@ namespace vietqtran.DataLayer.Configurations
 		{
 			builder.ToTable("Users");
 
-			builder.HasIndex(u => u.Email).IsUnique().HasDatabaseName("Index_User_Email");
-			builder.HasIndex(u => u.PhoneNumber).IsUnique().HasDatabaseName("Index_User_PhoneNumber");
-			builder.HasIndex(u => u.UserName).IsUnique().HasDatabaseName("Index_User_UserName");
-			builder.HasIndex(u => u.RoleId).HasDatabaseName("Index_User_RoleId");
-			builder.HasIndex(u => u.CreatedAt).HasDatabaseName("Index_User_CreatedAt");
-			builder.HasIndex(u => u.IsActive).HasDatabaseName("Index_User_IsActive");
+			builder.HasIndex(u => u.Email);
+			builder.HasIndex(u => u.PhoneNumber);
+			builder.HasIndex(u => u.UserName);
+			builder.HasIndex(u => u.RoleId);
+			builder.HasIndex(u => u.CreatedAt);
+			builder.HasIndex(u => u.IsActive);
 
 			builder.Property(u => u.Email).IsRequired(false);
 			builder.Property(u => u.PhoneNumber).IsRequired(false);

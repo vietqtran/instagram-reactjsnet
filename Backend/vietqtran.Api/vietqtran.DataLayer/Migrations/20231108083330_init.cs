@@ -109,7 +109,7 @@ namespace vietqtran.DataLayer.Migrations
                     BirthDay = table.Column<DateTime>(type: "datetime2", nullable: false),
                     RoleId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     IsPrivateAccount = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 11, 8, 7, 35, 22, 84, DateTimeKind.Utc).AddTicks(9118)),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 11, 8, 8, 33, 30, 807, DateTimeKind.Utc).AddTicks(6810)),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
                     LastOnlineTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastOfflineTime = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -403,12 +403,12 @@ namespace vietqtran.DataLayer.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Description", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { new Guid("4b72fc57-37ba-498b-8057-ebcb498aa274"), "809c7b8c-c1ce-4ead-b099-4c1917f67f17", "Role for ADMIN", "Admin", "ADMIN" },
-                    { new Guid("b0d94b6c-ee25-4f00-a7f0-1cb73713162a"), "ee34f6d9-4feb-469a-852a-4518114dead1", "Role for USER", "User", "USER" }
+                    { new Guid("8ed97161-ce04-413e-923a-331b4c4b813b"), "fe6c0d6a-532f-4c1f-b76c-9d867f6eabaf", "Role for ADMIN", "Admin", "ADMIN" },
+                    { new Guid("d58dc9d2-5bdc-4e41-9423-ef9403454199"), "2902b6a7-6a46-464f-87f0-5bf7ff0c5229", "Role for USER", "User", "USER" }
                 });
 
             migrationBuilder.CreateIndex(
-                name: "Index_AccessToken_Token",
+                name: "IX_Access_Tokens_Token",
                 table: "Access_Tokens",
                 column: "Token");
 
@@ -424,40 +424,19 @@ namespace vietqtran.DataLayer.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "Index_Message_Content",
+                name: "IX_Messages_Content",
                 table: "Messages",
-                column: "Content",
-                unique: true);
+                column: "Content");
 
             migrationBuilder.CreateIndex(
-                name: "Index_Message_CreatedAt",
+                name: "IX_Messages_CreatedAt",
                 table: "Messages",
-                column: "CreatedAt",
-                unique: true);
+                column: "CreatedAt");
 
             migrationBuilder.CreateIndex(
-                name: "Index_Message_Id",
+                name: "IX_Messages_Id",
                 table: "Messages",
-                column: "Id",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "Index_Message_ReplyId",
-                table: "Messages",
-                column: "ReplyId",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "Index_Message_Sender",
-                table: "Messages",
-                column: "UserId",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "Index_Message_StoryId",
-                table: "Messages",
-                column: "StoryId",
-                unique: true);
+                column: "Id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Messages_PostId",
@@ -465,32 +444,47 @@ namespace vietqtran.DataLayer.Migrations
                 column: "PostId");
 
             migrationBuilder.CreateIndex(
-                name: "Index_PersonalLink_Id",
+                name: "IX_Messages_ReplyId",
+                table: "Messages",
+                column: "ReplyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Messages_StoryId",
+                table: "Messages",
+                column: "StoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Messages_UserId",
+                table: "Messages",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Personal_Links_Id",
                 table: "Personal_Links",
                 column: "Id");
 
             migrationBuilder.CreateIndex(
-                name: "Index_PersonalLink_UserId",
+                name: "IX_Personal_Links_UserId",
                 table: "Personal_Links",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "Index_Post_Id",
+                name: "IX_Posts_Id",
                 table: "Posts",
                 column: "Id");
 
             migrationBuilder.CreateIndex(
-                name: "Index_Post_UserId",
+                name: "IX_Posts_UserId",
                 table: "Posts",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "Index_ReactMessage_MessageId_UserId",
+                name: "IX_Reacts_Message_MessageId_UserId",
                 table: "Reacts_Message",
                 columns: new[] { "MessageId", "UserId" });
 
             migrationBuilder.CreateIndex(
-                name: "Index_RefreshToken_Token",
+                name: "IX_Refresh_Tokens_Token",
                 table: "Refresh_Tokens",
                 column: "Token");
 
@@ -501,26 +495,14 @@ namespace vietqtran.DataLayer.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "Index_Role_Name",
+                name: "IX_Roles_Name",
                 table: "Roles",
-                column: "Name",
-                unique: true,
-                filter: "[Name] IS NOT NULL");
+                column: "Name");
 
             migrationBuilder.CreateIndex(
-                name: "Index_PersonalLink_CreatedAt",
+                name: "IX_Stories_CreatedAt",
                 table: "Stories",
                 column: "CreatedAt");
-
-            migrationBuilder.CreateIndex(
-                name: "Index_Story_Id",
-                table: "Stories",
-                column: "Id");
-
-            migrationBuilder.CreateIndex(
-                name: "Index_Story_UserId",
-                table: "Stories",
-                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Stories_HighLightId",
@@ -528,59 +510,64 @@ namespace vietqtran.DataLayer.Migrations
                 column: "HighLightId");
 
             migrationBuilder.CreateIndex(
-                name: "Index_Follow_BlockedId",
+                name: "IX_Stories_Id",
+                table: "Stories",
+                column: "Id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Stories_UserId",
+                table: "Stories",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_User_Blocks_BlockedId",
                 table: "User_Blocks",
                 column: "BlockedId");
 
             migrationBuilder.CreateIndex(
-                name: "Index_Follow_BlockerId",
+                name: "IX_User_Blocks_BlockerId",
                 table: "User_Blocks",
                 column: "BlockerId");
 
             migrationBuilder.CreateIndex(
-                name: "Index_Follow_FollowedId",
+                name: "IX_User_Follows_FollowedId",
                 table: "User_Follows",
                 column: "FollowedId");
 
             migrationBuilder.CreateIndex(
-                name: "Index_Follow_FollowerId",
+                name: "IX_User_Follows_FollowerId",
                 table: "User_Follows",
                 column: "FollowerId");
 
             migrationBuilder.CreateIndex(
-                name: "Index_User_CreatedAt",
+                name: "IX_Users_CreatedAt",
                 table: "Users",
                 column: "CreatedAt");
 
             migrationBuilder.CreateIndex(
-                name: "Index_User_Email",
+                name: "IX_Users_Email",
                 table: "Users",
-                column: "Email",
-                unique: true,
-                filter: "[Email] IS NOT NULL");
+                column: "Email");
 
             migrationBuilder.CreateIndex(
-                name: "Index_User_IsActive",
+                name: "IX_Users_IsActive",
                 table: "Users",
                 column: "IsActive");
 
             migrationBuilder.CreateIndex(
-                name: "Index_User_PhoneNumber",
+                name: "IX_Users_PhoneNumber",
                 table: "Users",
-                column: "PhoneNumber",
-                unique: true,
-                filter: "[PhoneNumber] IS NOT NULL");
+                column: "PhoneNumber");
 
             migrationBuilder.CreateIndex(
-                name: "Index_User_RoleId",
+                name: "IX_Users_RoleId",
                 table: "Users",
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
-                name: "Index_User_UserName",
+                name: "IX_Users_UserName",
                 table: "Users",
-                column: "UserName",
-                unique: true);
+                column: "UserName");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ViewStory_StotyId",

@@ -17,12 +17,12 @@ namespace vietqtran.DataLayer.Configurations
 
 			builder.HasKey(x => x.Id);
 
-			builder.HasIndex(m => m.Id).IsUnique().HasDatabaseName("Index_Message_Id");
-			builder.HasIndex(m => m.Content).IsUnique().HasDatabaseName("Index_Message_Content");
-			builder.HasIndex(m => m.CreatedAt).IsUnique().HasDatabaseName("Index_Message_CreatedAt");
-			builder.HasIndex(m => m.ReplyId).IsUnique().HasDatabaseName("Index_Message_ReplyId");
-			builder.HasIndex(m => m.StoryId).IsUnique().HasDatabaseName("Index_Message_StoryId");
-			builder.HasIndex(m => m.UserId).IsUnique().HasDatabaseName("Index_Message_Sender");
+			builder.HasIndex(m => m.Id);
+			builder.HasIndex(m => m.Content);
+			builder.HasIndex(m => m.CreatedAt);
+			builder.HasIndex(m => m.ReplyId);
+			builder.HasIndex(m => m.StoryId);
+			builder.HasIndex(m => m.UserId);
 
 
 			builder.HasOne(m => m.User)

@@ -17,8 +17,8 @@ namespace vietqtran.DataLayer.Configurations
 
 			builder.HasKey(p => p.Id);
 
-			builder.HasIndex(pl => pl.Id).HasDatabaseName("Index_Post_Id");
-			builder.HasIndex(pl => pl.UserId).HasDatabaseName("Index_Post_UserId");
+			builder.HasIndex(pl => pl.Id);
+			builder.HasIndex(pl => pl.UserId);
 
 			builder.HasOne(p => p.User)
 				.WithMany(u => u.Posts)

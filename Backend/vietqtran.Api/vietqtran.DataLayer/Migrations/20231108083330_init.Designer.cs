@@ -12,7 +12,7 @@ using vietqtran.DataAccess.Data;
 namespace vietqtran.DataLayer.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20231108073522_init")]
+    [Migration("20231108083330_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -140,8 +140,7 @@ namespace vietqtran.DataLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Token")
-                        .HasDatabaseName("Index_AccessToken_Token");
+                    b.HasIndex("Token");
 
                     b.HasIndex("UserId")
                         .IsUnique();
@@ -223,31 +222,19 @@ namespace vietqtran.DataLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Content")
-                        .IsUnique()
-                        .HasDatabaseName("Index_Message_Content");
+                    b.HasIndex("Content");
 
-                    b.HasIndex("CreatedAt")
-                        .IsUnique()
-                        .HasDatabaseName("Index_Message_CreatedAt");
+                    b.HasIndex("CreatedAt");
 
-                    b.HasIndex("Id")
-                        .IsUnique()
-                        .HasDatabaseName("Index_Message_Id");
+                    b.HasIndex("Id");
 
                     b.HasIndex("PostId");
 
-                    b.HasIndex("ReplyId")
-                        .IsUnique()
-                        .HasDatabaseName("Index_Message_ReplyId");
+                    b.HasIndex("ReplyId");
 
-                    b.HasIndex("StoryId")
-                        .IsUnique()
-                        .HasDatabaseName("Index_Message_StoryId");
+                    b.HasIndex("StoryId");
 
-                    b.HasIndex("UserId")
-                        .IsUnique()
-                        .HasDatabaseName("Index_Message_Sender");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Messages", (string)null);
                 });
@@ -265,11 +252,9 @@ namespace vietqtran.DataLayer.Migrations
 
                     b.HasKey("Id", "UserId", "Link");
 
-                    b.HasIndex("Id")
-                        .HasDatabaseName("Index_PersonalLink_Id");
+                    b.HasIndex("Id");
 
-                    b.HasIndex("UserId")
-                        .HasDatabaseName("Index_PersonalLink_UserId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Personal_Links", (string)null);
                 });
@@ -295,11 +280,9 @@ namespace vietqtran.DataLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Id")
-                        .HasDatabaseName("Index_Post_Id");
+                    b.HasIndex("Id");
 
-                    b.HasIndex("UserId")
-                        .HasDatabaseName("Index_Post_UserId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Posts", (string)null);
                 });
@@ -322,8 +305,7 @@ namespace vietqtran.DataLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Token")
-                        .HasDatabaseName("Index_RefreshToken_Token");
+                    b.HasIndex("Token");
 
                     b.HasIndex("UserId")
                         .IsUnique();
@@ -348,11 +330,9 @@ namespace vietqtran.DataLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BlockedId")
-                        .HasDatabaseName("Index_Follow_BlockedId");
+                    b.HasIndex("BlockedId");
 
-                    b.HasIndex("BlockerId")
-                        .HasDatabaseName("Index_Follow_BlockerId");
+                    b.HasIndex("BlockerId");
 
                     b.ToTable("User_Blocks", (string)null);
                 });
@@ -374,11 +354,9 @@ namespace vietqtran.DataLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FollowedId")
-                        .HasDatabaseName("Index_Follow_FollowedId");
+                    b.HasIndex("FollowedId");
 
-                    b.HasIndex("FollowerId")
-                        .HasDatabaseName("Index_Follow_FollowerId");
+                    b.HasIndex("FollowerId");
 
                     b.ToTable("User_Follows", (string)null);
                 });
@@ -400,8 +378,7 @@ namespace vietqtran.DataLayer.Migrations
 
                     b.HasKey("UserId", "MessageId");
 
-                    b.HasIndex("MessageId", "UserId")
-                        .HasDatabaseName("Index_ReactMessage_MessageId_UserId");
+                    b.HasIndex("MessageId", "UserId");
 
                     b.ToTable("Reacts_Message", (string)null);
                 });
@@ -450,26 +427,23 @@ namespace vietqtran.DataLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Name")
-                        .IsUnique()
-                        .HasDatabaseName("Index_Role_Name")
-                        .HasFilter("[Name] IS NOT NULL");
+                    b.HasIndex("Name");
 
                     b.ToTable("Roles", (string)null);
 
                     b.HasData(
                         new
                         {
-                            Id = new Guid("4b72fc57-37ba-498b-8057-ebcb498aa274"),
-                            ConcurrencyStamp = "809c7b8c-c1ce-4ead-b099-4c1917f67f17",
+                            Id = new Guid("8ed97161-ce04-413e-923a-331b4c4b813b"),
+                            ConcurrencyStamp = "fe6c0d6a-532f-4c1f-b76c-9d867f6eabaf",
                             Description = "Role for ADMIN",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = new Guid("b0d94b6c-ee25-4f00-a7f0-1cb73713162a"),
-                            ConcurrencyStamp = "ee34f6d9-4feb-469a-852a-4518114dead1",
+                            Id = new Guid("d58dc9d2-5bdc-4e41-9423-ef9403454199"),
+                            ConcurrencyStamp = "2902b6a7-6a46-464f-87f0-5bf7ff0c5229",
                             Description = "Role for USER",
                             Name = "User",
                             NormalizedName = "USER"
@@ -501,16 +475,13 @@ namespace vietqtran.DataLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CreatedAt")
-                        .HasDatabaseName("Index_PersonalLink_CreatedAt");
+                    b.HasIndex("CreatedAt");
 
                     b.HasIndex("HighLightId");
 
-                    b.HasIndex("Id")
-                        .HasDatabaseName("Index_Story_Id");
+                    b.HasIndex("Id");
 
-                    b.HasIndex("UserId")
-                        .HasDatabaseName("Index_Story_UserId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Stories", (string)null);
                 });
@@ -540,7 +511,7 @@ namespace vietqtran.DataLayer.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 11, 8, 7, 35, 22, 84, DateTimeKind.Utc).AddTicks(9118));
+                        .HasDefaultValue(new DateTime(2023, 11, 8, 8, 33, 30, 807, DateTimeKind.Utc).AddTicks(6810));
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(450)");
@@ -609,28 +580,17 @@ namespace vietqtran.DataLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CreatedAt")
-                        .HasDatabaseName("Index_User_CreatedAt");
+                    b.HasIndex("CreatedAt");
 
-                    b.HasIndex("Email")
-                        .IsUnique()
-                        .HasDatabaseName("Index_User_Email")
-                        .HasFilter("[Email] IS NOT NULL");
+                    b.HasIndex("Email");
 
-                    b.HasIndex("IsActive")
-                        .HasDatabaseName("Index_User_IsActive");
+                    b.HasIndex("IsActive");
 
-                    b.HasIndex("PhoneNumber")
-                        .IsUnique()
-                        .HasDatabaseName("Index_User_PhoneNumber")
-                        .HasFilter("[PhoneNumber] IS NOT NULL");
+                    b.HasIndex("PhoneNumber");
 
-                    b.HasIndex("RoleId")
-                        .HasDatabaseName("Index_User_RoleId");
+                    b.HasIndex("RoleId");
 
-                    b.HasIndex("UserName")
-                        .IsUnique()
-                        .HasDatabaseName("Index_User_UserName");
+                    b.HasIndex("UserName");
 
                     b.ToTable("Users", (string)null);
                 });
