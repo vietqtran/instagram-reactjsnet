@@ -41,5 +41,12 @@ namespace vietqtran.Models.Entities
 		public RefreshToken RefreshToken { get; set; }
 		public ICollection<Message> Messages { get; set; }
 		public ICollection<ReactMessage> MessageReacts { get; set; }
+		public ICollection<PersonalLink> PersonalLinks { get; set; }
+		public ICollection<Story> Stories { get; set; }
+		public ICollection<HighLight> HighLights { get; set; }
+		public ICollection<Follow> Followers { get; set; }
+		public ICollection<Follow> Followeds { get; set; }
+		public ICollection<Block> Blockers { get; set; }
+		public ICollection<Block> Blockeds { get; set; }
 	}
 }
