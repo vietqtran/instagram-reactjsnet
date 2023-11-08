@@ -27,6 +27,10 @@ namespace vietqtran.DataLayer.Configurations
 			builder.HasOne(s => s.HighLight)
 				.WithMany(hl => hl.Stories)
 				.HasForeignKey(s => s.HighLightId);
+			builder.HasMany(s => s.Messages)
+				.WithOne(m => m.Story)
+				.HasForeignKey(m => m.StoryId)
+				.OnDelete(DeleteBehavior.NoAction);
 		}
 	}
 }

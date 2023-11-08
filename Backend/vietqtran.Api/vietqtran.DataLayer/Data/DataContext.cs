@@ -39,6 +39,7 @@ namespace vietqtran.DataAccess.Data
 			modelBuilder.ApplyConfiguration(new StoryConfiguration());
 			modelBuilder.ApplyConfiguration(new FollowConfiguration());
 			modelBuilder.ApplyConfiguration(new BlockConfiguration());
+			modelBuilder.ApplyConfiguration(new PostConfiguration());
 
 			modelBuilder.Entity<IdentityUserClaim<Guid>>().ToTable("User_Claims");
 			modelBuilder.Entity<IdentityUserRole<Guid>>().ToTable("User_Roles").HasKey(ur => new { ur.UserId, ur.RoleId });
@@ -58,5 +59,6 @@ namespace vietqtran.DataAccess.Data
 		public DbSet<HighLight> HighLights { get; set; }
 		public DbSet<Follow> Follows { get; set; }
 		public DbSet<Block> Blocks { get; set; }
+		public DbSet<Post> Posts { get; set; }
 	}
 }

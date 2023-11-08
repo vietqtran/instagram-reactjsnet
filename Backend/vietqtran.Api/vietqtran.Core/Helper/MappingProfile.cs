@@ -10,13 +10,6 @@ namespace vietqtran.Api.Helper
 		{
 			//! User mapping
 			CreateMap<User, AppUserVM>();
-
-			//! Message Mapping
-			CreateMap<TextMessage, Message>();
-			CreateMap<FileMessage, Message>();
-			CreateMap<ReplyStoryMessage, Message>();
-			CreateMap<SharePostMEssage, Message>();
-			CreateMap<IconMessage, Message>();
 		}
 	}
 }

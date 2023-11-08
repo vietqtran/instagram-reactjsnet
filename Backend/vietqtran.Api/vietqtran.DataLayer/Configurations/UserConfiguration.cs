@@ -43,14 +43,21 @@ namespace vietqtran.DataLayer.Configurations
 				.WithOne(at => at.User)
 				.HasForeignKey<RefreshToken>(at => at.UserId)
 				.OnDelete(DeleteBehavior.NoAction);
+			builder.HasMany(u => u.Messages)
+				.WithOne(m => m.User)
+				.HasForeignKey(m => m.UserId)
+				.OnDelete(DeleteBehavior.NoAction);
 			builder.HasMany(u => u.PersonalLinks)
 				.WithOne(pl => pl.User)
+				.HasForeignKey(pl => pl.UserId)
 				.OnDelete(DeleteBehavior.Cascade);
 			builder.HasMany(u => u.Stories)
 				.WithOne(s => s.User)
+				.HasForeignKey(s => s.UserId)
 				.OnDelete(DeleteBehavior.NoAction);
 			builder.HasMany(u => u.HighLights)
 				.WithOne(hl => hl.User)
+				.HasForeignKey(hl => hl.UserId)
 				.OnDelete(DeleteBehavior.NoAction);
 			builder.HasMany(u => u.Followers)
 				.WithOne(f => f.Follower)
@@ -67,6 +74,10 @@ namespace vietqtran.DataLayer.Configurations
 			builder.HasMany(u => u.Blockers)
 				.WithOne(b => b.Blocker)
 				.HasForeignKey(b => b.BlockerId)
+				.OnDelete(DeleteBehavior.NoAction);
+			builder.HasMany(u => u.Posts)
+				.WithOne(p => p.User)
+				.HasForeignKey(p => p.UserId)
 				.OnDelete(DeleteBehavior.NoAction);
 
 
