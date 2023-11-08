@@ -301,6 +301,32 @@ namespace vietqtran.DataLayer.Migrations
                     b.ToTable("Refresh_Tokens", (string)null);
                 });
 
+            modelBuilder.Entity("vietqtran.Models.Entities.Relations.Block", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("BlockedId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("BlockerId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BlockedId")
+                        .HasDatabaseName("Index_Follow_BlockedId");
+
+                    b.HasIndex("BlockerId")
+                        .HasDatabaseName("Index_Follow_BlockerId");
+
+                    b.ToTable("User_Blocks", (string)null);
+                });
+
             modelBuilder.Entity("vietqtran.Models.Entities.Relations.Follow", b =>
                 {
                     b.Property<Guid>("Id")
@@ -318,9 +344,11 @@ namespace vietqtran.DataLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FollowedId");
+                    b.HasIndex("FollowedId")
+                        .HasDatabaseName("Index_Follow_FollowedId");
 
-                    b.HasIndex("FollowerId");
+                    b.HasIndex("FollowerId")
+                        .HasDatabaseName("Index_Follow_FollowerId");
 
                     b.ToTable("User_Follows", (string)null);
                 });
@@ -381,16 +409,16 @@ namespace vietqtran.DataLayer.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("0c43e18c-135b-4c96-ab6d-297c8cea3727"),
-                            ConcurrencyStamp = "3b6adcc5-47e3-4f02-88d6-23310ce9cadd",
+                            Id = new Guid("dd55f1a6-57dd-4817-9d48-b150ccdb612c"),
+                            ConcurrencyStamp = "250b9839-0316-4878-b9bb-0604aeda8da2",
                             Description = "Role for ADMIN",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = new Guid("dd015c28-b813-4785-8212-41e959889b19"),
-                            ConcurrencyStamp = "e7656773-0c6e-4739-86ba-29cb2eed76ab",
+                            Id = new Guid("d6b9ce69-2ee3-42a0-b103-cb85a4ccbcf3"),
+                            ConcurrencyStamp = "d915a6ff-b73d-4151-b8dc-e81920f215e1",
                             Description = "Role for USER",
                             Name = "User",
                             NormalizedName = "USER"
@@ -464,7 +492,7 @@ namespace vietqtran.DataLayer.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 11, 8, 6, 4, 35, 984, DateTimeKind.Utc).AddTicks(6756));
+                        .HasDefaultValue(new DateTime(2023, 11, 8, 6, 28, 34, 174, DateTimeKind.Utc).AddTicks(866));
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(450)");
@@ -618,6 +646,25 @@ namespace vietqtran.DataLayer.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("vietqtran.Models.Entities.Relations.Block", b =>
+                {
+                    b.HasOne("vietqtran.Models.Entities.User", "Blocked")
+                        .WithMany("Blockeds")
+                        .HasForeignKey("BlockedId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("vietqtran.Models.Entities.User", "Blocker")
+                        .WithMany("Blockers")
+                        .HasForeignKey("BlockerId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Blocked");
+
+                    b.Navigation("Blocker");
+                });
+
             modelBuilder.Entity("vietqtran.Models.Entities.Relations.Follow", b =>
                 {
                     b.HasOne("vietqtran.Models.Entities.User", "Followed")
@@ -705,6 +752,10 @@ namespace vietqtran.DataLayer.Migrations
                 {
                     b.Navigation("AccessToken")
                         .IsRequired();
+
+                    b.Navigation("Blockeds");
+
+                    b.Navigation("Blockers");
 
                     b.Navigation("Followeds");
 

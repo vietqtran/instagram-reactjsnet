@@ -46,5 +46,7 @@ namespace vietqtran.Models.Entities
 		public ICollection<HighLight> HighLights { get; set; }
 		public ICollection<Follow> Followers { get; set; }
 		public ICollection<Follow> Followeds { get; set; }
+		public ICollection<Block> Blockers { get; set; }
+		public ICollection<Block> Blockeds { get; set; }
 	}
 }

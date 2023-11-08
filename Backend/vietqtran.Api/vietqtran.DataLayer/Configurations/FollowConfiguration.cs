@@ -15,6 +15,11 @@ namespace vietqtran.DataLayer.Configurations
 		{
 			builder.ToTable("User_Follows");
 
+			builder.HasKey(f => f.Id);
+
+			builder.HasIndex(f => f.FollowerId).HasDatabaseName("Index_Follow_FollowerId");
+			builder.HasIndex(f => f.FollowedId).HasDatabaseName("Index_Follow_FollowedId");
+
 			builder.HasOne(f => f.Followed)
 				.WithMany(u => u.Followeds)
 				.HasForeignKey(f => f.FollowedId)

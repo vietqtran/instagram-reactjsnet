@@ -60,6 +60,14 @@ namespace vietqtran.DataLayer.Configurations
 				.WithOne(f => f.Followed)
 				.HasForeignKey(f => f.FollowedId)
 				.OnDelete(DeleteBehavior.NoAction);
+			builder.HasMany(u => u.Blockers)
+				.WithOne(b => b.Blocker)
+				.HasForeignKey(b => b.BlockerId)
+				.OnDelete(DeleteBehavior.NoAction);
+			builder.HasMany(u => u.Blockers)
+				.WithOne(b => b.Blocker)
+				.HasForeignKey(b => b.BlockerId)
+				.OnDelete(DeleteBehavior.NoAction);
 
 
 			builder.Property(u => u.Avatar).IsRequired(false);

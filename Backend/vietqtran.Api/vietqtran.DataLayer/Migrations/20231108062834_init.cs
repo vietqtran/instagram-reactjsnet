@@ -109,7 +109,7 @@ namespace vietqtran.DataLayer.Migrations
                     BirthDay = table.Column<DateTime>(type: "datetime2", nullable: false),
                     RoleId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     IsPrivateAccount = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 11, 8, 6, 4, 35, 984, DateTimeKind.Utc).AddTicks(6756)),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 11, 8, 6, 28, 34, 174, DateTimeKind.Utc).AddTicks(866)),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
                     LastOnlineTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastOfflineTime = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -253,6 +253,30 @@ namespace vietqtran.DataLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "User_Blocks",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    BlockerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    BlockedId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_User_Blocks", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_User_Blocks_Users_BlockedId",
+                        column: x => x.BlockedId,
+                        principalTable: "Users",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_User_Blocks_Users_BlockerId",
+                        column: x => x.BlockerId,
+                        principalTable: "Users",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "User_Follows",
                 columns: table => new
                 {
@@ -334,8 +358,8 @@ namespace vietqtran.DataLayer.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Description", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { new Guid("0c43e18c-135b-4c96-ab6d-297c8cea3727"), "3b6adcc5-47e3-4f02-88d6-23310ce9cadd", "Role for ADMIN", "Admin", "ADMIN" },
-                    { new Guid("dd015c28-b813-4785-8212-41e959889b19"), "e7656773-0c6e-4739-86ba-29cb2eed76ab", "Role for USER", "User", "USER" }
+                    { new Guid("d6b9ce69-2ee3-42a0-b103-cb85a4ccbcf3"), "d915a6ff-b73d-4151-b8dc-e81920f215e1", "Role for USER", "User", "USER" },
+                    { new Guid("dd55f1a6-57dd-4817-9d48-b150ccdb612c"), "250b9839-0316-4878-b9bb-0604aeda8da2", "Role for ADMIN", "Admin", "ADMIN" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -449,12 +473,22 @@ namespace vietqtran.DataLayer.Migrations
                 column: "HighLightId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_User_Follows_FollowedId",
+                name: "Index_Follow_BlockedId",
+                table: "User_Blocks",
+                column: "BlockedId");
+
+            migrationBuilder.CreateIndex(
+                name: "Index_Follow_BlockerId",
+                table: "User_Blocks",
+                column: "BlockerId");
+
+            migrationBuilder.CreateIndex(
+                name: "Index_Follow_FollowedId",
                 table: "User_Follows",
                 column: "FollowedId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_User_Follows_FollowerId",
+                name: "Index_Follow_FollowerId",
                 table: "User_Follows",
                 column: "FollowerId");
 
@@ -514,6 +548,9 @@ namespace vietqtran.DataLayer.Migrations
 
             migrationBuilder.DropTable(
                 name: "Stories");
+
+            migrationBuilder.DropTable(
+                name: "User_Blocks");
 
             migrationBuilder.DropTable(
                 name: "User_Claims");
