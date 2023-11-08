@@ -24,6 +24,9 @@ namespace vietqtran.DataLayer.Configurations
 			builder.HasOne(s => s.User)
 				.WithMany(u => u.Stories)
 				.HasForeignKey(s => s.UserId);
+			builder.HasOne(s => s.HighLight)
+				.WithMany(hl => hl.Stories)
+				.HasForeignKey(s => s.HighLightId);
 		}
 	}
 }

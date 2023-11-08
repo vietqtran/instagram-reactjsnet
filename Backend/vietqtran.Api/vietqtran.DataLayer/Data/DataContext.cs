@@ -55,5 +55,6 @@ namespace vietqtran.DataAccess.Data
 		public DbSet<ReactMessage> ReactMessages { get; set; }
 		public DbSet<PersonalLink> PersonalLinks { get; set; }
 		public DbSet<Story> Stories { get; set; }
+		public DbSet<HighLight> HighLights { get; set; }
 	}
 }

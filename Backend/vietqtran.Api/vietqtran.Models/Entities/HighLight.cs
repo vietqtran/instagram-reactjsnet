@@ -7,19 +7,19 @@ using System.Threading.Tasks;
 
 namespace vietqtran.Models.Entities
 {
-	public class Story
+	public class HighLight
 	{
 		public Guid Id { get; set; }
 		public Guid UserId { get; set; }
 		[Url]
-		public string MediaLink { get; set; }
-		public string Type { get; set; }
+		public string PreviewImage { get; set; }
 		public DateTime CreatedAt { get; set; }
-		public long ViewQuantity { get; set; }
-		public Guid HighLightId { get; set; }
+		public string Title { get; set; }
+
+
 
 		//! Reference
 		public User User { get; set; }
-		public HighLight HighLight { get; set; }
+		public ICollection<Story> Stories { get; set; }
 	}
 }

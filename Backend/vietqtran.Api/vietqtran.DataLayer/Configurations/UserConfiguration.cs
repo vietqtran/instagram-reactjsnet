@@ -47,7 +47,10 @@ namespace vietqtran.DataLayer.Configurations
 				.OnDelete(DeleteBehavior.Cascade);
 			builder.HasMany(u => u.Stories)
 				.WithOne(s => s.User)
-				.OnDelete(DeleteBehavior.Cascade);
+				.OnDelete(DeleteBehavior.NoAction);
+			builder.HasMany(u => u.HighLights)
+				.WithOne(hl => hl.User)
+				.OnDelete(DeleteBehavior.NoAction);
 
 
 			builder.Property(u => u.Avatar).IsRequired(false);
