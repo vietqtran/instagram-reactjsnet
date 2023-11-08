@@ -9,7 +9,7 @@ using vietqtran.Models.Entities;
 
 namespace vietqtran.DataLayer.Configurations
 {
-	public class PostConfiguration : IEntityTypeConfiguration<Post>
+	internal class PostConfiguration : IEntityTypeConfiguration<Post>
 	{
 		public void Configure (EntityTypeBuilder<Post> builder)
 		{
@@ -23,9 +23,17 @@ namespace vietqtran.DataLayer.Configurations
 			builder.HasOne(p => p.User)
 				.WithMany(u => u.Posts)
 				.HasForeignKey(p => p.UserId);
-			builder.HasMany(p => p.Messages)
-				.WithOne(m => m.Post)
-				.HasForeignKey(m => m.PostId);
+			builder.HasMany(p => p.LikePosts)
+				.WithOne(lp => lp.Post)
+				.HasForeignKey(lp => lp.PostId);
+			builder.HasMany(p => p.Comments)
+				.WithOne(c => c.Post)
+				.HasForeignKey(p => p.PostId)
+				.OnDelete(DeleteBehavior.Cascade);
+			builder.HasMany(p => p.Saveds)
+				.WithOne(s => s.Post)
+				.HasForeignKey(p => p.PostId)
+				.OnDelete(DeleteBehavior.NoAction);
 		}
 	}
 }

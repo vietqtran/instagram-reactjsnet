@@ -17,6 +17,7 @@ namespace vietqtran.Models.Entities
 		public Guid Id { get; set; }
 		public MessageType MessageType { get; set; }
 		public Guid UserId { get; set; }
+		public Guid ConversationId { get; set; }
 		public DateTime CreatedAt { get; set; }
 		public bool IsDeleted { get; set; }
 		public MessageStatus Status { get; set; }
@@ -26,8 +27,8 @@ namespace vietqtran.Models.Entities
 		//! Particilar
 
 		public string Content { get; set; }
-		public Guid PostId { get; set; }
-		public Guid StoryId { get; set; }
+		public Guid? PostId { get; set; }
+		public Guid? StoryId { get; set; }
 		public string Emoji { get; set; }
 		[Url]
 		public string FileUrl { get; set; }
@@ -36,7 +37,6 @@ namespace vietqtran.Models.Entities
 		//! Refrence
 		public User User { get; set; }
 		public ICollection<ReactMessage> MessageReacts { get; set; }
-		public Post Post { get; set; }
-		public Story Story { get; set; }
+		public Conversation Conversation { get; set; }
 	}
 }

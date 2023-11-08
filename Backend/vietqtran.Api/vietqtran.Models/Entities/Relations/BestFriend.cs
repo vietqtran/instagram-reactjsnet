@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace vietqtran.Models.Entities.Relations
 {
-	public class Follow
+	public class BestFriend
 	{
 		public Guid Id { get; set; }
-		public Guid FollowedId { get; set; }
-		public Guid FollowerId { get; set; }
-		public DateTime CreatedAt { get; set; }
+		public Guid RequestUserId { get; set; }
+		public Guid ResponseUserId { get; set; }
 		public bool IsConfirmed { get; set; }
 
 
-		//! Reference 
-		public User Follower { get; set; }
-		public User Followed { get; set; }
+
+		//! Reference
+		public User RequestUser { get; set; }
+		public User ResponseUser { get; set; }
 	}
 }

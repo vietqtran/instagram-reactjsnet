@@ -10,7 +10,7 @@ using vietqtran.Models.Entities.Relations;
 
 namespace vietqtran.DataLayer.Configurations
 {
-	public class ViewStoryConfiguration : IEntityTypeConfiguration<ViewStory>
+	internal class ViewStoryConfiguration : IEntityTypeConfiguration<ViewStory>
 	{
 		public void Configure (EntityTypeBuilder<ViewStory> builder)
 		{

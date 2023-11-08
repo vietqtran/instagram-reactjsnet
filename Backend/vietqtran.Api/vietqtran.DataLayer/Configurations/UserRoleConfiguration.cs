@@ -9,7 +9,7 @@ using vietqtran.Models.Entities;
 
 namespace vietqtran.DataLayer.Configurations
 {
-	public class UserRoleConfiguration : IEntityTypeConfiguration<Role>
+	internal class UserRoleConfiguration : IEntityTypeConfiguration<Role>
 	{
 		public void Configure (EntityTypeBuilder<Role> builder)
 		{

@@ -9,7 +9,7 @@ using vietqtran.Models.Entities;
 
 namespace vietqtran.DataLayer.Configurations
 {
-	public class HighLightConfiguration : IEntityTypeConfiguration<HighLight>
+	internal class HighLightConfiguration : IEntityTypeConfiguration<HighLight>
 	{
 		public void Configure (EntityTypeBuilder<HighLight> builder)
 		{
@@ -24,9 +24,6 @@ namespace vietqtran.DataLayer.Configurations
 			builder.HasOne(hl => hl.User)
 				.WithMany(u => u.HighLights)
 				.HasForeignKey(hl => hl.UserId);
-			builder.HasMany(hl => hl.Stories)
-				.WithOne(s => s.HighLight)
-				.OnDelete(DeleteBehavior.NoAction);
 		}
 	}
 }

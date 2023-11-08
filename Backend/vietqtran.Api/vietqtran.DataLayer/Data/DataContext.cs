@@ -40,6 +40,14 @@ namespace vietqtran.DataAccess.Data
 			modelBuilder.ApplyConfiguration(new FollowConfiguration());
 			modelBuilder.ApplyConfiguration(new BlockConfiguration());
 			modelBuilder.ApplyConfiguration(new PostConfiguration());
+			modelBuilder.ApplyConfiguration(new BestFriendConfiguration());
+			modelBuilder.ApplyConfiguration(new LikePostConfiguration());
+			modelBuilder.ApplyConfiguration(new CommentConfiguration());
+			modelBuilder.ApplyConfiguration(new SavedConfiguration());
+			modelBuilder.ApplyConfiguration(new SavedGroupConfiguration());
+			modelBuilder.ApplyConfiguration(new HashTagConfiguration());
+			modelBuilder.ApplyConfiguration(new FollowHashTagConfiguration());
+
 
 			modelBuilder.Entity<IdentityUserClaim<Guid>>().ToTable("User_Claims");
 			modelBuilder.Entity<IdentityUserRole<Guid>>().ToTable("User_Roles").HasKey(ur => new { ur.UserId, ur.RoleId });
@@ -60,5 +68,13 @@ namespace vietqtran.DataAccess.Data
 		public DbSet<Follow> Follows { get; set; }
 		public DbSet<Block> Blocks { get; set; }
 		public DbSet<Post> Posts { get; set; }
+		public DbSet<BestFriend> BestFriends { get; set; }
+		public DbSet<LikePost> LikePosts { get; set; }
+		public DbSet<Comment> Comments { get; set; }
+		public DbSet<Notification> Notifications { get; set; }
+		public DbSet<Saved> Saveds { get; set; }
+		public DbSet<SavedGroup> SavedGroups { get; set; }
+		public DbSet<HashTag> HashTags { get; set; }
+		public DbSet<FollowHashTag> FollowHashTags { get; set; }
 	}
 }

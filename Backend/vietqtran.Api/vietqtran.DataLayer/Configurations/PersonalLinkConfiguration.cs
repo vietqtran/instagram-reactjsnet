@@ -9,7 +9,7 @@ using vietqtran.Models.Entities;
 
 namespace vietqtran.DataLayer.Configurations
 {
-	public class PersonalLinkConfiguration : IEntityTypeConfiguration<PersonalLink>
+	internal class PersonalLinkConfiguration : IEntityTypeConfiguration<PersonalLink>
 	{
 		public void Configure (EntityTypeBuilder<PersonalLink> builder)
 		{

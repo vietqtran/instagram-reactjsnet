@@ -10,7 +10,7 @@ using vietqtran.Models.Entities;
 
 namespace vietqtran.DataLayer.Configurations
 {
-	public class UserConfiguration : IEntityTypeConfiguration<User>
+	internal class UserConfiguration : IEntityTypeConfiguration<User>
 	{
 		public void Configure (EntityTypeBuilder<User> builder)
 		{
@@ -43,6 +43,10 @@ namespace vietqtran.DataLayer.Configurations
 				.WithOne(at => at.User)
 				.HasForeignKey<RefreshToken>(at => at.UserId)
 				.OnDelete(DeleteBehavior.NoAction);
+			builder.HasOne(u => u.SearchHistory)
+				.WithOne(s => s.User)
+				.HasForeignKey<SearchHistory>(s => s.UserId)
+				.OnDelete(DeleteBehavior.NoAction);
 			builder.HasMany(u => u.Messages)
 				.WithOne(m => m.User)
 				.HasForeignKey(m => m.UserId)
@@ -67,6 +71,14 @@ namespace vietqtran.DataLayer.Configurations
 				.WithOne(f => f.Followed)
 				.HasForeignKey(f => f.FollowedId)
 				.OnDelete(DeleteBehavior.NoAction);
+			builder.HasMany(u => u.RequestUsers)
+				.WithOne(bf => bf.RequestUser)
+				.HasForeignKey(bf => bf.RequestUserId)
+				.OnDelete(DeleteBehavior.NoAction);
+			builder.HasMany(u => u.ResponseUsers)
+				.WithOne(bf => bf.ResponseUser)
+				.HasForeignKey(bf => bf.ResponseUserId)
+				.OnDelete(DeleteBehavior.NoAction);
 			builder.HasMany(u => u.Blockers)
 				.WithOne(b => b.Blocker)
 				.HasForeignKey(b => b.BlockerId)
@@ -82,6 +94,25 @@ namespace vietqtran.DataLayer.Configurations
 			builder.HasMany(u => u.ViewsStory)
 				.WithOne(vs => vs.User)
 				.HasForeignKey(vs => vs.ViewerId)
+				.OnDelete(DeleteBehavior.NoAction);
+			builder.HasMany(u => u.LikePosts)
+				.WithOne(lp => lp.User)
+				.HasForeignKey(lp => lp.UserId);
+			builder.HasMany(u => u.Comments)
+				.WithOne(c => c.User)
+				.HasForeignKey(c => c.UserId)
+				.OnDelete(DeleteBehavior.Cascade);
+			builder.HasMany(u => u.SendNotifications)
+				.WithOne(n => n.Sender)
+				.HasForeignKey(n => n.SenderId)
+				.OnDelete(DeleteBehavior.NoAction);
+			builder.HasMany(u => u.ReceiveNotifications)
+				.WithOne(n => n.Receiver)
+				.HasForeignKey(n => n.UserId)
+				.OnDelete(DeleteBehavior.NoAction);
+			builder.HasMany(u => u.Saveds)
+				.WithOne(s => s.User)
+				.HasForeignKey(s => s.UserId)
 				.OnDelete(DeleteBehavior.NoAction);
 
 			builder.Property(u => u.Avatar).IsRequired(false);

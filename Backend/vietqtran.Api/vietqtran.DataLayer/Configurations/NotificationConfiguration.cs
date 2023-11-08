@@ -5,20 +5,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using vietqtran.Models.Entities.Relations;
 using vietqtran.Models.Entities;
 
 namespace vietqtran.DataLayer.Configurations
 {
-	internal class RefreshTokenConfiguration : IEntityTypeConfiguration<RefreshToken>
+	internal class NotificationConfiguration : IEntityTypeConfiguration<Notification>
 	{
-		public void Configure (EntityTypeBuilder<RefreshToken> builder)
+		public void Configure (EntityTypeBuilder<Notification> builder)
 		{
-			builder.ToTable("Refresh_Tokens");
+			builder.ToTable("Notifications");
 
-			builder.HasKey(rt => rt.Id);
-
-			builder.HasIndex(rt => rt.Token);
+			builder.HasKey(x => x.Id);
 
 		}
 	}

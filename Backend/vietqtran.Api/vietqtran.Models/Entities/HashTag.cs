@@ -8,18 +8,20 @@ using vietqtran.Models.Entities.Relations;
 
 namespace vietqtran.Models.Entities
 {
-	public class Story
+	public class HashTag
 	{
 		public Guid Id { get; set; }
-		public Guid UserId { get; set; }
+		public string Titile { get; set; }
 		[Url]
-		public string MediaLink { get; set; }
-		public string Type { get; set; }
-		public DateTime CreatedAt { get; set; }
-		public Guid? HighLightId { get; set; }
+		public string Image { get; set; }
+
+
 
 		//! Reference
-		public User User { get; set; }
-		public ICollection<ViewStory> ViewsStory { get; set; }
+
+		public ICollection<PostHashTag> PostHashTags { get; set; }
+		public ICollection<FollowHashTag> FollowHashTags { get; set; }
+		public ICollection<SearchHistory> SearchHistories { get; set; }
+
 	}
 }

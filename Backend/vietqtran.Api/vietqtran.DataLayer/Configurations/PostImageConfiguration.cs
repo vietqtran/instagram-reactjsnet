@@ -9,7 +9,7 @@ using vietqtran.Models.Entities;
 
 namespace vietqtran.DataLayer.Configurations
 {
-	public class PostImageConfiguration : IEntityTypeConfiguration<PostImage>
+	internal class PostImageConfiguration : IEntityTypeConfiguration<PostImage>
 	{
 		public void Configure (EntityTypeBuilder<PostImage> builder)
 		{

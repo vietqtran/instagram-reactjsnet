@@ -11,7 +11,7 @@ using System.Reflection.Emit;
 
 namespace vietqtran.DataLayer.Configurations
 {
-	public class ReactMessageConfiguration : IEntityTypeConfiguration<ReactMessage>
+	internal class ReactMessageConfiguration : IEntityTypeConfiguration<ReactMessage>
 	{
 		public void Configure (EntityTypeBuilder<ReactMessage> builder)
 		{
