@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace vietqtran.DataLayer.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class init2 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -134,9 +134,8 @@ namespace vietqtran.DataLayer.Migrations
                     UserName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     BirthDay = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    RoleId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     IsPrivateAccount = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 11, 9, 6, 39, 14, 419, DateTimeKind.Utc).AddTicks(9082)),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 11, 9, 9, 3, 51, 494, DateTimeKind.Utc).AddTicks(2393)),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
                     LastOnlineTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastOfflineTime = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -144,6 +143,7 @@ namespace vietqtran.DataLayer.Migrations
                     Bio = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: true),
                     Avatar = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsLocked = table.Column<bool>(type: "bit", nullable: false),
+                    RoleId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Email = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     NormalizedEmail = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -679,8 +679,8 @@ namespace vietqtran.DataLayer.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Description", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { new Guid("41035363-3183-44c7-a123-8f94c6dba1b8"), "52febd34-c0e8-40af-923f-7013982482b2", "Role for ADMIN", "Admin", "ADMIN" },
-                    { new Guid("deed6f77-15fc-4103-b5a2-7881eaa4e138"), "ca939fa9-7e4e-4fa9-bc39-70340e1b4fa8", "Role for USER", "User", "USER" }
+                    { new Guid("7efbbd23-215b-4d7b-ae30-8591ab56f72f"), "7b1390a7-3f7b-4be6-b3f0-e4ebe1e17520", "Role for USER", "User", "USER" },
+                    { new Guid("aac62d49-e011-44de-9275-6e02604441e2"), "a35d8574-2043-427d-9a10-6b44b242df5e", "Role for ADMIN", "Admin", "ADMIN" }
                 });
 
             migrationBuilder.CreateIndex(

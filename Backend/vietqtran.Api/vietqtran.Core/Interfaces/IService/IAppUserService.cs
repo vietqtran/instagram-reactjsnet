@@ -16,9 +16,9 @@ namespace vietqtran.Core.Interfaces.IService
 	{
 		public Task<ICollection<User>> GetAllUsersServiceAsync ( );
 
-		Task<bool> Register (SignUpCredentials signUpCredentials);
+		Task<SignUpResponse> Register (SignUpCredentials signUpCredentials);
 
-		Task<string> Login (LoginCredentials loginCredentials);
+		Task<LoginResponse> Login (LoginCredentials loginCredentials);
 
 	}
 }

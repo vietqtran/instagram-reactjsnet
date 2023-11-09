@@ -1,8 +1,17 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Logging;
+using Microsoft.IdentityModel.Tokens;
 using NuGet.Common;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 using vietqtran.Core.Interfaces.IService;
+using vietqtran.Core.Utilities;
 using vietqtran.Models.RequestModels.User;
 using vietqtran.Models.ViewModels;
 using vietqtran.Services.Services;
@@ -18,12 +27,15 @@ namespace vietqtran.Api.Controllers
 		private readonly IAppUserService _appUserService;
 		private readonly IMapper _mapper;
 		private readonly ILogger<UserController> _logger;
+		private readonly IOptions<JwtConfig> _jwtConfig;
 
-		public UserController (IAppUserService appUserService, IMapper mapper, ILogger<UserController> logger)
+
+		public UserController (IAppUserService appUserService, IMapper mapper, ILogger<UserController> logger, IOptions<JwtConfig> jwtConfig)
 		{
 			_appUserService = appUserService;
 			_mapper = mapper;
 			_logger = logger;
+			_jwtConfig = jwtConfig;
 		}
 
 		[HttpGet]
@@ -41,11 +53,11 @@ namespace vietqtran.Api.Controllers
 		{
 			var result = await _appUserService.Register(signUpCredentials);
 
-			if (result == true) {
-				return Ok("Signup successfull!");
+			if (result.Status == "Successed") {
+				return Ok(result);
 			}
 
-			return BadRequest("Signup failed!");
+			return BadRequest(result);
 		}
 
 		[HttpPost("login")]
@@ -54,11 +66,37 @@ namespace vietqtran.Api.Controllers
 		{
 			var result = await _appUserService.Login(loginCredentials);
 
-			if (string.IsNullOrEmpty(result)) {
-				return BadRequest("Can't Login");
+			if (result.Status == "Seccessed") {
+				return BadRequest(result);
 			}
 
-			return Ok(result);
+			var handler = new JwtSecurityTokenHandler();
+			var jwtToken = handler.ReadJwtToken(result.Token);
+			var claims = jwtToken.Claims.ToList();
+			var roles = claims.Where(x => x.Type == "role").Select(x => x.Value).ToList();
+
+			return Ok(new {
+				result,
+				roles
+			});
+		}
+
+		private ClaimsPrincipal ValidateToken (string token)
+		{
+			IdentityModelEventSource.ShowPII = true;
+
+			SecurityToken validatedToken;
+			TokenValidationParameters validationParameters = new TokenValidationParameters();
+
+			validationParameters.ValidateLifetime = true;
+
+			validationParameters.ValidAudience = _jwtConfig.Value.Audience;
+			validationParameters.ValidIssuer = _jwtConfig.Value.Issuer;
+			validationParameters.IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtConfig.Value.SecretKey));
+
+			ClaimsPrincipal claimsPrincipal = new JwtSecurityTokenHandler().ValidateToken(token, validationParameters, out validatedToken);
+
+			return claimsPrincipal;
 		}
 	}
 }

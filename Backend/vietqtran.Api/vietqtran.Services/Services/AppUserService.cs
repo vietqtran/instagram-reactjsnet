@@ -50,35 +50,84 @@ namespace vietqtran.Services.Services
 			return users;
 		}
 
-		public async Task<string> Login (LoginCredentials loginCredentials)
+		public async Task<LoginResponse> Login (LoginCredentials loginCredentials)
 		{
 			var user = await _userManager.FindByEmailAsync(loginCredentials.Email);
 			if (user == null) {
-				return string.Empty;
+				return new LoginResponse
+				{
+					Error = "Email not found!",
+					Status = "Failed"
+				};
 			}
 
 			var result = await _signInManager.PasswordSignInAsync(user, loginCredentials.Password, true, false);
 			if (!result.Succeeded) {
-				return string.Empty;
+				return new LoginResponse
+				{
+					Error = "Password is incorrect!",
+					Status = "Failed"
+				};
 			}
 
+			var roles = await _userManager.GetRolesAsync(user);
 
-			string token = await GenerateAccessToken(user);
+			var claims = new List<Claim>
+			{
+				new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
+				new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+				new Claim(JwtRegisteredClaimNames.GivenName, user.UserName),
+				new Claim(JwtRegisteredClaimNames.Email, user.Email),
+				new Claim("UserId", user.Id.ToString())
+			};
 
-			return token;
+			claims.AddRange(roles.Select(role => new Claim(ClaimTypes.Role, role)));
+
+			var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtConfig.Value.SecretKey));
+
+			var signingCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+			var tokenDescriptor = new SecurityTokenDescriptor
+			{
+				Issuer = _jwtConfig.Value.Issuer,
+				Audience = _jwtConfig.Value.Audience,
+				IssuedAt = DateTime.UtcNow,
+				NotBefore = DateTime.UtcNow,
+				Expires = DateTime.UtcNow.Add(_jwtConfig.Value.ExpiryTime),
+				Subject = new ClaimsIdentity(claims),
+				SigningCredentials = signingCredentials
+			};
+
+			var tokenHandler = new JwtSecurityTokenHandler();
+			var accessToken = tokenHandler.CreateToken(tokenDescriptor);
+
+			return new LoginResponse
+			{
+				Token = tokenHandler.WriteToken(accessToken),
+				Status = "Successed"
+			};
 		}
 
-		public async Task<bool> Register (SignUpCredentials signUpCredentials)
+		public async Task<SignUpResponse> Register (SignUpCredentials signUpCredentials)
 		{
 			var user = _mapper.Map<User>(signUpCredentials);
 
 			var result = await _userManager.CreateAsync(user, signUpCredentials.Password);
 
+			await _userManager.AddToRoleAsync(user, "User");
+
 			if (result.Succeeded) {
-				return true;
+				return new SignUpResponse
+				{
+					Status = "Successed",
+				};
 			}
 
-			return false;
+			return new SignUpResponse
+			{
+				Error = "",
+				Status = "Failed"
+			};
 		}
 
 		public async Task<string> GenerateAccessToken (User user)
@@ -93,9 +142,9 @@ namespace vietqtran.Services.Services
 			{
 				new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
 				new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-				new Claim(ClaimTypes.GivenName, user.UserName),
-				new Claim(ClaimTypes.Email, user.Email),
-				new Claim(ClaimTypes.Role, string.Join(";", roles))
+				new Claim(JwtRegisteredClaimNames.GivenName, user.UserName),
+				new Claim(JwtRegisteredClaimNames.Email, user.Email),
+				new Claim("UserId", user.Id.ToString())
 			};
 
 			var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtConfig.Value.SecretKey));
