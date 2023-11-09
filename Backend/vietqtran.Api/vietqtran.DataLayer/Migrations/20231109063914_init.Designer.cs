@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using vietqtran.DataAccess.Data;
 
@@ -11,9 +12,11 @@ using vietqtran.DataAccess.Data;
 namespace vietqtran.DataLayer.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20231109063914_init")]
+    partial class init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -722,16 +725,16 @@ namespace vietqtran.DataLayer.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("3deb025f-d924-4aa9-9bf0-5a32e67d1ea1"),
-                            ConcurrencyStamp = "9cb77be0-e47e-4b38-9376-20904db64c11",
+                            Id = new Guid("41035363-3183-44c7-a123-8f94c6dba1b8"),
+                            ConcurrencyStamp = "52febd34-c0e8-40af-923f-7013982482b2",
                             Description = "Role for ADMIN",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = new Guid("aea821fb-1090-49c9-9741-0af604536426"),
-                            ConcurrencyStamp = "a9b9974a-4ad1-49a7-b4bf-15397ab9b0d7",
+                            Id = new Guid("deed6f77-15fc-4103-b5a2-7881eaa4e138"),
+                            ConcurrencyStamp = "ca939fa9-7e4e-4fa9-bc39-70340e1b4fa8",
                             Description = "Role for USER",
                             Name = "User",
                             NormalizedName = "USER"
@@ -831,7 +834,7 @@ namespace vietqtran.DataLayer.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 11, 9, 6, 52, 55, 704, DateTimeKind.Utc).AddTicks(1986));
+                        .HasDefaultValue(new DateTime(2023, 11, 9, 6, 39, 14, 419, DateTimeKind.Utc).AddTicks(9082));
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(450)");
@@ -887,7 +890,7 @@ namespace vietqtran.DataLayer.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<Guid?>("RoleId")
+                    b.Property<Guid>("RoleId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("SecurityStamp")
@@ -1256,9 +1259,13 @@ namespace vietqtran.DataLayer.Migrations
 
             modelBuilder.Entity("vietqtran.Models.Entities.User", b =>
                 {
-                    b.HasOne("vietqtran.Models.Entities.Role", null)
+                    b.HasOne("vietqtran.Models.Entities.Role", "UserRole")
                         .WithMany("Users")
-                        .HasForeignKey("RoleId");
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("UserRole");
                 });
 
             modelBuilder.Entity("vietqtran.Models.Entities.Conversation", b =>

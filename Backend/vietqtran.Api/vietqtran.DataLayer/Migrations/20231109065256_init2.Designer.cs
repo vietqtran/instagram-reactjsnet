@@ -12,8 +12,8 @@ using vietqtran.DataAccess.Data;
 namespace vietqtran.DataLayer.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20231108163814_init")]
-    partial class init
+    [Migration("20231109065256_init2")]
+    partial class init2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -122,37 +122,13 @@ namespace vietqtran.DataLayer.Migrations
                     b.ToTable("User_Tokens", (string)null);
                 });
 
-            modelBuilder.Entity("vietqtran.Models.Entities.AccessToken", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("ExpiryDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Token")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Token");
-
-                    b.HasIndex("UserId")
-                        .IsUnique();
-
-                    b.ToTable("Access_Tokens", (string)null);
-                });
-
             modelBuilder.Entity("vietqtran.Models.Entities.Comment", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<string>("Content")
                         .IsRequired()
@@ -164,11 +140,11 @@ namespace vietqtran.DataLayer.Migrations
                     b.Property<DateTime?>("ModifiedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("PostId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<long>("PostId")
+                        .HasColumnType("bigint");
 
-                    b.Property<Guid?>("ReplyId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<long?>("ReplyId")
+                        .HasColumnType("bigint");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
@@ -186,9 +162,11 @@ namespace vietqtran.DataLayer.Migrations
 
             modelBuilder.Entity("vietqtran.Models.Entities.Conversation", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -200,9 +178,11 @@ namespace vietqtran.DataLayer.Migrations
 
             modelBuilder.Entity("vietqtran.Models.Entities.HashTag", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<string>("Image")
                         .IsRequired()
@@ -221,9 +201,11 @@ namespace vietqtran.DataLayer.Migrations
 
             modelBuilder.Entity("vietqtran.Models.Entities.HighLight", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -248,16 +230,18 @@ namespace vietqtran.DataLayer.Migrations
 
             modelBuilder.Entity("vietqtran.Models.Entities.Message", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<string>("Content")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<Guid>("ConversationId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<long>("ConversationId")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -279,17 +263,17 @@ namespace vietqtran.DataLayer.Migrations
                     b.Property<int>("MessageType")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("PostId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<long?>("PostId")
+                        .HasColumnType("bigint");
 
-                    b.Property<Guid>("ReplyId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<long>("ReplyId")
+                        .HasColumnType("bigint");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("StoryId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<long?>("StoryId")
+                        .HasColumnType("bigint");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
@@ -315,12 +299,14 @@ namespace vietqtran.DataLayer.Migrations
 
             modelBuilder.Entity("vietqtran.Models.Entities.Notification", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("bigint");
 
-                    b.Property<Guid?>("CommentId")
-                        .HasColumnType("uniqueidentifier");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<long?>("CommentId")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Content")
                         .IsRequired()
@@ -332,14 +318,14 @@ namespace vietqtran.DataLayer.Migrations
                     b.Property<bool>("IsRead")
                         .HasColumnType("bit");
 
-                    b.Property<Guid?>("PostId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<long?>("PostId")
+                        .HasColumnType("bigint");
 
                     b.Property<Guid>("SenderId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("StoryId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<long?>("StoryId")
+                        .HasColumnType("bigint");
 
                     b.Property<int>("Type")
                         .HasColumnType("int");
@@ -358,8 +344,8 @@ namespace vietqtran.DataLayer.Migrations
 
             modelBuilder.Entity("vietqtran.Models.Entities.PersonalLink", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<long>("Id")
+                        .HasColumnType("bigint");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
@@ -378,9 +364,11 @@ namespace vietqtran.DataLayer.Migrations
 
             modelBuilder.Entity("vietqtran.Models.Entities.Post", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -406,9 +394,11 @@ namespace vietqtran.DataLayer.Migrations
 
             modelBuilder.Entity("vietqtran.Models.Entities.RefreshToken", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<DateTime>("ExpiryDate")
                         .HasColumnType("datetime2");
@@ -432,9 +422,11 @@ namespace vietqtran.DataLayer.Migrations
 
             modelBuilder.Entity("vietqtran.Models.Entities.Relations.BestFriend", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<bool>("IsConfirmed")
                         .HasColumnType("bit");
@@ -456,9 +448,11 @@ namespace vietqtran.DataLayer.Migrations
 
             modelBuilder.Entity("vietqtran.Models.Entities.Relations.Block", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<Guid>("BlockedId")
                         .HasColumnType("uniqueidentifier");
@@ -480,9 +474,11 @@ namespace vietqtran.DataLayer.Migrations
 
             modelBuilder.Entity("vietqtran.Models.Entities.Relations.Follow", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -507,12 +503,14 @@ namespace vietqtran.DataLayer.Migrations
 
             modelBuilder.Entity("vietqtran.Models.Entities.Relations.FollowHashTag", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("bigint");
 
-                    b.Property<Guid>("HashTagId")
-                        .HasColumnType("uniqueidentifier");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<long>("HashTagId")
+                        .HasColumnType("bigint");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
@@ -534,8 +532,8 @@ namespace vietqtran.DataLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<Guid>("PostId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<long>("PostId")
+                        .HasColumnType("bigint");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
@@ -551,15 +549,17 @@ namespace vietqtran.DataLayer.Migrations
 
             modelBuilder.Entity("vietqtran.Models.Entities.Relations.PostHashTag", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("bigint");
 
-                    b.Property<Guid>("HashTagId")
-                        .HasColumnType("uniqueidentifier");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<Guid>("PostId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<long>("HashTagId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("PostId")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
@@ -575,8 +575,8 @@ namespace vietqtran.DataLayer.Migrations
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("MessageId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<long>("MessageId")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -594,15 +594,17 @@ namespace vietqtran.DataLayer.Migrations
 
             modelBuilder.Entity("vietqtran.Models.Entities.Relations.Saved", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("bigint");
 
-                    b.Property<Guid?>("CollectionId")
-                        .HasColumnType("uniqueidentifier");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<Guid>("PostId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<long?>("CollectionId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("PostId")
+                        .HasColumnType("bigint");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
@@ -618,9 +620,11 @@ namespace vietqtran.DataLayer.Migrations
 
             modelBuilder.Entity("vietqtran.Models.Entities.Relations.SavedGroup", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -641,12 +645,14 @@ namespace vietqtran.DataLayer.Migrations
 
             modelBuilder.Entity("vietqtran.Models.Entities.Relations.UserConversation", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("bigint");
 
-                    b.Property<Guid>("ConversationId")
-                        .HasColumnType("uniqueidentifier");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<long>("ConversationId")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("DeletedAt")
                         .HasColumnType("datetime2");
@@ -668,15 +674,17 @@ namespace vietqtran.DataLayer.Migrations
 
             modelBuilder.Entity("vietqtran.Models.Entities.Relations.ViewStory", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<bool>("Liked")
                         .HasColumnType("bit");
 
-                    b.Property<Guid>("StotyId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<long>("StotyId")
+                        .HasColumnType("bigint");
 
                     b.Property<Guid>("ViewerId")
                         .HasColumnType("uniqueidentifier");
@@ -717,16 +725,16 @@ namespace vietqtran.DataLayer.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("cf61cef2-a63f-4ae9-bd7f-37964ec79229"),
-                            ConcurrencyStamp = "70366832-6875-4397-ac24-54fcb839f64b",
+                            Id = new Guid("3deb025f-d924-4aa9-9bf0-5a32e67d1ea1"),
+                            ConcurrencyStamp = "9cb77be0-e47e-4b38-9376-20904db64c11",
                             Description = "Role for ADMIN",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = new Guid("4bd77abb-cbd8-40e4-a85c-9a2d55fa35b3"),
-                            ConcurrencyStamp = "c4579a97-2599-448c-8e6a-099bd495712c",
+                            Id = new Guid("aea821fb-1090-49c9-9741-0af604536426"),
+                            ConcurrencyStamp = "a9b9974a-4ad1-49a7-b4bf-15397ab9b0d7",
                             Description = "Role for USER",
                             Name = "User",
                             NormalizedName = "USER"
@@ -735,12 +743,14 @@ namespace vietqtran.DataLayer.Migrations
 
             modelBuilder.Entity("vietqtran.Models.Entities.SearchHistory", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("bigint");
 
-                    b.Property<Guid?>("HashTagId")
-                        .HasColumnType("uniqueidentifier");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<long?>("HashTagId")
+                        .HasColumnType("bigint");
 
                     b.Property<Guid?>("SearchUserId")
                         .HasColumnType("uniqueidentifier");
@@ -765,15 +775,17 @@ namespace vietqtran.DataLayer.Migrations
 
             modelBuilder.Entity("vietqtran.Models.Entities.Story", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid?>("HighLightId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<long?>("HighLightId")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("MediaLink")
                         .IsRequired()
@@ -822,7 +834,7 @@ namespace vietqtran.DataLayer.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 11, 8, 16, 38, 14, 597, DateTimeKind.Utc).AddTicks(5990));
+                        .HasDefaultValue(new DateTime(2023, 11, 9, 6, 52, 55, 704, DateTimeKind.Utc).AddTicks(1986));
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(450)");
@@ -878,7 +890,7 @@ namespace vietqtran.DataLayer.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<Guid>("RoleId")
+                    b.Property<Guid?>("RoleId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("SecurityStamp")
@@ -907,17 +919,6 @@ namespace vietqtran.DataLayer.Migrations
                     b.HasIndex("UserName");
 
                     b.ToTable("Users", (string)null);
-                });
-
-            modelBuilder.Entity("vietqtran.Models.Entities.AccessToken", b =>
-                {
-                    b.HasOne("vietqtran.Models.Entities.User", "User")
-                        .WithOne("AccessToken")
-                        .HasForeignKey("vietqtran.Models.Entities.AccessToken", "UserId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("vietqtran.Models.Entities.Comment", b =>
@@ -1258,13 +1259,9 @@ namespace vietqtran.DataLayer.Migrations
 
             modelBuilder.Entity("vietqtran.Models.Entities.User", b =>
                 {
-                    b.HasOne("vietqtran.Models.Entities.Role", "UserRole")
+                    b.HasOne("vietqtran.Models.Entities.Role", null)
                         .WithMany("Users")
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("UserRole");
+                        .HasForeignKey("RoleId");
                 });
 
             modelBuilder.Entity("vietqtran.Models.Entities.Conversation", b =>
@@ -1311,9 +1308,6 @@ namespace vietqtran.DataLayer.Migrations
 
             modelBuilder.Entity("vietqtran.Models.Entities.User", b =>
                 {
-                    b.Navigation("AccessToken")
-                        .IsRequired();
-
                     b.Navigation("Blockeds");
 
                     b.Navigation("Blockers");

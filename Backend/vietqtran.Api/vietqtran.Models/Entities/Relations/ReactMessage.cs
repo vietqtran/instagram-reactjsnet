@@ -12,7 +12,7 @@ namespace vietqtran.Models.Entities.Relations
 		public MessageReact React { get; set; }
 		public string Name { get; set; }
 		public Guid UserId { get; set; }
-		public Guid MessageId { get; set; }
+		public long MessageId { get; set; }
 
 
 		//! Reference

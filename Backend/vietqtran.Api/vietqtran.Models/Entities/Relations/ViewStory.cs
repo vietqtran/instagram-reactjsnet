@@ -8,9 +8,9 @@ namespace vietqtran.Models.Entities.Relations
 {
 	public class ViewStory
 	{
-		public Guid Id { get; set; }
+		public long Id { get; set; }
 		public Guid ViewerId { get; set; }
-		public Guid StotyId { get; set; }
+		public long StotyId { get; set; }
 		public bool Liked { get; set; } = false;
 
 

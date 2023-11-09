@@ -16,9 +16,5 @@ namespace vietqtran.Core.Interfaces.IRepository
 	{
 		public Task<ICollection<User>> GetAllUsersAsync ( );
 
-		Task<bool> Register (SignUpCredentials signUpCredentials);
-
-		Task<AuthResponse> Login (LoginCredentials loginCredentials);
-
 	}
 }

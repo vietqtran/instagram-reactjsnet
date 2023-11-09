@@ -8,9 +8,9 @@ namespace vietqtran.Models.Entities.Relations
 {
 	public class UserConversation
 	{
-		public Guid Id { get; set; }
+		public long Id { get; set; }
 		public Guid UserId { get; set; }
-		public Guid ConversationId { get; set; }
+		public long ConversationId { get; set; }
 		public DateTime DeletedAt { get; set; } = DateTime.UtcNow;
 		public bool IsAllowedNotification { get; set; } = true;
 

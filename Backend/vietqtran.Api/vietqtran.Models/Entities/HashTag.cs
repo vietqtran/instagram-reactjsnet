@@ -10,7 +10,7 @@ namespace vietqtran.Models.Entities
 {
 	public class HashTag
 	{
-		public Guid Id { get; set; }
+		public long Id { get; set; }
 		public string Titile { get; set; }
 		[Url]
 		public string Image { get; set; }

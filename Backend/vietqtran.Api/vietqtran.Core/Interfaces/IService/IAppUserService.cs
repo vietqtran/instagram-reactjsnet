@@ -18,7 +18,7 @@ namespace vietqtran.Core.Interfaces.IService
 
 		Task<bool> Register (SignUpCredentials signUpCredentials);
 
-		Task<AuthResponse> Login (LoginCredentials loginCredentials);
+		Task<string> Login (LoginCredentials loginCredentials);
 
 	}
 }

@@ -9,8 +9,8 @@ namespace vietqtran.Models.Entities
 {
 	public class PostImage
 	{
-		public Guid Id { get; set; }
-		public Guid PostId { get; set; }
+		public long Id { get; set; }
+		public long PostId { get; set; }
 		[Url]
 		public string Link { get; set; }
 	}

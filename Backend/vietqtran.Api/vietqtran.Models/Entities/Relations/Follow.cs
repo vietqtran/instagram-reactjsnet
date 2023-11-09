@@ -8,7 +8,7 @@ namespace vietqtran.Models.Entities.Relations
 {
 	public class Follow
 	{
-		public Guid Id { get; set; }
+		public long Id { get; set; }
 		public Guid FollowedId { get; set; }
 		public Guid FollowerId { get; set; }
 		public DateTime CreatedAt { get; set; }
