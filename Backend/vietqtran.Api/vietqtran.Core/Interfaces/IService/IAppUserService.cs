@@ -3,24 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using vietqtran.Models.User;
 using vietqtran.Models.ViewModels;
 using vietqtran.Models.DTO;
+using vietqtran.Models.RequestModels.User;
+using Microsoft.AspNetCore.Identity;
+using vietqtran.Models.Entities;
+using vietqtran.Models.ResponseModels;
 
 namespace vietqtran.Core.Interfaces.IService
 {
-    public interface IAppUserService
-    {
-        public Task<ICollection<AppUser>> GetAllUsersServiceAsync ( );
+	public interface IAppUserService
+	{
+		public Task<ICollection<User>> GetAllUsersServiceAsync ( );
 
-        public Task<AppUserVM> GetById (Guid id);
+		Task<SignUpResponse> Register (SignUpCredentials signUpCredentials);
 
-        public Task<AppUserVM> Create (AppUserDTO userDto);
+		Task<LoginResponse> Login (LoginCredentials loginCredentials);
 
-        public Task<AppUserVM> Update (AppUserDTO userDto);
-
-        public Task<bool> Delete (Guid id);
-
-        public Task<IEnumerable<AppUserVM>> GetWithPagination (string keyword, int page, int pageSize);
-    }
+	}
 }

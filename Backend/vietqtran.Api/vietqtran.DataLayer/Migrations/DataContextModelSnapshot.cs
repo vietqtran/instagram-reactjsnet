@@ -63,7 +63,7 @@ namespace vietqtran.DataLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("UserClaims", (string)null);
+                    b.ToTable("User_Claims", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
@@ -83,7 +83,7 @@ namespace vietqtran.DataLayer.Migrations
 
                     b.HasKey("UserId");
 
-                    b.ToTable("UserLogins", (string)null);
+                    b.ToTable("User_Logins", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
@@ -96,7 +96,7 @@ namespace vietqtran.DataLayer.Migrations
 
                     b.HasKey("UserId", "RoleId");
 
-                    b.ToTable("UserRoles", (string)null);
+                    b.ToTable("User_Roles", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
@@ -116,117 +116,586 @@ namespace vietqtran.DataLayer.Migrations
 
                     b.HasKey("UserId");
 
-                    b.ToTable("UserTokens", (string)null);
+                    b.ToTable("User_Tokens", (string)null);
                 });
 
-            modelBuilder.Entity("vietqtran.Models.User.AppUser", b =>
+            modelBuilder.Entity("vietqtran.Models.Entities.Comment", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("bigint");
 
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<string>("ConcurrencyStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Dob")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Email")
+                    b.Property<string>("Content")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("EmailConfirmed")
+                    b.Property<bool?>("IsReply")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
+                    b.Property<DateTime?>("ModifiedAt")
+                        .HasColumnType("datetime2");
 
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
+                    b.Property<long>("PostId")
+                        .HasColumnType("bigint");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<long?>("ReplyId")
+                        .HasColumnType("bigint");
 
-                    b.Property<string>("NormalizedEmail")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Password")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
-                    b.ToTable("AppUsers", (string)null);
+                    b.HasIndex("PostId");
 
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("f290a53b-41d6-4a70-9e27-0f1e02cc5964"),
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "44a3835a-179a-4571-8bc3-4c11ba16d435",
-                            Dob = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "ngothilinhchi@gmail.com",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            Name = "Ngô Thị Linh Chi",
-                            Password = "linhchi",
-                            PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false
-                        },
-                        new
-                        {
-                            Id = new Guid("7002fcd9-c1a4-4a56-a8a7-83d6b50b6e09"),
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "f3f2a56b-ac5f-48fc-9e38-a52e66447879",
-                            Dob = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "tranquocviet1303@gmail.com",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            Name = "Trần Quốc Việt",
-                            Password = "admin",
-                            PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false
-                        },
-                        new
-                        {
-                            Id = new Guid("9c612556-096c-401a-a8a3-9d372e5562fb"),
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "7d1f4fa9-8883-4916-b41a-730d3aa7e4ae",
-                            Dob = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "tranthuylinh@gmail.com",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            Name = "Trần Thùy Linh",
-                            Password = "thuylinh",
-                            PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false
-                        });
+                    b.HasIndex("UserId");
+
+                    b.HasIndex("IsReply", "ReplyId");
+
+                    b.ToTable("Comments", (string)null);
                 });
 
-            modelBuilder.Entity("vietqtran.Models.User.AppUserRole", b =>
+            modelBuilder.Entity("vietqtran.Models.Entities.Conversation", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Conversation");
+                });
+
+            modelBuilder.Entity("vietqtran.Models.Entities.HashTag", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("Image")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Titile")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Titile");
+
+                    b.ToTable("HashTags", (string)null);
+                });
+
+            modelBuilder.Entity("vietqtran.Models.Entities.HighLight", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("PreviewImage")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("HighLights");
+                });
+
+            modelBuilder.Entity("vietqtran.Models.Entities.Message", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<long>("ConversationId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Emoji")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FileUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsReply")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("MessageType")
+                        .HasColumnType("int");
+
+                    b.Property<long?>("PostId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("ReplyId")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<long?>("StoryId")
+                        .HasColumnType("bigint");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Content");
+
+                    b.HasIndex("ConversationId");
+
+                    b.HasIndex("CreatedAt");
+
+                    b.HasIndex("Id");
+
+                    b.HasIndex("ReplyId");
+
+                    b.HasIndex("StoryId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Messages", (string)null);
+                });
+
+            modelBuilder.Entity("vietqtran.Models.Entities.Notification", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<long?>("CommentId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreateAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsRead")
+                        .HasColumnType("bit");
+
+                    b.Property<long?>("PostId")
+                        .HasColumnType("bigint");
+
+                    b.Property<Guid>("SenderId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<long?>("StoryId")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SenderId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Notifications");
+                });
+
+            modelBuilder.Entity("vietqtran.Models.Entities.PersonalLink", b =>
+                {
+                    b.Property<long>("Id")
+                        .HasColumnType("bigint");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Link")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id", "UserId", "Link");
+
+                    b.HasIndex("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Personal_Links", (string)null);
+                });
+
+            modelBuilder.Entity("vietqtran.Models.Entities.Post", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Visibility")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Posts", (string)null);
+                });
+
+            modelBuilder.Entity("vietqtran.Models.Entities.RefreshToken", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime>("ExpiryDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Token")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Token");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("Refresh_Tokens", (string)null);
+                });
+
+            modelBuilder.Entity("vietqtran.Models.Entities.Relations.BestFriend", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<bool>("IsConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("RequestUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ResponseUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RequestUserId");
+
+                    b.HasIndex("ResponseUserId");
+
+                    b.ToTable("User_BestFriends", (string)null);
+                });
+
+            modelBuilder.Entity("vietqtran.Models.Entities.Relations.Block", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<Guid>("BlockedId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("BlockerId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BlockedId");
+
+                    b.HasIndex("BlockerId");
+
+                    b.ToTable("User_Blocks", (string)null);
+                });
+
+            modelBuilder.Entity("vietqtran.Models.Entities.Relations.Follow", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("FollowedId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("FollowerId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsConfirmed")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FollowedId");
+
+                    b.HasIndex("FollowerId");
+
+                    b.ToTable("User_Follows", (string)null);
+                });
+
+            modelBuilder.Entity("vietqtran.Models.Entities.Relations.FollowHashTag", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<long>("HashTagId")
+                        .HasColumnType("bigint");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("HashTagId");
+
+                    b.HasIndex("UserId", "HashTagId");
+
+                    b.ToTable("Follows_HashTag", (string)null);
+                });
+
+            modelBuilder.Entity("vietqtran.Models.Entities.Relations.LikePost", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<long>("PostId")
+                        .HasColumnType("bigint");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PostId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Likes_Post", (string)null);
+                });
+
+            modelBuilder.Entity("vietqtran.Models.Entities.Relations.PostHashTag", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<long>("HashTagId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("PostId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("HashTagId");
+
+                    b.HasIndex("PostId");
+
+                    b.ToTable("PostHashTag");
+                });
+
+            modelBuilder.Entity("vietqtran.Models.Entities.Relations.ReactMessage", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<long>("MessageId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("React")
+                        .HasColumnType("int");
+
+                    b.HasKey("UserId", "MessageId");
+
+                    b.HasIndex("MessageId", "UserId");
+
+                    b.ToTable("Reacts_Message", (string)null);
+                });
+
+            modelBuilder.Entity("vietqtran.Models.Entities.Relations.Saved", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<long?>("CollectionId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("PostId")
+                        .HasColumnType("bigint");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PostId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Saveds", (string)null);
+                });
+
+            modelBuilder.Entity("vietqtran.Models.Entities.Relations.SavedGroup", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Saved_Groups", (string)null);
+                });
+
+            modelBuilder.Entity("vietqtran.Models.Entities.Relations.UserConversation", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<long>("ConversationId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsAllowedNotification")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ConversationId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserConversation");
+                });
+
+            modelBuilder.Entity("vietqtran.Models.Entities.Relations.ViewStory", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<bool>("Liked")
+                        .HasColumnType("bit");
+
+                    b.Property<long>("StotyId")
+                        .HasColumnType("bigint");
+
+                    b.Property<Guid>("ViewerId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StotyId");
+
+                    b.HasIndex("ViewerId");
+
+                    b.ToTable("ViewStory");
+                });
+
+            modelBuilder.Entity("vietqtran.Models.Entities.Role", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -239,34 +708,652 @@ namespace vietqtran.DataLayer.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("NormalizedName")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("AppUserRoles", (string)null);
+                    b.HasIndex("Name");
+
+                    b.ToTable("Roles", (string)null);
 
                     b.HasData(
                         new
                         {
-                            Id = new Guid("0b0c1d91-c6f4-4265-9b4d-d4cc5948c7b5"),
-                            ConcurrencyStamp = "ece0cef7-bed4-4ade-8151-b299581ae9a6",
-                            Name = "Admin"
+                            Id = new Guid("aac62d49-e011-44de-9275-6e02604441e2"),
+                            ConcurrencyStamp = "a35d8574-2043-427d-9a10-6b44b242df5e",
+                            Description = "Role for ADMIN",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = new Guid("dc361635-1c5a-42f6-b96a-7292b8afbe38"),
-                            ConcurrencyStamp = "ece90ef8-d023-4c31-9202-ba762d37f734",
-                            Name = "User"
-                        },
-                        new
-                        {
-                            Id = new Guid("4b9cb9ea-28c3-4e90-9a33-26bf4e118d80"),
-                            ConcurrencyStamp = "845941fa-65ec-42e1-8fa8-94df401b7279",
-                            Name = "Manager"
+                            Id = new Guid("7efbbd23-215b-4d7b-ae30-8591ab56f72f"),
+                            ConcurrencyStamp = "7b1390a7-3f7b-4be6-b3f0-e4ebe1e17520",
+                            Description = "Role for USER",
+                            Name = "User",
+                            NormalizedName = "USER"
                         });
+                });
+
+            modelBuilder.Entity("vietqtran.Models.Entities.SearchHistory", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<long?>("HashTagId")
+                        .HasColumnType("bigint");
+
+                    b.Property<Guid?>("SearchUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("HashTagId");
+
+                    b.HasIndex("SearchUserId");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("SearchHistory");
+                });
+
+            modelBuilder.Entity("vietqtran.Models.Entities.Story", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("HighLightId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("MediaLink")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatedAt");
+
+                    b.HasIndex("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Stories", (string)null);
+                });
+
+            modelBuilder.Entity("vietqtran.Models.Entities.User", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Avatar")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Bio")
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<DateTime>("BirthDay")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(2023, 11, 9, 9, 3, 51, 494, DateTimeKind.Utc).AddTicks(2393));
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Gender")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsLocked")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsPrivateAccount")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("LastOfflineTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("LastOnlineTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid?>("RoleId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatedAt");
+
+                    b.HasIndex("Email");
+
+                    b.HasIndex("IsActive");
+
+                    b.HasIndex("PhoneNumber");
+
+                    b.HasIndex("RoleId");
+
+                    b.HasIndex("UserName");
+
+                    b.ToTable("Users", (string)null);
+                });
+
+            modelBuilder.Entity("vietqtran.Models.Entities.Comment", b =>
+                {
+                    b.HasOne("vietqtran.Models.Entities.Post", "Post")
+                        .WithMany("Comments")
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("vietqtran.Models.Entities.User", "User")
+                        .WithMany("Comments")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Post");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("vietqtran.Models.Entities.HighLight", b =>
+                {
+                    b.HasOne("vietqtran.Models.Entities.User", "User")
+                        .WithMany("HighLights")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("vietqtran.Models.Entities.Message", b =>
+                {
+                    b.HasOne("vietqtran.Models.Entities.Conversation", "Conversation")
+                        .WithMany("Messages")
+                        .HasForeignKey("ConversationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("vietqtran.Models.Entities.User", "User")
+                        .WithMany("Messages")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Conversation");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("vietqtran.Models.Entities.Notification", b =>
+                {
+                    b.HasOne("vietqtran.Models.Entities.User", "Sender")
+                        .WithMany("SendNotifications")
+                        .HasForeignKey("SenderId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("vietqtran.Models.Entities.User", "Receiver")
+                        .WithMany("ReceiveNotifications")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Receiver");
+
+                    b.Navigation("Sender");
+                });
+
+            modelBuilder.Entity("vietqtran.Models.Entities.PersonalLink", b =>
+                {
+                    b.HasOne("vietqtran.Models.Entities.User", "User")
+                        .WithMany("PersonalLinks")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("vietqtran.Models.Entities.Post", b =>
+                {
+                    b.HasOne("vietqtran.Models.Entities.User", "User")
+                        .WithMany("Posts")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("vietqtran.Models.Entities.RefreshToken", b =>
+                {
+                    b.HasOne("vietqtran.Models.Entities.User", "User")
+                        .WithOne("RefreshToken")
+                        .HasForeignKey("vietqtran.Models.Entities.RefreshToken", "UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("vietqtran.Models.Entities.Relations.BestFriend", b =>
+                {
+                    b.HasOne("vietqtran.Models.Entities.User", "RequestUser")
+                        .WithMany("RequestUsers")
+                        .HasForeignKey("RequestUserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("vietqtran.Models.Entities.User", "ResponseUser")
+                        .WithMany("ResponseUsers")
+                        .HasForeignKey("ResponseUserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("RequestUser");
+
+                    b.Navigation("ResponseUser");
+                });
+
+            modelBuilder.Entity("vietqtran.Models.Entities.Relations.Block", b =>
+                {
+                    b.HasOne("vietqtran.Models.Entities.User", "Blocked")
+                        .WithMany("Blockeds")
+                        .HasForeignKey("BlockedId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("vietqtran.Models.Entities.User", "Blocker")
+                        .WithMany("Blockers")
+                        .HasForeignKey("BlockerId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Blocked");
+
+                    b.Navigation("Blocker");
+                });
+
+            modelBuilder.Entity("vietqtran.Models.Entities.Relations.Follow", b =>
+                {
+                    b.HasOne("vietqtran.Models.Entities.User", "Followed")
+                        .WithMany("Followeds")
+                        .HasForeignKey("FollowedId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("vietqtran.Models.Entities.User", "Follower")
+                        .WithMany("Followers")
+                        .HasForeignKey("FollowerId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Followed");
+
+                    b.Navigation("Follower");
+                });
+
+            modelBuilder.Entity("vietqtran.Models.Entities.Relations.FollowHashTag", b =>
+                {
+                    b.HasOne("vietqtran.Models.Entities.HashTag", "HashTag")
+                        .WithMany("FollowHashTags")
+                        .HasForeignKey("HashTagId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("vietqtran.Models.Entities.User", "User")
+                        .WithMany("FollowHashTags")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("HashTag");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("vietqtran.Models.Entities.Relations.LikePost", b =>
+                {
+                    b.HasOne("vietqtran.Models.Entities.Post", "Post")
+                        .WithMany("LikePosts")
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("vietqtran.Models.Entities.User", "User")
+                        .WithMany("LikePosts")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Post");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("vietqtran.Models.Entities.Relations.PostHashTag", b =>
+                {
+                    b.HasOne("vietqtran.Models.Entities.HashTag", "HashTag")
+                        .WithMany("PostHashTags")
+                        .HasForeignKey("HashTagId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("vietqtran.Models.Entities.Post", "Post")
+                        .WithMany("PostHashTags")
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("HashTag");
+
+                    b.Navigation("Post");
+                });
+
+            modelBuilder.Entity("vietqtran.Models.Entities.Relations.ReactMessage", b =>
+                {
+                    b.HasOne("vietqtran.Models.Entities.Message", "Message")
+                        .WithMany("MessageReacts")
+                        .HasForeignKey("MessageId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("vietqtran.Models.Entities.User", "User")
+                        .WithMany("MessageReacts")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Message");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("vietqtran.Models.Entities.Relations.Saved", b =>
+                {
+                    b.HasOne("vietqtran.Models.Entities.Post", "Post")
+                        .WithMany("Saveds")
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("vietqtran.Models.Entities.User", "User")
+                        .WithMany("Saveds")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Post");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("vietqtran.Models.Entities.Relations.SavedGroup", b =>
+                {
+                    b.HasOne("vietqtran.Models.Entities.User", "User")
+                        .WithMany("SavedGroups")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("vietqtran.Models.Entities.Relations.UserConversation", b =>
+                {
+                    b.HasOne("vietqtran.Models.Entities.Conversation", "Conversation")
+                        .WithMany("UserConversations")
+                        .HasForeignKey("ConversationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("vietqtran.Models.Entities.User", "User")
+                        .WithMany("UserConversations")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Conversation");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("vietqtran.Models.Entities.Relations.ViewStory", b =>
+                {
+                    b.HasOne("vietqtran.Models.Entities.Story", "Story")
+                        .WithMany("ViewsStory")
+                        .HasForeignKey("StotyId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("vietqtran.Models.Entities.User", "User")
+                        .WithMany("ViewsStory")
+                        .HasForeignKey("ViewerId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Story");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("vietqtran.Models.Entities.SearchHistory", b =>
+                {
+                    b.HasOne("vietqtran.Models.Entities.HashTag", "SearchHashTag")
+                        .WithMany("SearchHistories")
+                        .HasForeignKey("HashTagId");
+
+                    b.HasOne("vietqtran.Models.Entities.User", "SearchUser")
+                        .WithMany("SearchHistories")
+                        .HasForeignKey("SearchUserId");
+
+                    b.HasOne("vietqtran.Models.Entities.User", "User")
+                        .WithOne("SearchHistory")
+                        .HasForeignKey("vietqtran.Models.Entities.SearchHistory", "UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("SearchHashTag");
+
+                    b.Navigation("SearchUser");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("vietqtran.Models.Entities.Story", b =>
+                {
+                    b.HasOne("vietqtran.Models.Entities.User", "User")
+                        .WithMany("Stories")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("vietqtran.Models.Entities.User", b =>
+                {
+                    b.HasOne("vietqtran.Models.Entities.Role", null)
+                        .WithMany("Users")
+                        .HasForeignKey("RoleId");
+                });
+
+            modelBuilder.Entity("vietqtran.Models.Entities.Conversation", b =>
+                {
+                    b.Navigation("Messages");
+
+                    b.Navigation("UserConversations");
+                });
+
+            modelBuilder.Entity("vietqtran.Models.Entities.HashTag", b =>
+                {
+                    b.Navigation("FollowHashTags");
+
+                    b.Navigation("PostHashTags");
+
+                    b.Navigation("SearchHistories");
+                });
+
+            modelBuilder.Entity("vietqtran.Models.Entities.Message", b =>
+                {
+                    b.Navigation("MessageReacts");
+                });
+
+            modelBuilder.Entity("vietqtran.Models.Entities.Post", b =>
+                {
+                    b.Navigation("Comments");
+
+                    b.Navigation("LikePosts");
+
+                    b.Navigation("PostHashTags");
+
+                    b.Navigation("Saveds");
+                });
+
+            modelBuilder.Entity("vietqtran.Models.Entities.Role", b =>
+                {
+                    b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("vietqtran.Models.Entities.Story", b =>
+                {
+                    b.Navigation("ViewsStory");
+                });
+
+            modelBuilder.Entity("vietqtran.Models.Entities.User", b =>
+                {
+                    b.Navigation("Blockeds");
+
+                    b.Navigation("Blockers");
+
+                    b.Navigation("Comments");
+
+                    b.Navigation("FollowHashTags");
+
+                    b.Navigation("Followeds");
+
+                    b.Navigation("Followers");
+
+                    b.Navigation("HighLights");
+
+                    b.Navigation("LikePosts");
+
+                    b.Navigation("MessageReacts");
+
+                    b.Navigation("Messages");
+
+                    b.Navigation("PersonalLinks");
+
+                    b.Navigation("Posts");
+
+                    b.Navigation("ReceiveNotifications");
+
+                    b.Navigation("RefreshToken")
+                        .IsRequired();
+
+                    b.Navigation("RequestUsers");
+
+                    b.Navigation("ResponseUsers");
+
+                    b.Navigation("SavedGroups");
+
+                    b.Navigation("Saveds");
+
+                    b.Navigation("SearchHistories");
+
+                    b.Navigation("SearchHistory")
+                        .IsRequired();
+
+                    b.Navigation("SendNotifications");
+
+                    b.Navigation("Stories");
+
+                    b.Navigation("UserConversations");
+
+                    b.Navigation("ViewsStory");
                 });
 #pragma warning restore 612, 618
         }

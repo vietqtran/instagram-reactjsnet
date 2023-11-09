@@ -3,23 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using vietqtran.Models.User;
+using vietqtran.Models.Entities;
 using vietqtran.Models.DTO;
+using vietqtran.Models.RequestModels.User;
+using Microsoft.AspNetCore.Identity;
+using vietqtran.Models.ViewModels;
+using vietqtran.Models.ResponseModels;
 
 namespace vietqtran.Core.Interfaces.IRepository
 {
-    public interface IAppUserRepository
-    {
-        public Task<ICollection<AppUser>> GetAllUsersAsync ( );
+	public interface IAppUserRepository
+	{
+		public Task<ICollection<User>> GetAllUsersAsync ( );
 
-        public AppUser? GetById (string id);
-
-        public AppUser Create (AppUserDTO userDto);
-
-        public AppUser Update (AppUserDTO userDto);
-
-        public bool Delete (string id);
-
-        public AppUser Search (string searchTerm);
-    }
+	}
 }

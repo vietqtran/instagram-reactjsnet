@@ -5,15 +5,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using vietqtran.Models.User;
+using vietqtran.Models.Entities;
 
 namespace vietqtran.DataLayer.Configurations
 {
-    public class UserRoleConfiguration : IEntityTypeConfiguration<AppUserRole>
-    {
-        public void Configure (EntityTypeBuilder<AppUserRole> builder)
-        {
-            builder.ToTable("AppUserRoles");
-        }
-    }
+	internal class UserRoleConfiguration : IEntityTypeConfiguration<Role>
+	{
+		public void Configure (EntityTypeBuilder<Role> builder)
+		{
+			builder.ToTable("Roles");
+
+			builder.HasKey(x => x.Id);
+
+			builder.HasIndex(r => r.Name);
+		}
+	}
 }
