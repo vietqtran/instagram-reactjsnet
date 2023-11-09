@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using vietqtran.Models.Entities;
+using vietqtran.Models.RequestModels.User;
 using vietqtran.Models.ViewModels;
 
 namespace vietqtran.Api.Helper
@@ -10,6 +11,7 @@ namespace vietqtran.Api.Helper
 		{
 			//! User mapping
 			CreateMap<User, AppUserVM>();
+			CreateMap<SignUpCredentials, User>();
 		}
 	}
 }

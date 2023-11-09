@@ -9,7 +9,7 @@ namespace vietqtran.Models.Entities
 {
 	public class PersonalLink
 	{
-		public Guid Id { get; set; }
+		public long Id { get; set; }
 		public Guid UserId { get; set; }
 		[Url]
 		public string Link { get; set; }
