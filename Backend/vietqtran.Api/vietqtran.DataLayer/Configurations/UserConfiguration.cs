@@ -19,7 +19,6 @@ namespace vietqtran.DataLayer.Configurations
 			builder.HasIndex(u => u.Email);
 			builder.HasIndex(u => u.PhoneNumber);
 			builder.HasIndex(u => u.UserName);
-			builder.HasIndex(u => u.RoleId);
 			builder.HasIndex(u => u.CreatedAt);
 			builder.HasIndex(u => u.IsActive);
 
@@ -31,14 +30,6 @@ namespace vietqtran.DataLayer.Configurations
 			builder.Property(u => u.BirthDay).IsRequired(true);
 			builder.Property(u => u.Bio).HasMaxLength(150);
 
-			builder.HasOne(u => u.UserRole)
-				.WithMany(r => r.Users)
-				.HasForeignKey(u => u.RoleId)
-				.OnDelete(DeleteBehavior.NoAction);
-			builder.HasOne(u => u.AccessToken)
-				.WithOne(at => at.User)
-				.HasForeignKey<AccessToken>(at => at.UserId)
-				.OnDelete(DeleteBehavior.NoAction);
 			builder.HasOne(u => u.RefreshToken)
 				.WithOne(at => at.User)
 				.HasForeignKey<RefreshToken>(at => at.UserId)

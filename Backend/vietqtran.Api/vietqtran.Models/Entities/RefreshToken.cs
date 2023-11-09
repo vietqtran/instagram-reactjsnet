@@ -11,7 +11,7 @@ namespace vietqtran.Models.Entities
 {
 	public class RefreshToken
 	{
-		public Guid Id { get; set; }
+		public long Id { get; set; }
 		public string Token { get; set; }
 		public DateTime ExpiryDate { get; set; }
 

@@ -8,9 +8,9 @@ namespace vietqtran.Models.Entities.Relations
 {
 	public class PostHashTag
 	{
-		public Guid Id { get; set; }
-		public Guid PostId { get; set; }
-		public Guid HashTagId { get; set; }
+		public long Id { get; set; }
+		public long PostId { get; set; }
+		public long HashTagId { get; set; }
 
 
 		//! Reference

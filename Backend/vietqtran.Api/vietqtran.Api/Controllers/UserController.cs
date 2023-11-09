@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NuGet.Common;
 using vietqtran.Core.Interfaces.IService;
@@ -26,6 +27,7 @@ namespace vietqtran.Api.Controllers
 		}
 
 		[HttpGet]
+		[Authorize]
 		[ProducesResponseType(200, Type = typeof(ICollection<AppUserVM>))]
 		public async Task<IActionResult> GetAsync ( )
 		{
@@ -34,6 +36,7 @@ namespace vietqtran.Api.Controllers
 		}
 
 		[HttpPost("register")]
+		[AllowAnonymous]
 		public async Task<IActionResult> Register (SignUpCredentials signUpCredentials)
 		{
 			var result = await _appUserService.Register(signUpCredentials);
@@ -46,9 +49,14 @@ namespace vietqtran.Api.Controllers
 		}
 
 		[HttpPost("login")]
+		[AllowAnonymous]
 		public async Task<IActionResult> Login (LoginCredentials loginCredentials)
 		{
 			var result = await _appUserService.Login(loginCredentials);
+
+			if (string.IsNullOrEmpty(result)) {
+				return BadRequest("Can't Login");
+			}
 
 			return Ok(result);
 		}

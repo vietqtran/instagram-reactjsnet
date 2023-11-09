@@ -29,7 +29,7 @@ builder.Services.AddSwaggerGen(options => {
 	options.SwaggerDoc("v1", new OpenApiInfo { Title = "Swagger Instagram", Version = "v1.0.0" });
 	options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
 	{
-		Description = "",
+		Description = @"JWT Authorization header using the Bearer sheme.\nEnter 'Bearer' [space] and then your token in the text input below.\nExample: 'Bearer vietdeptraitoken123...'",
 		Name = "Authorization",
 		In = ParameterLocation.Header,
 		Type = SecuritySchemeType.ApiKey,
@@ -90,14 +90,14 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 //! Add Repositories Injection
 builder.Services.AddTransient<AppUserRepository>();
 builder.Services.AddScoped<IAppUserRepository, AppUserRepository>();
-builder.Services.AddTransient<TokenRepository>();
-builder.Services.AddScoped<ITokenRepository, TokenRepository>();
+builder.Services.AddTransient<UserManager<User>, UserManager<User>>();
+builder.Services.AddTransient<SignInManager<User>, SignInManager<User>>();
+builder.Services.AddTransient<RoleManager<Role>, RoleManager<Role>>();
+
 
 //! Add Services Injection
 builder.Services.AddTransient<AppUserService>();
 builder.Services.AddScoped<IAppUserService, AppUserService>();
-builder.Services.AddTransient<TokenService>();
-builder.Services.AddScoped<ITokenService, TokenService>();
 
 //! Cors setup
 builder.Services.AddCors(options => {

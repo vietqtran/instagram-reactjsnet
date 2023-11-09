@@ -8,7 +8,7 @@ namespace vietqtran.Models.Entities.Relations
 {
 	public class SavedGroup
 	{
-		public Guid Id { get; set; }
+		public long Id { get; set; }
 		public Guid UserId { get; set; }
 		public string Title { get; set; }
 		public DateTime CreatedAt { get; set; }

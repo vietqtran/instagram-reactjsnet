@@ -9,16 +9,16 @@ namespace vietqtran.Models.Entities
 {
 	public class Notification
 	{
-		public Guid Id { get; set; }
+		public long Id { get; set; }
 		public bool IsRead { get; set; } = false;
 		public NotificationType Type { get; set; }
 		public DateTime CreateAt { get; set; } = DateTime.Now;
 		public Guid SenderId { get; set; }
 		public Guid UserId { get; set; }
 		public string Content { get; set; }
-		public Guid? PostId { get; set; }
-		public Guid? CommentId { get; set; }
-		public Guid? StoryId { get; set; }
+		public long? PostId { get; set; }
+		public long? CommentId { get; set; }
+		public long? StoryId { get; set; }
 
 
 

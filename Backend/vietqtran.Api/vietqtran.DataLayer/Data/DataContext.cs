@@ -34,7 +34,6 @@ namespace vietqtran.DataAccess.Data
 			modelBuilder.ApplyConfiguration(new MessageConfiguration());
 			modelBuilder.ApplyConfiguration(new ReactMessageConfiguration());
 			modelBuilder.ApplyConfiguration(new RefreshTokenConfiguration());
-			modelBuilder.ApplyConfiguration(new AccessTokenConfiguration());
 			modelBuilder.ApplyConfiguration(new PersonalLinkConfiguration());
 			modelBuilder.ApplyConfiguration(new StoryConfiguration());
 			modelBuilder.ApplyConfiguration(new FollowConfiguration());
@@ -59,7 +58,6 @@ namespace vietqtran.DataAccess.Data
 		}
 
 		public DbSet<RefreshToken> RefreshTokens { get; set; }
-		public DbSet<AccessToken> AccessTokens { get; set; }
 		public DbSet<Message> Messages { get; set; }
 		public DbSet<ReactMessage> ReactMessages { get; set; }
 		public DbSet<PersonalLink> PersonalLinks { get; set; }
