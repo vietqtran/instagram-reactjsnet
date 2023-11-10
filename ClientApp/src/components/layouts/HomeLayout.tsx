@@ -8,7 +8,7 @@ interface HomeLayoutProps {
 
 function HomeLayout({ children }: HomeLayoutProps) {
    return (
-      <div className='flex min-h-[200vh]'>
+      <div className='relative flex min-h-[200vh]'>
          <NavBar />
          <main className='ml-0 flex h-auto flex-1 items-center justify-center sm:ml-[72px] md:ml-[335px]'>
             {children}

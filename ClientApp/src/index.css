@@ -23,3 +23,20 @@ code {
 .border-form-login.light {
    border: 1px solid rgb(219, 219, 219);
 }
+
+.sub-nav-shadow {
+   box-shadow: 10px 0 20px -5px rgba(0, 0, 0, 0.15);
+}
+
+@keyframes expand {
+   from {
+      transform: translateX(-100%);
+   }
+   to {
+      transform: translateX(0);
+   }
+}
+
+.sub-nav-keyframe {
+   animation: expand 0.2s ease-out;
+}

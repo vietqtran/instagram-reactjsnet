@@ -20,11 +20,7 @@ const AppRoutes: { [key: string]: React.ReactNode }[] = [
    },
    {
       path: "/home", // Add the 'path' property here
-      element: (
-         <ProtectedRoute>
-            <HomePage />
-         </ProtectedRoute>
-      ),
+      element: <HomePage />,
    },
 ]
 

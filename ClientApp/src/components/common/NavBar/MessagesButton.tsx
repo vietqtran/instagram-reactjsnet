@@ -1,6 +1,7 @@
 import React from "react"
-import { RiMessengerLine } from "react-icons/ri"
 import { Link } from "react-router-dom"
+import MessageOutline from "./Icons/Message/MessageOutline"
+import MessageSolid from "./Icons/Message/MessageSolid"
 
 interface MessagesButtonProps {
    tab: string
@@ -8,14 +9,29 @@ interface MessagesButtonProps {
 }
 
 const MessagesButton: React.FC<MessagesButtonProps> = ({ tab, setTab }) => {
+   console.log(tab)
+
    return (
-      <div className='my-1 rounded-lg duration-100 ease-linear hover:bg-gray-100'>
-         <Link to='/messages' className='hover:text-black'>
-            <div className='flex items-center justify-start px-2 py-[10px]'>
-               <span className='block w-[40px] text-left text-[28px]'>
-                  <RiMessengerLine />
+      <div
+         onClick={() => {
+            setTab("message")
+         }}
+         className='group my-3 rounded-lg duration-200 ease-linear hover:bg-gray-100'
+      >
+         <Link to='#' className='hover:text-black'>
+            <div className='flex items-center justify-start p-3'>
+               <div className='block w-[40px] group-hover:scale-105'>
+                  {tab === "message" ? <MessageSolid /> : <MessageOutline />}
+               </div>
+               <span
+                  className={`${tab === "message" ? "font-bold" : ""} ${
+                     tab === "search" || tab === "notification"
+                        ? "hidden"
+                        : "block"
+                  } `}
+               >
+                  <span className='hidden lg:block'>Messages</span>
                </span>
-               <span>Messages</span>
             </div>
          </Link>
       </div>
