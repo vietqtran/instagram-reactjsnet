@@ -46,7 +46,8 @@ namespace vietqtran.DataAccess.Data
 			modelBuilder.ApplyConfiguration(new SavedGroupConfiguration());
 			modelBuilder.ApplyConfiguration(new HashTagConfiguration());
 			modelBuilder.ApplyConfiguration(new FollowHashTagConfiguration());
-
+			modelBuilder.ApplyConfiguration(new LikeCommentConfiguration());
+			modelBuilder.ApplyConfiguration(new TaggedPostConfiguration());
 
 			modelBuilder.Entity<IdentityUserClaim<Guid>>().ToTable("User_Claims");
 			modelBuilder.Entity<IdentityUserRole<Guid>>().ToTable("User_Roles").HasKey(ur => new { ur.UserId, ur.RoleId });
@@ -74,5 +75,7 @@ namespace vietqtran.DataAccess.Data
 		public DbSet<SavedGroup> SavedGroups { get; set; }
 		public DbSet<HashTag> HashTags { get; set; }
 		public DbSet<FollowHashTag> FollowHashTags { get; set; }
+		public DbSet<LikeComment> LikeComments { get; set; }
+		public DbSet<TaggedPost> TaggedPosts { get; set; }
 	}
 }

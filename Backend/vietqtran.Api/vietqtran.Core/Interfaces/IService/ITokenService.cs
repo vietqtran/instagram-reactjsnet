@@ -11,6 +11,5 @@ namespace vietqtran.Core.Interfaces.IService
 	public interface ITokenService
 	{
 		Task<LoginResponse> RefreshToken (string refreshToken);
-
 	}
 }

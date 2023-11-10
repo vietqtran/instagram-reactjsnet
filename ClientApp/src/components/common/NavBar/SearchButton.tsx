@@ -1,5 +1,6 @@
 import React from "react"
-import { RiSearchLine } from "react-icons/ri"
+import SearchOutline from "./Icons/Search/SearchOutline"
+import SearchSolid from "./Icons/Search/SearchSolid"
 
 interface SearchButtonProps {
    tab: string
@@ -8,13 +9,28 @@ interface SearchButtonProps {
 
 function SearchButton({ tab, setTab }: SearchButtonProps) {
    return (
-      <div className='my-1 rounded-lg duration-100 ease-linear hover-bg-gray-100'>
-         <div className='cursor-pointer hover-text-black'>
-            <div className='flex items-center justify-start px-2 py-10px'>
-               <span className='block w-40px text-left text-28px'>
-                  <RiSearchLine />
-               </span>
-               <span>Search</span>
+      <div
+         onClick={() => {
+            setTab("search")
+         }}
+         className={`group my-3 rounded-lg duration-200 ease-linear hover:bg-gray-100 ${
+            tab === "search" ? "outline-1 outline-gray-300 outline" : ""
+         }`}
+      >
+         <div className='cursor-pointer'>
+            <div className='flex items-center justify-start p-3'>
+               <div className='block w-[40px] group-hover:scale-105'>
+                  {tab === "search" ? <SearchSolid /> : <SearchOutline />}
+               </div>
+               <div
+                  className={`${
+                     tab === "search" || tab === "notification"
+                        ? "hidden"
+                        : "block"
+                  }`}
+               >
+                  <span className='hidden lg:block'>Search</span>
+               </div>
             </div>
          </div>
       </div>

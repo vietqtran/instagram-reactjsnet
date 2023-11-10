@@ -1,5 +1,6 @@
 import React from "react"
-import { RiHeartLine } from "react-icons/ri"
+import HeartOutline from "./Icons/Heart/HeartOutline"
+import HeartSolid from "./Icons/Heart/HeartSolid"
 
 interface NotificationsButtonProps {
    tab: string
@@ -7,14 +8,31 @@ interface NotificationsButtonProps {
 }
 
 function NotificationsButton({ tab, setTab }: NotificationsButtonProps) {
+   console.log(tab)
+
    return (
-      <div className='my-1 rounded-lg duration-100 ease-linear hover:bg-gray-100'>
+      <div
+         onClick={() => {
+            setTab("notification")
+         }}
+         className={`group my-3 rounded-lg duration-200 ease-linear hover:bg-gray-100 ${
+            tab === "notification" ? "outline-1 outline-gray-300 outline" : ""
+         }`}
+      >
          <div className='cursor-pointer hover:text-black'>
-            <div className='flex items-center justify-start px-2 py-[10px]'>
-               <span className='block w-[40px] text-left text-[28px]'>
-                  <RiHeartLine />
-               </span>
-               <span>Notifications</span>
+            <div className='flex items-center justify-start p-3'>
+               <div className='block w-[40px] group-hover:scale-105'>
+                  {tab === "notification" ? <HeartSolid /> : <HeartOutline />}
+               </div>
+               <div
+                  className={`${
+                     tab === "search" || tab === "notification"
+                        ? "hidden"
+                        : "block"
+                  }`}
+               >
+                  <span className='hidden lg:block'>Notifications</span>
+               </div>
             </div>
          </div>
       </div>

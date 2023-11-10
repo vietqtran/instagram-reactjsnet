@@ -1,8 +1,12 @@
 import React, { useState } from "react"
-import { LuPlusCircle } from "react-icons/lu"
 import Overlay from "../Overlay"
+import CreateOutline from "./Icons/Create/CreateOutline"
 
-function CreateButton() {
+interface ExploreButtonProps {
+   tab: string
+}
+
+function CreateButton({ tab }: ExploreButtonProps) {
    const [showModal, setShowModal] = useState(false)
    return (
       <>
@@ -15,14 +19,22 @@ function CreateButton() {
          )}
          <div
             onClick={() => setShowModal(true)}
-            className='my-1 rounded-lg duration-100 ease-linear hover:bg-gray-100'
+            className='group my-3 rounded-lg duration-200 ease-linear hover:bg-gray-100'
          >
             <div className='cursor-pointer hover:text-black'>
-               <div className='flex items-center justify-start px-2 py-[10px]'>
-                  <span className='block w-[40px] text-left text-[28px]'>
-                     <LuPlusCircle />
-                  </span>
-                  <span>Create</span>
+               <div className='flex items-center justify-start p-3'>
+                  <div className='block w-[40px] duration-200 ease-out group-hover:scale-105'>
+                     <CreateOutline />
+                  </div>
+                  <div
+                     className={`${
+                        tab === "search" || tab === "notification"
+                           ? "hidden"
+                           : "block"
+                     }`}
+                  >
+                     <span className='hidden lg:block'>Create</span>
+                  </div>
                </div>
             </div>
          </div>

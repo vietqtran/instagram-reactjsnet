@@ -27,7 +27,7 @@ function LoginInputPassword({
                text !== ""
                   ? "top-[1px] text-[9px]"
                   : "top-[50%] translate-y-[-50%] text-xs"
-            } absolute left-0 px-2 text-gray-500 z-10 pointer-events-none duration-100 ease-linear`}
+            } absolute left-0 px-2 text-gray-500 z-10 pointer-events-none duration-200 ease-linear`}
          >
             {placeholder}
          </span>
