@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace vietqtran.Models.Entities.Relations
 {
-	public class LikeComment
+	public class TaggedPost
 	{
 		public long Id { get; set; }
-		public Guid UserId { get; set; }
-		public long CommentId { get; set; }
+		public Guid TaggedId { get; set; }
+		public long PostId { get; set; }
 
 
 
 		//! Reference
 
-		public User User { get; set; }
-		public Comment Comment { get; set; }
+		public User Tagged { get; set; }
+		public Post Post { get; set; }
 	}
 }
