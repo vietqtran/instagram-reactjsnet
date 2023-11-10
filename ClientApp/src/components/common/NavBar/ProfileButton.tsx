@@ -8,22 +8,35 @@ interface ProfileButtonProps {
 }
 
 function ProfileButton({ tab, setTab }: ProfileButtonProps) {
+   console.log(tab)
+
    return (
-      <div className='my-2 rounded-lg duration-100 ease-linear hover:bg-gray-100'>
-         <Link to='/profile' className='hover:text-black'>
-            <div className='flex items-center justify-start px-2 py-[10px]'>
-               <span className={`block w-[40px] text-left text-[28px]`}>
+      <div
+         onClick={() => {
+            setTab("profile")
+         }}
+         className='group my-3 rounded-lg duration-200 ease-linear hover:bg-gray-100'
+      >
+         <Link to='#' className='hover:text-black'>
+            <div className='flex items-center justify-start p-3'>
+               <div className='block w-[40px]'>
                   <div
                      className={`${
                         tab === "profile" ? "border-2 border-black" : ""
-                     } w-fit rounded-full`}
+                     } w-fit rounded-full group-hover:scale-105`}
                   >
                      <Avatar size={26} src='/assets/logo/user.png' />
                   </div>
-               </span>
-               <span className={`${tab === "profile" ? "font-bold" : ""}`}>
-                  Profile
-               </span>
+               </div>
+               <div
+                  className={`${tab === "profile" ? "font-bold" : ""} ${
+                     tab === "search" || tab === "notification"
+                        ? "hidden"
+                        : "block"
+                  } `}
+               >
+                  <span className='hidden lg:block'>Profile</span>
+               </div>
             </div>
          </Link>
       </div>
