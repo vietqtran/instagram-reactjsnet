@@ -105,7 +105,7 @@ builder.Services.AddCors(options => {
 		builder
 		    .AllowAnyHeader()
 		    .AllowAnyMethod()
-		    .SetIsOriginAllowed(_ => true); // Allow all origin can call API
+		    .SetIsOriginAllowed(_ => true); //? Allow all origin can call API
 	});
 });
 
@@ -123,6 +123,8 @@ if (app.Environment.IsDevelopment()) {
 app.UseHttpsRedirection();
 
 app.UseAuthentication();
+
+app.UseRouting();
 
 app.UseAuthorization();
 

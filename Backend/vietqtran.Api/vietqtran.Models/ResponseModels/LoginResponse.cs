@@ -7,11 +7,10 @@ using vietqtran.Models.Entities;
 
 namespace vietqtran.Models.ResponseModels
 {
-	public class AuthResponse
+	public class LoginResponse
 	{
-		public string AccessToken { get; set; }
-		public string RefreshToken { get; set; }
-		public DateTime ExpireDate { get; set; }
-		public string Role { get; set; }
+		public string? Status { get; set; }
+		public string? Token { get; set; }
+		public string? Error { get; set; }
 	}
 }

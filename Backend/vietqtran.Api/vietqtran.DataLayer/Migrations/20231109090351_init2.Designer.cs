@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using vietqtran.DataAccess.Data;
 
@@ -11,9 +12,11 @@ using vietqtran.DataAccess.Data;
 namespace vietqtran.DataLayer.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20231109090351_init2")]
+    partial class init2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -732,7 +735,6 @@ namespace vietqtran.DataLayer.Migrations
                         {
                             Id = new Guid("7efbbd23-215b-4d7b-ae30-8591ab56f72f"),
                             ConcurrencyStamp = "7b1390a7-3f7b-4be6-b3f0-e4ebe1e17520",
-
                             Description = "Role for USER",
                             Name = "User",
                             NormalizedName = "USER"
