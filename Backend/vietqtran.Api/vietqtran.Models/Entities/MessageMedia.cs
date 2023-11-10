@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace vietqtran.Models.Entities.Relations
+namespace vietqtran.Models.Entities
 {
-	internal class LikeComment
+	public class MessageMedia
 	{
 	}
 }

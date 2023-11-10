@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace vietqtran.DataLayer.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class init2 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -135,7 +135,7 @@ namespace vietqtran.DataLayer.Migrations
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     BirthDay = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IsPrivateAccount = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 11, 10, 0, 42, 17, 811, DateTimeKind.Utc).AddTicks(1553)),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 11, 9, 9, 3, 51, 494, DateTimeKind.Utc).AddTicks(2393)),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
                     LastOnlineTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastOfflineTime = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -310,8 +310,7 @@ namespace vietqtran.DataLayer.Migrations
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Visibility = table.Column<int>(type: "int", nullable: false),
-                    IsPinned = table.Column<bool>(type: "bit", nullable: false)
+                    Visibility = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -651,31 +650,6 @@ namespace vietqtran.DataLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Tagged_Posts",
-                columns: table => new
-                {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    TaggedId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PostId = table.Column<long>(type: "bigint", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Tagged_Posts", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Tagged_Posts_Posts_PostId",
-                        column: x => x.PostId,
-                        principalTable: "Posts",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Tagged_Posts_Users_TaggedId",
-                        column: x => x.TaggedId,
-                        principalTable: "Users",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "ViewStory",
                 columns: table => new
                 {
@@ -700,37 +674,13 @@ namespace vietqtran.DataLayer.Migrations
                         principalColumn: "Id");
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Likes_Comment",
-                columns: table => new
-                {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CommentId = table.Column<long>(type: "bigint", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Likes_Comment", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Likes_Comment_Comments_CommentId",
-                        column: x => x.CommentId,
-                        principalTable: "Comments",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Likes_Comment_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id");
-                });
-
             migrationBuilder.InsertData(
                 table: "Roles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Description", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { new Guid("64b5ac1d-1e70-4a97-95a0-3012854b1706"), "469bf266-fd51-48b5-8da9-691728692984", "Role for ADMIN", "Admin", "ADMIN" },
-                    { new Guid("c654ca76-586d-4f54-9daf-a9598a016e3e"), "f4cf8c2e-1c29-4fbf-87dd-afbadab2119b", "Role for USER", "User", "USER" }
+                    { new Guid("7efbbd23-215b-4d7b-ae30-8591ab56f72f"), "7b1390a7-3f7b-4be6-b3f0-e4ebe1e17520", "Role for USER", "User", "USER" },
+                    { new Guid("aac62d49-e011-44de-9275-6e02604441e2"), "a35d8574-2043-427d-9a10-6b44b242df5e", "Role for ADMIN", "Admin", "ADMIN" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -766,16 +716,6 @@ namespace vietqtran.DataLayer.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_HighLights_UserId",
                 table: "HighLights",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Likes_Comment_CommentId",
-                table: "Likes_Comment",
-                column: "CommentId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Likes_Comment_UserId",
-                table: "Likes_Comment",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
@@ -931,21 +871,6 @@ namespace vietqtran.DataLayer.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Tagged_Posts_Id",
-                table: "Tagged_Posts",
-                column: "Id");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Tagged_Posts_PostId",
-                table: "Tagged_Posts",
-                column: "PostId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Tagged_Posts_TaggedId",
-                table: "Tagged_Posts",
-                column: "TaggedId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_User_BestFriends_RequestUserId",
                 table: "User_BestFriends",
                 column: "RequestUserId");
@@ -1030,13 +955,13 @@ namespace vietqtran.DataLayer.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "Comments");
+
+            migrationBuilder.DropTable(
                 name: "Follows_HashTag");
 
             migrationBuilder.DropTable(
                 name: "HighLights");
-
-            migrationBuilder.DropTable(
-                name: "Likes_Comment");
 
             migrationBuilder.DropTable(
                 name: "Likes_Post");
@@ -1069,9 +994,6 @@ namespace vietqtran.DataLayer.Migrations
                 name: "SearchHistory");
 
             migrationBuilder.DropTable(
-                name: "Tagged_Posts");
-
-            migrationBuilder.DropTable(
                 name: "User_BestFriends");
 
             migrationBuilder.DropTable(
@@ -1099,19 +1021,16 @@ namespace vietqtran.DataLayer.Migrations
                 name: "ViewStory");
 
             migrationBuilder.DropTable(
-                name: "Comments");
+                name: "Messages");
 
             migrationBuilder.DropTable(
-                name: "Messages");
+                name: "Posts");
 
             migrationBuilder.DropTable(
                 name: "HashTags");
 
             migrationBuilder.DropTable(
                 name: "Stories");
-
-            migrationBuilder.DropTable(
-                name: "Posts");
 
             migrationBuilder.DropTable(
                 name: "Conversation");

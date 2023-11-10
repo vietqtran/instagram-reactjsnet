@@ -370,9 +370,6 @@ namespace vietqtran.DataLayer.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("IsPinned")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -524,29 +521,6 @@ namespace vietqtran.DataLayer.Migrations
                     b.ToTable("Follows_HashTag", (string)null);
                 });
 
-            modelBuilder.Entity("vietqtran.Models.Entities.Relations.LikeComment", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
-
-                    b.Property<long>("CommentId")
-                        .HasColumnType("bigint");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CommentId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Likes_Comment", (string)null);
-                });
-
             modelBuilder.Entity("vietqtran.Models.Entities.Relations.LikePost", b =>
                 {
                     b.Property<int>("Id")
@@ -666,31 +640,6 @@ namespace vietqtran.DataLayer.Migrations
                     b.ToTable("Saved_Groups", (string)null);
                 });
 
-            modelBuilder.Entity("vietqtran.Models.Entities.Relations.TaggedPost", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
-
-                    b.Property<long>("PostId")
-                        .HasColumnType("bigint");
-
-                    b.Property<Guid>("TaggedId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Id");
-
-                    b.HasIndex("PostId");
-
-                    b.HasIndex("TaggedId");
-
-                    b.ToTable("Tagged_Posts", (string)null);
-                });
-
             modelBuilder.Entity("vietqtran.Models.Entities.Relations.UserConversation", b =>
                 {
                     b.Property<long>("Id")
@@ -773,16 +722,16 @@ namespace vietqtran.DataLayer.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("64b5ac1d-1e70-4a97-95a0-3012854b1706"),
-                            ConcurrencyStamp = "469bf266-fd51-48b5-8da9-691728692984",
+                            Id = new Guid("aac62d49-e011-44de-9275-6e02604441e2"),
+                            ConcurrencyStamp = "a35d8574-2043-427d-9a10-6b44b242df5e",
                             Description = "Role for ADMIN",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = new Guid("c654ca76-586d-4f54-9daf-a9598a016e3e"),
-                            ConcurrencyStamp = "f4cf8c2e-1c29-4fbf-87dd-afbadab2119b",
+                            Id = new Guid("7efbbd23-215b-4d7b-ae30-8591ab56f72f"),
+                            ConcurrencyStamp = "7b1390a7-3f7b-4be6-b3f0-e4ebe1e17520",
                             Description = "Role for USER",
                             Name = "User",
                             NormalizedName = "USER"
@@ -882,7 +831,7 @@ namespace vietqtran.DataLayer.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 11, 10, 0, 42, 17, 811, DateTimeKind.Utc).AddTicks(1553));
+                        .HasDefaultValue(new DateTime(2023, 11, 9, 9, 3, 51, 494, DateTimeKind.Utc).AddTicks(2393));
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(450)");
@@ -1146,25 +1095,6 @@ namespace vietqtran.DataLayer.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("vietqtran.Models.Entities.Relations.LikeComment", b =>
-                {
-                    b.HasOne("vietqtran.Models.Entities.Comment", "Comment")
-                        .WithMany("LikeComments")
-                        .HasForeignKey("CommentId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("vietqtran.Models.Entities.User", "User")
-                        .WithMany("LikeComments")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("Comment");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("vietqtran.Models.Entities.Relations.LikePost", b =>
                 {
                     b.HasOne("vietqtran.Models.Entities.Post", "Post")
@@ -1252,25 +1182,6 @@ namespace vietqtran.DataLayer.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("vietqtran.Models.Entities.Relations.TaggedPost", b =>
-                {
-                    b.HasOne("vietqtran.Models.Entities.Post", "Post")
-                        .WithMany("Tags")
-                        .HasForeignKey("PostId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("vietqtran.Models.Entities.User", "Tagged")
-                        .WithMany("Tags")
-                        .HasForeignKey("TaggedId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("Post");
-
-                    b.Navigation("Tagged");
-                });
-
             modelBuilder.Entity("vietqtran.Models.Entities.Relations.UserConversation", b =>
                 {
                     b.HasOne("vietqtran.Models.Entities.Conversation", "Conversation")
@@ -1350,11 +1261,6 @@ namespace vietqtran.DataLayer.Migrations
                         .HasForeignKey("RoleId");
                 });
 
-            modelBuilder.Entity("vietqtran.Models.Entities.Comment", b =>
-                {
-                    b.Navigation("LikeComments");
-                });
-
             modelBuilder.Entity("vietqtran.Models.Entities.Conversation", b =>
                 {
                     b.Navigation("Messages");
@@ -1385,8 +1291,6 @@ namespace vietqtran.DataLayer.Migrations
                     b.Navigation("PostHashTags");
 
                     b.Navigation("Saveds");
-
-                    b.Navigation("Tags");
                 });
 
             modelBuilder.Entity("vietqtran.Models.Entities.Role", b =>
@@ -1414,8 +1318,6 @@ namespace vietqtran.DataLayer.Migrations
                     b.Navigation("Followers");
 
                     b.Navigation("HighLights");
-
-                    b.Navigation("LikeComments");
 
                     b.Navigation("LikePosts");
 
@@ -1448,8 +1350,6 @@ namespace vietqtran.DataLayer.Migrations
                     b.Navigation("SendNotifications");
 
                     b.Navigation("Stories");
-
-                    b.Navigation("Tags");
 
                     b.Navigation("UserConversations");
 
