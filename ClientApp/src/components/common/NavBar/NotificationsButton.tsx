@@ -15,7 +15,7 @@ function NotificationsButton({ tab, setTab }: NotificationsButtonProps) {
          onClick={() => {
             setTab("notification")
          }}
-         className={`group my-3 rounded-lg duration-200 ease-linear hover:bg-gray-100 ${
+         className={`group my-3 rounded-lg duration-200 ease-linear hover:bg-gray-100 md:block hidden ${
             tab === "notification" ? "outline-1 outline-gray-300 outline" : ""
          }`}
       >

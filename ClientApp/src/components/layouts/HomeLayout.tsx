@@ -10,7 +10,7 @@ function HomeLayout({ children }: HomeLayoutProps) {
    return (
       <div className='relative flex min-h-[200vh]'>
          <NavBar />
-         <main className='ml-0 flex h-auto flex-1 items-center justify-center sm:ml-[72px] md:ml-[335px]'>
+         <main className='ml-0 flex h-auto flex-1 items-center justify-center md:ml-[72px] lg:ml-[335px]'>
             {children}
             <Footer />
          </main>

@@ -11,19 +11,17 @@ function CreateButton({ tab }: ExploreButtonProps) {
    return (
       <>
          {showModal === true && (
-            <div className='relative'>
-               <Overlay setShow={setShowModal} show={showModal}>
-                  aad
-               </Overlay>
-            </div>
+            <Overlay setShow={setShowModal} show={showModal}>
+               aad
+            </Overlay>
          )}
          <div
             onClick={() => setShowModal(true)}
-            className='group my-3 rounded-lg duration-200 ease-linear hover:bg-gray-100'
+            className='group rounded-lg duration-200 ease-linear hover:bg-gray-100 md:my-3'
          >
             <div className='cursor-pointer hover:text-black'>
                <div className='flex items-center justify-start p-3'>
-                  <div className='block w-[40px] duration-200 ease-out group-hover:scale-105'>
+                  <div className='block w-fit duration-200 ease-out group-hover:scale-105 md:w-[40px]'>
                      <CreateOutline />
                   </div>
                   <div

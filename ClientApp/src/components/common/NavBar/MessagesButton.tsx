@@ -16,11 +16,11 @@ const MessagesButton: React.FC<MessagesButtonProps> = ({ tab, setTab }) => {
          onClick={() => {
             setTab("message")
          }}
-         className='group my-3 rounded-lg duration-200 ease-linear hover:bg-gray-100'
+         className='group rounded-lg duration-200 ease-linear hover:bg-gray-100 md:my-3'
       >
          <Link to='#' className='hover:text-black'>
             <div className='flex items-center justify-start p-3'>
-               <div className='block w-[40px] group-hover:scale-105'>
+               <div className='block w-fit group-hover:scale-105 md:w-[40px]'>
                   {tab === "message" ? <MessageSolid /> : <MessageOutline />}
                </div>
                <span

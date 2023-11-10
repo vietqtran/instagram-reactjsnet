@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react"
+import React, { useState } from "react"
 import TextLogo from "../TextLogo"
 import { Link } from "react-router-dom"
 import HomeButton from "./HomeButton"
@@ -32,9 +32,9 @@ function NavBar() {
          `}
       >
          <div className='relative z-10 h-full'>
-            <div className='z-20 flex h-full w-full flex-col items-center justify-between border-r-[1px] border-gray-300 bg-white p-3'>
-               <div className='w-full text-black'>
-                  <div className='relative mb-4 flex w-full cursor-pointer justify-center px-2 pb-7 pt-[21px] lg:justify-start'>
+            <div className='z-50 flex h-full w-full flex-col items-center justify-between border-t-[1px] border-gray-300 bg-white md:border-r-[1px] md:p-3'>
+               <div className='flex w-full items-center justify-around text-black md:block'>
+                  <div className='relative mb-4 hidden w-full cursor-pointer justify-center px-2 pb-7 pt-[21px] md:flex lg:justify-start'>
                      {!(tab === "search" || tab === "notification") && (
                         <Link to='/home'>
                            <div
@@ -61,8 +61,8 @@ function NavBar() {
                   <CreateButton tab={tab} />
                   <ProfileButton tab={tab} setTab={handleChangeTab} />
                </div>
-               <div className='w-full'>
-                  <MoreButton />
+               <div className='hidden w-full md:block'>
+                  <MoreButton tab={tab} />
                </div>
             </div>
             <div

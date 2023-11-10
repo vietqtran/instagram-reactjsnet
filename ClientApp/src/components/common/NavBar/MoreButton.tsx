@@ -2,7 +2,11 @@ import React, { useState } from "react"
 import MoreOutline from "./Icons/More/MoreOutline"
 import MoreSolid from "./Icons/More/MoreSolid"
 
-function MoreButton() {
+interface MoreButtonProps {
+   tab: string
+}
+
+function MoreButton({ tab }: MoreButtonProps) {
    const [clicked, setClicked] = useState(false)
    return (
       <div
@@ -16,12 +20,14 @@ function MoreButton() {
                <div className='block w-[40px] group-hover:scale-105'>
                   {clicked ? <MoreSolid /> : <MoreOutline />}
                </div>
-               <div>
-                  <span
-                     className={`hidden lg:block ${clicked ? "font-bold" : ""}`}
-                  >
-                     More
-                  </span>
+               <div
+                  className={`${
+                     tab === "search" || tab === "notification"
+                        ? "hidden"
+                        : "block"
+                  }`}
+               >
+                  <span className='hidden lg:block'>More</span>
                </div>
             </div>
          </div>

@@ -13,7 +13,7 @@ function SearchButton({ tab, setTab }: SearchButtonProps) {
          onClick={() => {
             setTab("search")
          }}
-         className={`group my-3 rounded-lg duration-200 ease-linear hover:bg-gray-100 ${
+         className={`md:block hidden group md:my-3 rounded-lg duration-200 ease-linear hover:bg-gray-100 ${
             tab === "search" ? "outline-1 outline-gray-300 outline" : ""
          }`}
       >
