@@ -58,6 +58,8 @@ namespace vietqtran.Models.Entities
 		public SearchHistory SearchHistory { get; set; }
 		public ICollection<SearchHistory> SearchHistories { get; set; }
 		public ICollection<UserConversation> UserConversations { get; set; }
+		public ICollection<LikeComment> LikeComments { get; set; }
+		public ICollection<TaggedPost> Tags { get; set; }
 
 	}
 }

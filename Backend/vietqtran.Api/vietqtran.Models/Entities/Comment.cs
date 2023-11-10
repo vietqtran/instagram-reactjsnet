@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using vietqtran.Models.Entities.Relations;
 
 namespace vietqtran.Models.Entities
 {
@@ -20,5 +21,7 @@ namespace vietqtran.Models.Entities
 		//! Reference
 		public User User { get; set; }
 		public Post Post { get; set; }
+		public ICollection<LikeComment> LikeComments { get; set; }
+
 	}
 }
