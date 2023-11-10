@@ -134,9 +134,8 @@ namespace vietqtran.DataLayer.Migrations
                     UserName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     BirthDay = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    RoleId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     IsPrivateAccount = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 11, 9, 6, 39, 14, 419, DateTimeKind.Utc).AddTicks(9082)),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 11, 10, 1, 24, 50, 717, DateTimeKind.Utc).AddTicks(2052)),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
                     LastOnlineTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastOfflineTime = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -144,6 +143,7 @@ namespace vietqtran.DataLayer.Migrations
                     Bio = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: true),
                     Avatar = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsLocked = table.Column<bool>(type: "bit", nullable: false),
+                    RoleId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Email = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     NormalizedEmail = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -310,7 +310,8 @@ namespace vietqtran.DataLayer.Migrations
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Visibility = table.Column<int>(type: "int", nullable: false)
+                    Visibility = table.Column<int>(type: "int", nullable: false),
+                    IsPinned = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -650,6 +651,31 @@ namespace vietqtran.DataLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Tagged_Posts",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TaggedId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PostId = table.Column<long>(type: "bigint", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tagged_Posts", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Tagged_Posts_Posts_PostId",
+                        column: x => x.PostId,
+                        principalTable: "Posts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Tagged_Posts_Users_TaggedId",
+                        column: x => x.TaggedId,
+                        principalTable: "Users",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ViewStory",
                 columns: table => new
                 {
@@ -674,13 +700,37 @@ namespace vietqtran.DataLayer.Migrations
                         principalColumn: "Id");
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Likes_Comment",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CommentId = table.Column<long>(type: "bigint", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Likes_Comment", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Likes_Comment_Comments_CommentId",
+                        column: x => x.CommentId,
+                        principalTable: "Comments",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Likes_Comment_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id");
+                });
+
             migrationBuilder.InsertData(
                 table: "Roles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Description", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { new Guid("41035363-3183-44c7-a123-8f94c6dba1b8"), "52febd34-c0e8-40af-923f-7013982482b2", "Role for ADMIN", "Admin", "ADMIN" },
-                    { new Guid("deed6f77-15fc-4103-b5a2-7881eaa4e138"), "ca939fa9-7e4e-4fa9-bc39-70340e1b4fa8", "Role for USER", "User", "USER" }
+                    { new Guid("5d4cb01d-09d1-4093-a1f4-83e4ce06a9a0"), "1a5562fc-727c-4e43-9ae0-a39bbb46cd8e", "Role for USER", "User", "USER" },
+                    { new Guid("d693d296-22ce-4dd0-bf7f-9e6c93b3ebe1"), "8755fb03-d574-468e-bb49-42de981194a0", "Role for ADMIN", "Admin", "ADMIN" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -716,6 +766,16 @@ namespace vietqtran.DataLayer.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_HighLights_UserId",
                 table: "HighLights",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Likes_Comment_CommentId",
+                table: "Likes_Comment",
+                column: "CommentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Likes_Comment_UserId",
+                table: "Likes_Comment",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
@@ -871,6 +931,21 @@ namespace vietqtran.DataLayer.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Tagged_Posts_Id",
+                table: "Tagged_Posts",
+                column: "Id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tagged_Posts_PostId",
+                table: "Tagged_Posts",
+                column: "PostId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tagged_Posts_TaggedId",
+                table: "Tagged_Posts",
+                column: "TaggedId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_User_BestFriends_RequestUserId",
                 table: "User_BestFriends",
                 column: "RequestUserId");
@@ -955,13 +1030,13 @@ namespace vietqtran.DataLayer.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Comments");
-
-            migrationBuilder.DropTable(
                 name: "Follows_HashTag");
 
             migrationBuilder.DropTable(
                 name: "HighLights");
+
+            migrationBuilder.DropTable(
+                name: "Likes_Comment");
 
             migrationBuilder.DropTable(
                 name: "Likes_Post");
@@ -994,6 +1069,9 @@ namespace vietqtran.DataLayer.Migrations
                 name: "SearchHistory");
 
             migrationBuilder.DropTable(
+                name: "Tagged_Posts");
+
+            migrationBuilder.DropTable(
                 name: "User_BestFriends");
 
             migrationBuilder.DropTable(
@@ -1021,16 +1099,19 @@ namespace vietqtran.DataLayer.Migrations
                 name: "ViewStory");
 
             migrationBuilder.DropTable(
-                name: "Messages");
+                name: "Comments");
 
             migrationBuilder.DropTable(
-                name: "Posts");
+                name: "Messages");
 
             migrationBuilder.DropTable(
                 name: "HashTags");
 
             migrationBuilder.DropTable(
                 name: "Stories");
+
+            migrationBuilder.DropTable(
+                name: "Posts");
 
             migrationBuilder.DropTable(
                 name: "Conversation");

@@ -16,7 +16,7 @@ namespace vietqtran.Models.Entities
 		public string Title { get; set; }
 		public DateTime CreatedAt { get; set; }
 		public Visibility Visibility { get; set; }
-
+		public bool IsPinned { get; set; } = false;
 
 
 		//! Reference
@@ -26,5 +26,6 @@ namespace vietqtran.Models.Entities
 		public ICollection<Comment> Comments { get; set; }
 		public ICollection<Saved> Saveds { get; set; }
 		public ICollection<PostHashTag> PostHashTags { get; set; }
+		public ICollection<TaggedPost> Tags { get; set; }
 	}
 }
