@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react"
-import TextLogo from "../common/TextLogo"
+import TextLogo from "../../common/TextLogo"
 import { Link } from "react-router-dom"
 import GetTheApp from "./GetTheApp"
 

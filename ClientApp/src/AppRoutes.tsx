@@ -1,8 +1,7 @@
-import ProtectedRoute from "./components/HOC/ProtectedRoute"
-import HomePage from "./components/Home/HomePage"
-import LoginForm from "./components/Login/LoginForm"
-import OldUserLogin from "./components/Login/OldUserLogin"
-import RegisterForm from "./components/Login/RegisterForm"
+import HomePage from "./components/pages/Home/HomePage"
+import LoginForm from "./components/pages/Login/LoginForm"
+import OldUserLogin from "./components/pages/Login/OldUserLogin"
+import RegisterForm from "./components/pages/Login/RegisterForm"
 import React from "react"
 
 const AppRoutes: { [key: string]: React.ReactNode }[] = [

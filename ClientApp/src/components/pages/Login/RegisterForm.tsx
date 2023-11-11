@@ -1,11 +1,11 @@
 import React, { useState, FormEvent } from "react"
-import Layout from "../layouts/Layout"
 import FormParent from "./FormParent"
-import LoginInputText from "../common/LoginInputText"
-import LoginInputPassword from "../common/LoginInputPassword"
 import LoginButton from "./LoginButton"
 import LoginWithFacebook from "./LoginWithFacebook"
 import { Link } from "react-router-dom"
+import Layout from "../../layouts/Layout"
+import LoginInputPassword from "../../common/LoginInputPassword"
+import LoginInputText from "../../common/LoginInputText"
 
 function RegisterForm() {
    const [contact, setContact] = useState<string>("")
