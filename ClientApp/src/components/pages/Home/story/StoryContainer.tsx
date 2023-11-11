@@ -16,10 +16,42 @@ function StoryContainer() {
       slidesToScroll: 3,
       prevArrow: <PrevArrow />,
       nextArrow: <NextArrow />,
+      responsive: [
+         {
+            breakpoint: 1311,
+            settings: {
+               slidesToShow: 7,
+            },
+         },
+         {
+            breakpoint: 1180,
+            settings: {
+               slidesToShow: 5.5,
+            },
+         },
+         {
+            breakpoint: 1024,
+            settings: {
+               slidesToShow: 8,
+            },
+         },
+         {
+            breakpoint: 590,
+            settings: {
+               slidesToShow: 7,
+            },
+         },
+         {
+            breakpoint: 500,
+            settings: {
+               slidesToShow: 5,
+            },
+         },
+      ],
    }
    return (
       <div className='w-full'>
-         <div className='w-[630px] overflow-hidden'>
+         <div className='w-auto overflow-hidden'>
             {slideToShow > 8 && (
                <Slider {...settings}>
                   <StoryItem />
