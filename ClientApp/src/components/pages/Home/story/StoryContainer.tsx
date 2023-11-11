@@ -48,7 +48,8 @@ const settings = {
 }
 
 function StoryContainer() {
-   const slideToShow = 10
+   const slideToShow = 9
+
    return (
       <div className='w-full'>
          <div className='w-auto overflow-hidden'>
@@ -80,8 +81,6 @@ function StoryContainer() {
             )}
             {slideToShow <= 8 && (
                <div className='flex w-full items-start'>
-                  <StoryItem />
-                  <StoryItem />
                   <StoryItem />
                   <StoryItem />
                </div>
