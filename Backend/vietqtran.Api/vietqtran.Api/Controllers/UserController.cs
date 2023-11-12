@@ -30,7 +30,7 @@ namespace vietqtran.Api.Controllers
 		private readonly IOptions<JwtConfig> _jwtConfig;
 
 
-		public UserController(IAppUserService appUserService, IMapper mapper, ILogger<UserController> logger, IOptions<JwtConfig> jwtConfig)
+		public UserController (IAppUserService appUserService, IMapper mapper, ILogger<UserController> logger, IOptions<JwtConfig> jwtConfig)
 		{
 			_appUserService = appUserService;
 			_mapper = mapper;
@@ -39,9 +39,9 @@ namespace vietqtran.Api.Controllers
 		}
 
 		[HttpGet]
-		[Authorize]
+		//[Authorize]
 		[ProducesResponseType(200, Type = typeof(ICollection<AppUserVM>))]
-		public async Task<IActionResult> GetAsync()
+		public async Task<IActionResult> GetAsync ( )
 		{
 			var users = await _appUserService.GetAllUsersServiceAsync();
 			return Ok(_mapper.Map<ICollection<AppUserVM>>(users));
@@ -49,12 +49,11 @@ namespace vietqtran.Api.Controllers
 
 		[HttpPost("register")]
 		[AllowAnonymous]
-		public async Task<IActionResult> Register(SignUpCredentials signUpCredentials)
+		public async Task<IActionResult> Register (SignUpCredentials signUpCredentials)
 		{
 			var result = await _appUserService.Register(signUpCredentials);
 
-			if (result.Status == "Successed")
-			{
+			if (result.Status == "Successed") {
 				return Ok(result);
 			}
 
@@ -63,43 +62,20 @@ namespace vietqtran.Api.Controllers
 
 		[HttpPost("login")]
 		[AllowAnonymous]
-		public async Task<IActionResult> Login(LoginCredentials loginCredentials)
+		public async Task<IActionResult> Login (LoginCredentials loginCredentials)
 		{
 			var result = await _appUserService.Login(loginCredentials);
 
-			if (result.Status == "Seccessed")
-			{
+			if (result.Status != "Successed") {
 				return BadRequest(result);
 			}
 
-			var handler = new JwtSecurityTokenHandler();
-			var jwtToken = handler.ReadJwtToken(result.Token);
-			var claims = jwtToken.Claims.ToList();
-			var roles = claims.Where(x => x.Type == "role").Select(x => x.Value).ToList();
+			//var handler = new JwtSecurityTokenHandler();
+			//var jwtToken = handler.ReadJwtToken(result.AccessToken);
+			//var claims = jwtToken.Claims.ToList();
+			//var roles = claims.Where(x => x.Type == "role").Select(x => x.Value).ToList();
 
-			return Ok(new
-			{
-				result,
-				roles
-			});
-		}
-
-		private ClaimsPrincipal ValidateToken(string token)
-		{
-			IdentityModelEventSource.ShowPII = true;
-
-			SecurityToken validatedToken;
-			TokenValidationParameters validationParameters = new TokenValidationParameters();
-
-			validationParameters.ValidateLifetime = true;
-
-			validationParameters.ValidAudience = _jwtConfig.Value.Audience;
-			validationParameters.ValidIssuer = _jwtConfig.Value.Issuer;
-			validationParameters.IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtConfig.Value.SecretKey));
-
-			ClaimsPrincipal claimsPrincipal = new JwtSecurityTokenHandler().ValidateToken(token, validationParameters, out validatedToken);
-
-			return claimsPrincipal;
+			return Ok(result);
 		}
 	}
 }

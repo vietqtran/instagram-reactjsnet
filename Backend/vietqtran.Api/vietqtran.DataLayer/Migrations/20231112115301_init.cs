@@ -135,7 +135,7 @@ namespace vietqtran.DataLayer.Migrations
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     BirthDay = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IsPrivateAccount = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 11, 10, 1, 24, 50, 717, DateTimeKind.Utc).AddTicks(2052)),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 11, 12, 11, 53, 0, 845, DateTimeKind.Utc).AddTicks(1352)),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
                     LastOnlineTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastOfflineTime = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -330,7 +330,7 @@ namespace vietqtran.DataLayer.Migrations
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Token = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ExpiryDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Exp = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
@@ -729,8 +729,8 @@ namespace vietqtran.DataLayer.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Description", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { new Guid("5d4cb01d-09d1-4093-a1f4-83e4ce06a9a0"), "1a5562fc-727c-4e43-9ae0-a39bbb46cd8e", "Role for USER", "User", "USER" },
-                    { new Guid("d693d296-22ce-4dd0-bf7f-9e6c93b3ebe1"), "8755fb03-d574-468e-bb49-42de981194a0", "Role for ADMIN", "Admin", "ADMIN" }
+                    { new Guid("0805ce18-dc94-4db6-834c-a20317d0d8a1"), "ec454e73-c3c3-44e2-9407-625e3ac79e15", "Role for USER", "User", "USER" },
+                    { new Guid("e9470f1f-d162-4a82-bea8-64e2de4574f3"), "ffb05549-74e0-4474-bc40-b8f051c469f2", "Role for ADMIN", "Admin", "ADMIN" }
                 });
 
             migrationBuilder.CreateIndex(

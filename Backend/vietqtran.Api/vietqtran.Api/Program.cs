@@ -29,7 +29,7 @@ builder.Services.AddSwaggerGen(options => {
 	options.SwaggerDoc("v1", new OpenApiInfo { Title = "Swagger Instagram", Version = "v1.0.0" });
 	options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
 	{
-		Description = @"JWT Authorization header using the Bearer sheme.\nEnter 'Bearer' [space] and then your token in the text input below.\nExample: 'Bearer vietdeptraitoken123...'",
+		Description = @"JWT Authorization header using the Bearer sheme. Enter 'Bearer' [space] and then your token in the text input below. Example: 'Bearer vietdeptraitoken123...'",
 		Name = "Authorization",
 		In = ParameterLocation.Header,
 		Type = SecuritySchemeType.ApiKey,

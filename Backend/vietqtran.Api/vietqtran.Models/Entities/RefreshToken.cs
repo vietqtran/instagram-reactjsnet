@@ -13,12 +13,11 @@ namespace vietqtran.Models.Entities
 	{
 		public long Id { get; set; }
 		public string Token { get; set; }
-		public DateTime ExpiryDate { get; set; }
+		public DateTime Exp { get; set; }
+		public Guid UserId { get; set; }
 
 
 		//! Reference
-
-		public Guid UserId { get; set; }
 		public User User { get; set; }
 	}
 }

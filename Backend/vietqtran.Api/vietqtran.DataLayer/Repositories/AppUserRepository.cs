@@ -43,9 +43,27 @@ namespace vietqtran.DataLayer.Repositories
 			_logger = logger;
 		}
 
+		/// <summary>
+		/// Get All User
+		/// </summary>
 		public async Task<ICollection<User>> GetAllUsersAsync ( )
 		{
 			return await _context.Users.ToListAsync();
+		}
+
+		/// <summary>
+		/// Update Refresh Token in Database
+		/// </summary>
+		public async Task UpdateRefreshToken (RefreshToken newRefeshToken)
+		{
+			var refreshToken = await _context.RefreshTokens.Where(t => t.UserId == newRefeshToken.UserId).FirstOrDefaultAsync();
+
+			if (refreshToken != null) {
+				_context.RefreshTokens.Remove(refreshToken);
+			}
+
+			await _context.RefreshTokens.AddAsync(newRefeshToken);
+			await _context.SaveChangesAsync();
 		}
 	}
 }

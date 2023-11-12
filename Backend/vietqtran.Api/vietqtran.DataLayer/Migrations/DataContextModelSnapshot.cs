@@ -400,7 +400,7 @@ namespace vietqtran.DataLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<DateTime>("ExpiryDate")
+                    b.Property<DateTime>("Exp")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Token")
@@ -773,16 +773,16 @@ namespace vietqtran.DataLayer.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("d693d296-22ce-4dd0-bf7f-9e6c93b3ebe1"),
-                            ConcurrencyStamp = "8755fb03-d574-468e-bb49-42de981194a0",
+                            Id = new Guid("e9470f1f-d162-4a82-bea8-64e2de4574f3"),
+                            ConcurrencyStamp = "ffb05549-74e0-4474-bc40-b8f051c469f2",
                             Description = "Role for ADMIN",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = new Guid("5d4cb01d-09d1-4093-a1f4-83e4ce06a9a0"),
-                            ConcurrencyStamp = "1a5562fc-727c-4e43-9ae0-a39bbb46cd8e",
+                            Id = new Guid("0805ce18-dc94-4db6-834c-a20317d0d8a1"),
+                            ConcurrencyStamp = "ec454e73-c3c3-44e2-9407-625e3ac79e15",
                             Description = "Role for USER",
                             Name = "User",
                             NormalizedName = "USER"
@@ -882,7 +882,7 @@ namespace vietqtran.DataLayer.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 11, 10, 1, 24, 50, 717, DateTimeKind.Utc).AddTicks(2052));
+                        .HasDefaultValue(new DateTime(2023, 11, 12, 11, 53, 0, 845, DateTimeKind.Utc).AddTicks(1352));
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(450)");

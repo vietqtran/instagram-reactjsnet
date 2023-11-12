@@ -19,7 +19,6 @@ namespace vietqtran.DataLayer.Configurations
 			builder.HasKey(rt => rt.Id);
 
 			builder.HasIndex(rt => rt.Token);
-
 		}
 	}
 }
