@@ -1,8 +1,8 @@
 import React from "react"
 import FormParent from "./FormParent"
-import Avatar from "../../common/Avatar"
+import Avatar from "../../components/common/Avatar"
 import { Link } from "react-router-dom"
-import Layout from "../../layouts/Layout"
+import Layout from "../../components/layouts/Layout"
 
 function OldUserLogin() {
    return (

@@ -1,5 +1,5 @@
 import React from "react"
-import HomeLayout from "../../layouts/HomeLayout"
+import HomeLayout from "../../components/layouts/HomeLayout"
 import StoryContainer from "./story/StoryContainer"
 import PostContainer from "./posts/PostContainer"
 import SuggestContainer from "./suggest/SuggestContainer"
