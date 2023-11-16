@@ -70,6 +70,15 @@ namespace vietqtran.Api.Controllers
 				return Ok(StatusCodes.Status404NotFound);
 			}
 
+			HttpContext.Response.Cookies.Append("token", result.AccessToken, new CookieOptions()
+			{
+				HttpOnly = true,
+				SameSite = SameSiteMode.Strict,
+				Secure = true
+			});
+
+			//var token = Request.Cookies["token"];
+
 			//var handler = new JwtSecurityTokenHandler();
 			//var jwtToken = handler.ReadJwtToken(result.AccessToken);
 			//var claims = jwtToken.Claims.ToList();

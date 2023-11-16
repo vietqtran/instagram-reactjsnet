@@ -1,22 +1,28 @@
 "use client"
 
-import React, { useState, FormEvent } from "react"
-import LoginInputText from "@components/common/LoginInputText"
-import LoginInputPassword from "@components/common/LoginInputPassword"
-import LoginWithFacebook from "@pages/Login/LoginWithFacebook"
-import Link from "next/link"
-import LoginButton from "@pages/Login/LoginButton"
+import React, { FormEvent, useEffect, useState } from "react"
+import { useRouter, useSearchParams } from "next/navigation"
+
 import AuthLayout from "@components/layouts/AuthLayout"
 import FormParent from "@pages/Login/FormParent"
+import Link from "next/link"
+import LoginButton from "@pages/Login/LoginButton"
 import { LoginCredentials } from "@type/LoginCredentials"
-import { login } from "@utils/api/userApi"
+import LoginInputPassword from "@components/common/LoginInputPassword"
+import LoginInputText from "@components/common/LoginInputText"
 import { LoginResponse } from "@type/LoginResponse"
-import { useRouter } from "next/navigation"
+import LoginWithFacebook from "@pages/Login/LoginWithFacebook"
+import { login } from "@utils/api/userApi"
 
-function LoginForm() {
+export default function Login() {
    const router = useRouter()
+   const searchParams = useSearchParams()
 
-   const [account, setAccount] = useState<string>("")
+   const [account, setAccount] = useState<string>(
+      searchParams && searchParams?.get("e") !== ""
+         ? (searchParams.get("e") as string)
+         : ""
+   )
    const [password, setPassword] = useState<string>("")
 
    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -30,7 +36,7 @@ function LoginForm() {
             .then((response: any) => {
                const loginResponse = response as LoginResponse
                console.log(`=======> RESPONSE: `, loginResponse)
-               if (loginResponse.status === "Succeed") {
+               if ((loginResponse as LoginResponse).status === "Succeed") {
                   router.push("/")
                   return
                }
@@ -54,7 +60,7 @@ function LoginForm() {
                   <LoginInputText
                      text={account}
                      setText={setAccount}
-                     placeholder={"Phone number, username, or email"}
+                     placeholder={"Email"}
                   />
                   <LoginInputPassword
                      text={password}
@@ -85,5 +91,3 @@ function LoginForm() {
       </AuthLayout>
    )
 }
-
-export default LoginForm

@@ -1,43 +1,51 @@
 "use client"
 
-import React, { useState, FormEvent } from "react"
+import React, { FormEvent, useState } from "react"
+
+import AuthLayout from "@components/layouts/AuthLayout"
 import FormParent from "@pages/Login/FormParent"
-import LoginButton from "@pages/Login/LoginButton"
-import LoginWithFacebook from "@pages/Login/LoginWithFacebook"
 import Link from "next/link"
-import Layout from "@components/layouts/AuthLayout"
+import LoginButton from "@pages/Login/LoginButton"
 import LoginInputPassword from "@components/common/LoginInputPassword"
 import LoginInputText from "@components/common/LoginInputText"
-import AuthLayout from "@components/layouts/AuthLayout"
+import LoginWithFacebook from "@pages/Login/LoginWithFacebook"
+import { SignUpCredentials } from "@type/SignUpCredential"
+import { SignUpResponse } from "@type/SignUpResponse"
+import { isMailValid } from "@utils/validate/emailValidate"
+import { register } from "@utils/api/userApi"
+import { useRouter } from "next/navigation"
 
-export default function Home() {
-   const [contact, setContact] = useState<string>("")
+export default function SignUp() {
+   const router = useRouter()
+
+   const [email, setEmail] = useState<string>("")
    const [name, setName] = useState<string>("")
    const [username, setUsername] = useState<string>("")
    const [password, setPassword] = useState<string>("")
 
-   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault()
-      console.log(contact, name, username, password)
+      console.log(email, name, username, password)
+      const signUpData: SignUpCredentials = {
+         email: email,
+         name: name,
+         password: password,
+         username: username,
+      }
+      await register(signUpData)
+         .then((response: any) => {
+            const signUpResponse = response as SignUpResponse
+            console.log("=====> SIGN UP RESPONSE", signUpResponse)
+            if (signUpResponse.status === "Succeed") {
+               router.push(`/a/login?e=${email}`)
+               return
+            }
+         })
+         .catch((err: Error) => {
+            console.log("=====> SIGN UP ERROR: ", err)
+         })
    }
 
-   const isPhoneValid = () => {
-      const regex = /^[0-9]{10}$/
-      return regex.test(contact)
-   }
-
-   const isMailValid = () => {
-      const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i
-      return regex.test(contact)
-   }
-
-   const validate = () => {
-      return (
-         (isMailValid() || isPhoneValid()) &&
-         username !== "" &&
-         password.length >= 6
-      )
-   }
    return (
       <AuthLayout>
          <FormParent type='signup'>
@@ -58,9 +66,9 @@ export default function Home() {
                      <hr className='flex-1' />
                   </div>
                   <LoginInputText
-                     text={contact}
-                     setText={setContact}
-                     placeholder={"Phone number, username, or email"}
+                     text={email}
+                     setText={setEmail}
+                     placeholder={"Email"}
                   />
                   <LoginInputText
                      text={name}
@@ -79,8 +87,8 @@ export default function Home() {
                   />
                   <div className='w-full py-2 text-center text-xs'>
                      <p className='mb-2'>
-                        People who use our service may have uploaded your
-                        contact information to Instagram.{" "}
+                        People who use our service may have uploaded your email
+                        information to Instagram.{" "}
                         <Link
                            className='text-blue-700'
                            href={
@@ -119,7 +127,14 @@ export default function Home() {
                         .
                      </p>
                   </div>
-                  <LoginButton canClick={validate()} text={"Sign up"} />
+                  <LoginButton
+                     canClick={
+                        isMailValid(email) &&
+                        username !== "" &&
+                        password.length >= 6
+                     }
+                     text={"Sign up"}
+                  />
                </div>
             </form>
          </FormParent>

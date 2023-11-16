@@ -79,6 +79,13 @@ builder.Services.AddAuthentication(options => {
 	};
 });
 
+//! Identity Config
+builder.Services.Configure<IdentityOptions>(options => {
+	options.User.RequireUniqueEmail = true;
+	options.SignIn.RequireConfirmedEmail = false;
+	options.Tokens.ProviderMap.Remove("SecurityStamp");
+});
+
 //! Connect to Database
 builder.Services.AddDbContext<DataContext>(options => {
 	options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));

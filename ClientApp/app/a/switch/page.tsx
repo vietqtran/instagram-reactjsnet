@@ -1,11 +1,10 @@
-import React from "react"
-import FormParent from "@pages/Login/FormParent"
-import Avatar from "@components/common/Avatar"
-import Link from "next/link"
 import AuthLayout from "@components/layouts/AuthLayout"
-import Head from "next/head"
+import Avatar from "@components/common/Avatar"
+import FormParent from "@pages/Login/FormParent"
+import Link from "next/link"
+import React from "react"
 
-function OldUserLogin() {
+export default function SwitchAccount() {
    return (
       <AuthLayout>
          <FormParent type=''>
@@ -24,7 +23,7 @@ function OldUserLogin() {
                <span>Not @username? </span>
                <Link
                   className='font-medium text-blue-500 hover:text-sky-900'
-                  href={"/login"}
+                  href={"/a/login"}
                >
                   Switch accounts
                </Link>
@@ -33,5 +32,3 @@ function OldUserLogin() {
       </AuthLayout>
    )
 }
-
-export default OldUserLogin
