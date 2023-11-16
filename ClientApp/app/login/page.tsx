@@ -1,17 +1,11 @@
+"use client"
+
 import React, { useState, FormEvent } from "react"
 import LoginInputText from "@components/common/LoginInputText"
 import LoginInputPassword from "@components/common/LoginInputPassword"
 import LoginWithFacebook from "@pages/Login/LoginWithFacebook"
 import Link from "next/link"
 import LoginButton from "@pages/Login/LoginButton"
-
-export const getServerSideProps = async () => {
-   return {
-      props: {
-         title: "Trang chủ",
-      },
-   }
-}
 
 function LoginForm() {
    const [account, setAccount] = useState<string>("")

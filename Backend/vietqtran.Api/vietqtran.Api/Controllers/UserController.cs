@@ -20,7 +20,7 @@ using vietqtran.Services.Services;
 
 namespace vietqtran.Api.Controllers
 {
-	[Route("v1/api/[controller]")]
+	[Route("api/v1/[controller]")]
 	[ApiController]
 	public class UserController : ControllerBase
 	{

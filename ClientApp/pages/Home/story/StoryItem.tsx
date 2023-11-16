@@ -13,6 +13,7 @@ function StoryItem() {
                      alt='user-avatar'
                      width={56}
                      height={56}
+                     priority
                   />
                </div>
             </div>
