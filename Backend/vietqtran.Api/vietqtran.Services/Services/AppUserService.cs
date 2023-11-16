@@ -87,7 +87,7 @@ namespace vietqtran.Services.Services
 				{
 					AccessToken = accessToken,
 					RefreshToken = refreshToken.Token,
-					Status = "Successed"
+					Status = "Succeed"
 				};
 			} catch (Exception ex) {
 				return new LoginResponse
@@ -113,7 +113,7 @@ namespace vietqtran.Services.Services
 				if (result.Succeeded) {
 					return new SignUpResponse
 					{
-						Status = "Successed",
+						Status = "Succeed",
 					};
 				}
 

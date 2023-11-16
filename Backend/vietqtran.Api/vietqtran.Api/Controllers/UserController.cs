@@ -53,7 +53,7 @@ namespace vietqtran.Api.Controllers
 		{
 			var result = await _appUserService.Register(signUpCredentials);
 
-			if (result.Status == "Successed") {
+			if (result.Status == "Succeed") {
 				return Ok(result);
 			}
 
@@ -66,8 +66,8 @@ namespace vietqtran.Api.Controllers
 		{
 			var result = await _appUserService.Login(loginCredentials);
 
-			if (result.Status != "Successed") {
-				return BadRequest(result);
+			if (result.Status != "Succeed") {
+				return Ok(StatusCodes.Status404NotFound);
 			}
 
 			//var handler = new JwtSecurityTokenHandler();

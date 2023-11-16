@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
 const instance = axios.create(
     {
@@ -11,8 +11,8 @@ instance.interceptors.response.use(
     (response) => {
         return response.data
     },
-    (error) => {
-        console.log(error)
+    (error: AxiosError) => {
+        console.log(error.response?.data)
     }
 )
 
