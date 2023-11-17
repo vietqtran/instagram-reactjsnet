@@ -87,7 +87,7 @@ namespace vietqtran.Api.Controllers
 			return Ok(result);
 		}
 
-		[HttpPost("fb-auth")]
+		[HttpPost("facebook-login")]
 		[AllowAnonymous]
 		public async Task<IActionResult> LoginFacebook (LoginCredentials loginCredentials)
 		{

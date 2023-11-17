@@ -1,6 +1,6 @@
-import React from "react"
-import Link from "next/link"
 import Image from "next/image"
+import Link from "next/link"
+import React from "react"
 
 function GetTheApp() {
    return (
@@ -15,6 +15,7 @@ function GetTheApp() {
                      className='h-full w-auto'
                      width={400}
                      height={400}
+                     priority
                   />
                </Link>
             </div>

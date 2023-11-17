@@ -1,6 +1,6 @@
 "use client"
 
-import React, { FormEvent, useEffect, useState } from "react"
+import React, { FormEvent, useState } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 
 import AuthLayout from "@components/layouts/AuthLayout"
@@ -12,7 +12,9 @@ import LoginInputPassword from "@components/common/LoginInputPassword"
 import LoginInputText from "@components/common/LoginInputText"
 import { LoginResponse } from "@type/LoginResponse"
 import LoginWithFacebook from "@pages/Login/LoginWithFacebook"
+import { RootState } from "@redux/reducers"
 import { login } from "@utils/api/userApi"
+import { useSelector } from "react-redux"
 
 export default function Login() {
    const router = useRouter()

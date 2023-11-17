@@ -1,5 +1,7 @@
 import React, { ReactNode } from "react"
+
 import Footer from "../common/Footer"
+import ReduxProvider from "@components/common/ReduxProvider"
 
 interface AuthLayoutProps {
    children: ReactNode
@@ -7,12 +9,14 @@ interface AuthLayoutProps {
 
 function AuthLayout({ children }: AuthLayoutProps) {
    return (
-      <div className='flex min-h-screen w-full flex-col items-center justify-between overflow-y-auto'>
-         <div className='flex min-h-0 flex-1 items-center justify-center'>
-            {children}
+      <ReduxProvider>
+         <div className='flex min-h-screen w-full flex-col items-center justify-between overflow-y-auto'>
+            <div className='flex min-h-0 flex-1 items-center justify-center'>
+               {children}
+            </div>
+            <Footer />
          </div>
-         <Footer />
-      </div>
+      </ReduxProvider>
    )
 }
 

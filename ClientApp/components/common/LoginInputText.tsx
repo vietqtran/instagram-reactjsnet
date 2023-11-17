@@ -33,7 +33,7 @@ function LoginInputText({ text, setText, placeholder }: LoginInputTextProps) {
             onBlur={() => {
                setIsFocus(false)
             }}
-            value={text}
+            value={text || ""}
             onChange={(e) => setText(e.target.value)}
             className='z-20 h-full min-w-full bg-transparent text-xs leading-none text-black outline-none'
          />

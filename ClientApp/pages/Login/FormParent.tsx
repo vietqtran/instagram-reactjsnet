@@ -2,7 +2,9 @@ import React, { ReactNode } from "react"
 
 import GetTheApp from "./GetTheApp"
 import Link from "next/link"
+import { RootState } from "@redux/reducers"
 import TextLogo from "../../components/common/TextLogo"
+import { useSelector } from "react-redux"
 
 interface FormParentProps {
    children: ReactNode

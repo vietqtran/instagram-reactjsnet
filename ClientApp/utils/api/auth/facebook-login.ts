@@ -1,11 +1,20 @@
-import FacebookProvider from 'next-auth/providers/facebook'
-import NextAuth from 'next-auth'
+import { UserCredential, signInWithPopup } from 'firebase/auth';
+import { auth, facebookProvider } from '@utils/firebase'
 
-export default NextAuth({
-    providers: [
-        FacebookProvider({
-            clientId: process.env.FACEBOOK_CLIENT_ID as string,
-            clientSecret: process.env.FACEBOOK_CLIENT_SECRET as string
-        })
-    ]
-})
+import { FacebookSignUpUser } from '@type/FacebookSignUpUser';
+import { useDispatch } from 'react-redux';
+
+export const handleFacebookLogin = async () => {
+    try {
+        const result = await signInWithPopup(auth, facebookProvider);
+        const user: UserCredential = result;
+        const facebookSignUpUser: FacebookSignUpUser = {
+            avatar: user.user.photoURL || "",
+            email: user.user.email || "",
+            name: user.user.displayName || ""
+        }
+        return facebookSignUpUser
+    } catch (error) {
+        return null
+    }
+};

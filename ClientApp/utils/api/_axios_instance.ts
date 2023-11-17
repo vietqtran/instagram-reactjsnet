@@ -3,7 +3,7 @@ import axios, { AxiosError } from "axios";
 const instance = axios.create(
     {
         timeout: 300000,
-        baseURL: process.env[ 'REACT_APP_API_URL' ]
+        baseURL: process.env.NEXT_PUBLIC_API_URL
     }
 )
 

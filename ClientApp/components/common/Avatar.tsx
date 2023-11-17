@@ -8,13 +8,17 @@ interface AvatarProps {
 
 const Avatar: React.FC<AvatarProps> = ({ size, src }) => {
    return (
-      <div className='aspect-square h-fit w-fit overflow-hidden rounded-full'>
+      <div
+         style={{ width: size, height: size }}
+         className='aspect-square h-fit w-fit overflow-hidden rounded-full'
+      >
          <Image
             src={src}
             alt='avatar'
             className='aspect-square h-full w-full'
             width={size}
             height={size}
+            priority
          />
       </div>
    )
