@@ -12,14 +12,14 @@ function LoginInputText({ text, setText, placeholder }: LoginInputTextProps) {
    return (
       <div
          className={`${
-            text !== "" ? "pb-[2px] pt-[14px]" : "py-2"
+            text && text !== "" ? "pb-[2px] pt-[14px]" : "py-2"
          } w-full bg-gray-50 px-2 text-sm relative rounded-[4px] overflow-hidden border-[1px] my-1 ${
             isFocus === true ? "border-gray-400" : "border-gray-300"
          }`}
       >
          <span
             className={`${
-               text !== ""
+               text && text !== ""
                   ? "top-[1px] text-[9px]"
                   : "top-[50%] translate-y-[-50%] text-xs"
             } absolute left-0 px-2 text-gray-500 z-10 pointer-events-none duration-75 ease-linear`}

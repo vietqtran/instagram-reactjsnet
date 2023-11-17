@@ -86,5 +86,32 @@ namespace vietqtran.Api.Controllers
 
 			return Ok(result);
 		}
+
+		[HttpPost("fb-auth")]
+		[AllowAnonymous]
+		public async Task<IActionResult> LoginFacebook (LoginCredentials loginCredentials)
+		{
+			var result = await _appUserService.Login(loginCredentials);
+
+			if (result.Status != "Succeed") {
+				return Ok(StatusCodes.Status404NotFound);
+			}
+
+			HttpContext.Response.Cookies.Append("token", result.AccessToken, new CookieOptions()
+			{
+				HttpOnly = true,
+				SameSite = SameSiteMode.Strict,
+				Secure = true
+			});
+
+			//var token = Request.Cookies["token"];
+
+			//var handler = new JwtSecurityTokenHandler();
+			//var jwtToken = handler.ReadJwtToken(result.AccessToken);
+			//var claims = jwtToken.Claims.ToList();
+			//var roles = claims.Where(x => x.Type == "role").Select(x => x.Value).ToList();
+
+			return Ok(result);
+		}
 	}
 }

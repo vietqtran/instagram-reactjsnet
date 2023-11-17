@@ -1,7 +1,8 @@
 import React, { ReactNode } from "react"
-import TextLogo from "../../components/common/TextLogo"
-import Link from "next/link"
+
 import GetTheApp from "./GetTheApp"
+import Link from "next/link"
+import TextLogo from "../../components/common/TextLogo"
 
 interface FormParentProps {
    children: ReactNode
@@ -25,7 +26,7 @@ function FormParent({ children, type }: FormParentProps) {
                         <div className='text-sm'>
                            <span>{`Don't have an account?`}</span>
                            <Link
-                              href={"/signup"}
+                              href={"/a/signup"}
                               className='ml-1 font-medium text-blue-500 hover:text-blue-500'
                            >
                               Sign up
@@ -35,7 +36,7 @@ function FormParent({ children, type }: FormParentProps) {
                         <div className='text-sm'>
                            <span>{`Have an account?`}</span>
                            <Link
-                              href={"/login"}
+                              href={"/a/login"}
                               className='ml-1 font-medium text-blue-500 hover:text-blue-500'
                            >
                               Log in
