@@ -2,8 +2,8 @@
 
 import HomeLayout from "@components/layouts/HomeLayout"
 import React from "react"
+import TabNav from "@pages/User/TabNav"
 import UserPreviewTop from "@components/common/User/UserPreviewTop"
-import { usePathname } from "next/navigation"
 
 export default function User() {
    return (
@@ -11,6 +11,7 @@ export default function User() {
          <div className='container mx-auto flex justify-center py-8 md:px-5'>
             <div className='w-full max-w-[935px]'>
                <UserPreviewTop />
+               <TabNav />
             </div>
          </div>
       </HomeLayout>

@@ -1,13 +1,14 @@
 import Avatar from "./Avatar"
 import AvatarWithStory from "./AvatarWithStory"
 import EditProfileButton from "../Button/EditProfileButton"
+import Highlight from "@pages/User/Highlight"
 import React from "react"
 import SettingButton from "../Button/SettingButton"
 import ViewArchiveButton from "../Button/ViewArchiveButton"
 
 const UserPreviewTop = () => {
    return (
-      <div className='w-full border-b-[1px] border-b-gray-300 px-2 pb-4 md:px-0'>
+      <div className='w-full max-w-[935px]  px-2 md:px-0'>
          <div className='flex w-full items-center justify-start'>
             <div className='mr-4 hidden px-12 md:block'>
                <AvatarWithStory
@@ -28,7 +29,7 @@ const UserPreviewTop = () => {
             <div className='p-2'>
                <div className='mb-5 flex flex-1 flex-wrap items-center'>
                   <span className='order-1 text-[19px]'>vietqtran</span>
-                  <div className='order-3 mt-3 flex flex-nowrap md:order-2 md:mt-0'>
+                  <div className='order-3 mt-3 flex flex-nowrap md:w-fit w-full md:order-2 md:mt-0'>
                      <EditProfileButton />
                      <ViewArchiveButton />
                   </div>
@@ -37,7 +38,7 @@ const UserPreviewTop = () => {
                   </div>
                </div>
 
-               <div className='hidden md:block'>
+               <div className=' md:block'>
                   <div className='flex items-center'>
                      <div className='mr-8'>
                         <span className='text-[15px]'>
@@ -68,6 +69,8 @@ const UserPreviewTop = () => {
             <div className='text-sm font-semibold'>Quốc Việt</div>
             <p className='text-sm'>bio</p>
          </div>
+
+         <Highlight />
       </div>
    )
 }
