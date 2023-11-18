@@ -1,7 +1,7 @@
 import React, { FormEvent, useState } from "react"
 
 import AuthLayout from "@components/layouts/AuthLayout"
-import Avatar from "@components/common/Avatar"
+import Avatar from "@components/common/User/Avatar"
 import { FacebookSignUpUser } from "@type/FacebookSignUpUser"
 import FormParent from "@pages/Login/FormParent"
 import Image from "next/image"
@@ -50,8 +50,6 @@ const FacebookSignUpForm = () => {
             console.log("=====> SIGN UP ERROR: ", err)
          })
    }
-
-   console.log(user)
 
    return (
       <form

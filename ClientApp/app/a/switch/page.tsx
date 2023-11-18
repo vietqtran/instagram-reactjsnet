@@ -1,5 +1,5 @@
 import AuthLayout from "@components/layouts/AuthLayout"
-import Avatar from "@components/common/Avatar"
+import Avatar from "@components/common/User/Avatar"
 import FormParent from "@pages/Login/FormParent"
 import Link from "next/link"
 import React from "react"

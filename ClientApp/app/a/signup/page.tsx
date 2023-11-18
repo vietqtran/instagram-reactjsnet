@@ -31,6 +31,7 @@ export default function SignUp() {
          name: name,
          password: password,
          username: username,
+         avatar: "/assets/logo/user.png",
       }
       await register(signUpData)
          .then((response: any) => {
