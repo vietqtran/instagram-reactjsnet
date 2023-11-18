@@ -1,24 +1,22 @@
 "use client"
 
-import { UserResponse } from "@type/UserResponse"
-import { fetchUsersData } from "@utils/fetchData/user"
 import React, { useEffect, useState } from "react"
 
+import { LoginResponse } from "@type/LoginResponse"
+import { RootState } from "@redux/reducers"
+import { UserResponse } from "@type/UserResponse"
+import { fetchUsersData } from "@utils/fetchData/user"
+import { useSelector } from "react-redux"
+
 function PostContainer() {
-   const [users, setUsers] = useState<UserResponse[]>([])
+   const user: LoginResponse = useSelector((state: RootState) => state.user)
 
    useEffect(() => {
-      fetchUsersData().then((response: any) => {
-         setUsers(response)
-      })
+      // fetchUsersData().then((response: any) => {
+      //    setUsers(response||[])
+      // })
    }, [])
-   return (
-      <div className='w-full'>
-         {users.map((u, i) => {
-            return <span key={i}>{u.name}</span>
-         })}
-      </div>
-   )
+   return <div className='w-full'>{user.user?.email}</div>
 }
 
 export default PostContainer

@@ -1,6 +1,6 @@
-import React from "react"
 import HeartOutline from "./Icons/Heart/HeartOutline"
 import HeartSolid from "./Icons/Heart/HeartSolid"
+import React from "react"
 
 interface NotificationsButtonProps {
    tab: string
@@ -8,8 +8,6 @@ interface NotificationsButtonProps {
 }
 
 function NotificationsButton({ tab, setTab }: NotificationsButtonProps) {
-   console.log(tab)
-
    return (
       <div
          onClick={() => {

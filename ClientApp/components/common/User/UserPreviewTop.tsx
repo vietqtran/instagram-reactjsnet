@@ -1,0 +1,75 @@
+import Avatar from "./Avatar"
+import AvatarWithStory from "./AvatarWithStory"
+import EditProfileButton from "../Button/EditProfileButton"
+import React from "react"
+import SettingButton from "../Button/SettingButton"
+import ViewArchiveButton from "../Button/ViewArchiveButton"
+
+const UserPreviewTop = () => {
+   return (
+      <div className='w-full border-b-[1px] border-b-gray-300 px-2 pb-4 md:px-0'>
+         <div className='flex w-full items-center justify-start'>
+            <div className='mr-4 hidden px-12 md:block'>
+               <AvatarWithStory
+                  hasStories={true}
+                  size={150}
+                  src='/assets/logo/user.png'
+               />
+            </div>
+
+            <div className='mr-4 block px-2 md:hidden'>
+               <AvatarWithStory
+                  hasStories={true}
+                  size={77}
+                  src='/assets/logo/user.png'
+               />
+            </div>
+
+            <div className='p-2'>
+               <div className='mb-5 flex flex-1 flex-wrap items-center'>
+                  <span className='order-1 text-[19px]'>vietqtran</span>
+                  <div className='order-3 mt-3 flex flex-nowrap md:order-2 md:mt-0'>
+                     <EditProfileButton />
+                     <ViewArchiveButton />
+                  </div>
+                  <div className='order-2 mx-2 md:order-3'>
+                     <SettingButton />
+                  </div>
+               </div>
+
+               <div className='hidden md:block'>
+                  <div className='flex items-center'>
+                     <div className='mr-8'>
+                        <span className='text-[15px]'>
+                           <span className='font-semibold'>18</span> posts
+                        </span>
+                     </div>
+                     <div className='mr-8'>
+                        <span className='text-[15px]'>
+                           <span className='font-semibold'>18</span> followers
+                        </span>
+                     </div>
+                     <div className='mr-8'>
+                        <span className='text-[15px]'>
+                           <span className='font-semibold'>18</span> following
+                        </span>
+                     </div>
+                  </div>
+               </div>
+
+               <div className='mt-5 hidden md:block'>
+                  <div className='text-sm font-semibold'>Quốc Việt</div>
+                  <p className='text-sm'>bio</p>
+               </div>
+            </div>
+         </div>
+
+         <div className='mt-3 block md:hidden'>
+            <div className='text-sm font-semibold'>Quốc Việt</div>
+            <p className='text-sm'>bio</p>
+         </div>
+      </div>
+   )
+}
+
+export default UserPreviewTop

@@ -87,7 +87,8 @@ namespace vietqtran.Services.Services
 				{
 					AccessToken = accessToken,
 					RefreshToken = refreshToken.Token,
-					Status = "Succeed"
+					Status = "Succeed",
+					User = _mapper.Map<AppUserVM>(user)
 				};
 			} catch (Exception ex) {
 				return new LoginResponse

@@ -1,22 +1,46 @@
 "use client"
-import React, { useState } from "react"
-import TextLogo from "../TextLogo"
-import Link from "next/link"
-import HomeButton from "./HomeButton"
-import SearchButton from "./SearchButton"
-import NotificationsButton from "./NotificationsButton"
+
+import React, { useEffect, useState } from "react"
+
 import CreateButton from "./CreateButton"
-import ProfileButton from "./ProfileButton"
 import ExploreButton from "./ExploreButton"
-import MessagesButton from "./MessagesButton"
+import HomeButton from "./HomeButton"
+import Link from "next/link"
 import Logo from "./Icons/Logo"
-import SubNavContent from "../SubNavContent"
-import SearchContent from "./Icons/Search/SearchContent"
-import NotificationContent from "./Icons/Heart/NotificationContent"
+import MessagesButton from "./MessagesButton"
 import MoreButton from "./MoreButton"
+import NotificationContent from "./Icons/Heart/NotificationContent"
+import NotificationsButton from "./NotificationsButton"
+import ProfileButton from "./ProfileButton"
+import { RootState } from "@redux/reducers"
+import SearchButton from "./SearchButton"
+import SearchContent from "./Icons/Search/SearchContent"
+import SubNavContent from "../SubNavContent"
+import TextLogo from "../TextLogo"
+import { User } from "@type/User"
+import { usePathname } from "next/navigation"
+import { useSelector } from "react-redux"
 
 function NavBar() {
-   const [tab, setTab] = useState<string>("home")
+   const pathName = usePathname()
+   const user: User = useSelector((state: RootState) => state.user)
+
+   const [tab, setTab] = useState<string>("")
+
+   useEffect(() => {
+      const pathElements = pathName?.split("/")
+      console.log(pathElements)
+      if (pathElements && pathElements[1] === "u") {
+         if (pathElements[2] === user.username) {
+            setTab("profile")
+         } else {
+            setTab("")
+         }
+      }
+      if (pathElements && pathElements[1] === "") {
+         setTab("home")
+      }
+   }, [pathName])
 
    const handleChangeTab = (newTab: string) => {
       setTab(newTab)
