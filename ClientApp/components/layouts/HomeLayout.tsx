@@ -13,7 +13,7 @@ function HomeLayout({ children }: HomeLayoutProps) {
       <ReduxProvider>
          <div className='relative flex'>
             <NavBar />
-            <main className='ml-0 flex h-auto flex-1 flex-col justify-start md:ml-[72px] lg:ml-[335px]'>
+            <main className='ml-0 flex h-auto flex-1 flex-col justify-start items-center md:ml-[72px] lg:ml-[335px]'>
                {children}
                <Footer />
             </main>

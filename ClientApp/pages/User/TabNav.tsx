@@ -1,23 +1,26 @@
 import { BsGrid3X3 } from "react-icons/bs"
 import Link from "next/link"
 import React from "react"
+import { RootState } from "@redux/reducers"
 import TabNavItem from "@components/common/User/TabNavItem"
+import { User } from "@type/User"
 import { usePathname } from "next/navigation"
+import { useSelector } from "react-redux"
 
 export default function TabNav() {
    const pathname = usePathname()
+   const user: User = useSelector((state: RootState) => state.user)
    const tab = pathname?.split("/").at(-1) || ""
 
    return (
       <div className='w-full border-t-[1px] border-t-gray-300 flex justify-center'>
-         <TabNavItem>
+         <TabNavItem
+            currentTab={["saved", "tagged", "reels"].includes(tab) ? tab : ""}
+            tab={""}
+         >
             <Link
-               href={`${pathname}`}
-               className={`${
-                  tab !== "reels" && tab !== "saved" && tab !== "tagged"
-                     ? ""
-                     : "text-gray-400"
-               } flex items-center text-[13px] font-medium`}
+               href={`/u/${user.username}`}
+               className={`flex items-center text-[13px] font-medium`}
             >
                <span>
                   <svg
@@ -89,12 +92,10 @@ export default function TabNav() {
                <span className='ml-2'>POSTS</span>
             </Link>
          </TabNavItem>
-         <TabNavItem>
+         <TabNavItem currentTab={tab} tab={"reels"}>
             <Link
-               href={`${pathname}/reels`}
-               className={`${
-                  tab === "reels" ? "" : "text-gray-400"
-               } flex items-center text-[13px] font-medium`}
+               href={`/u/${user.username}/reels`}
+               className={` flex items-center text-[13px] font-medium`}
             >
                <span>
                   <svg
@@ -148,16 +149,16 @@ export default function TabNav() {
                      ></path>
                      <path
                         d='M9.763 17.664a.908.908 0 0 1-.454-.787V11.63a.909.909 0 0 1 1.364-.788l4.545 2.624a.909.909 0 0 1 0 1.575l-4.545 2.624a.91.91 0 0 1-.91 0Z'
-                        fill-rule='evenodd'
+                        fillRule='evenodd'
                      ></path>
                   </svg>
                </span>{" "}
                <span className='ml-2'>REELS</span>
             </Link>
          </TabNavItem>
-         <TabNavItem>
+         <TabNavItem currentTab={tab} tab={"saved"}>
             <Link
-               href={`${pathname}/saved`}
+               href={`/u/${user.username}/saved`}
                className={`${
                   tab === "saved" ? "" : "text-gray-400"
                } flex items-center text-[13px] font-medium`}
@@ -185,12 +186,10 @@ export default function TabNav() {
                <span className='ml-2'>SAVED</span>
             </Link>
          </TabNavItem>
-         <TabNavItem>
+         <TabNavItem currentTab={tab} tab={"tagged"}>
             <Link
-               href={`${pathname}/tagged`}
-               className={`${
-                  tab === "tagged" ? "" : "text-gray-400"
-               } flex items-center text-[13px] font-medium`}
+               href={`/u/${user.username}/tagged`}
+               className={`flex items-center text-[13px] font-medium`}
             >
                <span>
                   <svg

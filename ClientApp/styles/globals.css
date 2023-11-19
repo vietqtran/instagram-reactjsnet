@@ -49,3 +49,7 @@ code {
       rgba(246, 216, 77, 1) 100%
    );
 }
+
+.hide-scrollbar::-webkit-scrollbar {
+   display: none;
+}

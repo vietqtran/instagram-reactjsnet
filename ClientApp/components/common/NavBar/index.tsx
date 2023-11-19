@@ -48,7 +48,7 @@ function NavBar() {
 
    return (
       <nav
-         className={`z-10 duration-200 ease-linear fixed bottom-0 left-0 right-0 h-[48px] w-full sm:right-auto md:w-[74px] md:top-0 md:h-[100vh] 
+         className={`z-20 duration-200 ease-linear fixed bottom-0 left-0 right-0 h-[48px] w-full sm:right-auto md:w-[74px] md:top-0 md:h-[100vh] 
          ${
             tab === "search" || tab === "notification"
                ? "lg:w-[74px]"
@@ -61,7 +61,7 @@ function NavBar() {
                <div className='flex w-full items-center justify-around text-black md:block'>
                   <div className='relative mb-4 hidden w-full cursor-pointer justify-center px-2 pb-7 pt-[21px] md:flex lg:justify-start'>
                      {!(tab === "search" || tab === "notification") && (
-                        <Link href='/home'>
+                        <Link href='/'>
                            <div
                               className={`absolute left-0 px-3 opacity-0 duration-200 ease-linear lg:opacity-100`}
                            >

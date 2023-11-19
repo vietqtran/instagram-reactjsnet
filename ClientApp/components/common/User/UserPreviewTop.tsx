@@ -8,7 +8,7 @@ import ViewArchiveButton from "../Button/ViewArchiveButton"
 
 const UserPreviewTop = () => {
    return (
-      <div className='w-full max-w-[935px]  px-2 md:px-0'>
+      <div className='w-full max-w-[935px] px-2 md:px-0'>
          <div className='flex w-full items-center justify-start'>
             <div className='mr-4 hidden px-12 md:block'>
                <AvatarWithStory
