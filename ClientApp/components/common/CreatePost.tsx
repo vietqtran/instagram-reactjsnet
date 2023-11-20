@@ -1,6 +1,7 @@
-import React, { useState } from "react"
+import React, { useCallback, useState } from "react"
 
 import Image from "next/image"
+import { useDropzone } from "react-dropzone"
 
 export default function CreatePost() {
    const [files, setFiles] = useState<FileList | null>()
@@ -16,19 +17,29 @@ export default function CreatePost() {
       }
    }
 
+   const onDrop = useCallback((acceptedFiles: any) => {
+      setFiles(acceptedFiles)
+   }, [])
+
+   const { getRootProps, getInputProps } = useDropzone({ onDrop })
+
    return (
       <div className='relative grid place-items-center'>
          <div className='w-[702px] rounded-lg bg-white'>
             <div className='w-full text-center py-2 v-border-b'>
                <span className='text-sm font-semibold'>Create new post</span>
             </div>
-            <div className='w-full aspect-square grid place-items-center'>
+            <div
+               className='w-full aspect-square grid place-items-center'
+               {...getRootProps()}
+            >
                {files &&
                   Array.from(files).map((f, i) => {
                      return (
                         <div key={i}>
                            {f.type.startsWith("image") && (
                               <Image
+                                 className='w-auto h-auto'
                                  width={100}
                                  height={100}
                                  alt=''
@@ -70,6 +81,7 @@ export default function CreatePost() {
                   </div>
                   <div>
                      <input
+                        {...getInputProps()}
                         onChange={filesInputChange}
                         type='file'
                         className='hidden'
