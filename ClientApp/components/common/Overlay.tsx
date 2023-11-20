@@ -23,7 +23,7 @@ function Overlay({ children, show, setShow }: OverlayProps) {
                onClick={(e) => {
                   e.stopPropagation()
                }}
-               className='modal h-fit w-fit bg-white'
+               className='modal h-fit w-fit bg-transparent'
             >
                {children}
             </div>

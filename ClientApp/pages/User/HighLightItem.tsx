@@ -4,7 +4,7 @@ import React from "react"
 export default function HighLightItem() {
    return (
       <div className='z-0 grid place-items-center min-w-fit'>
-         <div className='px-2'>
+         <div className='md:px-5 px-2'>
             <div className='border-[1px] border-gray-200 w-fit cursor-pointer overflow-hidden rounded-full p-[1px]'>
                <div className='rounded-full border-[1px] border-white'>
                   <Image
