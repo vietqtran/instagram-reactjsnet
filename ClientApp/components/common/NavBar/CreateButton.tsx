@@ -1,6 +1,8 @@
 import React, { useState } from "react"
-import Overlay from "../Overlay"
+
 import CreateOutline from "./Icons/Create/CreateOutline"
+import CreatePost from "../CreatePost"
+import Overlay from "../Overlay"
 
 interface ExploreButtonProps {
    tab: string
@@ -12,7 +14,7 @@ function CreateButton({ tab }: ExploreButtonProps) {
       <>
          {showModal === true && (
             <Overlay setShow={setShowModal} show={showModal}>
-               aad
+               <CreatePost />
             </Overlay>
          )}
          <div
