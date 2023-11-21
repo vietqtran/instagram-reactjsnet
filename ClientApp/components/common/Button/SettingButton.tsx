@@ -6,7 +6,7 @@ export default function SettingButton() {
       <Link href={"/settings"}>
          <svg
             aria-label='Options'
-            className='block text-black relative'
+            className='v-svg'
             fill='currentColor'
             height='24'
             role='img'

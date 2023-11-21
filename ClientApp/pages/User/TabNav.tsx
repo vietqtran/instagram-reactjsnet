@@ -25,7 +25,7 @@ export default function TabNav() {
                <span>
                   <svg
                      aria-label=''
-                     className='block relative text-inherit'
+                     className='v-svg'
                      fill='currentColor'
                      height='12'
                      role='img'
@@ -100,7 +100,7 @@ export default function TabNav() {
                <span>
                   <svg
                      aria-label=''
-                     className='block relative text-inherit'
+                     className='v-svg'
                      fill='currentColor'
                      height='12'
                      role='img'
@@ -166,7 +166,7 @@ export default function TabNav() {
                <span>
                   <svg
                      aria-label=''
-                     className='block text-inherit relative'
+                     className='v-svg'
                      fill='currentColor'
                      height='12'
                      role='img'
@@ -194,7 +194,7 @@ export default function TabNav() {
                <span>
                   <svg
                      aria-label=''
-                     className='block text-inherit relative'
+                     className='v-svg'
                      fill='currentColor'
                      height='12'
                      role='img'

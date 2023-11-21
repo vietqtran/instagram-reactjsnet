@@ -5,7 +5,7 @@ function HomeSolid() {
       <div>
          <svg
             aria-label='Trang chủ'
-            className='relative block text-black'
+            className='v-svg'
             fill='currentColor'
             height='24'
             role='img'

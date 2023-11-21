@@ -1,10 +1,10 @@
 import React from "react"
 
-function SearchOutline() {
+const Share = () => {
    return (
-      <div>
+      <div className='p-2 hover:opacity-50 cursor-pointer'>
          <svg
-            aria-label='Tìm kiếm'
+            aria-label='Share Post'
             className='v-svg'
             fill='currentColor'
             height='24'
@@ -12,29 +12,26 @@ function SearchOutline() {
             viewBox='0 0 24 24'
             width='24'
          >
-            <title>Tìm kiếm</title>
-            <path
-               d='M19 10.5A8.5 8.5 0 1 1 10.5 2a8.5 8.5 0 0 1 8.5 8.5Z'
-               fill='none'
-               stroke='currentColor'
-               strokeLinecap='round'
-               strokeLinejoin='round'
-               strokeWidth='2'
-            ></path>
             <line
                fill='none'
                stroke='currentColor'
-               strokeLinecap='round'
                strokeLinejoin='round'
                strokeWidth='2'
-               x1='16.511'
-               x2='22'
-               y1='16.511'
-               y2='22'
+               x1='22'
+               x2='9.218'
+               y1='3'
+               y2='10.083'
             ></line>
+            <polygon
+               fill='none'
+               points='11.698 20.334 22 3.001 2 3.001 9.218 10.084 11.698 20.334'
+               stroke='currentColor'
+               strokeLinejoin='round'
+               strokeWidth='2'
+            ></polygon>
          </svg>
       </div>
    )
 }
 
-export default SearchOutline
+export default Share

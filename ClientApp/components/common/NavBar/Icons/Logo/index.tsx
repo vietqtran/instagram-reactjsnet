@@ -5,7 +5,7 @@ function Logo() {
       <div>
          <svg
             aria-label='Instagram'
-            className='relative block text-black'
+            className='v-svg'
             fill='currentColor'
             height='24'
             role='img'

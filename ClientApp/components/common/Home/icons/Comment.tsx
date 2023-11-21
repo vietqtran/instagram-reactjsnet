@@ -1,10 +1,10 @@
 import React from "react"
 
-function HomeOutline() {
+const Comment = () => {
    return (
-      <div>
+      <div className='p-2 hover:opacity-50 cursor-pointer'>
          <svg
-            aria-label='Trang chủ'
+            aria-label='Comment'
             className='v-svg'
             fill='currentColor'
             height='24'
@@ -13,7 +13,7 @@ function HomeOutline() {
             width='24'
          >
             <path
-               d='M9.005 16.545a2.997 2.997 0 0 1 2.997-2.997A2.997 2.997 0 0 1 15 16.545V22h7V11.543L12 2 2 11.543V22h7.005Z'
+               d='M20.656 17.008a9.993 9.993 0 1 0-3.59 3.615L22 22Z'
                fill='none'
                stroke='currentColor'
                strokeLinejoin='round'
@@ -24,4 +24,4 @@ function HomeOutline() {
    )
 }
 
-export default HomeOutline
+export default Comment

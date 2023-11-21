@@ -5,7 +5,7 @@ function MessageOutline() {
       <div>
          <svg
             aria-label='Messenger'
-            className='relative block text-black'
+            className='v-svg'
             fill='currentColor'
             height='24'
             role='img'

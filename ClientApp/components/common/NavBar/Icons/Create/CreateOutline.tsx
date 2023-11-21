@@ -5,7 +5,7 @@ function CreateOutline() {
       <div>
          <svg
             aria-label='Bài viết mới'
-            className='text-block relative block'
+            className='v-svg'
             fill='currentColor'
             height='24'
             role='img'

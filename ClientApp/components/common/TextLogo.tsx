@@ -9,7 +9,7 @@ function TextLogo({ size }: TextLogoProps) {
       <div className='flex w-full items-center justify-center'>
          <svg
             aria-label='Instagram'
-            className='relative block text-black'
+            className='v-svg'
             fill='currentColor'
             height='29'
             role='img'

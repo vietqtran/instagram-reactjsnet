@@ -32,7 +32,7 @@ export default function PostItem() {
             {/* carousel  */}
             <svg
                aria-label='Carousel'
-               className='text-white block relative'
+               className='v-svg'
                fill='currentColor'
                height='22'
                role='img'
@@ -45,7 +45,7 @@ export default function PostItem() {
             {/* pin icon */}
             <svg
                aria-label='Pinned post icon'
-               className='text-white block relative'
+               className='v-svg'
                fill='currentColor'
                height='22'
                role='img'

@@ -5,7 +5,7 @@ function CompassOutline() {
       <div>
          <svg
             aria-label='Khám phá'
-            className='x5n08af block text-black'
+            className='v-svg'
             fill='currentColor'
             height='24'
             role='img'

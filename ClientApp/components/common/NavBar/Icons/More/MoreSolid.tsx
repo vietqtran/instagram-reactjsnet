@@ -5,7 +5,7 @@ function MoreSolid() {
       <div>
          <svg
             aria-label='Settings'
-            className='relative block text-black'
+            className='v-svg'
             fill='currentColor'
             height='24'
             role='img'

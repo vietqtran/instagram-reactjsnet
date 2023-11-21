@@ -5,7 +5,7 @@ function CompassSolid() {
       <div>
          <svg
             aria-label='Khám phá'
-            className='relative block text-black'
+            className='v-svg'
             fill='currentColor'
             height='24'
             role='img'

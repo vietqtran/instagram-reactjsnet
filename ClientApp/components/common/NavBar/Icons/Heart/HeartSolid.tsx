@@ -5,7 +5,7 @@ function HeartSolid() {
       <div>
          <svg
             aria-label='Thông báo'
-            className='text-block relative block'
+            className='v-svg'
             fill='currentColor'
             height='24'
             role='img'

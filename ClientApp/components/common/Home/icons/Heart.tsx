@@ -1,10 +1,10 @@
 import React from "react"
 
-function HeartOutline() {
+const Heart = () => {
    return (
-      <div>
+      <div className='p-2 hover:opacity-50 cursor-pointer'>
          <svg
-            aria-label='Thông báo'
+            aria-label='Like'
             className='v-svg'
             fill='currentColor'
             height='24'
@@ -18,4 +18,4 @@ function HeartOutline() {
    )
 }
 
-export default HeartOutline
+export default Heart

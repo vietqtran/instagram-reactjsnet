@@ -1,14 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Fira+Code:wght@300;400;500&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600&family=Roboto+Flex:opsz,wght@8..144,100;8..144,200;8..144,300;8..144,400;8..144,500;8..144,600;8..144,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500&display=swap');
+
+* {
+   /* user-select: none; */
+   outline-color: #000;
+   outline-width: 1px;
+   /* outline-style: solid; */
+}
 
 body {
    margin: 0;
-   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
-      "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
-      "Helvetica Neue", sans-serif;
-   -webkit-font-smoothing: antialiased;
-   -moz-osx-font-smoothing: grayscale;
+   font-family: 'Montserrat', sans-serif !important;
 }
 
 code {
@@ -32,6 +36,7 @@ code {
    from {
       transform: translateX(-100%);
    }
+
    to {
       transform: translateX(0);
    }
@@ -42,12 +47,10 @@ code {
 }
 
 .story-border {
-   background: linear-gradient(
-      234deg,
-      rgba(101, 0, 170, 1) 0%,
-      rgba(253, 29, 29, 1) 35%,
-      rgba(246, 216, 77, 1) 100%
-   );
+   background: linear-gradient(234deg,
+         rgba(101, 0, 170, 1) 0%,
+         rgba(253, 29, 29, 1) 35%,
+         rgba(246, 216, 77, 1) 100%);
 }
 
 .hide-scrollbar::-webkit-scrollbar {
@@ -56,22 +59,34 @@ code {
 
 .cover-saved-bg {
    background: #000;
-   background: linear-gradient(
-      0deg,
-      rgba(0, 0, 0, 0.4) 0%,
-      rgba(255, 255, 255, 0) 100%
-   );
+   background: linear-gradient(0deg,
+         rgba(0, 0, 0, 0.4) 0%,
+         rgba(255, 255, 255, 0) 100%);
 }
 
 .cover-saved-bg-hover {
    background: rgb(255, 253, 253);
-   background: linear-gradient(
-      0deg,
-      rgba(255, 253, 253, 0.1) 0%,
-      rgba(255, 255, 255, 0) 100%
-   );
+   background: linear-gradient(0deg,
+         rgba(255, 253, 253, 0.1) 0%,
+         rgba(255, 255, 255, 0) 100%);
 }
 
 .v-border-b {
    @apply border-b-[1px] border-gray-300;
+}
+
+.swiper-arrow {
+   color: white !important;
+   opacity: .8;
+}
+
+.swiper-pagination-dot {
+   background: #fff !important;
+   margin: 2px !important;
+   width: 6px !important;
+   height: 6px !important;
+}
+
+.v-svg {
+   @apply text-black relative block
 }

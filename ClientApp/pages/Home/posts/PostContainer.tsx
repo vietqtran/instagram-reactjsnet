@@ -3,9 +3,8 @@
 import React, { useEffect, useState } from "react"
 
 import { LoginResponse } from "@type/LoginResponse"
+import Post from "@components/common/Home/Post"
 import { RootState } from "@redux/reducers"
-import { UserResponse } from "@type/UserResponse"
-import { fetchUsersData } from "@utils/fetchData/user"
 import { useSelector } from "react-redux"
 
 function PostContainer() {
@@ -16,7 +15,12 @@ function PostContainer() {
       //    setUsers(response||[])
       // })
    }, [])
-   return <div className='w-full'>{user.user?.email}</div>
+   return (
+      <div className='w-full mt-3 flex flex-col items-center mb-10'>
+         <Post type='user' />
+         <Post type='tag' />
+      </div>
+   )
 }
 
 export default PostContainer
