@@ -17,7 +17,7 @@ export default function TabNavItem({
             currentTab === tab
                ? "text-black before:contents-[] before:absolute before:w-full before:h-[1px] before:bg-black before:top-0 before:left-0"
                : "text-gray-400"
-         } mx-8  cursor-pointer text-[13px] font-medium relative`}
+         } mx-8  cursor-pointer text-xs font-semibold relative`}
       >
          {children}
       </div>

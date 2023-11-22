@@ -1,4 +1,5 @@
 import Image from "next/image"
+import Link from "next/link"
 import React from "react"
 
 interface AvatarProps {
@@ -12,14 +13,16 @@ const Avatar: React.FC<AvatarProps> = ({ size, src }) => {
          style={{ width: size, height: size }}
          className='aspect-square h-fit w-fit overflow-hidden rounded-full'
       >
-         <Image
-            src={src}
-            alt='avatar'
-            className='aspect-square h-full w-full'
-            width={size}
-            height={size}
-            priority
-         />
+         <Link href={"/u/username"}>
+            <Image
+               src={src}
+               alt='avatar'
+               className='aspect-square h-full w-full'
+               width={size}
+               height={size}
+               priority
+            />
+         </Link>
       </div>
    )
 }

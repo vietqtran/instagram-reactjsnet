@@ -24,7 +24,7 @@ function UserPostHeader() {
                </span>
                <span className='text-gray-400'>1d</span>
             </div>
-            <div className='font-light'>address</div>
+            <div>address</div>
          </div>
          <div className='text-xl p-1 cursor-pointer'>
             <HiOutlineDotsHorizontal />

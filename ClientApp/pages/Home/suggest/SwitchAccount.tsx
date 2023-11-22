@@ -1,5 +1,6 @@
 import Avatar from "@components/common/User/Avatar"
 import Image from "next/image"
+import Link from "next/link"
 import React from "react"
 import { RootState } from "@redux/reducers"
 import { User } from "@type/User"
@@ -14,7 +15,9 @@ function SwitchAccount() {
             <Avatar src={user.avatar} size={44} />
          </div>
          <div className='flex flex-col flex-1 items-start pl-3'>
-            <span className='text-[13px] font-semibold'>{user.username}</span>
+            <Link href={"/u/username"} className='text-[13px] font-semibold'>
+               {user.username}
+            </Link>
             <span className='text-[13px] text-gray-500'>{user.name}</span>
          </div>
          <div>

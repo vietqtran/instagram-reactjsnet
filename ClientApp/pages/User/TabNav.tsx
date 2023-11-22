@@ -20,12 +20,12 @@ export default function TabNav() {
          >
             <Link
                href={`/u/${user.username}`}
-               className={`flex items-center py-5 text-[13px] font-medium`}
+               className={`flex items-center py-5`}
             >
                <span>
                   <svg
                      aria-label=''
-                     className='v-svg'
+                     className='text-inherit block relative'
                      fill='currentColor'
                      height='12'
                      role='img'
@@ -95,12 +95,12 @@ export default function TabNav() {
          <TabNavItem currentTab={tab} tab={"reels"}>
             <Link
                href={`/u/${user.username}/reels`}
-               className={`py-5 flex items-center text-[13px] font-medium`}
+               className={`py-5 flex items-center`}
             >
                <span>
                   <svg
                      aria-label=''
-                     className='v-svg'
+                     className='text-inherit block relative'
                      fill='currentColor'
                      height='12'
                      role='img'
@@ -161,12 +161,11 @@ export default function TabNav() {
                href={`/u/${user.username}/saved`}
                className={`${
                   tab === "saved" ? "" : "text-gray-400"
-               } flex items-center py-5 text-[13px] font-medium`}
+               } flex items-center py-5`}
             >
                <span>
                   <svg
-                     aria-label=''
-                     className='v-svg'
+                     className='text-inherit block relative'
                      fill='currentColor'
                      height='12'
                      role='img'
@@ -189,12 +188,12 @@ export default function TabNav() {
          <TabNavItem currentTab={tab} tab={"tagged"}>
             <Link
                href={`/u/${user.username}/tagged`}
-               className={`flex items-center py-5 text-[13px] font-medium`}
+               className={`flex items-center py-5`}
             >
                <span>
                   <svg
                      aria-label=''
-                     className='v-svg'
+                     className='text-inherit block relative'
                      fill='currentColor'
                      height='12'
                      role='img'
