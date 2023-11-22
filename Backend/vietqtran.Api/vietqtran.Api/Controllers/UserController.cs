@@ -39,7 +39,7 @@ namespace vietqtran.Api.Controllers
 		}
 
 		[HttpGet]
-		//[Authorize]
+		[Authorize]
 		[ProducesResponseType(200, Type = typeof(ICollection<AppUserVM>))]
 		public async Task<IActionResult> GetAsync ( )
 		{

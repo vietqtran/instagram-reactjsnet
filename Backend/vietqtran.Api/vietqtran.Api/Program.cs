@@ -96,15 +96,19 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 //! Add Repositories Injection
 builder.Services.AddTransient<AppUserRepository>();
+builder.Services.AddTransient<TokenRepository>();
 builder.Services.AddScoped<IAppUserRepository, AppUserRepository>();
 builder.Services.AddTransient<UserManager<User>, UserManager<User>>();
 builder.Services.AddTransient<SignInManager<User>, SignInManager<User>>();
 builder.Services.AddTransient<RoleManager<Role>, RoleManager<Role>>();
+builder.Services.AddScoped<ITokenRepository, TokenRepository>();
 
 
 //! Add Services Injection
 builder.Services.AddTransient<AppUserService>();
+builder.Services.AddTransient<TokenService>();
 builder.Services.AddScoped<IAppUserService, AppUserService>();
+builder.Services.AddScoped<ITokenService, TokenService>();
 
 //! Cors setup
 builder.Services.AddCors(options => {
