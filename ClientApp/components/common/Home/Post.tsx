@@ -1,13 +1,13 @@
-import Comment from "./icons/Comment"
 import CommentInput from "./CommentInput"
-import Heart from "./icons/Heart"
+import CommentOutline from "@components/Icons/Comment/CommentOutline"
+import HeartOutline from "@components/Icons/Heart/HeartOutline"
 import Link from "next/link"
 import PostContent from "./PostContent"
 import PostHeader from "./PostHeader"
 import PostSlider from "./PostSlider"
 import React from "react"
-import Save from "./icons/Save"
-import Share from "./icons/Share"
+import SaveOutlineBig from "@components/Icons/Save/SaveOutlineBig"
+import ShareOutline from "@components/Icons/Share/ShareOutline"
 
 interface PostProps {
    type: string
@@ -24,12 +24,18 @@ export default function Post({ type }: Readonly<PostProps>) {
          </div>
          <div className='w-full flex items-center justify-between my-1'>
             <div className='flex-1 flex items-center justify-start'>
-               <Heart />
-               <Comment />
-               <Share />
+               <div className='p-2 hover:opacity-50 cursor-pointer'>
+                  <HeartOutline />
+               </div>
+               <div className='p-2 hover:opacity-50 cursor-pointer'>
+                  <CommentOutline />
+               </div>
+               <div className='p-2 hover:opacity-50 cursor-pointer'>
+                  <ShareOutline />
+               </div>
             </div>
-            <div>
-               <Save />
+            <div className='p-2 hover:opacity-50 cursor-pointer'>
+               <SaveOutlineBig />
             </div>
          </div>
          <div className='px-2 text-sm'>

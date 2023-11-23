@@ -1,9 +1,13 @@
 import React from "react"
-import Video from "../Video"
+import ReelOutline from "@components/Icons/Reel/ReelOutline"
+import Video from "@components/common/Video"
 
-export default function ReelItem() {
+const ExploreReelItem = () => {
    return (
       <div className='cursor-pointer w-full h-full relative aspect-[16/25]'>
+         <div className='absolute p-3 right-0 top-0'>
+            <ReelOutline />
+         </div>
          <Video
             autoplay={false}
             controls={false}
@@ -13,3 +17,5 @@ export default function ReelItem() {
       </div>
    )
 }
+
+export default ExploreReelItem

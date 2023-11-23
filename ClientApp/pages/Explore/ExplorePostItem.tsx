@@ -2,10 +2,11 @@ import { FaHeart, FaMessage } from "react-icons/fa6"
 
 import CarouselSolid from "@components/Icons/Carousel/CarouselSolid"
 import Image from "next/image"
-import PinSolid from "@components/Icons/Pin/PinSolid"
 import React from "react"
 
-export default function PostItem() {
+type ExplorePostItemProps = {}
+
+const ExplorePostItem = ({}: ExplorePostItemProps) => {
    return (
       <div className='group relative col-span-1 aspect-square overflow-hidden h-full w-full cursor-pointer'>
          <div>
@@ -32,8 +33,9 @@ export default function PostItem() {
 
          <div className='absolute top-0 right-0 p-2 z-0'>
             <CarouselSolid />
-            <PinSolid />
          </div>
       </div>
    )
 }
+
+export default ExplorePostItem

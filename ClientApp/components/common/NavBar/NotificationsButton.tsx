@@ -1,17 +1,33 @@
-import HeartOutline from "./Icons/Heart/HeartOutline"
-import HeartSolid from "./Icons/Heart/HeartSolid"
-import React from "react"
+import React, { useRef } from "react"
+
+import HeartOutline from "@components/Icons/Heart/HeartOutline"
+import HeartSolid from "@components/Icons/Heart/HeartSolid"
 
 interface NotificationsButtonProps {
    tab: string
    setTab: (tab: string) => void
 }
 
-function NotificationsButton({ tab, setTab }: NotificationsButtonProps) {
+function NotificationsButton({
+   tab,
+   setTab,
+}: Readonly<NotificationsButtonProps>) {
+   const prevTab = useRef("")
+
    return (
       <div
          onClick={() => {
-            setTab("notification")
+            if (tab !== "search" && tab !== "notification") {
+               prevTab.current = tab
+               console.log(prevTab.current)
+               setTab("notification")
+            }
+            if (tab === "notification") {
+               setTab(prevTab.current)
+            }
+            if (tab === "search") {
+               setTab("notification")
+            }
          }}
          className={`group my-3 rounded-lg duration-200 ease-linear hover:bg-gray-100 md:block hidden ${
             tab === "notification" ? "outline-1 outline-gray-300 outline" : ""

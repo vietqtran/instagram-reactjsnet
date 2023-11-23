@@ -1,8 +1,8 @@
 import React from "react"
 
-const Comment = () => {
+const CommentOutline = () => {
    return (
-      <div className='p-2 hover:opacity-50 cursor-pointer'>
+      <div>
          <svg
             aria-label='Comment'
             className='v-svg'
@@ -24,4 +24,4 @@ const Comment = () => {
    )
 }
 
-export default Comment
+export default CommentOutline

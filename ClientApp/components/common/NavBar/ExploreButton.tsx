@@ -1,5 +1,5 @@
-import CompassOutline from "./Icons/Compass/CompassOutline"
-import CompassSolid from "./Icons/Compass/CompassSolid"
+import CompassOutline from "@components/Icons/Compass/CompassOutline"
+import CompassSolid from "@components/Icons/Compass/CompassSolid"
 import Link from "next/link"
 import React from "react"
 
@@ -16,7 +16,7 @@ const ExploreButton: React.FC<ExploreButtonProps> = ({ tab, setTab }) => {
          }}
          className='group rounded-lg duration-200 ease-linear hover:bg-gray-100 md:my-3'
       >
-         <Link href={"/e"} className='hover:text-black'>
+         <Link href={"/explore"} className='hover:text-black'>
             <div className='flex items-center justify-start p-3'>
                <div className='block w-fit group-hover:scale-105 md:w-[40px]'>
                   {tab === "explore" ? <CompassSolid /> : <CompassOutline />}

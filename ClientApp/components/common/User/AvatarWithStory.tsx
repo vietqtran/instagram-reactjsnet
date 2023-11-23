@@ -11,18 +11,28 @@ export default function AvatarWithStory({
    size,
    src,
    hasStories,
-}: AvatarWithStoryProps) {
+}: Readonly<AvatarWithStoryProps>) {
+   let storyBorderSize
+   if (hasStories) {
+      if (size > 50) {
+         storyBorderSize = "md:border-4"
+      } else {
+         storyBorderSize = "border-[2px]"
+      }
+   } else {
+      storyBorderSize = ""
+   }
+   const storyBorderClass = `${storyBorderSize} border-2 border-white`
+
    return (
       <div
-         className={`rounded-full bg-black md:p-1 p-[2px] ${
+         className={`rounded-full ${size > 50 ? "md:p-1 p-[2px]" : "p-[2px]"} ${
             hasStories ? "story-border" : ""
          }`}
       >
          <div
             style={{ width: size, height: size }}
-            className={`${
-               hasStories ? "md:border-4 border-2 border-white" : ""
-            } aspect-square h-fit w-fit overflow-hidden rounded-full`}
+            className={`aspect-square h-fit w-fit overflow-hidden rounded-full ${storyBorderClass}`}
          >
             <Image
                src={src}

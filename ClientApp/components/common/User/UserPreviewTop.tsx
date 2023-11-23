@@ -28,7 +28,9 @@ const UserPreviewTop = () => {
 
             <div className='p-2'>
                <div className='mb-5 flex flex-1 flex-wrap items-center'>
-                  <span className='order-1 text-[19px]'>vietqtran</span>
+                  <span className='order-1 text-[19px] font-semibold'>
+                     vietqtran
+                  </span>
                   <div className='order-3 mt-3 flex flex-nowrap md:w-fit w-full md:order-2 md:mt-0'>
                      <EditProfileButton />
                      <ViewArchiveButton />

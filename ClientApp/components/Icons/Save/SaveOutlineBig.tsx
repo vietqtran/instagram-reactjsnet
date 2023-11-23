@@ -1,8 +1,8 @@
 import React from "react"
 
-const Save = () => {
+const SaveOutlineBig = () => {
    return (
-      <div className='p-2 hover:opacity-50 cursor-pointer'>
+      <div>
          <svg
             aria-label='Save'
             className='v-svg'
@@ -26,4 +26,4 @@ const Save = () => {
    )
 }
 
-export default Save
+export default SaveOutlineBig

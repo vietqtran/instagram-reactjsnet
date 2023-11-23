@@ -1,8 +1,8 @@
 import React from "react"
 
-const Share = () => {
+const ShareOutline = () => {
    return (
-      <div className='p-2 hover:opacity-50 cursor-pointer'>
+      <div>
          <svg
             aria-label='Share Post'
             className='v-svg'
@@ -34,4 +34,4 @@ const Share = () => {
    )
 }
 
-export default Share
+export default ShareOutline

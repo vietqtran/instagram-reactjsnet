@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 
-import CreateOutline from "./Icons/Create/CreateOutline"
+import CreateOutline from "@components/Icons/Create/CreateOutline"
 import CreatePost from "../CreatePost"
 import Overlay from "../Overlay"
 

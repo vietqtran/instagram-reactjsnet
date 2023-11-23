@@ -1,6 +1,6 @@
 import Link from "next/link"
-import MessageOutline from "./Icons/Message/MessageOutline"
-import MessageSolid from "./Icons/Message/MessageSolid"
+import MessageOutline from "@components/Icons/Message/MessageOutline"
+import MessageSolid from "@components/Icons/Message/MessageSolid"
 import React from "react"
 
 interface MessagesButtonProps {
@@ -16,7 +16,7 @@ const MessagesButton: React.FC<MessagesButtonProps> = ({ tab, setTab }) => {
          }}
          className='group rounded-lg duration-200 ease-linear hover:bg-gray-100 md:my-3'
       >
-         <Link href='/m/inbox' className='hover:text-black'>
+         <Link href='/message/inbox' className='hover:text-black'>
             <div className='flex items-center justify-start p-3'>
                <div className='block w-fit group-hover:scale-105 md:w-[40px]'>
                   {tab === "message" ? <MessageSolid /> : <MessageOutline />}

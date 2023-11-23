@@ -1,5 +1,5 @@
-import HomeOutline from "./Icons/Home/HomeOutline"
-import HomeSolid from "./Icons/Home/HomeSolid"
+import HomeOutline from "@components/Icons/Home/HomeOutline"
+import HomeSolid from "@components/Icons/Home/HomeSolid"
 import Link from "next/link"
 import React from "react"
 import { useRouter } from "next/navigation"

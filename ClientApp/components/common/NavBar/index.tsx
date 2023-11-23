@@ -6,15 +6,15 @@ import CreateButton from "./CreateButton"
 import ExploreButton from "./ExploreButton"
 import HomeButton from "./HomeButton"
 import Link from "next/link"
-import Logo from "./Icons/Logo"
+import Logo from "@components/Icons/Logo"
 import MessagesButton from "./MessagesButton"
 import MoreButton from "./MoreButton"
-import NotificationContent from "./Icons/Heart/NotificationContent"
+import NotificationContent from "@components/Icons/Heart/NotificationContent"
 import NotificationsButton from "./NotificationsButton"
 import ProfileButton from "./ProfileButton"
 import { RootState } from "@redux/reducers"
 import SearchButton from "./SearchButton"
-import SearchContent from "./Icons/Search/SearchContent"
+import SearchContent from "@components/Icons/Search/SearchContent"
 import SubNavContent from "../SubNavContent"
 import TextLogo from "../TextLogo"
 import { User } from "@type/User"
@@ -40,7 +40,13 @@ function NavBar() {
       if (pathElements && pathElements[1] === "") {
          setTab("home")
       }
-   }, [pathName])
+      if (pathElements && pathElements[1] === "explore") {
+         setTab("explore")
+      }
+      if (pathElements && pathElements[1] === "message") {
+         setTab("message")
+      }
+   }, [pathName, user.username])
 
    const handleChangeTab = (newTab: string) => {
       setTab(newTab)

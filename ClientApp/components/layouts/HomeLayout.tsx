@@ -8,7 +8,7 @@ interface HomeLayoutProps {
    children: ReactNode
 }
 
-function HomeLayout({ children }: HomeLayoutProps) {
+function HomeLayout({ children }: Readonly<HomeLayoutProps>) {
    return (
       <ReduxProvider>
          <div className='relative flex'>

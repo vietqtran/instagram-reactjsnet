@@ -1,6 +1,7 @@
 import React, { useState } from "react"
-import MoreOutline from "./Icons/More/MoreOutline"
-import MoreSolid from "./Icons/More/MoreSolid"
+
+import MoreOutline from "@components/Icons/More/MoreOutline"
+import MoreSolid from "@components/Icons/More/MoreSolid"
 
 interface MoreButtonProps {
    tab: string
