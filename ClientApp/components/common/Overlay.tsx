@@ -6,7 +6,7 @@ interface OverlayProps {
    setShow: (show: boolean) => void
 }
 
-function Overlay({ children, show, setShow }: OverlayProps) {
+function Overlay({ children, show, setShow }: Readonly<OverlayProps>) {
    const handleClose = () => {
       setShow(false)
    }

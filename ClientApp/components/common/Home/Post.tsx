@@ -3,23 +3,21 @@ import CommentInput from "./CommentInput"
 import Heart from "./icons/Heart"
 import Link from "next/link"
 import PostContent from "./PostContent"
+import PostHeader from "./PostHeader"
 import PostSlider from "./PostSlider"
 import React from "react"
 import Save from "./icons/Save"
 import Share from "./icons/Share"
-import TagPostHeader from "./TagPostHeader"
-import UserPostHeader from "./UserPostHeader"
 
 interface PostProps {
    type: string
 }
 
-export default function Post({ type }: PostProps) {
+export default function Post({ type }: Readonly<PostProps>) {
    return (
       <div className='w-full max-w-[470px] select-none v-border-b pt-5'>
          <div className='w-full px-2'>
-            {type === "user" && <UserPostHeader />}
-            {type === "tag" && <TagPostHeader />}
+            <PostHeader type={type} />
          </div>
          <div className='w-full px-2'>
             <PostSlider id={type} />

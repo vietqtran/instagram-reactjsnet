@@ -19,6 +19,7 @@ const PostContent = () => {
          </div>
          {!readMore && (
             <div
+               onKeyDown={() => {}}
                onClick={() => setReadMore(true)}
                className='leading-4 cursor-pointer'
             >
