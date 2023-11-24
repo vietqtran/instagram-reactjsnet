@@ -6,9 +6,9 @@ import { useDropzone } from "react-dropzone"
 export default function CreatePost() {
    const [files, setFiles] = useState<FileList | null>()
 
-   const handleSelectFile = () => {
-      document.getElementById("fileInput")?.click()
-   }
+   // const handleSelectFile = () => {
+   //    document.getElementById("fileInput")?.click()
+   // }
 
    const filesInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const files: FileList | null = e.target.files || null
@@ -21,10 +21,16 @@ export default function CreatePost() {
       setFiles(acceptedFiles)
    }, [])
 
-   const { getRootProps, getInputProps } = useDropzone({ onDrop })
+   const { getRootProps, getInputProps } = useDropzone({
+      onDrop,
+      accept: {
+         "image/*": [".jpg", ".jpeg", ".png", ".webp"],
+         "video/*": [".mp4", ".mkv", ".mov", ".wmv", ".webm"],
+      },
+   })
 
    return (
-      <div className='relative grid place-items-center'>
+      <div className='relative grid place-items-center modal-keyframe'>
          <div className='w-[702px] rounded-lg bg-white'>
             <div className='w-full text-center py-2 v-border-b'>
                <span className='text-sm font-semibold'>Create new post</span>
@@ -81,6 +87,7 @@ export default function CreatePost() {
                   </div>
                   <div>
                      <input
+                        accept='image/*,video/*'
                         {...getInputProps()}
                         onChange={filesInputChange}
                         type='file'
@@ -88,10 +95,7 @@ export default function CreatePost() {
                         multiple
                         id='fileInput'
                      />
-                     <button
-                        onClick={handleSelectFile}
-                        className='bg-blue-500 text-[13px] text-white font-semibold py-[6px] px-4 rounded-md hover:bg-blue-600 mt-5'
-                     >
+                     <button className='bg-blue-500 text-[13px] text-white font-semibold py-[6px] px-4 rounded-md hover:bg-blue-600 mt-5'>
                         Select from computer
                      </button>
                   </div>
