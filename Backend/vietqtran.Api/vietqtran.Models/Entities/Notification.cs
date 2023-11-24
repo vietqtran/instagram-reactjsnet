@@ -16,6 +16,7 @@ namespace vietqtran.Models.Entities
 		public Guid SenderId { get; set; }
 		public Guid UserId { get; set; }
 		public string Content { get; set; }
+		public string? ContentMedia { get; set; }
 		public long? PostId { get; set; }
 		public long? CommentId { get; set; }
 		public long? StoryId { get; set; }

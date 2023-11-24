@@ -3,6 +3,5 @@ export interface UserVM {
     name: string,
     email: string,
     username: string,
-    dob: Date,
     avatar: string
 }

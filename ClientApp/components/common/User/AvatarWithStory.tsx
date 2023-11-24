@@ -26,9 +26,9 @@ export default function AvatarWithStory({
 
    return (
       <div
-         className={`rounded-full ${size > 50 ? "md:p-1 p-[2px]" : "p-[2px]"} ${
-            hasStories ? "story-border" : ""
-         }`}
+         className={`rounded-full cursor-pointer ${
+            size > 50 ? "md:p-1 p-[2px]" : "p-[2px]"
+         } ${hasStories ? "story-border" : ""}`}
       >
          <div
             style={{ width: size, height: size }}

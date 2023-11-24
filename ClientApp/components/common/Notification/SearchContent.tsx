@@ -1,8 +1,8 @@
 import React, { useState } from "react"
 
 import { IoIosCloseCircle } from "react-icons/io"
-import SearchAccountItem from "./SearchAccountItem"
-import SearchTagItem from "./SearchTagItem"
+import SearchAccountItem from "../../Icons/Search/SearchAccountItem"
+import SearchTagItem from "../../Icons/Search/SearchTagItem"
 
 function SearchContent() {
    const [searchValue, setSearchValue] = useState("")

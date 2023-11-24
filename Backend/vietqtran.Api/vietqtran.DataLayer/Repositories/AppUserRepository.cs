@@ -51,6 +51,11 @@ namespace vietqtran.DataLayer.Repositories
 			return await _context.Users.ToListAsync();
 		}
 
+		public Task<Role> GetRoleByUserId (Guid id)
+		{
+			throw new NotImplementedException();
+		}
+
 		/// <summary>
 		/// Update Refresh Token in Database
 		/// </summary>

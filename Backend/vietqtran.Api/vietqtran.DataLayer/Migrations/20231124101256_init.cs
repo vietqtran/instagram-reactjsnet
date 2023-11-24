@@ -134,8 +134,7 @@ namespace vietqtran.DataLayer.Migrations
                     UserName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     BirthDay = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IsPrivateAccount = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 11, 12, 11, 53, 0, 845, DateTimeKind.Utc).AddTicks(1352)),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 11, 24, 10, 12, 56, 504, DateTimeKind.Utc).AddTicks(9415)),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
                     LastOnlineTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastOfflineTime = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -263,6 +262,7 @@ namespace vietqtran.DataLayer.Migrations
                     SenderId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ContentMedia = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PostId = table.Column<long>(type: "bigint", nullable: true),
                     CommentId = table.Column<long>(type: "bigint", nullable: true),
                     StoryId = table.Column<long>(type: "bigint", nullable: true)
@@ -729,8 +729,8 @@ namespace vietqtran.DataLayer.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Description", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { new Guid("0805ce18-dc94-4db6-834c-a20317d0d8a1"), "ec454e73-c3c3-44e2-9407-625e3ac79e15", "Role for USER", "User", "USER" },
-                    { new Guid("e9470f1f-d162-4a82-bea8-64e2de4574f3"), "ffb05549-74e0-4474-bc40-b8f051c469f2", "Role for ADMIN", "Admin", "ADMIN" }
+                    { new Guid("42611a4e-3a67-4300-9977-a9ee16ab40aa"), "f832f2f0-98b2-4e2c-98b4-99ffe8a99284", "Role for ADMIN", "Admin", "ADMIN" },
+                    { new Guid("5f7ab3cc-29e0-4fc4-938b-433508ae4f4d"), "ebb4ab7b-eea5-4edd-8d86-05c35ddc0dae", "Role for USER", "User", "USER" }
                 });
 
             migrationBuilder.CreateIndex(

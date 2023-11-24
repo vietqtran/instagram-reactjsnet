@@ -8,6 +8,6 @@ namespace vietqtran.Models.Enums
 {
 	public enum NotificationType
 	{
-		NewFollower, RequestFollow, LikeStory, LikePost, RequestBestFriend, MentionComment, NewComment
+		NewFollower, LikeStory, LikePost, MentionComment, NewComment
 	}
 }

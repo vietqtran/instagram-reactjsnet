@@ -12,7 +12,7 @@ using vietqtran.DataAccess.Data;
 namespace vietqtran.DataLayer.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20231112115301_init")]
+    [Migration("20231124101256_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -310,6 +310,9 @@ namespace vietqtran.DataLayer.Migrations
 
                     b.Property<string>("Content")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ContentMedia")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreateAt")
@@ -776,16 +779,16 @@ namespace vietqtran.DataLayer.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("e9470f1f-d162-4a82-bea8-64e2de4574f3"),
-                            ConcurrencyStamp = "ffb05549-74e0-4474-bc40-b8f051c469f2",
+                            Id = new Guid("42611a4e-3a67-4300-9977-a9ee16ab40aa"),
+                            ConcurrencyStamp = "f832f2f0-98b2-4e2c-98b4-99ffe8a99284",
                             Description = "Role for ADMIN",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = new Guid("0805ce18-dc94-4db6-834c-a20317d0d8a1"),
-                            ConcurrencyStamp = "ec454e73-c3c3-44e2-9407-625e3ac79e15",
+                            Id = new Guid("5f7ab3cc-29e0-4fc4-938b-433508ae4f4d"),
+                            ConcurrencyStamp = "ebb4ab7b-eea5-4edd-8d86-05c35ddc0dae",
                             Description = "Role for USER",
                             Name = "User",
                             NormalizedName = "USER"
@@ -885,7 +888,7 @@ namespace vietqtran.DataLayer.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 11, 12, 11, 53, 0, 845, DateTimeKind.Utc).AddTicks(1352));
+                        .HasDefaultValue(new DateTime(2023, 11, 24, 10, 12, 56, 504, DateTimeKind.Utc).AddTicks(9415));
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(450)");
@@ -900,9 +903,6 @@ namespace vietqtran.DataLayer.Migrations
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsLocked")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsPrivateAccount")
                         .HasColumnType("bit");
 
                     b.Property<DateTime>("LastOfflineTime")
