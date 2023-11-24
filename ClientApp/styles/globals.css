@@ -114,3 +114,7 @@ code {
 .modal-keyframe {
    animation: showOptionsModal .1s linear;
 }
+
+.menu-shadow {
+   box-shadow: 2px 4px 12px rgba(0, 0, 0, .15);
+}
