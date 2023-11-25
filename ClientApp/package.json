@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-build-classic": "^40.1.0",
+    "@ckeditor/ckeditor5-react": "^6.2.0",
     "@react-native-async-storage/async-storage": "^1.19.5",
     "@types/slick-carousel": "^1.6.40",
     "axios": "^1.6.2",

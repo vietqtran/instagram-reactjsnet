@@ -1,25 +1,23 @@
-import React, { useCallback, useState } from "react"
+import React, { useCallback } from "react"
 
-import Image from "next/image"
 import { useDropzone } from "react-dropzone"
 
-export default function CreatePost() {
-   const [files, setFiles] = useState<FileList | null>()
+interface CreatePostProps {
+   setFiles: (files: FileList) => void
+   setShowPreviewPost: (show: boolean) => void
+}
 
-   // const handleSelectFile = () => {
-   //    document.getElementById("fileInput")?.click()
-   // }
-
-   const filesInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      const files: FileList | null = e.target.files || null
-      if (files) {
-         setFiles(files)
-      }
-   }
-
-   const onDrop = useCallback((acceptedFiles: any) => {
-      setFiles(acceptedFiles)
-   }, [])
+export default function CreatePost({
+   setFiles,
+   setShowPreviewPost,
+}: Readonly<CreatePostProps>) {
+   const onDrop = useCallback(
+      (acceptedFiles: any) => {
+         setFiles(acceptedFiles)
+         setShowPreviewPost(true)
+      },
+      [setFiles, setShowPreviewPost]
+   )
 
    const { getRootProps, getInputProps } = useDropzone({
       onDrop,
@@ -39,26 +37,6 @@ export default function CreatePost() {
                className='w-full aspect-square grid place-items-center'
                {...getRootProps()}
             >
-               {files &&
-                  Array.from(files).map((f, i) => {
-                     return (
-                        <div key={i}>
-                           {f.type.startsWith("image") && (
-                              <Image
-                                 className='w-auto h-auto'
-                                 width={100}
-                                 height={100}
-                                 alt=''
-                                 priority
-                                 src={URL.createObjectURL(f)}
-                              />
-                           )}
-                           {f.type.startsWith("video") && (
-                              <video src={URL.createObjectURL(f)} controls />
-                           )}
-                        </div>
-                     )
-                  })}
                <div className='flex flex-col items-center'>
                   <svg
                      aria-label='Icon to represent media such as images or videos'
@@ -89,7 +67,6 @@ export default function CreatePost() {
                      <input
                         accept='image/*,video/*'
                         {...getInputProps()}
-                        onChange={filesInputChange}
                         type='file'
                         className='hidden'
                         multiple

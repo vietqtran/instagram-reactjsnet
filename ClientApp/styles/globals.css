@@ -118,3 +118,27 @@ code {
 .menu-shadow {
    box-shadow: 2px 4px 12px rgba(0, 0, 0, .15);
 }
+
+/** Start Override CKEditor CSS */
+
+.ck-editor__editable {
+   border: none !important;
+   outline: none !important;
+   padding: 0 !important;
+   margin: 0 !important;
+   min-height: 180px !important;
+   max-height: 300px !important;
+   max-width: calc(323px - 32px) !important;
+   word-wrap: break-word !important;
+   overflow: auto !important;
+}
+
+.ck-sticky-panel {
+   display: none !important;
+}
+
+.ck-editor__editable:focus {
+   box-shadow: none !important;
+}
+
+/** End Override CKEditor CSS */

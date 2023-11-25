@@ -2,19 +2,35 @@ import React, { useState } from "react"
 
 import CreateOutline from "@components/Icons/Create/CreateOutline"
 import CreatePost from "../CreatePost"
+import { CreatePostPreview } from "./CreatePostPreview"
 import Overlay from "../Overlay"
 
 interface ExploreButtonProps {
    tab: string
 }
 
-function CreateButton({ tab }: ExploreButtonProps) {
+function CreateButton({ tab }: Readonly<ExploreButtonProps>) {
+   const [files, setFiles] = useState<FileList | null>()
+
    const [showModal, setShowModal] = useState(false)
+   const [showPreviewPost, setShowPreviewPost] = useState(false)
+
    return (
       <>
-         {showModal === true && (
+         {showModal === true && showPreviewPost === false && (
             <Overlay setShow={setShowModal} show={showModal}>
-               <CreatePost />
+               <CreatePost
+                  setShowPreviewPost={setShowPreviewPost}
+                  setFiles={setFiles}
+               />
+            </Overlay>
+         )}
+         {showModal === true && showPreviewPost === true && (
+            <Overlay setShow={setShowModal} show={showModal}>
+               <CreatePostPreview
+                  setShowPreviewPost={setShowPreviewPost}
+                  files={files}
+               />
             </Overlay>
          )}
          <div
