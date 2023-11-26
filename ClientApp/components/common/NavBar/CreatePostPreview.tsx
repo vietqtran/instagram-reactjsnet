@@ -20,7 +20,7 @@ export const CreatePostPreview = ({
    setShowPreviewPost,
 }: CreatePostPreviewProps) => {
    const [backConfirm, setBackConfirm] = useState(false)
-   const [showWriteContent, setShowWriteContent] = useState(true)
+   const [showWriteContent, setShowWriteContent] = useState(false)
    console.log("render")
    return (
       <div>
@@ -36,14 +36,26 @@ export const CreatePostPreview = ({
                      <GrLinkPrevious />
                   </span>
                   <span className='text-sm font-semibold'>Preview</span>
-                  <button
-                     onClick={() => {
-                        setShowWriteContent(true)
-                     }}
-                     className='text-sm py-2 px-4 cursor-pointer absolute right-0 font-semibold text-blue-500 hover:text-blue-700 top-[50%] translate-y-[-50%]'
-                  >
-                     Next
-                  </button>
+                  {!showWriteContent && (
+                     <button
+                        onClick={() => {
+                           setShowWriteContent(true)
+                        }}
+                        className='text-sm py-2 px-4 cursor-pointer absolute right-0 font-semibold text-blue-500 hover:text-blue-700 top-[50%] translate-y-[-50%]'
+                     >
+                        Next
+                     </button>
+                  )}
+                  {showWriteContent && (
+                     <button
+                        onClick={() => {
+                           setShowWriteContent(true)
+                        }}
+                        className='text-sm py-2 px-4 cursor-pointer absolute right-0 font-semibold text-blue-500 hover:text-blue-700 top-[50%] translate-y-[-50%]'
+                     >
+                        Share
+                     </button>
+                  )}
                </div>
                <div
                   className={`${

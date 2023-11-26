@@ -1,7 +1,9 @@
 // components/MyEditor.tsx
 
+import React, { useEffect, useState } from "react"
+
+import { CKEditor as CKEditorComponent } from "@ckeditor/ckeditor5-react"
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic"
-import React from "react"
 import dynamic from "next/dynamic"
 import { stripHtml } from "@utils/helper"
 
@@ -10,15 +12,9 @@ interface MyEditorProps {
    setData: (data: string) => void
 }
 
-// Import CKEditor dynamically and disable server-side rendering for it
-const CKEditor = dynamic(
-   () => import("@ckeditor/ckeditor5-react").then((module) => module.CKEditor),
-   { ssr: false }
-)
-
 const Editor: React.FC<MyEditorProps> = ({ data, setData }) => {
    return (
-      <CKEditor
+      <CKEditorComponent
          editor={ClassicEditor}
          config={{
             placeholder: "Write a caption...",

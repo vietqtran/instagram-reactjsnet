@@ -14,6 +14,7 @@
     "@react-native-async-storage/async-storage": "^1.19.5",
     "@types/slick-carousel": "^1.6.40",
     "axios": "^1.6.2",
+    "cloudinary-react": "^1.8.1",
     "emoji-picker-react": "^4.5.16",
     "firebase": "^10.6.0",
     "next": "14.0.2",
