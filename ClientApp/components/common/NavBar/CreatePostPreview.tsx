@@ -9,6 +9,7 @@ import { Swiper, SwiperSlide } from "swiper/react"
 import { CreatePostPreviewCaption } from "./CreatePostPreviewCaption"
 import { GrLinkPrevious } from "react-icons/gr"
 import Image from "next/image"
+import { uploadFiles } from "@utils/upload/clouldinaryUpload"
 
 type CreatePostPreviewProps = {
    files: FileList | null | undefined
@@ -21,17 +22,26 @@ export const CreatePostPreview = ({
 }: CreatePostPreviewProps) => {
    const [backConfirm, setBackConfirm] = useState(false)
    const [showWriteContent, setShowWriteContent] = useState(false)
-   console.log("render")
+
+   const handleSharePost = async () => {
+      if (files) {
+         const imageLinks = await uploadFiles(files).then((res) => {
+            return res
+         })
+         console.log(imageLinks)
+      }
+   }
+
    return (
       <div>
-         <div className='w-fit h-auto relative flex items-center justify-center modal-keyframe'>
+         <div className='modal-keyframe relative flex h-auto w-fit items-center justify-center'>
             <div className='rounded-lg bg-white'>
-               <div className='w-full text-center py-2 v-border-b relative'>
+               <div className='v-border-b relative w-full py-2 text-center'>
                   <span
                      onClick={() => {
                         setBackConfirm(true)
                      }}
-                     className='py-2 px-4 cursor-pointer text-lg absolute block left-0 top-[50%] translate-y-[-50%] '
+                     className='absolute left-0 top-[50%] block translate-y-[-50%] cursor-pointer px-4 py-2 text-lg'
                   >
                      <GrLinkPrevious />
                   </span>
@@ -41,17 +51,15 @@ export const CreatePostPreview = ({
                         onClick={() => {
                            setShowWriteContent(true)
                         }}
-                        className='text-sm py-2 px-4 cursor-pointer absolute right-0 font-semibold text-blue-500 hover:text-blue-700 top-[50%] translate-y-[-50%]'
+                        className='absolute right-0 top-[50%] translate-y-[-50%] cursor-pointer px-4 py-2 text-sm font-semibold text-blue-500 hover:text-blue-700'
                      >
                         Next
                      </button>
                   )}
                   {showWriteContent && (
                      <button
-                        onClick={() => {
-                           setShowWriteContent(true)
-                        }}
-                        className='text-sm py-2 px-4 cursor-pointer absolute right-0 font-semibold text-blue-500 hover:text-blue-700 top-[50%] translate-y-[-50%]'
+                        onClick={handleSharePost}
+                        className='absolute right-0 top-[50%] translate-y-[-50%] cursor-pointer px-4 py-2 text-sm font-semibold text-blue-500 hover:text-blue-700'
                      >
                         Share
                      </button>
@@ -62,14 +70,14 @@ export const CreatePostPreview = ({
                      showWriteContent ? "w-[calc(726px+322px)]" : "w-[726px]"
                   } flex items-start justify-center duration-200 ease-in-out`}
                >
-                  <div className='w-[726px] h-[726px] relative bg-black text-white'>
+                  <div className='relative h-[726px] w-[726px] bg-black text-white'>
                      <div
-                        className={`cursor-pointer text-2xl z-40 swiper-arrow after:hidden absolute top-[50%] translate-y-[-50%] left-0 swiper-button-prev`}
+                        className={`swiper-arrow swiper-button-prev absolute left-0 top-[50%] z-40 translate-y-[-50%] cursor-pointer text-2xl after:hidden`}
                      >
                         <IoIosArrowDropleftCircle />
                      </div>
                      <div
-                        className={`cursor-pointer text-2xl z-40 swiper-arrow after:hidden absolute top-[50%] translate-y-[-50%] right-0 swiper-button-next`}
+                        className={`swiper-arrow swiper-button-next absolute right-0 top-[50%] z-40 translate-y-[-50%] cursor-pointer text-2xl after:hidden`}
                      >
                         <IoIosArrowDroprightCircle />
                      </div>
@@ -91,16 +99,16 @@ export const CreatePostPreview = ({
                      </span>`
                            },
                         }}
-                        className={`w-full h-full slider`}
+                        className={`slider h-full w-full`}
                      >
                         <div
-                           className={`z-10 absolute flex items-center justify-center bottom-[15px] w-full swiper-pagination`}
+                           className={`swiper-pagination absolute bottom-[15px] z-10 flex w-full items-center justify-center`}
                         ></div>
                         {Array.from(files ?? []).map((file, index) => {
                            return (
                               <SwiperSlide key={file.name}>
                                  <Image
-                                    className='w-full h-full object-cover z-0'
+                                    className='z-0 h-full w-full object-cover'
                                     alt='post-preview-image'
                                     src={URL.createObjectURL(file)}
                                     width={5000}
@@ -117,18 +125,18 @@ export const CreatePostPreview = ({
             </div>
          </div>
          {backConfirm === true && (
-            <div className='w-[100vw] z-50 grid place-items-center h-[100vh] absolute top-0 left-0 bg-black bg-opacity-50'>
+            <div className='absolute left-0 top-0 z-50 grid h-[100vh] w-[100vw] place-items-center bg-black bg-opacity-50'>
                <div className='w-[400px] rounded-lg bg-white'>
-                  <div className='flex flex-col items-center py-8 justify-center v-border-b'>
-                     <h1 className=' text-xl'>Discard post?</h1>
-                     <p className='text-gray-600 text-sm'>{`If you leave, your edits won't be saved.`}</p>
+                  <div className='v-border-b flex flex-col items-center justify-center py-8'>
+                     <h1 className='text-xl'>Discard post?</h1>
+                     <p className='text-sm text-gray-600'>{`If you leave, your edits won't be saved.`}</p>
                   </div>
                   <div className='v-border-b py-3'>
                      <button
                         onClick={() => {
                            setShowPreviewPost(false)
                         }}
-                        className='font-semibold text-red-500 text-sm block h-full w-full'
+                        className='block h-full w-full text-sm font-semibold text-red-500'
                      >
                         Discard
                      </button>
@@ -138,7 +146,7 @@ export const CreatePostPreview = ({
                         onClick={() => {
                            setBackConfirm(false)
                         }}
-                        className=' text-sm block h-full w-full'
+                        className='block h-full w-full text-sm'
                      >
                         Cancel
                      </button>
