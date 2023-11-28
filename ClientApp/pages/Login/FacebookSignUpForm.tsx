@@ -1,10 +1,7 @@
 import React, { FormEvent, useState } from "react"
 
-import AuthLayout from "@components/layouts/AuthLayout"
 import Avatar from "@components/common/User/Avatar"
 import { FacebookSignUpUser } from "@type/FacebookSignUpUser"
-import FormParent from "@pages/Login/FormParent"
-import Image from "next/image"
 import Link from "next/link"
 import LoginButton from "@pages/Login/LoginButton"
 import LoginInputPassword from "@components/common/LoginInputPassword"
@@ -36,6 +33,7 @@ const FacebookSignUpForm = () => {
          name: name,
          password: password,
          username: username,
+         avatar: "",
       }
       await register(signUpData)
          .then((response: any) => {

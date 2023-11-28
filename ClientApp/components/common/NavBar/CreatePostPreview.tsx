@@ -1,15 +1,16 @@
-import {
-   IoIosArrowDropleftCircle,
-   IoIosArrowDroprightCircle,
-} from "react-icons/io"
-import { Navigation, Pagination } from "swiper/modules"
 import React, { useState } from "react"
-import { Swiper, SwiperSlide } from "swiper/react"
 
 import { CreatePostPreviewCaption } from "./CreatePostPreviewCaption"
 import { GrLinkPrevious } from "react-icons/gr"
-import Image from "next/image"
 import { uploadFiles } from "@utils/upload/clouldinaryUpload"
+import Slider from "../Slider"
+import { Post } from "@type/models/Post"
+import { User } from "@type/User"
+import { useSelector } from "react-redux"
+import { RootState } from "@redux/reducers"
+import { Visibility } from "@type/enum/Visibility"
+import { PostRequest } from "@type/requestModels/PostRequest"
+import { addPost } from "@utils/api/postApi"
 
 type CreatePostPreviewProps = {
    files: FileList | null | undefined
@@ -22,13 +23,23 @@ export const CreatePostPreview = ({
 }: CreatePostPreviewProps) => {
    const [backConfirm, setBackConfirm] = useState(false)
    const [showWriteContent, setShowWriteContent] = useState(false)
+   const [postCaption, setPostCaption] = useState("")
+   const user: User = useSelector((state: RootState) => state.user)
 
    const handleSharePost = async () => {
       if (files) {
          const imageLinks = await uploadFiles(files).then((res) => {
             return res
          })
-         console.log(imageLinks)
+         const post: PostRequest = {
+            title: postCaption,
+            userId: user.id,
+            visibility: Visibility.Public,
+         }
+         const postResponse = await addPost(post).then((res) => {
+            return res
+         })
+         console.log(postResponse)
       }
    }
 
@@ -70,57 +81,13 @@ export const CreatePostPreview = ({
                      showWriteContent ? "w-[calc(726px+322px)]" : "w-[726px]"
                   } flex items-start justify-center duration-200 ease-in-out`}
                >
-                  <div className='relative h-[726px] w-[726px] bg-black text-white'>
-                     <div
-                        className={`swiper-arrow swiper-button-prev absolute left-0 top-[50%] z-40 translate-y-[-50%] cursor-pointer text-2xl after:hidden`}
-                     >
-                        <IoIosArrowDropleftCircle />
-                     </div>
-                     <div
-                        className={`swiper-arrow swiper-button-next absolute right-0 top-[50%] z-40 translate-y-[-50%] cursor-pointer text-2xl after:hidden`}
-                     >
-                        <IoIosArrowDroprightCircle />
-                     </div>
-                     <Swiper
-                        navigation={{
-                           nextEl: `.swiper-button-next`,
-                           prevEl: `.swiper-button-prev`,
-                        }}
-                        modules={[Navigation, Pagination]}
-                        allowTouchMove
-                        pagination={{
-                           el: `.swiper-pagination`,
-                           clickable: true,
-                           renderBullet: function (index, className) {
-                              return `<span
-                        key=${index}
-                        class='${className} text-black cursor-pointer block swiper-pagination-dot'
-                     >
-                     </span>`
-                           },
-                        }}
-                        className={`slider h-full w-full`}
-                     >
-                        <div
-                           className={`swiper-pagination absolute bottom-[15px] z-10 flex w-full items-center justify-center`}
-                        ></div>
-                        {Array.from(files ?? []).map((file, index) => {
-                           return (
-                              <SwiperSlide key={file.name}>
-                                 <Image
-                                    className='z-0 h-full w-full object-cover'
-                                    alt='post-preview-image'
-                                    src={URL.createObjectURL(file)}
-                                    width={5000}
-                                    height={5000}
-                                    priority
-                                 />
-                              </SwiperSlide>
-                           )
-                        })}
-                     </Swiper>
-                  </div>
-                  {showWriteContent && <CreatePostPreviewCaption />}
+                  <Slider files={files} />
+                  {showWriteContent && (
+                     <CreatePostPreviewCaption
+                        postCaption={postCaption}
+                        setPostCaption={setPostCaption}
+                     />
+                  )}
                </div>
             </div>
          </div>

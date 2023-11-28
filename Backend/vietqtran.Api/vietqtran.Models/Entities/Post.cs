@@ -15,7 +15,7 @@ namespace vietqtran.Models.Entities
 		public Guid UserId { get; set; }
 		public string Title { get; set; }
 		public DateTime CreatedAt { get; set; }
-		public Visibility Visibility { get; set; }
+		public Visibility Visibility { get; set; } = Visibility.Public;
 		public bool IsPinned { get; set; } = false;
 
 

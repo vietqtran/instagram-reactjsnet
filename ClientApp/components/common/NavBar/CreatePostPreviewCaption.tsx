@@ -10,16 +10,19 @@ import { stripHtml } from "@utils/helper"
 import { useOutsideClick } from "@components/hooks/useClickOutSide"
 import { useSelector } from "react-redux"
 
-type Props = {}
+type CreatePostPreviewCaptionProps = {
+   postCaption: string
+   setPostCaption: (postCaption: string) => void
+}
 
-export const CreatePostPreviewCaption = (props: Props) => {
+export const CreatePostPreviewCaption = ({
+   postCaption,
+   setPostCaption,
+}: CreatePostPreviewCaptionProps) => {
    const [showEmoji, setShowEmoji] = useState(false)
-   const [postCaption, setPostCaption] = useState("")
 
    const chooseEmoji = (emojiObject: EmojiClickData, event: MouseEvent) => {
-      setPostCaption((prev) =>
-         prev.replace(/<\/p>$/, emojiObject.emoji + "</p>")
-      )
+      setPostCaption(postCaption.replace(/<\/p>$/, emojiObject.emoji + "</p>"))
    }
    const closeEmojiBoard = () => {
       setShowEmoji(false)
@@ -31,14 +34,14 @@ export const CreatePostPreviewCaption = (props: Props) => {
 
    return (
       <div className={`flex-1`}>
-         <div className='p-4 '>
+         <div className='p-4'>
             <div className='flex items-center justify-start pb-3'>
                <Avatar size={28} src={user.avatar ?? "/assets/logo/user.png"} />
-               <span className='font-semibold text-sm pl-3'>vietqtran</span>
+               <span className='pl-3 text-sm font-semibold'>vietqtran</span>
             </div>
             <Editor data={postCaption} setData={setPostCaption} />
          </div>
-         <div className='relative flex items-center justify-between text-sm py-2 v-border-b px-4'>
+         <div className='v-border-b relative flex items-center justify-between px-4 py-2 text-sm'>
             <div
                onClick={() => {
                   setShowEmoji((prev) => !prev)
@@ -47,11 +50,10 @@ export const CreatePostPreviewCaption = (props: Props) => {
             >
                <FaRegFaceSmile />
             </div>
-            <div>{stripHtml(postCaption).length.toLocaleString()}/2,200</div>
             {showEmoji && (
                <div
                   ref={ref}
-                  className='absolute z-50 top-[-100px] right-[100%]'
+                  className='absolute right-[100%] top-[-100px] z-50'
                >
                   <EmojiPicker onEmojiClick={chooseEmoji} />
                </div>
