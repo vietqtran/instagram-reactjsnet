@@ -5,22 +5,34 @@ import { HiOutlineDotsHorizontal } from "react-icons/hi"
 import Link from "next/link"
 import Overlay from "../Overlay"
 import PostOptions from "./PostOptions"
+import { PostResponse } from "@type/responseModel/postResponse"
 import PostUserAvatar from "./PostUserAvatar"
 import { UserVM } from "@type/UserVM"
 
 interface PostHeaderProps {
    type: string
    user: UserVM
+   post: PostResponse
+   handleDelete: () => void
 }
 
-function PostHeader({ type, user }: Readonly<PostHeaderProps>) {
+function PostHeader({
+   type,
+   user,
+   post,
+   handleDelete,
+}: Readonly<PostHeaderProps>) {
    const [showOptions, setShowOptions] = useState(false)
 
    return (
       <>
          {showOptions && (
             <Overlay show={showOptions} setShow={setShowOptions}>
-               <PostOptions setShowOptions={setShowOptions} />
+               <PostOptions
+                  handleDelete={handleDelete}
+                  userId={user.id}
+                  setShowOptions={setShowOptions}
+               />
             </Overlay>
          )}
          <div className='flex w-full items-center justify-between pb-3 pt-2 text-[13px]'>

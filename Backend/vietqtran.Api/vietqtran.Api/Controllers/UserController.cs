@@ -38,6 +38,13 @@ namespace vietqtran.Api.Controllers
 			_jwtConfig = jwtConfig;
 		}
 
+		/// <summary>
+		/// Retrieves a collection of all users.
+		/// </summary>
+		/// <returns>
+		/// An asynchronous task representing the HTTP response.
+		/// Returns an HTTP 200 (OK) status with a collection of <see cref="AppUserVM"/> if the operation is successful.
+		/// </returns>
 		[HttpGet]
 		[ProducesResponseType(200, Type = typeof(ICollection<AppUserVM>))]
 		public async Task<IActionResult> GetAsync ( )
@@ -46,6 +53,15 @@ namespace vietqtran.Api.Controllers
 			return Ok(_mapper.Map<ICollection<AppUserVM>>(users));
 		}
 
+		/// <summary>
+		/// Registers a new user.
+		/// </summary>
+		/// <param name="signUpCredentials">The credentials for user registration.</param>
+		/// <returns>
+		/// An asynchronous task representing the HTTP response.
+		/// Returns an HTTP 200 (OK) status with the registration result if successful.
+		/// Returns an HTTP 400 (Bad Request) status if registration fails.
+		/// </returns>
 		[HttpPost("register")]
 		[AllowAnonymous]
 		public async Task<IActionResult> Register (SignUpCredentials signUpCredentials)
@@ -59,6 +75,15 @@ namespace vietqtran.Api.Controllers
 			return BadRequest(result);
 		}
 
+		/// <summary>
+		/// Authenticates a user and generates an access token.
+		/// </summary>
+		/// <param name="loginCredentials">The credentials for user login.</param>
+		/// <returns>
+		/// An asynchronous task representing the HTTP response.
+		/// Returns an HTTP 200 (OK) status with the login result and sets an authentication cookie.
+		/// Returns an HTTP 404 (Not Found) status if login fails.
+		/// </returns>
 		[HttpPost("login")]
 		[AllowAnonymous]
 		public async Task<IActionResult> Login (LoginCredentials loginCredentials)
@@ -69,12 +94,12 @@ namespace vietqtran.Api.Controllers
 				return Ok(StatusCodes.Status404NotFound);
 			}
 
-			HttpContext.Response.Cookies.Append("token", result.AccessToken, new CookieOptions()
-			{
-				HttpOnly = true,
-				SameSite = SameSiteMode.Strict,
-				Secure = true
-			});
+			//HttpContext.Response.Cookies.Append("token", result.AccessToken, new CookieOptions()
+			//{
+			//	HttpOnly = true,
+			//	SameSite = SameSiteMode.Strict,
+			//	Secure = true
+			//});
 
 			//var token = Request.Cookies["token"];
 

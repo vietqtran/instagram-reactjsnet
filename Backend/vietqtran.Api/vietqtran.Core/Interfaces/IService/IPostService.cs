@@ -12,8 +12,11 @@ namespace vietqtran.Core.Interfaces.IService
 	public interface IPostService
 	{
 		public Task<IEnumerable<PostResponse>> GetAllPosts ( );
-		public Task<Post> GetPost (int id);
+		public Task<PostResponse> GetPost (Guid id);
+		public Task<IEnumerable<PostResponse>> GetPostByUserId (Guid userId);
+
 		public Task<PostResponse?> AddPost (PostRequest post);
+
 		public Task<bool> DeletePost (Guid id);
 	}
 }

@@ -4,23 +4,45 @@ import HeartOutline from "@components/Icons/Heart/HeartOutline"
 import Link from "next/link"
 import PostContent from "./PostContent"
 import PostHeader from "./PostHeader"
+import { PostResponse } from "@type/responseModel/postResponse"
 import PostSlider from "./PostSlider"
 import React from "react"
 import SaveOutlineBig from "@components/Icons/Save/SaveOutlineBig"
 import ShareOutline from "@components/Icons/Share/ShareOutline"
-import { PostResponse } from "@type/responseModel/postResponse"
+import { deletePost } from "@utils/api/postApi"
 
 interface PostProps {
    type: string
    post: PostResponse
+   updateAfterDeletePost: (postId: string) => void
 }
 
-export default function Post({ type, post }: Readonly<PostProps>) {
-   console.log(post)
+export default function Post({
+   type,
+   post,
+   updateAfterDeletePost,
+}: Readonly<PostProps>) {
+   const handelDelete = async () => {
+      const deleteResult: boolean = await deletePost(post.id).then(
+         (res: any) => {
+            console.log(res)
+            return res
+         }
+      )
+
+      if (deleteResult === true) {
+         updateAfterDeletePost(post.id)
+      }
+   }
    return (
       <div className='v-border-b w-full max-w-[470px] select-none pt-5'>
          <div className='w-full px-2'>
-            <PostHeader user={post.user} type={type} />
+            <PostHeader
+               handleDelete={handelDelete}
+               post={post}
+               user={post.user}
+               type={type}
+            />
          </div>
          <div className='w-full px-2'>
             <PostSlider images={post.postImages} id={type} />

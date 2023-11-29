@@ -80,9 +80,32 @@ namespace vietqtran.DataLayer.Repositories
 			}
 		}
 
-		public Task<Post> GetPost (int id)
+		public async Task<Post> GetPost (Guid id)
 		{
-			throw new NotImplementedException();
+			try {
+				var post = await _dataContext.Posts.FindAsync(id);
+
+				if (post == null) return null;
+
+				await _dataContext.Entry(post).Collection(p => p.PostImages).LoadAsync();
+				await _dataContext.Entry(post).Reference(p => p.User).LoadAsync();
+
+				return post;
+			} catch (Exception e) {
+				return null;
+			}
+		}
+
+		public async Task<ICollection<Post>> GetPostByUserId (Guid userId)
+		{
+			try {
+				var posts = await _dataContext.Posts.Where(p => p.UserId == userId).Include(p => p.PostImages)
+					.Include(p => p.User)
+					.ToListAsync();
+				return posts;
+			} catch (Exception e) {
+				return null;
+			}
 		}
 	}
 }

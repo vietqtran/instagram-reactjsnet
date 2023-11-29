@@ -10,8 +10,11 @@ namespace vietqtran.Core.Interfaces.IRepository
 	public interface IPostRepository
 	{
 		public Task<ICollection<Post>> GetAllPosts ( );
-		public Task<Post> GetPost (int id);
+		public Task<Post> GetPost (Guid id);
+		public Task<ICollection<Post>> GetPostByUserId (Guid userId);
+
 		public Task<Guid> AddPost (Post post);
+
 		public Task<bool> DeletePost (Guid id);
 
 		public Task<bool> AddImages (ICollection<string> postImages, Guid postId);

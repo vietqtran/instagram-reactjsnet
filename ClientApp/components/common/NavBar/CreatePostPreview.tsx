@@ -2,15 +2,16 @@ import React, { useState } from "react"
 
 import { CreatePostPreviewCaption } from "./CreatePostPreviewCaption"
 import { GrLinkPrevious } from "react-icons/gr"
-import { uploadFiles } from "@utils/upload/clouldinaryUpload"
-import Slider from "../Slider"
 import { Post } from "@type/models/Post"
-import { User } from "@type/User"
-import { useSelector } from "react-redux"
-import { RootState } from "@redux/reducers"
-import { Visibility } from "@type/enum/Visibility"
 import { PostRequest } from "@type/requestModels/PostRequest"
+import { PostResponse } from "@type/responseModel/postResponse"
+import { RootState } from "@redux/reducers"
+import Slider from "../Slider"
+import { User } from "@type/User"
+import { Visibility } from "@type/enum/Visibility"
 import { addPost } from "@utils/api/postApi"
+import { uploadFiles } from "@utils/upload/clouldinaryUpload"
+import { useSelector } from "react-redux"
 
 type CreatePostPreviewProps = {
    files: FileList | null | undefined
@@ -37,10 +38,15 @@ export const CreatePostPreview = ({
             visibility: Visibility.Public,
             postImages: imageLinks,
          }
-         const postResponse = await addPost(post).then((res) => {
-            return res
-         })
-         console.log(postResponse)
+         const postResponse: PostResponse = await addPost(post).then(
+            (res: any) => {
+               return res
+            }
+         )
+
+         if (!(postResponse.id === "" || postResponse.id === null)) {
+            window.location.reload()
+         }
       }
    }
 
@@ -83,12 +89,12 @@ export const CreatePostPreview = ({
                   } flex items-start justify-center duration-200 ease-in-out`}
                >
                   <Slider files={files} />
-                  {showWriteContent && (
+                  {/* {showWriteContent && (
                      <CreatePostPreviewCaption
                         postCaption={postCaption}
                         setPostCaption={setPostCaption}
                      />
-                  )}
+                  )} */}
                </div>
             </div>
          </div>

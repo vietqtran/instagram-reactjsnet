@@ -3,15 +3,20 @@ import { FaHeart, FaMessage } from "react-icons/fa6"
 import CarouselSolid from "@components/Icons/Carousel/CarouselSolid"
 import Image from "next/image"
 import PinSolid from "@components/Icons/Pin/PinSolid"
+import { PostResponse } from "@type/responseModel/postResponse"
 import React from "react"
 
-export default function PostItem() {
+type PostItemProps = {
+   post: PostResponse
+}
+
+export default function PostItem({ post }: Readonly<PostItemProps>) {
    return (
       <div className='group relative col-span-1 aspect-square overflow-hidden h-full w-full cursor-pointer'>
-         <div>
+         <div className='w-full h-full'>
             <Image
                alt='post'
-               src={"/assets/images/post_fake.jpg"}
+               src={post.postImages[0]}
                width={500}
                height={500}
                priority
@@ -31,8 +36,8 @@ export default function PostItem() {
          </div>
 
          <div className='absolute top-0 right-0 p-2 z-0'>
-            <CarouselSolid />
-            <PinSolid />
+            {post.postImages.length > 1 && !post.isPinned && <CarouselSolid />}
+            {post.isPinned && <PinSolid />}
          </div>
       </div>
    )

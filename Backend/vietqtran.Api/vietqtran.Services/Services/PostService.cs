@@ -52,6 +52,7 @@ namespace vietqtran.Services.Services
 			return null;
 		}
 
+
 		public async Task<bool> DeletePost (Guid id)
 		{
 			var result = await _postRepository.DeletePost(id);
@@ -59,13 +60,13 @@ namespace vietqtran.Services.Services
 			return result;
 		}
 
-		public async Task<IEnumerable<PostResponse>> GetAllPosts ( )
+		public async Task<IEnumerable<PostResponse>?> GetAllPosts ( )
 		{
-			var posts = _postRepository.GetAllPosts();
+			var posts = await _postRepository.GetAllPosts();
 
-			if (posts.Result == null) return null;
+			if (posts == null) return null;
 
-			var result = posts.Result.Select(post => new PostResponse
+			var result = posts.Select(post => new PostResponse
 			{
 				CreatedAt = post.CreatedAt,
 				Id = post.Id,
@@ -80,9 +81,44 @@ namespace vietqtran.Services.Services
 			return result;
 		}
 
-		public Task<Post> GetPost (int id)
+		public async Task<PostResponse> GetPost (Guid id)
 		{
-			throw new NotImplementedException();
+			var post = await _postRepository.GetPost(id);
+
+			if (post == null) throw new Exception("Post not found");
+
+			return new PostResponse
+			{
+				CreatedAt = post.CreatedAt,
+				Id = post.Id,
+				IsPinned = post.IsPinned,
+				Title = post.Title,
+				UserId = post.UserId,
+				Visibility = post.Visibility,
+				PostImages = post.PostImages.Select(pi => pi.Link).ToList(),
+				User = _mapper.Map<AppUserVM>(post.User)
+			};
+		}
+
+		public async Task<IEnumerable<PostResponse>?> GetPostByUserId (Guid userId)
+		{
+			var posts = await _postRepository.GetPostByUserId(userId);
+
+			if (posts == null) return null;
+
+			var result = posts.Select(post => new PostResponse
+			{
+				CreatedAt = post.CreatedAt,
+				Id = post.Id,
+				IsPinned = post.IsPinned,
+				Title = post.Title,
+				UserId = post.UserId,
+				Visibility = post.Visibility,
+				PostImages = post.PostImages.Select(pi => pi.Link).ToList(),
+				User = _mapper.Map<AppUserVM>(post.User)
+			});
+
+			return result;
 		}
 	}
 }
