@@ -8,7 +8,7 @@ namespace vietqtran.Models.Entities.Relations
 {
 	public class BestFriend
 	{
-		public long Id { get; set; }
+		public Guid Id { get; set; }
 		public Guid RequestUserId { get; set; }
 		public Guid ResponseUserId { get; set; }
 		public bool IsConfirmed { get; set; }

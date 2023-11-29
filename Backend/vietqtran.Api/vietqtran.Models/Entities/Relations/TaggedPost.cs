@@ -8,9 +8,9 @@ namespace vietqtran.Models.Entities.Relations
 {
 	public class TaggedPost
 	{
-		public long Id { get; set; }
+		public Guid Id { get; set; }
 		public Guid TaggedId { get; set; }
-		public long PostId { get; set; }
+		public Guid PostId { get; set; }
 
 
 

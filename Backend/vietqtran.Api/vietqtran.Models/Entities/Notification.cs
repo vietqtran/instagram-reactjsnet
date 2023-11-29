@@ -9,7 +9,7 @@ namespace vietqtran.Models.Entities
 {
 	public class Notification
 	{
-		public long Id { get; set; }
+		public Guid Id { get; set; }
 		public bool IsRead { get; set; } = false;
 		public NotificationType Type { get; set; }
 		public DateTime CreateAt { get; set; } = DateTime.Now;
@@ -17,9 +17,9 @@ namespace vietqtran.Models.Entities
 		public Guid UserId { get; set; }
 		public string Content { get; set; }
 		public string? ContentMedia { get; set; }
-		public long? PostId { get; set; }
-		public long? CommentId { get; set; }
-		public long? StoryId { get; set; }
+		public Guid? PostId { get; set; }
+		public Guid? CommentId { get; set; }
+		public Guid? StoryId { get; set; }
 
 
 

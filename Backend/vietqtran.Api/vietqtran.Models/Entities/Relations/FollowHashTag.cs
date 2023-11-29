@@ -8,9 +8,9 @@ namespace vietqtran.Models.Entities.Relations
 {
 	public class FollowHashTag
 	{
-		public long Id { get; set; }
+		public Guid Id { get; set; }
 		public Guid UserId { get; set; }
-		public long HashTagId { get; set; }
+		public Guid HashTagId { get; set; }
 
 
 		//! Reference

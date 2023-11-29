@@ -10,13 +10,13 @@ namespace vietqtran.Models.Entities
 {
 	public class Story
 	{
-		public long Id { get; set; }
+		public Guid Id { get; set; }
 		public Guid UserId { get; set; }
 		[Url]
 		public string MediaLink { get; set; }
 		public string Type { get; set; }
 		public DateTime CreatedAt { get; set; }
-		public long? HighLightId { get; set; }
+		public Guid? HighLightId { get; set; }
 
 		//! Reference
 		public User User { get; set; }

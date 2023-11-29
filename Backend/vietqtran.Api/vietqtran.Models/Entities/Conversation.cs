@@ -9,7 +9,7 @@ namespace vietqtran.Models.Entities
 {
 	public class Conversation
 	{
-		public long Id { get; set; }
+		public Guid Id { get; set; }
 		public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
 		//! Reference

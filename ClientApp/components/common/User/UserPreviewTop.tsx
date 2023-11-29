@@ -5,8 +5,13 @@ import Highlight from "@pages/User/Highlight"
 import React from "react"
 import SettingButton from "../Button/SettingButton"
 import ViewArchiveButton from "../Button/ViewArchiveButton"
+import { User } from "@type/User"
+import { useSelector } from "react-redux"
+import { RootState } from "@redux/reducers"
 
 const UserPreviewTop = () => {
+   const user: User = useSelector((state: RootState) => state.user)
+
    return (
       <div className='w-full max-w-[935px] px-2 md:px-0 md:pb-10'>
          <div className='flex w-full items-center justify-start'>
@@ -14,7 +19,7 @@ const UserPreviewTop = () => {
                <AvatarWithStory
                   hasStories={true}
                   size={150}
-                  src='/assets/logo/user.png'
+                  src={user.avatar ?? "/assets/logo/user.png"}
                />
             </div>
 
@@ -31,7 +36,7 @@ const UserPreviewTop = () => {
                   <span className='order-1 text-[19px] font-semibold'>
                      vietqtran
                   </span>
-                  <div className='order-3 mt-3 flex flex-nowrap md:w-fit w-full md:order-2 md:mt-0'>
+                  <div className='order-3 mt-3 flex w-full flex-nowrap md:order-2 md:mt-0 md:w-fit'>
                      <EditProfileButton />
                      <ViewArchiveButton />
                   </div>
@@ -40,7 +45,7 @@ const UserPreviewTop = () => {
                   </div>
                </div>
 
-               <div className=' md:block'>
+               <div className='md:block'>
                   <div className='flex items-center'>
                      <div className='mr-8'>
                         <span className='text-[15px]'>

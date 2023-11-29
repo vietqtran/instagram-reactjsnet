@@ -9,7 +9,7 @@ namespace vietqtran.Models.Entities
 {
 	public class HighLight
 	{
-		public long Id { get; set; }
+		public Guid Id { get; set; }
 		public Guid UserId { get; set; }
 		[Url]
 		public string PreviewImage { get; set; }

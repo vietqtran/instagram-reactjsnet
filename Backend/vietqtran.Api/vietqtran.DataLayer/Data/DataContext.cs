@@ -48,6 +48,10 @@ namespace vietqtran.DataAccess.Data
 			modelBuilder.ApplyConfiguration(new FollowHashTagConfiguration());
 			modelBuilder.ApplyConfiguration(new LikeCommentConfiguration());
 			modelBuilder.ApplyConfiguration(new TaggedPostConfiguration());
+			modelBuilder.ApplyConfiguration(new NotificationConfiguration());
+			modelBuilder.ApplyConfiguration(new HighLightConfiguration());
+			modelBuilder.ApplyConfiguration(new ViewStoryConfiguration());
+			modelBuilder.ApplyConfiguration(new PostImageConfiguration());
 
 			modelBuilder.Entity<IdentityUserClaim<Guid>>().ToTable("User_Claims");
 			modelBuilder.Entity<IdentityUserRole<Guid>>().ToTable("User_Roles").HasKey(ur => new { ur.UserId, ur.RoleId });
@@ -77,5 +81,7 @@ namespace vietqtran.DataAccess.Data
 		public DbSet<FollowHashTag> FollowHashTags { get; set; }
 		public DbSet<LikeComment> LikeComments { get; set; }
 		public DbSet<TaggedPost> TaggedPosts { get; set; }
+		public DbSet<ViewStory> ViewsStory { get; set; }
+		public DbSet<PostImage> PostImages { get; set; }
 	}
 }

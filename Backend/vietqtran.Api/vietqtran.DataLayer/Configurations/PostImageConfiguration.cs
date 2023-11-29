@@ -15,9 +15,14 @@ namespace vietqtran.DataLayer.Configurations
 		{
 			builder.ToTable("Post_Images");
 
-			builder.HasKey(pi => new { pi.Id, pi.PostId });
+			builder.HasKey(pi => pi.Id);
 
 			builder.HasIndex(pi => new { pi.PostId, pi.Link });
+
+			builder.HasOne(pi => pi.Post)
+				.WithMany(p => p.PostImages)
+				.HasForeignKey(pi => pi.PostId)
+				.OnDelete(DeleteBehavior.Cascade);
 		}
 	}
 }

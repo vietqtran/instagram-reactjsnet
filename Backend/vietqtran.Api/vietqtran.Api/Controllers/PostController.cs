@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using vietqtran.Core.Interfaces.IService;
 using vietqtran.Models.Entities;
 using vietqtran.Models.RequestModels;
 
@@ -10,16 +11,25 @@ namespace vietqtran.Api.Controllers
 	[ApiController]
 	public class PostController : ControllerBase
 	{
+		private readonly IPostService _postService;
+
+		public PostController (IPostService postService)
+		{
+			_postService = postService;
+		}
+
 		// GET: api/<PostController>
 		[HttpGet]
 		public async Task<IActionResult> GetAllPost ( )
 		{
-			return Ok(200);
+			var result = await _postService.GetAllPosts();
+			if (result == null) return NotFound();
+			return Ok(result);
 		}
 
 		// GET api/<PostController>/5
 		[HttpGet("{id}")]
-		public async Task<IActionResult> GetPost (int id)
+		public async Task<IActionResult> GetPost (Guid id)
 		{
 			return Ok();
 		}
@@ -28,7 +38,16 @@ namespace vietqtran.Api.Controllers
 		[HttpPost]
 		public async Task<IActionResult> AddPost (PostRequest postRequest)
 		{
-			return Ok(postRequest);
+			var result = await _postService.AddPost(postRequest);
+
+			return Ok(result);
+		}
+
+		[HttpDelete("{id}")]
+		public async Task<IActionResult> DeletePost (Guid id)
+		{
+			var isDeleted = await _postService.DeletePost(id);
+			return Ok(isDeleted ? "Delete Succeed" : "Delete Failed");
 		}
 	}
 }

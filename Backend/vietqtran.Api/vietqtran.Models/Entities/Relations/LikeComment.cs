@@ -8,9 +8,9 @@ namespace vietqtran.Models.Entities.Relations
 {
 	public class LikeComment
 	{
-		public long Id { get; set; }
+		public Guid Id { get; set; }
 		public Guid UserId { get; set; }
-		public long CommentId { get; set; }
+		public Guid CommentId { get; set; }
 
 
 

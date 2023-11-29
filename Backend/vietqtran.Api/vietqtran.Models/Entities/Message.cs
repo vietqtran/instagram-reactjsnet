@@ -14,21 +14,21 @@ namespace vietqtran.Models.Entities
 	public class Message
 	{
 		//! Common
-		public long Id { get; set; }
+		public Guid Id { get; set; }
 		public MessageType MessageType { get; set; }
 		public Guid UserId { get; set; }
-		public long ConversationId { get; set; }
+		public Guid ConversationId { get; set; }
 		public DateTime CreatedAt { get; set; }
 		public bool IsDeleted { get; set; }
 		public MessageStatus Status { get; set; }
 		public bool IsReply { get; set; }
-		public long ReplyId { get; set; }
+		public Guid ReplyId { get; set; }
 
 		//! Particilar
 
 		public string Content { get; set; }
-		public long? PostId { get; set; }
-		public long? StoryId { get; set; }
+		public Guid? PostId { get; set; }
+		public Guid? StoryId { get; set; }
 		public string Emoji { get; set; }
 		[Url]
 		public string FileUrl { get; set; }

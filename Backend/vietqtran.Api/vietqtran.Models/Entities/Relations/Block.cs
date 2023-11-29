@@ -8,7 +8,7 @@ namespace vietqtran.Models.Entities.Relations
 {
 	public class Block
 	{
-		public long Id { get; set; }
+		public Guid Id { get; set; }
 		public Guid BlockerId { get; set; }
 		public Guid BlockedId { get; set; }
 		public DateTime CreatedAt { get; set; }

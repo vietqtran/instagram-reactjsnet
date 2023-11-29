@@ -16,7 +16,7 @@ const Avatar: React.FC<AvatarProps> = ({ size, src }) => {
             <Image
                src={src}
                alt='avatar'
-               className='aspect-square h-full w-full'
+               className='aspect-square h-full w-full object-cover'
                width={size}
                height={size}
                priority

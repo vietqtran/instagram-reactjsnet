@@ -1,27 +1,23 @@
 import React, { useState } from "react"
 
-const PostContent = () => {
+interface PostContentProps {
+   content: string
+}
+
+const PostContent = ({ content }: PostContentProps) => {
    const [readMore, setReadMore] = useState(false)
 
    return (
-      <div className='w-full mt-3'>
-         <div className={`${readMore ? "h-auto" : "h-[20px]"} overflow-hidden`}>
-            <span>assdkjhdsbk</span>
-            <br />
-            <span>assdkjhdsbk</span>
-            <br />
-            <span>assdkjhdsbk</span>
-            <br />
-            <span>assdkjhdsbk</span>
-            <br />
-            <span>assdkjhdsbk</span>
-            <br />
-         </div>
+      <div className='mt-3 w-full'>
+         <div
+            dangerouslySetInnerHTML={{ __html: content }}
+            className={`${readMore ? "h-auto" : "h-[20px]"} overflow-hidden`}
+         ></div>
          {!readMore && (
             <div
                onKeyDown={() => {}}
                onClick={() => setReadMore(true)}
-               className='leading-4 cursor-pointer'
+               className='cursor-pointer leading-4'
             >
                <span>...</span>
                <br />

@@ -35,6 +35,7 @@ export const CreatePostPreview = ({
             title: postCaption,
             userId: user.id,
             visibility: Visibility.Public,
+            postImages: imageLinks,
          }
          const postResponse = await addPost(post).then((res) => {
             return res

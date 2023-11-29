@@ -11,7 +11,7 @@ namespace vietqtran.Models.Entities
 {
 	public class Post
 	{
-		public long Id { get; set; }
+		public Guid Id { get; set; }
 		public Guid UserId { get; set; }
 		public string Title { get; set; }
 		public DateTime CreatedAt { get; set; }
@@ -27,5 +27,6 @@ namespace vietqtran.Models.Entities
 		public ICollection<Saved> Saveds { get; set; }
 		public ICollection<PostHashTag> PostHashTags { get; set; }
 		public ICollection<TaggedPost> Tags { get; set; }
+		public ICollection<PostImage> PostImages { get; set; }
 	}
 }

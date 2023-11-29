@@ -8,10 +8,10 @@ namespace vietqtran.Models.Entities.Relations
 {
 	public class Saved
 	{
-		public long Id { get; set; }
+		public Guid Id { get; set; }
 		public Guid UserId { get; set; }
-		public long PostId { get; set; }
-		public long? CollectionId { get; set; }
+		public Guid PostId { get; set; }
+		public Guid? CollectionId { get; set; }
 
 
 		//! Reference 

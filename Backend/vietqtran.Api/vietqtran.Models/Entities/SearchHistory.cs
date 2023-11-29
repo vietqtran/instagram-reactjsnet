@@ -9,10 +9,10 @@ namespace vietqtran.Models.Entities
 {
 	public class SearchHistory
 	{
-		public long Id { get; set; }
+		public Guid Id { get; set; }
 		public SearchType Type { get; set; }
 		public Guid UserId { get; set; }
-		public long? HashTagId { get; set; }
+		public Guid? HashTagId { get; set; }
 		public Guid? SearchUserId { get; set; }
 
 

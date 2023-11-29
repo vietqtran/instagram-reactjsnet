@@ -6,12 +6,14 @@ import Link from "next/link"
 import Overlay from "../Overlay"
 import PostOptions from "./PostOptions"
 import PostUserAvatar from "./PostUserAvatar"
+import { UserVM } from "@type/UserVM"
 
 interface PostHeaderProps {
    type: string
+   user: UserVM
 }
 
-function PostHeader({ type }: Readonly<PostHeaderProps>) {
+function PostHeader({ type, user }: Readonly<PostHeaderProps>) {
    const [showOptions, setShowOptions] = useState(false)
 
    return (
@@ -21,15 +23,15 @@ function PostHeader({ type }: Readonly<PostHeaderProps>) {
                <PostOptions setShowOptions={setShowOptions} />
             </Overlay>
          )}
-         <div className='w-full flex items-center justify-between text-[13px] pt-2 pb-3'>
-            <div className='cursor-pointer relative'>
+         <div className='flex w-full items-center justify-between pb-3 pt-2 text-[13px]'>
+            <div className='relative cursor-pointer'>
                {type === "tag" && (
-                  <div className='grid place-items-center text-white m-[1px] text-xs absolute w-[17px] h-[17px] story-border bottom-[-3px] right-[-5px] rounded-full'>
+                  <div className='story-border absolute bottom-[-3px] right-[-5px] m-[1px] grid h-[17px] w-[17px] place-items-center rounded-full text-xs text-white'>
                      #
                   </div>
                )}
                <PostUserAvatar
-                  src='/assets/logo/user.png'
+                  src={user.avatar ?? "/assets/logo/user.png"}
                   size={32}
                   hasStories={true}
                />
@@ -38,7 +40,7 @@ function PostHeader({ type }: Readonly<PostHeaderProps>) {
                {type === "tag" && <div className='font-semibold'>#tagname</div>}
                <div className='flex items-center'>
                   <Link href={"/u/username"} className='font-semibold'>
-                     username
+                     {user.username}
                   </Link>
                   <span className='text-gray-600'>
                      <BsDot />
@@ -51,7 +53,7 @@ function PostHeader({ type }: Readonly<PostHeaderProps>) {
                onClick={() => {
                   setShowOptions(true)
                }}
-               className='text-xl p-1 cursor-pointer'
+               className='cursor-pointer p-1 text-xl'
             >
                <HiOutlineDotsHorizontal />
             </div>

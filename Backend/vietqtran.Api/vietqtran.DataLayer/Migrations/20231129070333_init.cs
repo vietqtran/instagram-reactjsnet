@@ -17,8 +17,7 @@ namespace vietqtran.DataLayer.Migrations
                 name: "Conversation",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -30,8 +29,7 @@ namespace vietqtran.DataLayer.Migrations
                 name: "HashTags",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Titile = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Image = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
@@ -134,7 +132,7 @@ namespace vietqtran.DataLayer.Migrations
                     UserName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     BirthDay = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 11, 24, 10, 12, 56, 504, DateTimeKind.Utc).AddTicks(9415)),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 11, 29, 7, 3, 33, 161, DateTimeKind.Utc).AddTicks(8579)),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
                     LastOnlineTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastOfflineTime = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -171,10 +169,9 @@ namespace vietqtran.DataLayer.Migrations
                 name: "Follows_HashTag",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    HashTagId = table.Column<long>(type: "bigint", nullable: false)
+                    HashTagId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -197,8 +194,7 @@ namespace vietqtran.DataLayer.Migrations
                 name: "HighLights",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     PreviewImage = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -218,19 +214,18 @@ namespace vietqtran.DataLayer.Migrations
                 name: "Messages",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     MessageType = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ConversationId = table.Column<long>(type: "bigint", nullable: false),
+                    ConversationId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false),
                     IsReply = table.Column<bool>(type: "bit", nullable: false),
-                    ReplyId = table.Column<long>(type: "bigint", nullable: false),
+                    ReplyId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Content = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    PostId = table.Column<long>(type: "bigint", nullable: true),
-                    StoryId = table.Column<long>(type: "bigint", nullable: true),
+                    PostId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    StoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     Emoji = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     FileUrl = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
@@ -254,8 +249,7 @@ namespace vietqtran.DataLayer.Migrations
                 name: "Notifications",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     IsRead = table.Column<bool>(type: "bit", nullable: false),
                     Type = table.Column<int>(type: "int", nullable: false),
                     CreateAt = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -263,9 +257,9 @@ namespace vietqtran.DataLayer.Migrations
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ContentMedia = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PostId = table.Column<long>(type: "bigint", nullable: true),
-                    CommentId = table.Column<long>(type: "bigint", nullable: true),
-                    StoryId = table.Column<long>(type: "bigint", nullable: true)
+                    PostId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    CommentId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    StoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -286,7 +280,7 @@ namespace vietqtran.DataLayer.Migrations
                 name: "Personal_Links",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Link = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
@@ -305,8 +299,7 @@ namespace vietqtran.DataLayer.Migrations
                 name: "Posts",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -327,8 +320,7 @@ namespace vietqtran.DataLayer.Migrations
                 name: "Refresh_Tokens",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Token = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Exp = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
@@ -347,8 +339,7 @@ namespace vietqtran.DataLayer.Migrations
                 name: "Saved_Groups",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
@@ -368,11 +359,10 @@ namespace vietqtran.DataLayer.Migrations
                 name: "SearchHistory",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Type = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    HashTagId = table.Column<long>(type: "bigint", nullable: true),
+                    HashTagId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     SearchUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
@@ -399,13 +389,12 @@ namespace vietqtran.DataLayer.Migrations
                 name: "Stories",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     MediaLink = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    HighLightId = table.Column<long>(type: "bigint", nullable: true)
+                    HighLightId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -421,8 +410,7 @@ namespace vietqtran.DataLayer.Migrations
                 name: "User_BestFriends",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     RequestUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ResponseUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     IsConfirmed = table.Column<bool>(type: "bit", nullable: false)
@@ -446,8 +434,7 @@ namespace vietqtran.DataLayer.Migrations
                 name: "User_Blocks",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     BlockerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     BlockedId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
@@ -471,8 +458,7 @@ namespace vietqtran.DataLayer.Migrations
                 name: "User_Follows",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FollowedId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FollowerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -497,10 +483,9 @@ namespace vietqtran.DataLayer.Migrations
                 name: "UserConversation",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ConversationId = table.Column<long>(type: "bigint", nullable: false),
+                    ConversationId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IsAllowedNotification = table.Column<bool>(type: "bit", nullable: false)
                 },
@@ -526,7 +511,7 @@ namespace vietqtran.DataLayer.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    MessageId = table.Column<long>(type: "bigint", nullable: false),
+                    MessageId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     React = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
@@ -549,14 +534,13 @@ namespace vietqtran.DataLayer.Migrations
                 name: "Comments",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PostId = table.Column<long>(type: "bigint", nullable: false),
+                    PostId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ModifiedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsReply = table.Column<bool>(type: "bit", nullable: true),
-                    ReplyId = table.Column<long>(type: "bigint", nullable: true)
+                    ReplyId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -581,7 +565,7 @@ namespace vietqtran.DataLayer.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    PostId = table.Column<long>(type: "bigint", nullable: false),
+                    PostId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
@@ -600,13 +584,31 @@ namespace vietqtran.DataLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Post_Images",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PostId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Link = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Post_Images", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Post_Images_Posts_PostId",
+                        column: x => x.PostId,
+                        principalTable: "Posts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "PostHashTag",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    PostId = table.Column<long>(type: "bigint", nullable: false),
-                    HashTagId = table.Column<long>(type: "bigint", nullable: false)
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PostId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    HashTagId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -629,11 +631,10 @@ namespace vietqtran.DataLayer.Migrations
                 name: "Saveds",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PostId = table.Column<long>(type: "bigint", nullable: false),
-                    CollectionId = table.Column<long>(type: "bigint", nullable: true)
+                    PostId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CollectionId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -654,10 +655,9 @@ namespace vietqtran.DataLayer.Migrations
                 name: "Tagged_Posts",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     TaggedId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PostId = table.Column<long>(type: "bigint", nullable: false)
+                    PostId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -676,25 +676,24 @@ namespace vietqtran.DataLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ViewStory",
+                name: "Views_Story",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
                     ViewerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    StotyId = table.Column<long>(type: "bigint", nullable: false),
+                    StotyId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Liked = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ViewStory", x => x.Id);
+                    table.PrimaryKey("PK_Views_Story", x => new { x.ViewerId, x.StotyId });
                     table.ForeignKey(
-                        name: "FK_ViewStory_Stories_StotyId",
+                        name: "FK_Views_Story_Stories_StotyId",
                         column: x => x.StotyId,
                         principalTable: "Stories",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_ViewStory_Users_ViewerId",
+                        name: "FK_Views_Story_Users_ViewerId",
                         column: x => x.ViewerId,
                         principalTable: "Users",
                         principalColumn: "Id");
@@ -704,10 +703,9 @@ namespace vietqtran.DataLayer.Migrations
                 name: "Likes_Comment",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CommentId = table.Column<long>(type: "bigint", nullable: false)
+                    CommentId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -729,8 +727,8 @@ namespace vietqtran.DataLayer.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Description", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { new Guid("42611a4e-3a67-4300-9977-a9ee16ab40aa"), "f832f2f0-98b2-4e2c-98b4-99ffe8a99284", "Role for ADMIN", "Admin", "ADMIN" },
-                    { new Guid("5f7ab3cc-29e0-4fc4-938b-433508ae4f4d"), "ebb4ab7b-eea5-4edd-8d86-05c35ddc0dae", "Role for USER", "User", "USER" }
+                    { new Guid("b9a0ff5c-b03d-4cc5-8956-bcc6b6a7adf7"), "8c5b3db6-ad5b-42ab-a958-6eef27b74a90", "Role for USER", "User", "USER" },
+                    { new Guid("ee04466f-a82f-478f-b429-edd435408820"), "02b11441-0c50-4173-9949-240ca32a81e0", "Role for ADMIN", "Admin", "ADMIN" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -762,6 +760,16 @@ namespace vietqtran.DataLayer.Migrations
                 name: "IX_HashTags_Titile",
                 table: "HashTags",
                 column: "Titile");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_HighLights_CreatedAt",
+                table: "HighLights",
+                column: "CreatedAt");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_HighLights_Id",
+                table: "HighLights",
+                column: "Id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_HighLights_UserId",
@@ -842,6 +850,11 @@ namespace vietqtran.DataLayer.Migrations
                 name: "IX_Personal_Links_UserId",
                 table: "Personal_Links",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Post_Images_PostId_Link",
+                table: "Post_Images",
+                columns: new[] { "PostId", "Link" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_PostHashTag_HashTagId",
@@ -1016,14 +1029,14 @@ namespace vietqtran.DataLayer.Migrations
                 column: "UserName");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ViewStory_StotyId",
-                table: "ViewStory",
+                name: "IX_Views_Story_StotyId",
+                table: "Views_Story",
                 column: "StotyId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ViewStory_ViewerId",
-                table: "ViewStory",
-                column: "ViewerId");
+                name: "IX_Views_Story_ViewerId_StotyId",
+                table: "Views_Story",
+                columns: new[] { "ViewerId", "StotyId" });
         }
 
         /// <inheritdoc />
@@ -1046,6 +1059,9 @@ namespace vietqtran.DataLayer.Migrations
 
             migrationBuilder.DropTable(
                 name: "Personal_Links");
+
+            migrationBuilder.DropTable(
+                name: "Post_Images");
 
             migrationBuilder.DropTable(
                 name: "PostHashTag");
@@ -1096,7 +1112,7 @@ namespace vietqtran.DataLayer.Migrations
                 name: "UserConversation");
 
             migrationBuilder.DropTable(
-                name: "ViewStory");
+                name: "Views_Story");
 
             migrationBuilder.DropTable(
                 name: "Comments");

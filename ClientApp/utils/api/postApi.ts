@@ -8,3 +8,7 @@ const END_POINT = {
 export const addPost = (post: PostRequest) => {
     return instance.post(`/${END_POINT.POST}`, post)
 }
+
+export const getAllPosts = () => {
+    return instance.get(`${END_POINT.POST}`)
+}
