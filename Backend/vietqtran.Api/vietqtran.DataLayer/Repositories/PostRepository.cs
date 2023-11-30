@@ -63,6 +63,7 @@ namespace vietqtran.DataLayer.Repositories
 				var posts = await _dataContext.Posts
 					.Include(p => p.PostImages)
 					.Include(p => p.User)
+					.OrderByDescending(p => p.CreatedAt)
 					.ToListAsync();
 				return posts;
 			} catch (Exception e) {
@@ -99,8 +100,10 @@ namespace vietqtran.DataLayer.Repositories
 		public async Task<ICollection<Post>> GetPostByUserId (Guid userId)
 		{
 			try {
-				var posts = await _dataContext.Posts.Where(p => p.UserId == userId).Include(p => p.PostImages)
+				var posts = await _dataContext.Posts.Where(p => p.UserId == userId)
+					.Include(p => p.PostImages)
 					.Include(p => p.User)
+					.OrderByDescending(p => p.CreatedAt)
 					.ToListAsync();
 				return posts;
 			} catch (Exception e) {

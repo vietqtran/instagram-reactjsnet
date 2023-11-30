@@ -8,6 +8,7 @@ import PostOptions from "./PostOptions"
 import { PostResponse } from "@type/responseModel/postResponse"
 import PostUserAvatar from "./PostUserAvatar"
 import { UserVM } from "@type/UserVM"
+import { calcTimeToNow } from "@utils/helper"
 
 interface PostHeaderProps {
    type: string
@@ -23,12 +24,13 @@ function PostHeader({
    handleDelete,
 }: Readonly<PostHeaderProps>) {
    const [showOptions, setShowOptions] = useState(false)
-
+   const time = calcTimeToNow(post.createdAt)
    return (
       <>
          {showOptions && (
             <Overlay show={showOptions} setShow={setShowOptions}>
                <PostOptions
+                  postId={post.id}
                   handleDelete={handleDelete}
                   userId={user.id}
                   setShowOptions={setShowOptions}
@@ -57,7 +59,7 @@ function PostHeader({
                   <span className='text-gray-600'>
                      <BsDot />
                   </span>
-                  <span className='text-gray-400'>1d</span>
+                  <span className='text-gray-400'>{time}</span>
                </div>
                <div>address</div>
             </div>

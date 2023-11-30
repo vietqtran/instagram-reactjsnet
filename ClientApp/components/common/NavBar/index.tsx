@@ -20,6 +20,7 @@ import TextLogo from "../TextLogo"
 import { User } from "@type/User"
 import { usePathname } from "next/navigation"
 import { useSelector } from "react-redux"
+import ReelsButton from "./ReelsButton"
 
 function NavBar() {
    const pathName = usePathname()
@@ -87,6 +88,7 @@ function NavBar() {
                   <HomeButton tab={tab} setTab={handleChangeTab} />
                   <SearchButton tab={tab} setTab={handleChangeTab} />
                   <ExploreButton tab={tab} setTab={handleChangeTab} />
+                  <ReelsButton tab={tab} setTab={handleChangeTab} />
                   <MessagesButton tab={tab} setTab={handleChangeTab} />
                   <NotificationsButton tab={tab} setTab={handleChangeTab} />
                   <CreateButton tab={tab} />

@@ -42,8 +42,6 @@ namespace vietqtran.Api.Controllers
 		{
 			var result = await _postService.GetPost(id);
 
-			if (result == null) return NotFound();
-
 			return Ok(result);
 		}
 
@@ -90,6 +88,7 @@ namespace vietqtran.Api.Controllers
 			var isDeleted = await _postService.DeletePost(id);
 			return Ok(isDeleted);
 		}
+
 
 	}
 }

@@ -20,9 +20,9 @@ const PostContainer = () => {
          setPosts(data)
       }
       fetchPostsData()
-   }, [])
+   }, [user.id])
    return (
-      <div className='w-full grid grid-cols-3 gap-1'>
+      <div className='grid w-full grid-cols-3 gap-1'>
          {posts?.map((post) => {
             return <PostItem post={post} key={post.id} />
          })}

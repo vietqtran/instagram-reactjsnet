@@ -20,16 +20,17 @@ const CommentInput = () => {
    const ref = useOutsideClick(closeEmojiBoard)
 
    return (
-      <div className='w-full flex items-start justify-between mt-1'>
+      <div className='mt-1 flex w-full items-start justify-between'>
          <div className='flex-1'>
             <textarea
                value={comment}
+               rows={4}
                onChange={(e) => setComment(e.target.value)}
-               className='h-auto min-h-[1.25rem] resize-none w-full outline-none py-2 placeholder:text-gray-500'
+               className='h-[40px] min-h-[1.25rem] w-full resize-none py-2 outline-none placeholder:text-gray-500'
                placeholder='Add a comment...'
             ></textarea>
          </div>
-         <div className='p-2 cursor-pointer flex items-center'>
+         <div className='flex cursor-pointer items-center p-2'>
             {comment !== "" && (
                <button className='font-semibold text-blue-500 hover:text-blue-700'>
                   Post
@@ -48,7 +49,7 @@ const CommentInput = () => {
                {showEmoji && (
                   <div
                      ref={ref}
-                     className='absolute z-50 bottom-[25px] right-0'
+                     className='absolute bottom-[25px] right-0 z-50'
                   >
                      <EmojiPicker onEmojiClick={chooseEmoji} />
                   </div>

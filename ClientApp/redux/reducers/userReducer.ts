@@ -1,12 +1,11 @@
 import { LOGIN, LOGOUT } from "@redux/actions/user";
 
-import { LoginResponse } from "@type/LoginResponse";
 import { User } from "@type/User";
 
 const initialState: User = {
     id: "",
     accessToken: "",
-    avatar: "",
+    avatar: "/assets/logo/user.png",
     email: "",
     name: "",
     refreshToken: "",

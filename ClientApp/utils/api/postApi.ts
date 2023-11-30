@@ -18,6 +18,10 @@ export const getPostByUserId = (userId: string) => {
     return instance.get(`${END_POINT.POST}/${END_POINT.GET_POST_BY_USER_ID}?userId=${userId}`)
 }
 
+export const getPostById = (postId: string) => {
+    return instance.get(`${END_POINT.POST}/${postId}`)
+}
+
 export const deletePost = (postId: string) => {
     return instance.delete(`${END_POINT.POST}/${postId}`)
 }

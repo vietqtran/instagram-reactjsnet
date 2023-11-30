@@ -11,7 +11,7 @@ export default function PostUserAvatar({
    size,
    src,
    hasStories,
-}: PostUserAvatarProps) {
+}: Readonly<PostUserAvatarProps>) {
    return (
       <div
          className={`rounded-full bg-black p-[2px] ${
@@ -27,7 +27,7 @@ export default function PostUserAvatar({
             <Image
                src={src}
                alt='avatar'
-               className='aspect-square h-full w-full'
+               className='aspect-square h-full w-full object-cover'
                width={size}
                height={size}
                priority

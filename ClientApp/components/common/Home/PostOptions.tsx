@@ -4,17 +4,20 @@ import Overlay from "../Overlay"
 import { RootState } from "@redux/reducers"
 import { User } from "@type/User"
 import { useSelector } from "react-redux"
+import Link from "next/link"
 
 type PostOptionsProps = {
    setShowOptions: (value: boolean) => void
    userId: string
    handleDelete: () => void
+   postId: string
 }
 
 const PostOptions = ({
    setShowOptions,
    userId,
    handleDelete,
+   postId,
 }: PostOptionsProps) => {
    const user: User = useSelector((state: RootState) => state.user)
    const [showDeleteConfirm, setShowDeleteConfirm] = useState(false)
@@ -23,9 +26,9 @@ const PostOptions = ({
       <>
          {showDeleteConfirm && (
             <Overlay setShow={setShowDeleteConfirm} show={showDeleteConfirm}>
-               <div className='w-[400px] bg-white rounded-lg modal-keyframe'>
-                  <div className='v-border-b text-center py-6'>
-                     <div className='text-lg font-normal mb-1'>
+               <div className='modal-keyframe w-[400px] rounded-lg bg-white'>
+                  <div className='v-border-b py-6 text-center'>
+                     <div className='mb-1 text-lg font-normal'>
                         Delete post?
                      </div>
                      <div className='text-sm text-gray-500'>
@@ -34,7 +37,7 @@ const PostOptions = ({
                   </div>
                   <div
                      onClick={handleDelete}
-                     className='cursor-pointer py-3 w-full text-center v-border-b text-red-600 font-bold'
+                     className='v-border-b w-full cursor-pointer py-3 text-center font-bold text-red-600'
                   >
                      Delete
                   </div>
@@ -42,7 +45,7 @@ const PostOptions = ({
                      onClick={() => {
                         setShowDeleteConfirm(false)
                      }}
-                     className='cursor-pointer w-full py-3 text-center'
+                     className='w-full cursor-pointer py-3 text-center'
                   >
                      Cancel
                   </div>
@@ -50,49 +53,52 @@ const PostOptions = ({
             </Overlay>
          )}
          {!showDeleteConfirm && (
-            <div className='w-[400px] bg-white rounded-lg modal-keyframe'>
-               <ul className='text-sm'>
+            <div className='modal-keyframe w-[400px] rounded-lg bg-white'>
+               <div className='text-sm'>
                   {userId === user.id && (
                      <>
-                        <li
+                        <div
                            onClick={() => {
                               setShowDeleteConfirm(true)
                            }}
-                           className='cursor-pointer py-[14px] w-full text-center v-border-b text-red-600 font-bold'
+                           className='v-border-b w-full cursor-pointer py-[14px] text-center font-bold text-red-600'
                         >
                            Delete
-                        </li>
-                        <li className='cursor-pointer w-full py-[14px] text-center v-border-b'>
+                        </div>
+                        <div className='v-border-b w-full cursor-pointer py-[14px] text-center'>
                            Edit
-                        </li>
+                        </div>
                      </>
                   )}
                   {userId !== user.id && (
-                     <li className='cursor-pointer py-[14px] w-full text-center v-border-b text-red-600 font-bold'>
+                     <div className='v-border-b w-full cursor-pointer py-[14px] text-center font-bold text-red-600'>
                         Report
-                     </li>
+                     </div>
                   )}
-                  <li className='cursor-pointer w-full py-[14px] text-center v-border-b'>
+                  <Link
+                     href={`/p/${postId}`}
+                     className='v-border-b block w-full cursor-pointer py-[14px] text-center'
+                  >
                      Go to post
-                  </li>
-                  <li className='cursor-pointer w-full py-[14px] text-center v-border-b'>
+                  </Link>
+                  <div className='v-border-b w-full cursor-pointer py-[14px] text-center'>
                      Share to...
-                  </li>
-                  <li className='cursor-pointer w-full py-[14px] text-center v-border-b'>
+                  </div>
+                  <div className='v-border-b w-full cursor-pointer py-[14px] text-center'>
                      Copy link
-                  </li>
-                  <li className='cursor-pointer w-full py-[14px] text-center v-border-b'>
+                  </div>
+                  <div className='v-border-b w-full cursor-pointer py-[14px] text-center'>
                      About this account
-                  </li>
-                  <li
+                  </div>
+                  <div
                      onClick={() => {
                         setShowOptions(false)
                      }}
-                     className='cursor-pointer w-full py-[14px] text-center'
+                     className='w-full cursor-pointer py-[14px] text-center'
                   >
                      Cancel
-                  </li>
-               </ul>
+                  </div>
+               </div>
             </div>
          )}
       </>

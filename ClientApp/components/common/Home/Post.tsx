@@ -34,6 +34,7 @@ export default function Post({
          updateAfterDeletePost(post.id)
       }
    }
+
    return (
       <div className='v-border-b w-full max-w-[470px] select-none pt-5'>
          <div className='w-full px-2'>
@@ -45,7 +46,7 @@ export default function Post({
             />
          </div>
          <div className='w-full px-2'>
-            <PostSlider images={post.postImages} id={type} />
+            <PostSlider images={post.postImages} id={post.id} />
          </div>
          <div className='my-1 flex w-full items-center justify-between'>
             <div className='flex flex-1 items-center justify-start'>
