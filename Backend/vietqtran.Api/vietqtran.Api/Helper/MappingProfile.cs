@@ -17,6 +17,9 @@ namespace vietqtran.Api.Helper
 
 			CreateMap<PostRequest, Post>();
 			CreateMap<Post, PostResponse>();
+
+			CreateMap<Comment, CommentResponse>();
+			CreateMap<CommentRequest, Comment>();
 		}
 	}
 }

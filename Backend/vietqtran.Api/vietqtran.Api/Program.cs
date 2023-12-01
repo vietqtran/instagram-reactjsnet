@@ -104,6 +104,8 @@ builder.Services.AddTransient<TokenRepository>();
 builder.Services.AddScoped<ITokenRepository, TokenRepository>();
 builder.Services.AddTransient<PostRepository>();
 builder.Services.AddScoped<IPostRepository, PostRepository>();
+builder.Services.AddTransient<CommentRepository>();
+builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 
 //! Add Services Injection
 builder.Services.AddTransient<AppUserService>();
@@ -112,6 +114,8 @@ builder.Services.AddTransient<TokenService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddTransient<PostService>();
 builder.Services.AddScoped<IPostService, PostService>();
+builder.Services.AddTransient<CommentService>();
+builder.Services.AddScoped<ICommentService, CommentService>();
 
 //! Cors setup
 builder.Services.AddCors(options => {

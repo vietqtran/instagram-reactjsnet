@@ -1,9 +1,6 @@
 import React, { useState } from "react"
 
-import { CreatePostPreviewCaption } from "./CreatePostPreviewCaption"
 import { GrLinkPrevious } from "react-icons/gr"
-import { Post } from "@type/models/Post"
-import { PostRequest } from "@type/requestModels/PostRequest"
 import { PostResponse } from "@type/responseModel/postResponse"
 import { RootState } from "@redux/reducers"
 import Slider from "../Slider"
@@ -12,6 +9,7 @@ import { Visibility } from "@type/enum/Visibility"
 import { addPost } from "@utils/api/postApi"
 import { uploadFiles } from "@utils/upload/clouldinaryUpload"
 import { useSelector } from "react-redux"
+import { PostRequest } from "@type/requestModels/PostRequest"
 
 type CreatePostPreviewProps = {
    files: FileList | null | undefined

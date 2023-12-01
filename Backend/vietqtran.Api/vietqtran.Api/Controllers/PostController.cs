@@ -88,7 +88,5 @@ namespace vietqtran.Api.Controllers
 			var isDeleted = await _postService.DeletePost(id);
 			return Ok(isDeleted);
 		}
-
-
 	}
 }

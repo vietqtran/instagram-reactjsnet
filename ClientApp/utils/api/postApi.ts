@@ -1,4 +1,4 @@
-import { PostRequest } from "@type/requestModels/PostRequest"
+import { PostRequest } from "@type/requestModels/postRequest"
 import instance from "./_axios_instance"
 
 const END_POINT = {
