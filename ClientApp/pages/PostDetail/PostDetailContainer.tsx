@@ -1,20 +1,24 @@
-import CommentOutline from "@components/Icons/Comment/CommentOutline"
-import HeartOutline from "@components/Icons/Heart/HeartOutline"
-import SaveOutlineBig from "@components/Icons/Save/SaveOutlineBig"
-import ShareOutline from "@components/Icons/Share/ShareOutline"
-import CommentInput from "@components/common/Home/CommentInput"
-import PostContent from "@components/common/Home/PostContent"
-import PostSlider from "@components/common/Home/PostSlider"
+import React, { useEffect, useState } from "react"
+import { addComment, getPostComments } from "@utils/api/commentApi"
+import { calcTimeToNow, calcTimeToNowDetail } from "@utils/helper"
+
 import Avatar from "@components/common/User/Avatar"
 import AvatarWithStory from "@components/common/User/AvatarWithStory"
-import { RootState } from "@redux/reducers"
-import { User } from "@type/User"
-import { PostResponse } from "@type/responseModel/postResponse"
-import { calcTimeToNow, calcTimeToNowDetail } from "@utils/helper"
-import Link from "next/link"
-import React from "react"
 import { BsThreeDots } from "react-icons/bs"
+import Comment from "@components/common/Comment"
+import CommentInput from "@components/common/Home/CommentInput"
+import CommentOutline from "@components/Icons/Comment/CommentOutline"
+import { CommentRequest } from "@type/requestModels/commentRequest"
+import { CommentResponse } from "@type/responseModel/commentResponse"
+import HeartOutline from "@components/Icons/Heart/HeartOutline"
+import Link from "next/link"
 import { PiDotOutlineFill } from "react-icons/pi"
+import { PostResponse } from "@type/responseModel/postResponse"
+import PostSlider from "@components/common/Home/PostSlider"
+import { RootState } from "@redux/reducers"
+import SaveOutlineBig from "@components/Icons/Save/SaveOutlineBig"
+import ShareOutline from "@components/Icons/Share/ShareOutline"
+import { User } from "@type/User"
 import { useSelector } from "react-redux"
 
 type PostDetailContainer = {
@@ -23,6 +27,44 @@ type PostDetailContainer = {
 
 const PostDetailContainer = ({ post }: PostDetailContainer) => {
    const user: User = useSelector((state: RootState) => state.user)
+   const [comments, setComments] = useState<CommentResponse[]>([])
+
+   useEffect(() => {
+      const fetchComments = async () => {
+         const data: CommentResponse[] = await getPostComments(post.id).then(
+            (res: any) => {
+               return res as CommentResponse[]
+            }
+         )
+         if (data) {
+            setComments(data)
+         }
+         console.log(data)
+      }
+
+      fetchComments()
+   }, [post.id])
+
+   const handleAddComment = async (content: string) => {
+      if (content !== "") {
+         const comment: CommentRequest = {
+            content: content,
+            isReply: false,
+            replyId: null,
+            postId: post.id,
+            userId: user.id,
+         }
+         const data: CommentResponse = await addComment(comment).then(
+            (res: any) => {
+               return res
+            }
+         )
+         console.log(data)
+         if (data) {
+            setComments((prev) => [data, ...prev])
+         }
+      }
+   }
 
    return (
       <div className='w-full max-w-[975px]'>
@@ -55,13 +97,13 @@ const PostDetailContainer = ({ post }: PostDetailContainer) => {
                         <BsThreeDots />
                      </div>
                   </div>
-                  <div className='v-border-b max-h-[420px] flex-1 overflow-y-auto px-4 py-2'>
-                     <div className='w-full'>
+                  <div className='v-border-b max-h-[420px] max-w-[337px] flex-1 overflow-y-auto py-2'>
+                     <div className='w-full px-4 pb-3'>
                         <div className='flex w-full items-start'>
                            <div>
                               <Avatar size={32} src={post.user.avatar} />
                            </div>
-                           <div className='pl-2'>
+                           <div className='max pl-2'>
                               <div className='text-sm'>
                                  <span className='font-semibold'>
                                     {post.user.username}
@@ -71,7 +113,7 @@ const PostDetailContainer = ({ post }: PostDetailContainer) => {
                                  </span>
                               </div>
                               <div
-                                 className='text-sm'
+                                 className='overflow-hidden whitespace-break-spaces break-all text-sm'
                                  dangerouslySetInnerHTML={{
                                     __html: post.title,
                                  }}
@@ -79,6 +121,9 @@ const PostDetailContainer = ({ post }: PostDetailContainer) => {
                            </div>
                         </div>
                      </div>
+                     {comments.map((cmt) => {
+                        return <Comment comment={cmt} key={cmt.id} />
+                     })}
                   </div>
                   <div className='px-2'>
                      <div className='my-1 flex w-full items-center justify-between'>
@@ -112,7 +157,7 @@ const PostDetailContainer = ({ post }: PostDetailContainer) => {
                            <div className='pr-2'>
                               <Avatar size={32} src={user.avatar} />
                            </div>
-                           <CommentInput />
+                           <CommentInput handleAddComment={handleAddComment} />
                         </div>
                      </div>
                   </div>

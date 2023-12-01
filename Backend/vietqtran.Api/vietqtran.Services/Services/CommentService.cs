@@ -48,8 +48,8 @@ namespace vietqtran.Services.Services
 
 		public async Task<CommentResponse> AddComment (CommentRequest commentRequest)
 		{
-			commentRequest.ModifiedAt = DateTime.UtcNow;
 			var comment = _mapper.Map<Comment>(commentRequest);
+			comment.ModifiedAt = DateTime.UtcNow;
 			var commentResponse = await _commentRepository.AddComment(comment);
 
 			if (commentResponse != null) {

@@ -5,10 +5,14 @@ export const stripHtml = (html: string) => {
 }
 
 export const calcTimeToNow = (time: string) => {
-    const utcDate = new Date(time + "Z");
+    const newTime = time.endsWith("Z") ? time : time + "Z"
+    const utcDate = new Date(newTime);
     const now = new Date();
     const nowUtc = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds()));
-    const seconds = (nowUtc.getTime() - utcDate.getTime()) / 1000;
+    const seconds = Math.ceil((nowUtc.getTime() - utcDate.getTime()) / 1000);
+    if (seconds < 10) {
+        return "now"
+    }
     if (seconds < 60) {
         return seconds + "s"
     }
@@ -29,10 +33,14 @@ export const calcTimeToNow = (time: string) => {
 }
 
 export const calcTimeToNowDetail = (time: string) => {
-    const utcDate = new Date(time + "Z");
+    const newTime = time.endsWith("Z") ? time : time + "Z"
+    const utcDate = new Date(newTime);
     const now = new Date();
     const nowUtc = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds()));
-    const seconds = (nowUtc.getTime() - utcDate.getTime()) / 1000;
+    const seconds = Math.ceil((nowUtc.getTime() - utcDate.getTime()) / 1000);
+    if (seconds < 10) {
+        return "now"
+    }
     if (seconds < 60) {
         return Math.floor(seconds) + (Math.floor(seconds) === 1 ? " second" : " seconds" + " ago")
     }

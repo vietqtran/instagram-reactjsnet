@@ -1,11 +1,15 @@
 import EmojiPicker, { EmojiClickData } from "emoji-picker-react"
-import React, { useEffect, useRef, useState } from "react"
+import React, { useState } from "react"
 
-import { EmojiType } from "@node_modules/next/dist/compiled/@vercel/og/emoji"
 import { FaRegFaceSmile } from "react-icons/fa6"
 import { useOutsideClick } from "@components/hooks/useClickOutSide"
+import Editor from "../Editor"
 
-const CommentInput = () => {
+interface CommentInputProps {
+   handleAddComment: (content: string) => void
+}
+
+const CommentInput = ({ handleAddComment }: CommentInputProps) => {
    const [comment, setComment] = useState("")
    const [showEmoji, setShowEmoji] = useState(false)
 
@@ -14,25 +18,26 @@ const CommentInput = () => {
    }
 
    const chooseEmoji = (emojiObject: EmojiClickData, event: MouseEvent) => {
-      setComment((prev) => prev + emojiObject.emoji)
+      setComment((prev) => prev.replace(/(<\/p>)$/, emojiObject.emoji))
    }
 
    const ref = useOutsideClick(closeEmojiBoard)
-
+   console.log(comment)
    return (
-      <div className='mt-1 flex w-full items-start justify-between'>
-         <div className='flex-1'>
-            <textarea
-               value={comment}
-               rows={4}
-               onChange={(e) => setComment(e.target.value)}
-               className='h-[40px] min-h-[1.25rem] w-full resize-none py-2 outline-none placeholder:text-gray-500'
-               placeholder='Add a comment...'
-            ></textarea>
+      <div className='mt-1 flex w-full items-center justify-between'>
+         <div className='comment-input max-w-[227px] flex-1'>
+            <Editor data={comment} setData={setComment} />
          </div>
          <div className='flex cursor-pointer items-center p-2'>
             {comment !== "" && (
-               <button className='font-semibold text-blue-500 hover:text-blue-700'>
+               <button
+                  onClick={() => {
+                     handleAddComment(comment)
+                     console.log(comment)
+                     setComment("")
+                  }}
+                  className='font-semibold text-blue-500 hover:text-blue-700'
+               >
                   Post
                </button>
             )}

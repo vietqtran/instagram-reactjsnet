@@ -16,7 +16,7 @@ namespace vietqtran.Api.Controllers
 			_commentService = commentService;
 		}
 
-		[HttpGet("postId")]
+		[HttpGet("{postId}")]
 		public async Task<IActionResult> GetCommentsByPostId (Guid postId)
 		{
 			var result = await _commentService.GetAllCommentsByPostId(postId);
