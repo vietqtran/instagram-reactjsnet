@@ -1,10 +1,8 @@
-// components/MyEditor.tsx
-
-import React, { useEffect, useState } from "react"
+"use client"
 
 import { CKEditor as CKEditorComponent } from "@ckeditor/ckeditor5-react"
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic"
-import dynamic from "next/dynamic"
+import React from "react"
 import { stripHtml } from "@utils/helper"
 
 interface MyEditorProps {

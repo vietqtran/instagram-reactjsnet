@@ -2,13 +2,20 @@ import EmojiPicker, { EmojiClickData } from "emoji-picker-react"
 import React, { useState } from "react"
 
 import Avatar from "../User/Avatar"
-import Editor from "../Editor"
 import { FaRegFaceSmile } from "react-icons/fa6"
 import { RootState } from "@redux/reducers"
 import { User } from "@type/User"
+import dynamic from "next/dynamic"
 import { stripHtml } from "@utils/helper"
 import { useOutsideClick } from "@components/hooks/useClickOutSide"
 import { useSelector } from "react-redux"
+
+const CustomEditor = dynamic(
+   () => {
+      return import("../Editor")
+   },
+   { ssr: false }
+)
 
 type CreatePostPreviewCaptionProps = {
    postCaption: string
@@ -39,7 +46,7 @@ export const CreatePostPreviewCaption = ({
                <Avatar size={28} src={user.avatar ?? "/assets/logo/user.png"} />
                <span className='pl-3 text-sm font-semibold'>vietqtran</span>
             </div>
-            <Editor data={postCaption} setData={setPostCaption} />
+            <CustomEditor data={postCaption} setData={setPostCaption} />
          </div>
          <div className='v-border-b relative flex items-center justify-between px-4 py-2 text-sm'>
             <div

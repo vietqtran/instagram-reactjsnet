@@ -31,6 +31,7 @@
     "swiper": "^11.0.4"
   },
   "devDependencies": {
+    "@types/ckeditor__ckeditor5-core": "^37.0.0",
     "@types/node": "^20.9.0",
     "@types/react": "^18",
     "@types/react-dom": "^18",

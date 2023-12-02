@@ -2,8 +2,15 @@ import EmojiPicker, { EmojiClickData } from "emoji-picker-react"
 import React, { useState } from "react"
 
 import { FaRegFaceSmile } from "react-icons/fa6"
+import dynamic from "next/dynamic"
 import { useOutsideClick } from "@components/hooks/useClickOutSide"
-import Editor from "../Editor"
+
+const CustomEditor = dynamic(
+   () => {
+      return import("../Editor")
+   },
+   { ssr: false }
+)
 
 interface CommentInputProps {
    handleAddComment: (content: string) => void
@@ -26,7 +33,7 @@ const CommentInput = ({ handleAddComment }: CommentInputProps) => {
    return (
       <div className='mt-1 flex w-full items-center justify-between'>
          <div className='comment-input max-w-[227px] flex-1'>
-            <Editor data={comment} setData={setComment} />
+            <CustomEditor data={comment} setData={setComment} />
          </div>
          <div className='flex cursor-pointer items-center p-2'>
             {comment !== "" && (

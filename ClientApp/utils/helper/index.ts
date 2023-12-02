@@ -59,3 +59,8 @@ export const calcTimeToNowDetail = (time: string) => {
     const weeks = days / 7
     return Math.floor(weeks) + (Math.floor(weeks) === 1 ? " week" : "weeks" + " ago")
 }
+
+export const trimExtraParagraphTags = (htmlString: string) => {
+    const regex = /^(<p>&nbsp;<\/p>)+|(<p>&nbsp;<\/p>)+$/g;
+    return htmlString.replace(regex, '');
+}

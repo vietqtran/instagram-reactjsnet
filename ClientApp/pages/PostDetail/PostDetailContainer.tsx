@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react"
 import { addComment, getPostComments } from "@utils/api/commentApi"
-import { calcTimeToNow, calcTimeToNowDetail } from "@utils/helper"
+import {
+   calcTimeToNow,
+   calcTimeToNowDetail,
+   trimExtraParagraphTags,
+} from "@utils/helper"
 
 import Avatar from "@components/common/User/Avatar"
 import AvatarWithStory from "@components/common/User/AvatarWithStory"
@@ -48,7 +52,7 @@ const PostDetailContainer = ({ post }: PostDetailContainer) => {
    const handleAddComment = async (content: string) => {
       if (content !== "") {
          const comment: CommentRequest = {
-            content: content,
+            content: trimExtraParagraphTags(content),
             isReply: false,
             replyId: null,
             postId: post.id,
