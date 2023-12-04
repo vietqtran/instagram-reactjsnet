@@ -761,16 +761,16 @@ namespace vietqtran.DataLayer.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("ee04466f-a82f-478f-b429-edd435408820"),
-                            ConcurrencyStamp = "02b11441-0c50-4173-9949-240ca32a81e0",
+                            Id = new Guid("8dc52e3a-3149-4aa8-8e93-d46e9cbe635a"),
+                            ConcurrencyStamp = "af710341-af78-483b-bfe7-29d91e5fd545",
                             Description = "Role for ADMIN",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = new Guid("b9a0ff5c-b03d-4cc5-8956-bcc6b6a7adf7"),
-                            ConcurrencyStamp = "8c5b3db6-ad5b-42ab-a958-6eef27b74a90",
+                            Id = new Guid("2991229c-8f5c-4bf3-9efd-92bb5dd5e40a"),
+                            ConcurrencyStamp = "45e7333e-ce96-48b9-9fff-f55c2767f2d2",
                             Description = "Role for USER",
                             Name = "User",
                             NormalizedName = "USER"
@@ -866,7 +866,7 @@ namespace vietqtran.DataLayer.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 11, 29, 7, 3, 33, 161, DateTimeKind.Utc).AddTicks(8579));
+                        .HasDefaultValue(new DateTime(2023, 12, 4, 11, 58, 52, 793, DateTimeKind.Utc).AddTicks(1762));
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(450)");
