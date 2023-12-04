@@ -17,9 +17,6 @@ namespace vietqtran.DataLayer.Configurations
 
 			builder.HasKey(lc => lc.Id);
 
-			builder.HasIndex(lc => lc.CommentId);
-			builder.HasIndex(lc => lc.UserId);
-
 			builder.HasOne(lc => lc.Comment)
 				.WithMany(c => c.LikeComments)
 				.HasForeignKey(lc => lc.CommentId)
