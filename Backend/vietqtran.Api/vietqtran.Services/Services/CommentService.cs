@@ -42,7 +42,7 @@ namespace vietqtran.Services.Services
 				IsReply = cmt.IsReply,
 				ReplyId = cmt.ReplyId,
 				User = _mapper.Map<AppUserVM>(cmt.User),
-				LikeComments = cmt.LikeComments
+				LikeComments = cmt.LikeComments.Select(like => like.UserId.ToString()).ToList()
 			});
 		}
 

@@ -19,6 +19,6 @@ namespace vietqtran.Models.ResponseModels
 		public bool? IsReply { get; set; }
 		public Guid? ReplyId { get; set; }
 		public AppUserVM User { get; set; }
-		public ICollection<LikeComment> LikeComments { get; set; }
+		public ICollection<string> LikeComments { get; set; }
 	}
 }
