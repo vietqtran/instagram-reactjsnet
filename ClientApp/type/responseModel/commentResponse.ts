@@ -9,4 +9,5 @@ export interface CommentResponse {
     isReply: boolean | null;
     replyId: string | null;
     user: User;
+    likeComments: string[]
 }

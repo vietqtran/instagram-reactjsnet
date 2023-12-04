@@ -36,7 +36,7 @@ namespace vietqtran.Api.Controllers
 			return Ok(result);
 		}
 
-		[HttpGet]
+		[HttpGet("count")]
 		public IActionResult GetCountLikeComment (Guid commentId)
 		{
 			var result = _likeCommentService.GetLikeCommentCountAsync(commentId);
