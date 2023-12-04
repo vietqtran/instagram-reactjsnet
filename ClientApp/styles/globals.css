@@ -119,6 +119,24 @@ code {
    box-shadow: 2px 4px 12px rgba(0, 0, 0, .15);
 }
 
+@keyframes heartScale {
+   0% {
+      transform: scale(1);
+   }
+
+   50% {
+      transform: scale(1.2);
+   }
+
+   100% {
+      transform: scale(1);
+   }
+}
+
+.heart-keyframe {
+   animation: heartScale .2s ease-in;
+}
+
 
 /** Start Override CKEditor CSS */
 
