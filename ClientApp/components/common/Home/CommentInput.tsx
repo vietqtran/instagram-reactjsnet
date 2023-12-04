@@ -32,7 +32,7 @@ const CommentInput = ({ handleAddComment }: CommentInputProps) => {
    console.log(comment)
    return (
       <div className='mt-1 flex w-full items-center justify-between'>
-         <div className='comment-input max-w-[227px] flex-1'>
+         <div className='comment-input w-full flex-1'>
             <CustomEditor data={comment} setData={setComment} />
          </div>
          <div className='flex cursor-pointer items-center p-2'>

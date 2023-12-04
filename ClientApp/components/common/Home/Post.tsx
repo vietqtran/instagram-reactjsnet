@@ -10,6 +10,13 @@ import React from "react"
 import SaveOutlineBig from "@components/Icons/Save/SaveOutlineBig"
 import ShareOutline from "@components/Icons/Share/ShareOutline"
 import { deletePost } from "@utils/api/postApi"
+import { CommentRequest } from "@type/requestModels/commentRequest"
+import { trimExtraParagraphTags } from "@utils/helper"
+import { CommentResponse } from "@type/responseModel/commentResponse"
+import { User } from "@type/User"
+import { useSelector } from "react-redux"
+import { RootState } from "@redux/reducers"
+import { addComment } from "@utils/api/commentApi"
 
 interface PostProps {
    type: string
@@ -22,6 +29,8 @@ export default function Post({
    post,
    updateAfterDeletePost,
 }: Readonly<PostProps>) {
+   const user: User = useSelector((state: RootState) => state.user)
+
    const handelDelete = async () => {
       const deleteResult: boolean = await deletePost(post.id).then(
          (res: any) => {
@@ -32,6 +41,24 @@ export default function Post({
 
       if (deleteResult === true) {
          updateAfterDeletePost(post.id)
+      }
+   }
+
+   const handleAddComment = async (content: string) => {
+      if (content !== "") {
+         const comment: CommentRequest = {
+            content: trimExtraParagraphTags(content),
+            isReply: false,
+            replyId: null,
+            postId: post.id,
+            userId: user.id,
+         }
+         const data: CommentResponse = await addComment(comment).then(
+            (res: any) => {
+               return res
+            }
+         )
+         console.log(data)
       }
    }
 
@@ -77,7 +104,7 @@ export default function Post({
                View all 7 comments
             </div>
             <div>
-               <CommentInput />
+               <CommentInput handleAddComment={handleAddComment} />
             </div>
          </div>
       </div>

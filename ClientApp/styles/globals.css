@@ -134,7 +134,6 @@ code {
    margin: 0 !important;
    min-height: 180px !important;
    max-height: 300px !important;
-   max-width: calc(323px - 32px) !important;
    word-wrap: break-word !important;
    overflow: auto !important;
 }
