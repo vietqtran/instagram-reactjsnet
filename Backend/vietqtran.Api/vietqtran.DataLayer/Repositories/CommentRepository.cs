@@ -46,6 +46,7 @@ namespace vietqtran.DataLayer.Repositories
 				var comments = await _dataContext.Comments.Where(c => c.PostId == postId)
 					.Include(c => c.User)
 					.Include(c => c.LikeComments)
+					.OrderByDescending(c => c.ModifiedAt)
 					.ToListAsync();
 				return comments;
 			} catch (Exception ex) {

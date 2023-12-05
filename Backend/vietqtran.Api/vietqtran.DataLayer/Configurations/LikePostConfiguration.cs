@@ -15,7 +15,7 @@ namespace vietqtran.DataLayer.Configurations
 		{
 			builder.ToTable("Likes_Post");
 
-			builder.HasKey(lp => lp.Id);
+			builder.HasKey(lp => new { lp.PostId, lp.UserId });
 
 			builder.HasIndex(lp => lp.PostId);
 			builder.HasIndex(lp => lp.UserId);

@@ -1,16 +1,17 @@
 import React, { useState } from "react"
-import Avatar from "./User/Avatar"
-import { calcTimeToNow } from "@utils/helper"
-import LikeCommentButton from "./Button/LikeCommentButton"
-import { CommentResponse } from "@type/responseModel/commentResponse"
-import { PiDotsThreeOutlineFill } from "react-icons/pi"
-import { LikedCommentButton } from "./Button/LikedCommentButton"
-import { User } from "@type/User"
-import { useSelector } from "react-redux"
-import { RootState } from "@redux/reducers"
 import { likeComment, unlikeComment } from "@utils/api/likeCommentApi"
-import Overlay from "./Overlay"
+
+import Avatar from "./User/Avatar"
+import { CommentResponse } from "@type/responseModel/commentResponse"
+import LikeCommentButton from "./Button/LikeCommentButton"
+import { LikedCommentButton } from "./Button/LikedCommentButton"
 import LikedUserModal from "@components/common/LikedUserModal"
+import Overlay from "./Overlay"
+import { PiDotsThreeOutlineFill } from "react-icons/pi"
+import { RootState } from "@redux/reducers"
+import { User } from "@type/User"
+import { calcTimeToNow } from "@utils/helper"
+import { useSelector } from "react-redux"
 
 type CommentProps = {
    comment: CommentResponse
@@ -54,7 +55,8 @@ function Comment({ comment }: Readonly<CommentProps>): React.JSX.Element {
             <Overlay setShow={setShowLikedUser} show={showLikedUser}>
                <LikedUserModal
                   setShowLikedUser={setShowLikedUser}
-                  commentId={comment.id}
+                  id={comment.id}
+                  type='comment'
                />
             </Overlay>
          )}

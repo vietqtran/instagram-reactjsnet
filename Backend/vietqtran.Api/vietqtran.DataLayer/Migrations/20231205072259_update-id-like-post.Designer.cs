@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using vietqtran.DataAccess.Data;
 
@@ -11,9 +12,11 @@ using vietqtran.DataAccess.Data;
 namespace vietqtran.DataLayer.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20231205072259_update-id-like-post")]
+    partial class updateidlikepost
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -550,13 +553,17 @@ namespace vietqtran.DataLayer.Migrations
 
             modelBuilder.Entity("vietqtran.Models.Entities.Relations.LikePost", b =>
                 {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid>("PostId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("PostId", "UserId");
+                    b.HasKey("Id");
 
                     b.HasIndex("PostId");
 
@@ -755,16 +762,16 @@ namespace vietqtran.DataLayer.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("8f5e58ab-f6c8-4a9d-83e1-703cd631920f"),
-                            ConcurrencyStamp = "f88d0b5d-e0ff-4106-9f09-221355dade9c",
+                            Id = new Guid("ba31fd20-781d-4174-a0ac-6c11f2eaf325"),
+                            ConcurrencyStamp = "51647809-9262-4f04-bf9b-8e7bcbb5d0e9",
                             Description = "Role for ADMIN",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = new Guid("ed57c7d9-b7d2-43de-af70-021eb94de0d1"),
-                            ConcurrencyStamp = "b02c5d4d-ea08-4de1-8fc6-ef3c24a0e4b0",
+                            Id = new Guid("7ad42936-58ae-4e1c-9f50-b6ef0ef0c107"),
+                            ConcurrencyStamp = "30c151f3-7a9b-4bc4-ad7d-f04ed8e3819e",
                             Description = "Role for USER",
                             Name = "User",
                             NormalizedName = "USER"
@@ -860,7 +867,7 @@ namespace vietqtran.DataLayer.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 12, 5, 7, 28, 24, 145, DateTimeKind.Utc).AddTicks(1531));
+                        .HasDefaultValue(new DateTime(2023, 12, 5, 7, 22, 58, 867, DateTimeKind.Utc).AddTicks(7707));
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(450)");

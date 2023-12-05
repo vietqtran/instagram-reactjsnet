@@ -11,17 +11,13 @@ import AvatarWithStory from "@components/common/User/AvatarWithStory"
 import { BsThreeDots } from "react-icons/bs"
 import Comment from "@components/common/Comment"
 import CommentInput from "@components/common/Home/CommentInput"
-import CommentOutline from "@components/Icons/Comment/CommentOutline"
 import { CommentRequest } from "@type/requestModels/commentRequest"
 import { CommentResponse } from "@type/responseModel/commentResponse"
-import HeartOutline from "@components/Icons/Heart/HeartOutline"
-import Link from "next/link"
+import LikedPost from "@components/common/LikedPost"
 import { PiDotOutlineFill } from "react-icons/pi"
 import { PostResponse } from "@type/responseModel/postResponse"
 import PostSlider from "@components/common/Home/PostSlider"
 import { RootState } from "@redux/reducers"
-import SaveOutlineBig from "@components/Icons/Save/SaveOutlineBig"
-import ShareOutline from "@components/Icons/Share/ShareOutline"
 import { User } from "@type/User"
 import { useSelector } from "react-redux"
 
@@ -71,7 +67,7 @@ const PostDetailContainer = ({ post }: PostDetailContainer) => {
    }
 
    return (
-      <div className='w-full max-w-[975px]'>
+      <div className='w-full w-[975px]'>
          <div className='v-border-b py-10'>
             <div className='flex h-full w-auto items-stretch justify-center border-[1px] border-gray-300'>
                <div className='h-full w-[calc(100%-337px)] flex-1'>
@@ -130,34 +126,12 @@ const PostDetailContainer = ({ post }: PostDetailContainer) => {
                      })}
                   </div>
                   <div className='px-2'>
-                     <div className='my-1 flex w-full items-center justify-between'>
-                        <div className='flex flex-1 items-center justify-start'>
-                           <div className='cursor-pointer p-2 hover:opacity-50'>
-                              <HeartOutline />
-                           </div>
-                           <div className='cursor-pointer p-2 hover:opacity-50'>
-                              <CommentOutline />
-                           </div>
-                           <div className='cursor-pointer p-2 hover:opacity-50'>
-                              <ShareOutline />
-                           </div>
-                        </div>
-                        <div className='cursor-pointer p-2 hover:opacity-50'>
-                           <SaveOutlineBig />
-                        </div>
-                     </div>
+                     <LikedPost postId={post.id} />
                      <div className='px-2 text-sm'>
-                        <div>
-                           Liked by{" "}
-                           <Link className='font-semibold' href={"/u/username"}>
-                              vietq.tran
-                           </Link>{" "}
-                           and <span className='font-semibold'>others</span>
-                        </div>
                         <div className='text-xs text-gray-500'>
                            {calcTimeToNowDetail(post.createdAt)}
                         </div>
-                        <div className='flex items-center justify-between pt-3'>
+                        <div className='post-detail flex items-center justify-between pt-3'>
                            <div className='pr-2'>
                               <Avatar size={32} src={user.avatar} />
                            </div>
@@ -169,8 +143,15 @@ const PostDetailContainer = ({ post }: PostDetailContainer) => {
             </div>
          </div>
 
-         <div>
-            <span>More posts from {post.user.username}</span>
+         <div className='mt-10 w-full'>
+            <span className='text-sm font-semibold'>
+               More posts from {post.user.username}
+            </span>
+            <div className='grid w-full grid-cols-3 gap-1'>
+               <div className='col-span-1 h-fit'>
+                  <div className='aspect-square w-full'></div>
+               </div>
+            </div>
          </div>
       </div>
    )

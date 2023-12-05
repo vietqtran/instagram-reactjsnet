@@ -41,8 +41,8 @@ export const CreatePostPreviewCaption = ({
 
    return (
       <div className={`flex-1`}>
-         <div className='p-4'>
-            <div className='flex items-center justify-start pb-3'>
+         <div className='p-4 post-content'>
+            <div className='max-w-[290px] overflow-hidden flex items-center justify-start pb-3'>
                <Avatar size={28} src={user.avatar ?? "/assets/logo/user.png"} />
                <span className='pl-3 text-sm font-semibold'>vietqtran</span>
             </div>

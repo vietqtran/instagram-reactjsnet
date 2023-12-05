@@ -108,6 +108,8 @@ builder.Services.AddTransient<CommentRepository>();
 builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 builder.Services.AddTransient<LikeCommentRepository>();
 builder.Services.AddScoped<ILikeCommentRepository, LikeCommentRepository>();
+builder.Services.AddTransient<LikePostRepository>();
+builder.Services.AddScoped<ILikePostRepository, LikePostRepository>();
 
 //! Add Services Injection
 builder.Services.AddTransient<AppUserService>();
@@ -120,6 +122,8 @@ builder.Services.AddTransient<CommentService>();
 builder.Services.AddScoped<ICommentService, CommentService>();
 builder.Services.AddTransient<LikeCommentService>();
 builder.Services.AddScoped<ILikeCommentService, LikeCommentService>();
+builder.Services.AddTransient<LikePostService>();
+builder.Services.AddScoped<ILikePostService, LikePostService>();
 
 //! Cors setup
 builder.Services.AddCors(options => {

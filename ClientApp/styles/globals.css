@@ -145,6 +145,18 @@ code {
    max-height: 45px !important;
 }
 
+.post-detail .ck-editor__editable {
+   max-width: 215px !important;
+}
+
+.post-content .ck-editor__editable {
+   max-width: 290px !important;
+}
+
+.post .ck-editor__editable {
+   max-width: 404px !important;
+}
+
 .ck-editor__editable {
    border: none !important;
    outline: none !important;

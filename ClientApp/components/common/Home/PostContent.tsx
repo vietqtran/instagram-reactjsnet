@@ -8,21 +8,27 @@ const PostContent = ({ content }: PostContentProps) => {
    const [readMore, setReadMore] = useState(false)
 
    return (
-      <div className='mt-3 w-full'>
-         <div
-            dangerouslySetInnerHTML={{ __html: content }}
-            className={`${readMore ? "h-auto" : "h-[20px]"} overflow-hidden`}
-         ></div>
-         {!readMore && (
-            <div
-               onKeyDown={() => {}}
-               onClick={() => setReadMore(true)}
-               className='cursor-pointer leading-4'
-            >
-               <span>...</span>
-               <br />
-               <span className='text-gray-500'>more</span>
-            </div>
+      <div className='w-full'>
+         {content !== "" && (
+            <>
+               <div
+                  dangerouslySetInnerHTML={{ __html: content }}
+                  className={`${
+                     readMore ? "h-auto" : "h-[20px]"
+                  } overflow-hidden`}
+               ></div>
+               {!readMore && (
+                  <div
+                     onKeyDown={() => {}}
+                     onClick={() => setReadMore(true)}
+                     className='cursor-pointer leading-4'
+                  >
+                     <span>...</span>
+                     <br />
+                     <span className='text-gray-500'>more</span>
+                  </div>
+               )}
+            </>
          )}
       </div>
    )

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using vietqtran.DataAccess.Data;
 
@@ -11,9 +12,11 @@ using vietqtran.DataAccess.Data;
 namespace vietqtran.DataLayer.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20231205072626_update-id-like-post2")]
+    partial class updateidlikepost2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -755,16 +758,16 @@ namespace vietqtran.DataLayer.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("8f5e58ab-f6c8-4a9d-83e1-703cd631920f"),
-                            ConcurrencyStamp = "f88d0b5d-e0ff-4106-9f09-221355dade9c",
+                            Id = new Guid("66f1451c-7248-4640-a5bf-73527ffd4ff4"),
+                            ConcurrencyStamp = "5d21f83b-c016-4e1e-b575-b6f56f605259",
                             Description = "Role for ADMIN",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = new Guid("ed57c7d9-b7d2-43de-af70-021eb94de0d1"),
-                            ConcurrencyStamp = "b02c5d4d-ea08-4de1-8fc6-ef3c24a0e4b0",
+                            Id = new Guid("aa6fd179-2eb3-430f-b6c1-4e1e51ef9b09"),
+                            ConcurrencyStamp = "e0fc6c2f-b776-4cce-be04-db2797fd30b0",
                             Description = "Role for USER",
                             Name = "User",
                             NormalizedName = "USER"
@@ -860,7 +863,7 @@ namespace vietqtran.DataLayer.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 12, 5, 7, 28, 24, 145, DateTimeKind.Utc).AddTicks(1531));
+                        .HasDefaultValue(new DateTime(2023, 12, 5, 7, 26, 26, 437, DateTimeKind.Utc).AddTicks(8291));
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(450)");

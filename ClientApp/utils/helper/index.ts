@@ -42,22 +42,22 @@ export const calcTimeToNowDetail = (time: string) => {
         return "now"
     }
     if (seconds < 60) {
-        return Math.floor(seconds) + (Math.floor(seconds) === 1 ? " second" : " seconds" + " ago")
+        return Math.floor(seconds) + (Math.floor(seconds) === 1 ? " second " : " seconds " + " ago")
     }
     const minus = seconds / 60;
     if (minus < 60) {
-        return Math.floor(minus) + (Math.floor(minus) === 1 ? " minute" : " minutes" + " ago")
+        return Math.floor(minus) + (Math.floor(minus) === 1 ? " minute " : " minutes " + " ago")
     }
     const hours = minus / 60;
     if (hours < 24) {
-        return Math.floor(hours) + (Math.floor(hours) === 1 ? " hour" : " hours" + " ago")
+        return Math.floor(hours) + (Math.floor(hours) === 1 ? " hour " : " hours " + " ago")
     }
     const days = hours / 24
     if (days < 7) {
-        return Math.floor(days) + (Math.floor(days) === 1 ? " day" : "days" + " ago")
+        return Math.floor(days) + (Math.floor(days) === 1 ? " day " : " days " + " ago")
     }
     const weeks = days / 7
-    return Math.floor(weeks) + (Math.floor(weeks) === 1 ? " week" : "weeks" + " ago")
+    return Math.floor(weeks) + (Math.floor(weeks) === 1 ? " week " : " weeks " + " ago")
 }
 
 export const trimExtraParagraphTags = (htmlString: string) => {
