@@ -67,7 +67,7 @@ const PostDetailContainer = ({ post }: PostDetailContainer) => {
    }
 
    return (
-      <div className='w-full w-[975px]'>
+      <div className=' w-[975px]'>
          <div className='v-border-b py-10'>
             <div className='flex h-full w-auto items-stretch justify-center border-[1px] border-gray-300'>
                <div className='h-full w-[calc(100%-337px)] flex-1'>
