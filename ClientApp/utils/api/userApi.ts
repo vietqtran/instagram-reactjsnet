@@ -1,6 +1,6 @@
-import { LoginCredentials } from "@type/LoginCredentials"
+import { LoginCredentials } from "@type/requestModels/LoginCredentials"
+import { SignUpCredentials } from "@type/requestModels/SignUpCredential"
 import instance from "./_axios_instance"
-import { SignUpCredentials } from "@type/SignUpCredential"
 
 const END_POINT = {
     USER: 'user',
@@ -18,4 +18,8 @@ export const login = (loginData: LoginCredentials) => {
 
 export const register = (signUpData: SignUpCredentials) => {
     return instance.post(`/${END_POINT.AUTH_REGISTER}`, signUpData)
+}
+
+export const getUserByUsername = (username: string) => {
+    return instance.get(`/${END_POINT.USER}/${username}`)
 }

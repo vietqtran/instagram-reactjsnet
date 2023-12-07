@@ -1,26 +1,24 @@
-import React, { useEffect, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 
 import PostItem from "@components/common/User/PostItem"
 import { PostResponse } from "@type/responseModel/postResponse"
-import { RootState } from "@redux/reducers"
-import { User } from "@type/User"
 import { getPostByUserId } from "@utils/api/postApi"
-import { useSelector } from "react-redux"
+import UserContext from "@components/context/UserContext"
 
 const PostContainer = () => {
    const [posts, setPosts] = useState<PostResponse[]>()
-   const user: User = useSelector((state: RootState) => state.user)
+   const userContext = useContext(UserContext)
    useEffect(() => {
       const fetchPostsData = async () => {
-         const data: PostResponse[] = await getPostByUserId(user.id).then(
-            (res: any) => {
-               return res
-            }
-         )
+         const data: PostResponse[] = await getPostByUserId(
+            userContext?.id ?? ""
+         ).then((res: any) => {
+            return res
+         })
          setPosts(data)
       }
       fetchPostsData()
-   }, [user.id])
+   }, [userContext?.id])
    return (
       <div className='grid w-full grid-cols-3 gap-1'>
          {posts?.map((post) => {

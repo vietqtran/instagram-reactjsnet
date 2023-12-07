@@ -64,3 +64,8 @@ export const trimExtraParagraphTags = (htmlString: string) => {
     const regex = /^(<p>&nbsp;<\/p>)+|(<p>&nbsp;<\/p>)+$/g;
     return htmlString.replace(regex, '');
 }
+
+export const formatCommentPreviewHTML = (username: string, comment: string) => {
+    const modifiedContent = comment.replace(/^<p>/, `<p><span class="font-medium">${username}</span> `);
+    return modifiedContent
+}

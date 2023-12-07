@@ -1,6 +1,6 @@
 import { ADD_FACEBOOK_USER, CANCEL_FACEBOOK_USER } from "@redux/actions/facebookUserAction"
 
-import { FacebookSignUpUser } from "@type/FacebookSignUpUser"
+import { FacebookSignUpUser } from "@type/requestModels/FacebookSignUpUser"
 
 const initialState: FacebookSignUpUser = {
     avatar: "",

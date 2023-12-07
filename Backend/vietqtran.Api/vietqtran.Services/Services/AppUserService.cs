@@ -206,5 +206,28 @@ namespace vietqtran.Services.Services
 				UserId = Guid.Parse(userId)
 			};
 		}
+
+		public async Task<UserDetailVM> GetUserByUsernameServiceAsync (string username)
+		{
+			var user = await _appUserRepository.GetUserByUsernameAsync(username);
+
+			if (user != null) {
+				var userDetail = new UserDetailVM
+				{
+					Id = user.Id,
+					Name = user.Name,
+					UserName = user.UserName,
+					Avatar = user.Avatar,
+					Bio = user.Bio,
+					Followers = user.Followers.Count,
+					Following = user.Followeds.Count,
+					Posts = user.Posts.Count,
+				};
+
+				return userDetail;
+			}
+
+			return null;
+		}
 	}
 }

@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux"
 
 import { AiFillFacebook } from "react-icons/ai"
-import { FacebookSignUpUser } from "@type/FacebookSignUpUser"
+import { FacebookSignUpUser } from "@type/requestModels/FacebookSignUpUser"
 import React from "react"
 import { addFacebookUser } from "@redux/actions/facebookUserAction"
 import { handleFacebookLogin } from "@utils/api/auth/facebook-login"

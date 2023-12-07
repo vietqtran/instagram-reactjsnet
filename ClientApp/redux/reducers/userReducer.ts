@@ -1,6 +1,6 @@
 import { LOGIN, LOGOUT } from "@redux/actions/user";
 
-import { User } from "@type/User";
+import { User } from "@type/models/User";
 
 const initialState: User = {
     id: "",

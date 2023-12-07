@@ -15,10 +15,10 @@ import PostSlider from "./PostSlider"
 import { RootState } from "@redux/reducers"
 import SaveOutlineBig from "@components/Icons/Save/SaveOutlineBig"
 import ShareOutline from "@components/Icons/Share/ShareOutline"
-import { User } from "@type/User"
 import { deletePost } from "@utils/api/postApi"
-import { trimExtraParagraphTags } from "@utils/helper"
+import { formatCommentPreviewHTML, trimExtraParagraphTags } from "@utils/helper"
 import { useSelector } from "react-redux"
+import { User } from "@type/models/User"
 
 interface PostProps {
    type: string
@@ -109,26 +109,26 @@ export default function Post({
                <div className='my-2 overflow-hidden'>
                   {comments[0] && (
                      <div className='flex items-start'>
-                        <p className='font-semibold'>
-                           {comments[0].user.username}
-                        </p>
                         <p
-                           className='pl-2'
+                           className='block'
                            dangerouslySetInnerHTML={{
-                              __html: comments[0].content,
+                              __html: formatCommentPreviewHTML(
+                                 comments[0].user.username,
+                                 comments[0].content
+                              ),
                            }}
                         ></p>
                      </div>
                   )}
                   {comments[1] && (
                      <div className='flex items-start'>
-                        <p className='font-semibold'>
-                           {comments[1].user.username}
-                        </p>
                         <p
-                           className='pl-2 block'
+                           className='block'
                            dangerouslySetInnerHTML={{
-                              __html: comments[1].content,
+                              __html: formatCommentPreviewHTML(
+                                 comments[1].user.username,
+                                 comments[1].content
+                              ),
                            }}
                         ></p>
                      </div>

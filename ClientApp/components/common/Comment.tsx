@@ -9,7 +9,7 @@ import LikedUserModal from "@components/common/LikedUserModal"
 import Overlay from "./Overlay"
 import { PiDotsThreeOutlineFill } from "react-icons/pi"
 import { RootState } from "@redux/reducers"
-import { User } from "@type/User"
+import { User } from "@type/models/User"
 import { calcTimeToNow } from "@utils/helper"
 import { useSelector } from "react-redux"
 

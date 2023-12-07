@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 
 import { AiOutlineClose } from "react-icons/ai"
 import LikedUserItem from "./LikedUserItem"
-import { UserVM } from "@type/UserVM"
+import { UserVM } from "@type/view/UserVM"
 import { getLikedCommentUsers } from "@utils/api/likeCommentApi"
 import { getLikedPostUsers } from "@utils/api/likePostApi"
 

@@ -3,7 +3,7 @@ import AvatarWithStory from "../User/AvatarWithStory"
 import Image from "next/image"
 import Link from "next/link"
 import React from "react"
-import { UserVM } from "@type/UserVM"
+import { UserVM } from "@type/view/UserVM"
 
 interface LikeStoryProps {
    sender: UserVM

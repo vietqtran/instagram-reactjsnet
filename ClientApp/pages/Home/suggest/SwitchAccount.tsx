@@ -3,7 +3,7 @@ import Image from "next/image"
 import Link from "next/link"
 import React from "react"
 import { RootState } from "@redux/reducers"
-import { User } from "@type/User"
+import { User } from "@type/models/User"
 import { useSelector } from "react-redux"
 
 function SwitchAccount() {

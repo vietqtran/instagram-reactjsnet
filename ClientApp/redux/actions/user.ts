@@ -1,5 +1,5 @@
 import { LoginResponse } from "@type/LoginResponse"
-import { User } from "@type/User"
+import { User } from "@type/models/User"
 
 export const LOGIN = 'LOGIN'
 export const LOGOUT = 'LOGOUT'

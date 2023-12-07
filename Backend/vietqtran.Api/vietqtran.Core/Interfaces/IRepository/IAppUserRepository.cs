@@ -15,6 +15,7 @@ namespace vietqtran.Core.Interfaces.IRepository
 	public interface IAppUserRepository
 	{
 		Task<ICollection<User>> GetAllUsersAsync ( );
+		Task<User> GetUserByUsernameAsync (string username);
 		Task<Role> GetRoleByUserId (Guid id);
 		Task UpdateRefreshToken (RefreshToken refreshToken);
 	}

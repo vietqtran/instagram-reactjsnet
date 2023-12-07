@@ -1,4 +1,4 @@
-import { UserVM } from "./UserVM";
+import { UserVM } from "../view/UserVM";
 
 export interface LoginResponse {
     accessToken: string,

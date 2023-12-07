@@ -18,7 +18,7 @@ import { PiDotOutlineFill } from "react-icons/pi"
 import { PostResponse } from "@type/responseModel/postResponse"
 import PostSlider from "@components/common/Home/PostSlider"
 import { RootState } from "@redux/reducers"
-import { User } from "@type/User"
+import { User } from "@type/models/User"
 import { useSelector } from "react-redux"
 
 type PostDetailContainer = {

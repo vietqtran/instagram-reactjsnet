@@ -1,7 +1,7 @@
-import { UserVM } from "@type/UserVM"
-import React from "react"
 import AvatarWithStory from "./User/AvatarWithStory"
 import FollowButton from "./Button/FollowButton"
+import React from "react"
+import { UserVM } from "@type/view/UserVM"
 
 type LikedUserItemProps = {
    user: UserVM

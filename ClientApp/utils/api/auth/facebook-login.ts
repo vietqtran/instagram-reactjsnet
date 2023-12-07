@@ -1,7 +1,7 @@
 import { UserCredential, signInWithPopup } from 'firebase/auth';
 import { auth, facebookProvider } from '@utils/firebase'
 
-import { FacebookSignUpUser } from '@type/FacebookSignUpUser';
+import { FacebookSignUpUser } from '@type/requestModels/FacebookSignUpUser';
 import { useDispatch } from 'react-redux';
 
 export const handleFacebookLogin = async () => {

@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Ignore Spelling: Username vietqtran
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -54,6 +56,23 @@ namespace vietqtran.DataLayer.Repositories
 		public Task<Role> GetRoleByUserId (Guid id)
 		{
 			throw new NotImplementedException();
+		}
+
+		public async Task<User> GetUserByUsernameAsync (string username)
+		{
+			try {
+				var user = await _context.Users
+					.Where(u => u.UserName == username)
+					.Include(u => u.Followers)
+					.Include(u => u.Followeds)
+					.Include(u => u.Posts)
+					.FirstOrDefaultAsync();
+				if (user == null) { return null; }
+				return user;
+			} catch (Exception ex) {
+				_logger.LogError(ex.Message);
+				return null;
+			}
 		}
 
 		/// <summary>

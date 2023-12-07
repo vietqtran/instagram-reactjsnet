@@ -1,4 +1,4 @@
-import { FacebookSignUpUser } from "@type/FacebookSignUpUser"
+import { FacebookSignUpUser } from "@type/requestModels/FacebookSignUpUser"
 
 export const ADD_FACEBOOK_USER = 'ADD_FACEBOOK_USER'
 export const CANCEL_FACEBOOK_USER = 'CANCEL_FACEBOOK_USER'

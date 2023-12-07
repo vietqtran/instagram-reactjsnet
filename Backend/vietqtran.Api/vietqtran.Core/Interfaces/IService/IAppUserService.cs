@@ -14,10 +14,9 @@ namespace vietqtran.Core.Interfaces.IService
 {
 	public interface IAppUserService
 	{
-		public Task<ICollection<User>> GetAllUsersServiceAsync ( );
-
+		Task<ICollection<User>> GetAllUsersServiceAsync ( );
+		Task<UserDetailVM> GetUserByUsernameServiceAsync (string username);
 		Task<SignUpResponse> Register (SignUpCredentials signUpCredentials);
-
 		Task<LoginResponse> Login (LoginCredentials loginCredentials);
 	}
 }

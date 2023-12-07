@@ -1,4 +1,6 @@
-﻿using AutoMapper;
+﻿// Ignore Spelling: username
+
+using AutoMapper;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
@@ -47,10 +49,17 @@ namespace vietqtran.Api.Controllers
 		/// </returns>
 		[HttpGet]
 		[ProducesResponseType(200, Type = typeof(ICollection<AppUserVM>))]
-		public async Task<IActionResult> GetAsync ( )
+		public async Task<IActionResult> GetUsersAsync ( )
 		{
 			var users = await _appUserService.GetAllUsersServiceAsync();
 			return Ok(_mapper.Map<ICollection<AppUserVM>>(users));
+		}
+
+		[HttpGet("{username}")]
+		public async Task<IActionResult> GetUserByIdAsync (string username)
+		{
+			var user = await _appUserService.GetUserByUsernameServiceAsync(username);
+			return Ok(user);
 		}
 
 		/// <summary>

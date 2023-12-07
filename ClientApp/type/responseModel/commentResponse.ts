@@ -1,4 +1,4 @@
-import { User } from "@type/User";
+import { User } from "@type/models/User";
 
 export interface CommentResponse {
     id: string;

@@ -12,15 +12,15 @@ import MoreButton from "./MoreButton"
 import NotificationContent from "@components/common/Notification/NotificationContent"
 import NotificationsButton from "./NotificationsButton"
 import ProfileButton from "./ProfileButton"
+import ReelsButton from "./ReelsButton"
 import { RootState } from "@redux/reducers"
 import SearchButton from "./SearchButton"
 import SearchContent from "@components/common/Notification/SearchContent"
 import SubNavContent from "../SubNavContent"
 import TextLogo from "../TextLogo"
-import { User } from "@type/User"
+import { User } from "@type/models/User"
 import { usePathname } from "next/navigation"
 import { useSelector } from "react-redux"
-import ReelsButton from "./ReelsButton"
 
 function NavBar() {
    const pathName = usePathname()

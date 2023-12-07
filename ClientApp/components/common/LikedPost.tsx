@@ -10,8 +10,8 @@ import Overlay from "./Overlay"
 import { RootState } from "@redux/reducers"
 import SaveOutlineBig from "@components/Icons/Save/SaveOutlineBig"
 import ShareOutline from "@components/Icons/Share/ShareOutline"
-import { User } from "@type/User"
-import { UserVM } from "@type/UserVM"
+import { User } from "@type/models/User"
+import { UserVM } from "@type/view/UserVM"
 import { useSelector } from "react-redux"
 
 type LikedPostProps = {

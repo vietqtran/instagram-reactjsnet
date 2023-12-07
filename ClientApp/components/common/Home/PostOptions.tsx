@@ -1,10 +1,10 @@
 import React, { useState } from "react"
 
+import Link from "next/link"
 import Overlay from "../Overlay"
 import { RootState } from "@redux/reducers"
-import { User } from "@type/User"
+import { User } from "@type/models/User"
 import { useSelector } from "react-redux"
-import Link from "next/link"
 
 type PostOptionsProps = {
    setShowOptions: (value: boolean) => void

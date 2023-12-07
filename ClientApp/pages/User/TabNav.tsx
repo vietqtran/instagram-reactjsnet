@@ -6,7 +6,7 @@ import { RootState } from "@redux/reducers"
 import SaveOutline from "@components/Icons/Save/SaveOutline"
 import TabNavItem from "@components/common/User/TabNavItem"
 import TaggedOutline from "@components/Icons/Tagged/TaggedOutline"
-import { User } from "@type/User"
+import { User } from "@type/models/User"
 import { usePathname } from "next/navigation"
 import { useSelector } from "react-redux"
 

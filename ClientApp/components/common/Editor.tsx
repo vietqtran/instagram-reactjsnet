@@ -22,9 +22,7 @@ const Editor: React.FC<MyEditorProps> = ({ data, setData }) => {
          onReady={(editor) => {}}
          onChange={(event, editor) => {
             const data = (editor as any).getData()
-            if (stripHtml(data).length <= 2201) {
-               setData(data)
-            }
+            setData(data)
          }}
          onBlur={(event, editor) => {}}
          onFocus={(event, editor) => {}}

@@ -2,7 +2,7 @@ import AvatarWithStory from "../User/AvatarWithStory"
 import FollowButton from "../Button/FollowButton"
 import Link from "next/link"
 import React from "react"
-import { UserVM } from "@type/UserVM"
+import { UserVM } from "@type/view/UserVM"
 
 interface NewFollowProps {
    sender: UserVM

@@ -1,4 +1,4 @@
-import { UserVM } from "@type/UserVM";
+import { UserVM } from "@type/view/UserVM";
 import { Visibility } from "@type/enum/Visibility";
 
 export interface PostResponse {
