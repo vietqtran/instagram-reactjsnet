@@ -1,4 +1,4 @@
-﻿// Ignore Spelling: Username vietqtran
+﻿// Ignore Spelling: Username vietqtran jwt App
 
 using System;
 using System.Collections.Generic;
@@ -78,15 +78,15 @@ namespace vietqtran.DataLayer.Repositories
 		/// <summary>
 		/// Update Refresh Token in Database
 		/// </summary>
-		public async Task UpdateRefreshToken (RefreshToken newRefeshToken)
+		public async Task UpdateRefreshToken (RefreshToken newRefreshToken)
 		{
-			var refreshToken = await _context.RefreshTokens.Where(t => t.UserId == newRefeshToken.UserId).FirstOrDefaultAsync();
+			var refreshToken = await _context.RefreshTokens.Where(t => t.UserId == newRefreshToken.UserId).FirstOrDefaultAsync();
 
 			if (refreshToken != null) {
 				_context.RefreshTokens.Remove(refreshToken);
 			}
 
-			await _context.RefreshTokens.AddAsync(newRefeshToken);
+			await _context.RefreshTokens.AddAsync(newRefreshToken);
 			await _context.SaveChangesAsync();
 		}
 	}

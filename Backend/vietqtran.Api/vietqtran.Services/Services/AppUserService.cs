@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Ignore Spelling: vietqtran username App jwt
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -207,7 +209,7 @@ namespace vietqtran.Services.Services
 			};
 		}
 
-		public async Task<UserDetailVM> GetUserByUsernameServiceAsync (string username)
+		public async Task<UserDetailVM?> GetUserByUsernameServiceAsync (string username)
 		{
 			var user = await _appUserRepository.GetUserByUsernameAsync(username);
 

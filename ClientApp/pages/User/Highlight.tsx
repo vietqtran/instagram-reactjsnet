@@ -3,10 +3,7 @@ import "slick-carousel/slick/slick-theme.css"
 
 import AddHighLight from "@components/common/User/AddHighLight"
 import HighLightItem from "./HighLightItem"
-import NextArrow from "@pages/Home/story/NextArrow"
-import PrevArrow from "@pages/Home/story/PrevArrow"
 import React from "react"
-import Slider from "react-slick"
 
 export default function Highlight() {
    const slideToShow = 8

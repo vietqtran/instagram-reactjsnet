@@ -1,24 +1,19 @@
 import React, { useEffect, useState } from "react"
 import { addComment, getPostComments } from "@utils/api/commentApi"
+import { formatCommentPreviewHTML, trimExtraParagraphTags } from "@utils/helper"
 
 import CommentInput from "./CommentInput"
-import CommentOutline from "@components/Icons/Comment/CommentOutline"
 import { CommentRequest } from "@type/requestModels/commentRequest"
 import { CommentResponse } from "@type/responseModel/commentResponse"
-import HeartOutline from "@components/Icons/Heart/HeartOutline"
-import Link from "next/link"
 import PostContent from "./PostContent"
 import PostFooter from "./PostFooter"
 import PostHeader from "./PostHeader"
 import { PostResponse } from "@type/responseModel/postResponse"
 import PostSlider from "./PostSlider"
 import { RootState } from "@redux/reducers"
-import SaveOutlineBig from "@components/Icons/Save/SaveOutlineBig"
-import ShareOutline from "@components/Icons/Share/ShareOutline"
-import { deletePost } from "@utils/api/postApi"
-import { formatCommentPreviewHTML, trimExtraParagraphTags } from "@utils/helper"
-import { useSelector } from "react-redux"
 import { User } from "@type/models/User"
+import { deletePost } from "@utils/api/postApi"
+import { useSelector } from "react-redux"
 
 interface PostProps {
    type: string

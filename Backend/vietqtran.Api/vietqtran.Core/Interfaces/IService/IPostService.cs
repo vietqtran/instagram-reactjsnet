@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Ignore Spelling: vietqtran
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,9 +13,9 @@ namespace vietqtran.Core.Interfaces.IService
 {
 	public interface IPostService
 	{
-		Task<IEnumerable<PostResponse>> GetAllPosts ( );
+		Task<IEnumerable<PostResponse>?> GetAllPosts ( );
 		Task<PostResponse> GetPost (Guid id);
-		Task<IEnumerable<PostResponse>> GetPostByUserId (Guid userId);
+		Task<IEnumerable<PostResponse>?> GetPostByUserId (Guid userId);
 
 		Task<PostResponse?> AddPost (PostRequest post);
 

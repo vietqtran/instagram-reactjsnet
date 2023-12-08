@@ -1,7 +1,6 @@
 import React, { useState } from "react"
 
 import { AiOutlinePlus } from "react-icons/ai"
-import Image from "next/image"
 import Overlay from "@components/common/Overlay"
 import SavedItem from "@components/common/User/SavedItem"
 import { TfiClose } from "react-icons/tfi"
