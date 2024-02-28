@@ -1,9 +1,29 @@
 import { FaRegCopyright } from 'react-icons/fa6'
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import SuggestItem from './SuggestItem'
+import { UserVM } from '@type/view/UserVM'
+import { getSuggestUsers } from '@utils/api/userApi'
+import { useSelector } from 'react-redux'
+import { RootState } from '@redux/reducers'
 
 function SuggestContainer() {
+  const user = useSelector((state: RootState) => state.user)
+  const [suggest, setSuggest] = useState<UserVM[]>([])
+
+  useEffect(() => {
+    const fetchSuggestData = async () => {
+      try {
+        const data: UserVM[] = await getSuggestUsers(user?.id ?? '').then(
+          (res: any) => res
+        )
+        setSuggest(data)
+      } catch (error) {}
+    }
+
+    fetchSuggestData()
+  }, [user?.id])
+
   return (
     <div className="float-right w-full pl-28 pr-10 text-[11px]">
       <div className="mb-3 mt-6 flex items-center justify-between font-semibold">
@@ -12,11 +32,9 @@ function SuggestContainer() {
           See All
         </Link>
       </div>
-      <SuggestItem />
-      <SuggestItem />
-      <SuggestItem />
-      <SuggestItem />
-      <SuggestItem />
+      {suggest?.map((item) => (
+        <SuggestItem user={item} key={item.id} />
+      ))}
       <div className="mt-9 text-gray-400">
         <p>
           <Link className="hover:underline" href={''}>

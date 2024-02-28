@@ -20,5 +20,6 @@ namespace vietqtran.Core.Interfaces.IRepository
 		Task<User> GetUserByUsernameAsync (string username);
 		Task<Role> GetRoleByUserId (Guid id);
 		Task UpdateRefreshToken (RefreshToken refreshToken);
+		Task<ICollection<User>> GetSuggestUsersAsync (Guid userId);
 	}
 }

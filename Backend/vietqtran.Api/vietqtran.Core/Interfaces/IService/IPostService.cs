@@ -15,7 +15,7 @@ namespace vietqtran.Core.Interfaces.IService
 	{
 		Task<IEnumerable<PostResponse>?> GetAllPosts ( );
 		Task<PostResponse> GetPost (Guid id);
-		Task<IEnumerable<PostResponse>?> GetPostByUserId (Guid userId);
+		Task<IEnumerable<PostResponse>?> GetPostByUsername (string username);
 
 		Task<PostResponse?> AddPost (PostRequest post);
 

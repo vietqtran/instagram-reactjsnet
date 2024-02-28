@@ -42,10 +42,12 @@ namespace vietqtran.Services.Services
 
 			var postId = await _postRepository.AddPost(post);
 
-			if (postId != Guid.Empty) {
+			if (postId != Guid.Empty)
+			{
 				var postResponse = _mapper.Map<PostResponse>(post);
 				var result = await _postRepository.AddImages(postRequest.PostImages, postId);
-				if (result == true) {
+				if (result == true)
+				{
 					postResponse.PostImages = postRequest.PostImages;
 					return postResponse;
 				}
@@ -102,9 +104,9 @@ namespace vietqtran.Services.Services
 			};
 		}
 
-		public async Task<IEnumerable<PostResponse>?> GetPostByUserId (Guid userId)
+		public async Task<IEnumerable<PostResponse>?> GetPostByUsername (string username)
 		{
-			var posts = await _postRepository.GetPostByUserId(userId);
+			var posts = await _postRepository.GetPostByUsername(username);
 
 			if (posts == null) return null;
 

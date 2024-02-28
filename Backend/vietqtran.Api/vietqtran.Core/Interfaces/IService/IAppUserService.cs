@@ -20,5 +20,6 @@ namespace vietqtran.Core.Interfaces.IService
 		Task<UserDetailVM?> GetUserByUsernameServiceAsync (string username);
 		Task<SignUpResponse> Register (SignUpCredentials signUpCredentials);
 		Task<LoginResponse> Login (LoginCredentials loginCredentials);
+		Task<ICollection<AppUserVM>> GetSuggestUsers (Guid userId);
 	}
 }

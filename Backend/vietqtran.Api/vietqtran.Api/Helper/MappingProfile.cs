@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using vietqtran.Models.Entities;
+using vietqtran.Models.Entities.Relations;
 using vietqtran.Models.RequestModels;
 using vietqtran.Models.RequestModels.User;
 using vietqtran.Models.ResponseModels;

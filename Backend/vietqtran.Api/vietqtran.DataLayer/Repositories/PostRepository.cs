@@ -24,69 +24,86 @@ namespace vietqtran.DataLayer.Repositories
 
 		public async Task<bool> AddImages (ICollection<string> images, Guid postId)
 		{
-			try {
+			try
+			{
 				var postImages = images.Select(link => new PostImage { Link = link, PostId = postId });
 				await _dataContext.PostImages.AddRangeAsync(postImages);
 				var rowsAffected = await _dataContext.SaveChangesAsync();
 				return rowsAffected > 0;
-			} catch (Exception e) {
+			}
+			catch (Exception e)
+			{
 				return false;
 			}
 		}
 
 		public async Task<Guid> AddPost (Post post)
 		{
-			try {
+			try
+			{
 				await _dataContext.AddAsync(post);
 				var rowsAffected = await _dataContext.SaveChangesAsync();
-				if (rowsAffected > 0) {
+				if (rowsAffected > 0)
+				{
 					return post.Id;
 				}
 				return Guid.Empty;
-			} catch (Exception e) {
+			}
+			catch (Exception e)
+			{
 				return Guid.Empty;
 			}
 		}
 
 		public async Task<bool> DeletePost (Guid id)
 		{
-			try {
+			try
+			{
 				var post = _dataContext.Posts.Find(id);
 				_dataContext.Posts.Remove(post);
 				var rowsAffected = await _dataContext.SaveChangesAsync();
 				return rowsAffected > 0;
-			} catch (Exception) {
+			}
+			catch (Exception)
+			{
 				return false;
 			}
 		}
 
 		public async Task<ICollection<Post>> GetAllPosts ( )
 		{
-			try {
+			try
+			{
 				var posts = await _dataContext.Posts
 					.Include(p => p.PostImages)
 					.Include(p => p.User)
 					.OrderByDescending(p => p.CreatedAt)
 					.ToListAsync();
 				return posts;
-			} catch (Exception e) {
+			}
+			catch (Exception e)
+			{
 				return null;
 			}
 		}
 
 		public async Task<ICollection<string>> GetImages (Guid postId)
 		{
-			try {
+			try
+			{
 				var images = _dataContext.PostImages.Where(pi => pi.PostId == postId).Select(pi => pi.Link);
 				return await images.ToListAsync();
-			} catch (Exception e) {
+			}
+			catch (Exception e)
+			{
 				return null;
 			}
 		}
 
 		public async Task<Post> GetPost (Guid id)
 		{
-			try {
+			try
+			{
 				var post = await _dataContext.Posts.FindAsync(id);
 
 				if (post == null) return null;
@@ -95,21 +112,26 @@ namespace vietqtran.DataLayer.Repositories
 				await _dataContext.Entry(post).Reference(p => p.User).LoadAsync();
 
 				return post;
-			} catch (Exception e) {
+			}
+			catch (Exception e)
+			{
 				return null;
 			}
 		}
 
-		public async Task<ICollection<Post>> GetPostByUserId (Guid userId)
+		public async Task<ICollection<Post>> GetPostByUsername (string username)
 		{
-			try {
-				var posts = await _dataContext.Posts.Where(p => p.UserId == userId)
+			try
+			{
+				var posts = await _dataContext.Posts.Where(p => p.User.UserName == username)
 					.Include(p => p.PostImages)
 					.Include(p => p.User)
 					.OrderByDescending(p => p.CreatedAt)
 					.ToListAsync();
 				return posts;
-			} catch (Exception e) {
+			}
+			catch (Exception e)
+			{
 				return null;
 			}
 		}

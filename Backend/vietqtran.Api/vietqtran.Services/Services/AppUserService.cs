@@ -61,9 +61,11 @@ namespace vietqtran.Services.Services
 		/// </summary> 
 		public async Task<LoginResponse> Login (LoginCredentials loginCredentials)
 		{
-			try {
+			try
+			{
 				var user = await _userManager.FindByEmailAsync(loginCredentials.Email);
-				if (user == null) {
+				if (user == null)
+				{
 					return new LoginResponse
 					{
 						Error = "Email not found!",
@@ -72,7 +74,8 @@ namespace vietqtran.Services.Services
 				}
 
 				var result = await _signInManager.PasswordSignInAsync(user, loginCredentials.Password, true, false);
-				if (!result.Succeeded) {
+				if (!result.Succeeded)
+				{
 					return new LoginResponse
 					{
 						Error = "Password is incorrect!",
@@ -92,7 +95,9 @@ namespace vietqtran.Services.Services
 					Status = "Succeed",
 					User = _mapper.Map<AppUserVM>(user),
 				};
-			} catch (Exception ex) {
+			}
+			catch (Exception ex)
+			{
 				return new LoginResponse
 				{
 					Error = ex.Message,
@@ -106,14 +111,16 @@ namespace vietqtran.Services.Services
 		/// </summary> 
 		public async Task<SignUpResponse> Register (SignUpCredentials signUpCredentials)
 		{
-			try {
+			try
+			{
 				var user = _mapper.Map<User>(signUpCredentials);
 
 				var result = await _userManager.CreateAsync(user, signUpCredentials.Password);
 
 				await _userManager.AddToRoleAsync(user, "User");
 
-				if (result.Succeeded) {
+				if (result.Succeeded)
+				{
 					return new SignUpResponse
 					{
 						Status = "Succeed",
@@ -125,7 +132,9 @@ namespace vietqtran.Services.Services
 					Error = "Can't register!",
 					Status = "Failed"
 				};
-			} catch (Exception ex) {
+			}
+			catch (Exception ex)
+			{
 				return new SignUpResponse
 				{
 					Error = ex.Message,
@@ -139,7 +148,8 @@ namespace vietqtran.Services.Services
 		/// </summary> 
 		public async Task<string> GenerateAccessToken (User user)
 		{
-			try {
+			try
+			{
 				var roles = await _userManager.GetRolesAsync(user);
 
 				var claims = new List<Claim>
@@ -172,7 +182,9 @@ namespace vietqtran.Services.Services
 				var accessToken = tokenHandler.CreateToken(tokenDescriptor);
 
 				return tokenHandler.WriteToken(accessToken).ToString();
-			} catch (Exception ex) {
+			}
+			catch (Exception ex)
+			{
 				return ex.ToString();
 			}
 		}
@@ -213,7 +225,8 @@ namespace vietqtran.Services.Services
 		{
 			var user = await _appUserRepository.GetUserByUsernameAsync(username);
 
-			if (user != null) {
+			if (user != null)
+			{
 				var userDetail = new UserDetailVM
 				{
 					Id = user.Id,
@@ -230,6 +243,12 @@ namespace vietqtran.Services.Services
 			}
 
 			return null;
+		}
+
+		public async Task<ICollection<AppUserVM>> GetSuggestUsers (Guid userId)
+		{
+			var users = await _appUserRepository.GetSuggestUsersAsync(userId);
+			return users.Select(user => _mapper.Map<AppUserVM>(user)).ToList();
 		}
 	}
 }

@@ -53,14 +53,37 @@ namespace vietqtran.DataLayer.Repositories
 			return await _context.Users.ToListAsync();
 		}
 
-		public Task<Role> GetRoleByUserId (Guid id)
+		public async Task<Role> GetRoleByUserId (Guid id)
 		{
 			throw new NotImplementedException();
 		}
 
+		public async Task<ICollection<User>> GetSuggestUsersAsync (Guid userId)
+		{
+			var userFolloweds = await _context.Follows
+			    .Where(f => f.Followed.Id == userId)
+			    .Select(f => f.Follower)
+			    .ToListAsync();
+
+			var userFollowings = await _context.Follows
+			    .Where(f => f.Follower.Id == userId)
+			    .Select(f => f.Followed)
+			    .ToListAsync();
+
+			var suggestUsers = await _context.Users
+			    .Where(u => !userFolloweds.Contains(u) && !userFollowings.Contains(u))
+			    .Where(u => u.Id != userId)
+			    .OrderBy(u => Guid.NewGuid())
+			    .Take(5)
+			    .ToListAsync();
+
+			return suggestUsers;
+		}
+
 		public async Task<User> GetUserByUsernameAsync (string username)
 		{
-			try {
+			try
+			{
 				var user = await _context.Users
 					.Where(u => u.UserName == username)
 					.Include(u => u.Followers)
@@ -69,7 +92,9 @@ namespace vietqtran.DataLayer.Repositories
 					.FirstOrDefaultAsync();
 				if (user == null) { return null; }
 				return user;
-			} catch (Exception ex) {
+			}
+			catch (Exception ex)
+			{
 				_logger.LogError(ex.Message);
 				return null;
 			}
@@ -82,7 +107,8 @@ namespace vietqtran.DataLayer.Repositories
 		{
 			var refreshToken = await _context.RefreshTokens.Where(t => t.UserId == newRefreshToken.UserId).FirstOrDefaultAsync();
 
-			if (refreshToken != null) {
+			if (refreshToken != null)
+			{
 				_context.RefreshTokens.Remove(refreshToken);
 			}
 

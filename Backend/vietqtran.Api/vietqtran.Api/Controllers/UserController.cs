@@ -77,7 +77,8 @@ namespace vietqtran.Api.Controllers
 		{
 			var result = await _appUserService.Register(signUpCredentials);
 
-			if (result.Status == "Succeed") {
+			if (result.Status == "Succeed")
+			{
 				return Ok(result);
 			}
 
@@ -99,7 +100,8 @@ namespace vietqtran.Api.Controllers
 		{
 			var result = await _appUserService.Login(loginCredentials);
 
-			if (result.Status != "Succeed") {
+			if (result.Status != "Succeed")
+			{
 				return Ok(StatusCodes.Status404NotFound);
 			}
 
@@ -117,6 +119,13 @@ namespace vietqtran.Api.Controllers
 			//var claims = jwtToken.Claims.ToList();
 			//var roles = claims.Where(x => x.Type == "role").Select(x => x.Value).ToList();
 
+			return Ok(result);
+		}
+
+		[HttpGet("suggest")]
+		public async Task<IActionResult> GetSuggestUsers ([FromQuery] Guid userId)
+		{
+			var result = await _appUserService.GetSuggestUsers(userId);
 			return Ok(result);
 		}
 	}

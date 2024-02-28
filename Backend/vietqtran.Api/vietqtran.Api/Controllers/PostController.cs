@@ -51,9 +51,9 @@ namespace vietqtran.Api.Controllers
 		/// <param name="userId">Id of the user</param>
 		/// <returns>List of posts of the user</returns> 
 		[HttpGet("user")]
-		public async Task<IActionResult> GetPostByUsername (Guid userId)
+		public async Task<IActionResult> GetPostByUsername (string username)
 		{
-			var result = await _postService.GetPostByUserId(userId);
+			var result = await _postService.GetPostByUsername(username);
 			if (result == null) return NotFound();
 			return Ok(result);
 		}

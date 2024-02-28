@@ -12,7 +12,7 @@ namespace vietqtran.Core.Interfaces.IRepository
 	{
 		Task<ICollection<Post>> GetAllPosts ( );
 		Task<Post> GetPost (Guid id);
-		Task<ICollection<Post>> GetPostByUserId (Guid userId);
+		Task<ICollection<Post>> GetPostByUsername (string username);
 
 		Task<Guid> AddPost (Post post);
 

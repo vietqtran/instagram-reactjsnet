@@ -25,7 +25,8 @@ builder.Services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.Re
 builder.Services.AddEndpointsApiExplorer();
 
 //! Swagger
-builder.Services.AddSwaggerGen(options => {
+builder.Services.AddSwaggerGen(options =>
+{
 	options.SwaggerDoc("v1", new OpenApiInfo { Title = "Swagger Instagram", Version = "v1.0.0" });
 	options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
 	{
@@ -59,11 +60,13 @@ builder.Services.Configure<JwtConfig>(builder.Configuration.GetSection("JWT"));
 builder.Services.AddIdentity<User, Role>()
     .AddEntityFrameworkStores<DataContext>()
     .AddDefaultTokenProviders();
-builder.Services.AddAuthentication(options => {
+builder.Services.AddAuthentication(options =>
+{
 	options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
 	options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 	options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(options => {
+}).AddJwtBearer(options =>
+{
 	options.SaveToken = true;
 	options.RequireHttpsMetadata = false;
 	options.TokenValidationParameters = new TokenValidationParameters
@@ -80,14 +83,16 @@ builder.Services.AddAuthentication(options => {
 });
 
 //! Identity Config
-builder.Services.Configure<IdentityOptions>(options => {
+builder.Services.Configure<IdentityOptions>(options =>
+{
 	options.User.RequireUniqueEmail = true;
 	options.SignIn.RequireConfirmedEmail = false;
 	options.Tokens.ProviderMap.Remove("SecurityStamp");
 });
 
 //! Connect to Database
-builder.Services.AddDbContext<DataContext>(options => {
+builder.Services.AddDbContext<DataContext>(options =>
+{
 	options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
@@ -110,6 +115,8 @@ builder.Services.AddTransient<LikeCommentRepository>();
 builder.Services.AddScoped<ILikeCommentRepository, LikeCommentRepository>();
 builder.Services.AddTransient<LikePostRepository>();
 builder.Services.AddScoped<ILikePostRepository, LikePostRepository>();
+builder.Services.AddTransient<FollowRepository>();
+builder.Services.AddScoped<IFollowRepository, FollowRepository>();
 
 //! Add Services Injection
 builder.Services.AddTransient<AppUserService>();
@@ -124,10 +131,14 @@ builder.Services.AddTransient<LikeCommentService>();
 builder.Services.AddScoped<ILikeCommentService, LikeCommentService>();
 builder.Services.AddTransient<LikePostService>();
 builder.Services.AddScoped<ILikePostService, LikePostService>();
+builder.Services.AddTransient<FollowService>();
+builder.Services.AddScoped<IFollowService, FollowService>();
 
 //! Cors setup
-builder.Services.AddCors(options => {
-	options.AddPolicy("AllowAllOriginPolicy", builder => {
+builder.Services.AddCors(options =>
+{
+	options.AddPolicy("AllowAllOriginPolicy", builder =>
+	{
 		builder
 		    .AllowAnyHeader()
 		    .AllowAnyMethod()
@@ -141,7 +152,8 @@ var app = builder.Build();
 app.UseCors("AllowAllOriginPolicy");
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment()) {
+if (app.Environment.IsDevelopment())
+{
 	app.UseSwagger();
 	app.UseSwaggerUI();
 }
