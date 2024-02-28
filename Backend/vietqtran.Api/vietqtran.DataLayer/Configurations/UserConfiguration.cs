@@ -109,7 +109,6 @@ namespace vietqtran.DataLayer.Configurations
 			builder.Property(u => u.Avatar).IsRequired(false);
 			builder.Property(u => u.CreatedAt).HasDefaultValue(DateTime.UtcNow);
 			builder.Property(u => u.Bio).IsRequired(false);
-
 		}
 	}
 }

@@ -12,8 +12,8 @@ using vietqtran.DataAccess.Data;
 namespace vietqtran.DataLayer.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20231205072259_update-id-like-post")]
-    partial class updateidlikepost
+    [Migration("20240227063627_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -553,17 +553,13 @@ namespace vietqtran.DataLayer.Migrations
 
             modelBuilder.Entity("vietqtran.Models.Entities.Relations.LikePost", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid>("PostId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("Id");
+                    b.HasKey("PostId", "UserId");
 
                     b.HasIndex("PostId");
 
@@ -762,16 +758,16 @@ namespace vietqtran.DataLayer.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("ba31fd20-781d-4174-a0ac-6c11f2eaf325"),
-                            ConcurrencyStamp = "51647809-9262-4f04-bf9b-8e7bcbb5d0e9",
+                            Id = new Guid("d45d4335-2b14-4c6d-8c01-f291288be5a9"),
+                            ConcurrencyStamp = "9cb9af64-85cb-4b74-8190-8ad3971cc9cb",
                             Description = "Role for ADMIN",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = new Guid("7ad42936-58ae-4e1c-9f50-b6ef0ef0c107"),
-                            ConcurrencyStamp = "30c151f3-7a9b-4bc4-ad7d-f04ed8e3819e",
+                            Id = new Guid("a6fe54ea-d252-4ef7-9270-2f6a7150e8c0"),
+                            ConcurrencyStamp = "002b04f9-29a1-4632-a7b6-608d63bc669d",
                             Description = "Role for USER",
                             Name = "User",
                             NormalizedName = "USER"
@@ -867,7 +863,7 @@ namespace vietqtran.DataLayer.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 12, 5, 7, 22, 58, 867, DateTimeKind.Utc).AddTicks(7707));
+                        .HasDefaultValue(new DateTime(2024, 2, 27, 6, 36, 27, 139, DateTimeKind.Utc).AddTicks(3385));
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(450)");

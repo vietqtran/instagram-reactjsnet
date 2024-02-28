@@ -132,7 +132,7 @@ namespace vietqtran.DataLayer.Migrations
                     UserName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     BirthDay = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 11, 29, 7, 3, 33, 161, DateTimeKind.Utc).AddTicks(8579)),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2024, 2, 27, 6, 36, 27, 139, DateTimeKind.Utc).AddTicks(3385)),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
                     LastOnlineTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastOfflineTime = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -563,14 +563,12 @@ namespace vietqtran.DataLayer.Migrations
                 name: "Likes_Post",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
                     PostId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Likes_Post", x => x.Id);
+                    table.PrimaryKey("PK_Likes_Post", x => new { x.PostId, x.UserId });
                     table.ForeignKey(
                         name: "FK_Likes_Post_Posts_PostId",
                         column: x => x.PostId,
@@ -727,8 +725,8 @@ namespace vietqtran.DataLayer.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Description", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { new Guid("b9a0ff5c-b03d-4cc5-8956-bcc6b6a7adf7"), "8c5b3db6-ad5b-42ab-a958-6eef27b74a90", "Role for USER", "User", "USER" },
-                    { new Guid("ee04466f-a82f-478f-b429-edd435408820"), "02b11441-0c50-4173-9949-240ca32a81e0", "Role for ADMIN", "Admin", "ADMIN" }
+                    { new Guid("a6fe54ea-d252-4ef7-9270-2f6a7150e8c0"), "002b04f9-29a1-4632-a7b6-608d63bc669d", "Role for USER", "User", "USER" },
+                    { new Guid("d45d4335-2b14-4c6d-8c01-f291288be5a9"), "9cb9af64-85cb-4b74-8190-8ad3971cc9cb", "Role for ADMIN", "Admin", "ADMIN" }
                 });
 
             migrationBuilder.CreateIndex(

@@ -1,17 +1,17 @@
-import React, { FormEvent, useState } from "react"
-import { useRouter, useSearchParams } from "next/navigation"
+import React, { FormEvent, useState } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
 
-import Link from "next/link"
-import LoginButton from "@pages/Login/LoginButton"
-import { LoginCredentials } from "@type/requestModels/LoginCredentials"
-import LoginInputPassword from "@components/common/LoginInputPassword"
-import LoginInputText from "@components/common/LoginInputText"
-import { LoginResponse } from "@type/LoginResponse"
-import LoginWithFacebook from "@pages/Login/LoginWithFacebook"
-import { User } from "@type/models/User"
-import { login } from "@utils/api/userApi"
-import { loginRedux } from "@redux/actions/user"
-import { useDispatch } from "react-redux"
+import Link from 'next/link'
+import LoginButton from '@pages/Login/LoginButton'
+import { LoginCredentials } from '@type/requestModels/LoginCredentials'
+import LoginInputPassword from '@components/common/LoginInputPassword'
+import LoginInputText from '@components/common/LoginInputText'
+import LoginWithFacebook from '@pages/Login/LoginWithFacebook'
+import { User } from '@type/models/User'
+import { login } from '@utils/api/userApi'
+import { loginRedux } from '@redux/actions/user'
+import { useDispatch } from 'react-redux'
+import { LoginResponse } from '@type/responseModel/LoginResponse'
 
 const LoginForm = () => {
    const dispatch = useDispatch()
@@ -19,24 +19,24 @@ const LoginForm = () => {
    const searchParams = useSearchParams()
 
    const [account, setAccount] = useState<string>(
-      searchParams && searchParams?.get("e") !== ""
-         ? (searchParams.get("e") as string)
-         : ""
+      searchParams && searchParams?.get('e') !== ''
+         ? (searchParams.get('e') as string)
+         : ''
    )
-   const [password, setPassword] = useState<string>("")
+   const [password, setPassword] = useState<string>('')
 
    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault()
       const loginData: LoginCredentials = {
          email: account,
-         password: password,
+         password: password
       }
       try {
          await login(loginData)
             .then((response: any) => {
                const loginResponse = response as LoginResponse
                console.log(`=======> RESPONSE: `, loginResponse)
-               if ((loginResponse as LoginResponse).status === "Succeed") {
+               if ((loginResponse as LoginResponse).status === 'Succeed') {
                   console.log(loginResponse)
                   const user: User = {
                      id: loginResponse.user.id,
@@ -45,10 +45,10 @@ const LoginForm = () => {
                      email: loginResponse.user.email,
                      name: loginResponse.user.name,
                      refreshToken: loginResponse.refreshToken,
-                     username: loginResponse.user.username,
+                     username: loginResponse.user.username
                   }
                   dispatch(loginRedux(user))
-                  router.push("/")
+                  router.push('/')
                   return
                }
             })
@@ -69,16 +69,16 @@ const LoginForm = () => {
             <LoginInputText
                text={account}
                setText={setAccount}
-               placeholder={"Email"}
+               placeholder={'Email'}
             />
             <LoginInputPassword
                text={password}
                setText={setPassword}
-               placeholder={"Password"}
+               placeholder={'Password'}
             />
             <LoginButton
-               canClick={account !== "" && password.length >= 6}
-               text={"Log in"}
+               canClick={account !== '' && password.length >= 6}
+               text={'Log in'}
             />
             <div className='my-3 flex w-full items-center justify-between opacity-80'>
                <hr className='flex-1' />

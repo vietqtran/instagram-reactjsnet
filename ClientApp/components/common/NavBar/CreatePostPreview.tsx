@@ -1,16 +1,16 @@
-import React, { useState } from "react"
+import React, { useState } from 'react'
 
-import { CreatePostPreviewCaption } from "./CreatePostPreviewCaption"
-import { GrLinkPrevious } from "react-icons/gr"
-import { PostRequest } from "@type/requestModels/postRequest"
-import { PostResponse } from "@type/responseModel/postResponse"
-import { RootState } from "@redux/reducers"
-import Slider from "../Slider"
-import { User } from "@type/models/User"
-import { Visibility } from "@type/enum/Visibility"
-import { addPost } from "@utils/api/postApi"
-import { uploadFiles } from "@utils/upload/clouldinaryUpload"
-import { useSelector } from "react-redux"
+import { CreatePostPreviewCaption } from './CreatePostPreviewCaption'
+import { GrLinkPrevious } from 'react-icons/gr'
+import { PostResponse } from '@type/responseModel/postResponse'
+import { RootState } from '@redux/reducers'
+import Slider from '../Slider'
+import { User } from '@type/models/User'
+import { Visibility } from '@type/enum/Visibility'
+import { addPost } from '@utils/api/postApi'
+import { uploadFiles } from '@utils/upload/clouldinaryUpload'
+import { useSelector } from 'react-redux'
+import { PostRequest } from '@type/requestModels/PostRequest'
 
 type CreatePostPreviewProps = {
    files: FileList | null | undefined
@@ -19,11 +19,11 @@ type CreatePostPreviewProps = {
 
 export const CreatePostPreview = ({
    files,
-   setShowPreviewPost,
+   setShowPreviewPost
 }: CreatePostPreviewProps) => {
    const [backConfirm, setBackConfirm] = useState(false)
    const [showWriteContent, setShowWriteContent] = useState(false)
-   const [postCaption, setPostCaption] = useState("")
+   const [postCaption, setPostCaption] = useState('')
    const user: User = useSelector((state: RootState) => state.user)
 
    const handleSharePost = async () => {
@@ -35,7 +35,7 @@ export const CreatePostPreview = ({
             title: postCaption,
             userId: user.id,
             visibility: Visibility.Public,
-            postImages: imageLinks,
+            postImages: imageLinks
          }
          const postResponse: PostResponse = await addPost(post).then(
             (res: any) => {
@@ -43,7 +43,7 @@ export const CreatePostPreview = ({
             }
          )
 
-         if (!(postResponse.id === "" || postResponse.id === null)) {
+         if (!(postResponse.id === '' || postResponse.id === null)) {
             window.location.reload()
          }
       }
@@ -84,7 +84,7 @@ export const CreatePostPreview = ({
                </div>
                <div
                   className={`${
-                     showWriteContent ? "w-[calc(726px+322px)]" : "w-[726px]"
+                     showWriteContent ? 'w-[calc(726px+322px)]' : 'w-[726px]'
                   } flex items-start justify-center duration-200 ease-in-out`}
                >
                   <Slider files={files} />

@@ -1,9 +1,9 @@
-"use client"
+'use client'
 
-import HomeLayout from "@components/layouts/HomeLayout"
-import PostContainer from "@pages/Home/posts/PostContainer"
-import StoryContainer from "@pages/Home/story/StoryContainer"
-import SuggestContainer from "@pages/Home/suggest/SuggestContainer"
+import HomeLayout from '@components/layouts/HomeLayout'
+import PostContainer from '@pages/Home/posts/PostContainer'
+import StoryContainer from '@pages/Home/story/StoryContainer'
+import SuggestContainer from '@pages/Home/suggest/SuggestContainer'
 
 export default function Home() {
    return (
